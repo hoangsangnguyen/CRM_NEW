@@ -1,0 +1,100 @@
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Vino.Server.ServicesTest.dll.config
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Vino.Server.ServicesTest.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Vino.Server.ServicesTest.pdb
+I:\Sang\Server\Server.ServicesTest\bin\Debug\AutoMapper.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\EntityFramework.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\EntityFramework.SqlServer.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Falcon.Web.Core.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\nunit.framework.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Rhino.Mocks.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\SimpleInjector.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Vino.Server.Data.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Vino.Server.Services.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Vino.Shared.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Falcon.Web.Mvc.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\FluentScheduler.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Newtonsoft.Json.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\ImageResizer.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Falcon.Web.Api.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\System.Web.WebPages.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\System.Web.Http.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Microsoft.Web.Infrastructure.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\System.Web.Razor.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\System.Web.WebPages.Deployment.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\System.Net.Http.Formatting.dll
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Vino.Server.Data.pdb
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Vino.Server.Services.pdb
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Vino.Server.Services.dll.config
+I:\Sang\Server\Server.ServicesTest\bin\Debug\AutoMapper.xml
+I:\Sang\Server\Server.ServicesTest\bin\Debug\EntityFramework.xml
+I:\Sang\Server\Server.ServicesTest\bin\Debug\EntityFramework.SqlServer.xml
+I:\Sang\Server\Server.ServicesTest\bin\Debug\nunit.framework.xml
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Rhino.Mocks.xml
+I:\Sang\Server\Server.ServicesTest\bin\Debug\SimpleInjector.xml
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Vino.Shared.pdb
+I:\Sang\Server\Server.ServicesTest\bin\Debug\FluentScheduler.pdb
+I:\Sang\Server\Server.ServicesTest\bin\Debug\FluentScheduler.xml
+I:\Sang\Server\Server.ServicesTest\bin\Debug\Newtonsoft.Json.xml
+I:\Sang\Server\Server.ServicesTest\bin\Debug\ImageResizer.xml
+I:\Sang\Server\Server.ServicesTest\bin\Debug\System.Web.WebPages.xml
+I:\Sang\Server\Server.ServicesTest\bin\Debug\System.Web.Http.xml
+I:\Sang\Server\Server.ServicesTest\bin\Debug\System.Web.Razor.xml
+I:\Sang\Server\Server.ServicesTest\bin\Debug\System.Web.WebPages.Deployment.xml
+I:\Sang\Server\Server.ServicesTest\bin\Debug\System.Net.Http.Formatting.xml
+I:\Sang\Server\Server.ServicesTest\obj\Debug\Vino.Server.ServicesTest.csprojResolveAssemblyReference.cache
+I:\Sang\Server\Server.ServicesTest\obj\Debug\Vino.Server.ServicesTest.csproj.CoreCompileInputs.cache
+I:\Sang\Server\Server.ServicesTest\obj\Debug\Vino.Server.ServicesTest.csproj.CopyComplete
+I:\Sang\Server\Server.ServicesTest\obj\Debug\Vino.Server.ServicesTest.dll
+I:\Sang\Server\Server.ServicesTest\obj\Debug\Vino.Server.ServicesTest.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Vino.Server.ServicesTest.dll.config
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Vino.Server.ServicesTest.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Vino.Server.ServicesTest.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\AutoMapper.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\EntityFramework.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\EntityFramework.SqlServer.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Falcon.Web.Core.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\nunit.framework.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Rhino.Mocks.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\SimpleInjector.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Vino.Server.Data.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Vino.Server.Services.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Vino.Shared.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Falcon.Web.Mvc.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\FluentScheduler.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Web.Mvc.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\ImageResizer.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Falcon.Web.Api.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Web.WebPages.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Newtonsoft.Json.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Web.Razor.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Web.WebPages.Razor.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Web.Http.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Net.Http.Formatting.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Vino.Server.Data.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Vino.Server.Services.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Vino.Server.Services.dll.config
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\AutoMapper.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\EntityFramework.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\EntityFramework.SqlServer.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\nunit.framework.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Rhino.Mocks.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\SimpleInjector.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Vino.Shared.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\FluentScheduler.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\FluentScheduler.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Web.Mvc.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\ImageResizer.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Web.WebPages.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\Newtonsoft.Json.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Web.Razor.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Web.Http.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\System.Net.Http.Formatting.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\obj\Debug\Vino.Server.ServicesTest.csprojResolveAssemblyReference.cache
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\obj\Debug\Vino.Server.ServicesTest.csproj.CoreCompileInputs.cache
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\obj\Debug\Vino.Server.ServicesTest.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\obj\Debug\Vino.Server.ServicesTest.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.ServicesTest\bin\Debug\ABCpdf.dll

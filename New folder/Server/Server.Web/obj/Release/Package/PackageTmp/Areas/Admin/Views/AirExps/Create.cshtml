@@ -1,0 +1,31 @@
+﻿@model Vino.Server.Services.MainServices.CRM.AirExp.Models.AirExpModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<section class="out-bar-top">
+    <i class="mdi mdi-truck-fast"></i>
+    <ul class="out-bar-line">
+        <li><a href="#" title="">Exports</a></li>
+        <li><a href="#" title="">Air Export</a></li>
+        <li><a href="#" title="">Create</a></li>
+    </ul>
+</section>
+@using (@Html.BeginForm("Create", "Airexps", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("_AddEdit", Model)
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="out-input">
+            <label style="display: block">&nbsp;</label>
+            <a href="#" class="btn pull-right"><i class="mdi mdi-refresh"></i>&nbsp;Refresh</a>
+            <button type="submit" value="save" id="save" class="btn pull-right"><i class="mdi mdi-floppy"></i>&nbsp;Save</button>
+            <a href="List" class="btn pull-right"><i class="mdi mdi-close"></i>&nbsp;Close</a>
+        </div>
+    </div>
+}
+
+
+
+
+

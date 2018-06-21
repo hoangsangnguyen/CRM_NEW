@@ -1,0 +1,235 @@
+﻿@using System.Globalization
+@using System.Xml
+@using Falcon.Web.Mvc.HtmlExtensions
+@using Vino.Server.Data.Common
+@using Vino.Server.Services.MainServices.CRM.Carrier.Model
+@using Vino.Server.Services.MainServices.CRM.Contact.Models
+@using Vino.Shared.Constants.Common
+
+@model Vino.Server.Services.MainServices.CRM.Customer.Models.CrmCustomerModel
+
+@{
+    Layout = null;
+}
+
+@Html.HiddenFor(m => m.Id)
+
+<body>
+    <section class="wr-main">
+        <div class="out-content-mid no-mb no-minheight">
+            <div class="container-fluid">
+                <div class="row">
+
+                    @*Customer id*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Customer ID</label>
+                            @Html.EditorFor(model => model.CustomerId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.CustomerId)
+                        </div>
+                    </div>
+                    @*Name*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Name</label>
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                    </div>
+
+                    @*English Name*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>English Name</label>
+                            @Html.EditorFor(model => model.FullEngishName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FullEngishName)
+                        </div>
+                    </div>
+                    @*VietNamese Name*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>VietNamese Name</label>
+                            @Html.EditorFor(model => model.FullVietNamName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FullVietNamName)
+                        </div>
+                    </div>
+
+                    @*Address*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Address</label>
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Address)
+                        </div>
+                    </div>
+
+                    @*Contact*@
+                    <table class="col-sm-12 col-md-6 col-lg-4">
+                        <tr class="out-input">
+                            <th>Contact</th>
+                        <tr>
+                            <td>
+                                <input id="@Html.FieldIdFor(model => model.ContactId)" class="DrpContact" />
+                                <script>
+                                    $(document).ready(function() {
+                                        $("#@Html.FieldIdFor(model => model.ContactId)").kendoDropDownList({
+                                            dataTextField: "Name",
+                                            dataValueField: "Value",
+                                            optionLabel:"Tất cả",
+                                            dataSource: {
+                                                transport: {
+                                                    read: {
+                                                        dataType: "json",
+                                                        url: "/api/lookupApi/GetGatewayType"
+                                                    }
+                                                }
+                                            },
+                                        });
+                                    });
+                                </script>
+                            </td>
+                            <td><a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-contact">Add</a></td>
+                        </tr>
+                        </tr>
+                        @Html.ValidationMessageFor(model => model.ContactId)
+                    </table>
+
+                    @*Work phone*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Work phone</label>
+                            @Html.EditorFor(model => model.WorkPhone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.WorkPhone)
+                        </div>
+                    </div>
+
+                    @*Home phone*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Home phone</label>
+                            @Html.EditorFor(model => model.HomePhone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.HomePhone)
+                        </div>
+                    </div>
+
+                    @*Fax No*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Fax No</label>
+                            @Html.EditorFor(model => model.FaxNo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FaxNo)
+                        </div>
+                    </div>
+
+                    @*Location*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <input id="@Html.FieldIdFor(model => model.LocationId)" />
+                        <script>
+                            $(document).ready(function() {
+                                $("#@Html.FieldIdFor(model => model.LocationId)").kendoDropDownList({
+                                    dataTextField: "Name",
+                                    dataValueField: "Value",
+                                    optionLabel:"Tất cả",
+                                    dataSource: {
+                                        transport: {
+                                            read: {
+                                                dataType: "json",
+                                                url: "/api/LookupApi/GetLookupWithId?type=59"
+                                                // Todo Enum in view
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+                        </script>
+                        @*<tr class="out-input">
+                            <th>Location</th>
+                            <tr>
+                                <td>
+
+                                </td>
+                                <td><a data-request-url="/api/LookupApi/GetLookupWithId?type=59" id="create-location">Add</a></td>
+                            </tr>
+                        </tr>*@
+                        @Html.ValidationMessageFor(model => model.LocationId)
+                    </div>
+
+                    @*Fax No*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Taxcode</label>
+                            @Html.EditorFor(model => model.Taxcode, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Taxcode)
+                        </div>
+                    </div>
+
+                    @*Category*@
+                    <table class="col-sm-12 col-md-6 col-lg-4">
+                        <tr class="out-input">
+                            <th>Category</th>
+                        <tr>
+                            <td>
+                                <input id="@Html.FieldIdFor(model => model.CategoryId)" />
+                                <script>
+                                    $(document).ready(function() {
+                                        $("#@Html.FieldIdFor(model => model.CategoryId)").kendoDropDownList({
+                                            dataTextField: "Name",
+                                            dataValueField: "Value",
+                                            optionLabel:"Tất cả",
+                                            dataSource: {
+                                                transport: {
+                                                    read: {
+                                                        dataType: "json",
+                                                        url: "/api/LookupApi/GetLookupWithId?type=60"
+                                                       // url: @Html.Raw(Url.Action("GetLookupWithId", "LookupApi", new {type = "60"}))
+                                                        // Todo Enum in view
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    });
+                                </script>
+                            </td>
+                            <td><a data-request-url="@Url.Action("GetLookupWithId", "LookupApi", new {type = 59})" id="create-category">Add</a></td>
+                        </tr>
+                        </tr>
+                        @Html.ValidationMessageFor(model => model.CategoryId)
+                    </table>
+
+                    @*Website*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Website</label>
+                            @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Website)
+                        </div>
+                    </div>
+
+                    @*Email*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Email</label>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        @*modal*@
+        <div id="myModal" class="modal  fade " data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div id="myModalContent"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript" src="/Areas/Admin/Content/js/customer_addedit.js"></script>
+</body>
+
+
+

@@ -1,0 +1,158 @@
+I:\Sang\Server\Server.Services\bin\Debug\Vino.Server.Services.dll.config
+I:\Sang\Server\Server.Services\bin\Debug\Vino.Server.Services.dll
+I:\Sang\Server\Server.Services\bin\Debug\Vino.Server.Services.pdb
+I:\Sang\Server\Server.Services\bin\Debug\AutoMapper.dll
+I:\Sang\Server\Server.Services\bin\Debug\EntityFramework.dll
+I:\Sang\Server\Server.Services\bin\Debug\EntityFramework.SqlServer.dll
+I:\Sang\Server\Server.Services\bin\Debug\Falcon.Web.Api.dll
+I:\Sang\Server\Server.Services\bin\Debug\Falcon.Web.Core.dll
+I:\Sang\Server\Server.Services\bin\Debug\Falcon.Web.Mvc.dll
+I:\Sang\Server\Server.Services\bin\Debug\FluentScheduler.dll
+I:\Sang\Server\Server.Services\bin\Debug\ImageResizer.dll
+I:\Sang\Server\Server.Services\bin\Debug\Microsoft.Azure.Amqp.dll
+I:\Sang\Server\Server.Services\bin\Debug\Microsoft.Azure.Devices.dll
+I:\Sang\Server\Server.Services\bin\Debug\Microsoft.Azure.Devices.Shared.dll
+I:\Sang\Server\Server.Services\bin\Debug\Microsoft.Owin.dll
+I:\Sang\Server\Server.Services\bin\Debug\Microsoft.Web.Infrastructure.dll
+I:\Sang\Server\Server.Services\bin\Debug\Newtonsoft.Json.dll
+I:\Sang\Server\Server.Services\bin\Debug\Owin.dll
+I:\Sang\Server\Server.Services\bin\Debug\PCLCrypto.dll
+I:\Sang\Server\Server.Services\bin\Debug\PInvoke.BCrypt.dll
+I:\Sang\Server\Server.Services\bin\Debug\PInvoke.Kernel32.dll
+I:\Sang\Server\Server.Services\bin\Debug\PInvoke.NCrypt.dll
+I:\Sang\Server\Server.Services\bin\Debug\PInvoke.Windows.Core.dll
+I:\Sang\Server\Server.Services\bin\Debug\Refit.dll
+I:\Sang\Server\Server.Services\bin\Debug\SimpleInjector.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Net.Http.Formatting.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Net.WebSockets.Client.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Net.WebSockets.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Runtime.Serialization.Primitives.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Security.Cryptography.Algorithms.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Security.Cryptography.Encoding.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Security.Cryptography.Primitives.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Web.Helpers.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Web.Http.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Web.Razor.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Web.WebPages.Deployment.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Web.WebPages.dll
+I:\Sang\Server\Server.Services\bin\Debug\System.Web.WebPages.Razor.dll
+I:\Sang\Server\Server.Services\bin\Debug\Telerik.Reporting.dll
+I:\Sang\Server\Server.Services\bin\Debug\Telerik.Reporting.Services.WebApi.dll
+I:\Sang\Server\Server.Services\bin\Debug\Telerik.ReportViewer.Mvc.dll
+I:\Sang\Server\Server.Services\bin\Debug\Validation.dll
+I:\Sang\Server\Server.Services\bin\Debug\Vino.Server.Data.dll
+I:\Sang\Server\Server.Services\bin\Debug\Vino.Shared.dll
+I:\Sang\Server\Server.Services\bin\Debug\Vino.Shared.pdb
+I:\Sang\Server\Server.Services\bin\Debug\Vino.Server.Data.pdb
+I:\Sang\Server\Server.Services\bin\Debug\AutoMapper.xml
+I:\Sang\Server\Server.Services\bin\Debug\EntityFramework.xml
+I:\Sang\Server\Server.Services\bin\Debug\EntityFramework.SqlServer.xml
+I:\Sang\Server\Server.Services\bin\Debug\FluentScheduler.pdb
+I:\Sang\Server\Server.Services\bin\Debug\FluentScheduler.xml
+I:\Sang\Server\Server.Services\bin\Debug\ImageResizer.xml
+I:\Sang\Server\Server.Services\bin\Debug\Microsoft.Azure.Amqp.xml
+I:\Sang\Server\Server.Services\bin\Debug\Microsoft.Azure.Devices.xml
+I:\Sang\Server\Server.Services\bin\Debug\Microsoft.Azure.Devices.Shared.xml
+I:\Sang\Server\Server.Services\bin\Debug\Microsoft.Owin.xml
+I:\Sang\Server\Server.Services\bin\Debug\Newtonsoft.Json.xml
+I:\Sang\Server\Server.Services\bin\Debug\PCLCrypto.xml
+I:\Sang\Server\Server.Services\bin\Debug\PInvoke.BCrypt.xml
+I:\Sang\Server\Server.Services\bin\Debug\PInvoke.Kernel32.xml
+I:\Sang\Server\Server.Services\bin\Debug\PInvoke.NCrypt.xml
+I:\Sang\Server\Server.Services\bin\Debug\PInvoke.Windows.Core.xml
+I:\Sang\Server\Server.Services\bin\Debug\Refit.xml
+I:\Sang\Server\Server.Services\bin\Debug\SimpleInjector.xml
+I:\Sang\Server\Server.Services\bin\Debug\System.Net.Http.Formatting.xml
+I:\Sang\Server\Server.Services\bin\Debug\System.Web.Helpers.xml
+I:\Sang\Server\Server.Services\bin\Debug\System.Web.Http.xml
+I:\Sang\Server\Server.Services\bin\Debug\System.Web.Razor.xml
+I:\Sang\Server\Server.Services\bin\Debug\System.Web.WebPages.xml
+I:\Sang\Server\Server.Services\bin\Debug\System.Web.WebPages.Deployment.xml
+I:\Sang\Server\Server.Services\bin\Debug\System.Web.WebPages.Razor.xml
+I:\Sang\Server\Server.Services\bin\Debug\Validation.xml
+I:\Sang\Server\Server.Services\obj\Debug\Vino.Server.Services.csprojResolveAssemblyReference.cache
+I:\Sang\Server\Server.Services\obj\Debug\Vino.Server.Services.csproj.CoreCompileInputs.cache
+I:\Sang\Server\Server.Services\obj\Debug\Vino.Server.Services.csproj.CopyComplete
+I:\Sang\Server\Server.Services\obj\Debug\Vino.Server.Services.dll
+I:\Sang\Server\Server.Services\obj\Debug\Vino.Server.Services.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Vino.Server.Services.dll.config
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Vino.Server.Services.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Vino.Server.Services.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\AutoMapper.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\EntityFramework.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\EntityFramework.SqlServer.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Falcon.Web.Api.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Falcon.Web.Core.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Falcon.Web.Mvc.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\FluentScheduler.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\ImageResizer.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Microsoft.Azure.Amqp.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Microsoft.Azure.Devices.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Microsoft.Azure.Devices.Shared.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Microsoft.Owin.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Newtonsoft.Json.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Owin.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\PCLCrypto.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\PInvoke.BCrypt.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\PInvoke.Kernel32.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\PInvoke.NCrypt.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\PInvoke.Windows.Core.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Refit.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\SimpleInjector.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Net.Http.Formatting.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Net.WebSockets.Client.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Net.WebSockets.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Runtime.Serialization.Primitives.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Security.Cryptography.Algorithms.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Security.Cryptography.Encoding.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Security.Cryptography.Primitives.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.Helpers.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.Http.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.Mvc.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.Razor.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.WebPages.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.WebPages.Razor.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Telerik.Reporting.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Telerik.Reporting.Services.WebApi.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Telerik.ReportViewer.Mvc.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Validation.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Vino.Server.Data.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Vino.Shared.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Vino.Shared.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Vino.Server.Data.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\AutoMapper.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\EntityFramework.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\EntityFramework.SqlServer.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\FluentScheduler.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\FluentScheduler.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\ImageResizer.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Microsoft.Azure.Amqp.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Microsoft.Azure.Devices.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Microsoft.Azure.Devices.Shared.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Microsoft.Owin.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Newtonsoft.Json.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\PCLCrypto.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\PInvoke.BCrypt.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\PInvoke.Kernel32.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\PInvoke.NCrypt.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\PInvoke.Windows.Core.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Refit.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\SimpleInjector.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Net.Http.Formatting.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.Helpers.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.Http.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.Mvc.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.Razor.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.WebPages.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\Validation.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\obj\Debug\Vino.Server.Services.csprojResolveAssemblyReference.cache
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\obj\Debug\Vino.Server.Services.csproj.CoreCompileInputs.cache
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\obj\Debug\Vino.Server.Services.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\obj\Debug\Vino.Server.Services.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.Services\bin\Debug\ABCpdf.dll

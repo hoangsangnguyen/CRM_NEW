@@ -1,0 +1,353 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icons/icomoon.eot?4n0s5n');
+  src:  url('../fonts/icons/icomoon.eot?4n0s5n#iefix') format('embedded-opentype'),
+    url('../fonts/icons/icomoon.ttf?4n0s5n') format('truetype'),
+    url('../fonts/icons/icomoon.woff?4n0s5n') format('woff'),
+    url('../fonts/icons/icomoon.svg?4n0s5n#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ico_barcode:before {
+  content: "\e903";
+}
+.icon-ico_action:before {
+  content: "\e900";
+}
+.icon-ico_add:before {
+  content: "\e901";
+}
+.icon-ico_back:before {
+  content: "\e902";
+}
+.icon-ico_bell:before {
+  content: "\e904";
+}
+.icon-ico_bin:before {
+  content: "\e905";
+}
+.icon-ico_brand:before {
+  content: "\e906";
+}
+.icon-ico_business:before {
+  content: "\e907";
+}
+.icon-ico_calendar:before {
+  content: "\e908";
+}
+.icon-ico_category:before {
+  content: "\e909";
+}
+.icon-ico_checkbox:before {
+  content: "\e90a";
+}
+.icon-ico_checkbox_blank:before {
+  content: "\e90b";
+}
+.icon-ico_close:before {
+  content: "\e90c";
+}
+.icon-ico_color:before {
+  content: "\e90d";
+}
+.icon-ico_customer:before {
+  content: "\e90e";
+}
+.icon-ico_customer_group:before {
+  content: "\e90f";
+}
+.icon-ico_customer_manage:before {
+  content: "\e910";
+}
+.icon-ico_dashboard:before {
+  content: "\e911";
+}
+.icon-ico_delete:before {
+  content: "\e912";
+}
+.icon-ico_down:before {
+  content: "\e913";
+}
+.icon-ico_edit:before {
+  content: "\e914";
+}
+.icon-ico_excel:before {
+  content: "\e915";
+}
+.icon-ico_filter:before {
+  content: "\e916";
+}
+.icon-ico_import:before {
+  content: "\e917";
+}
+.icon-ico_info:before {
+  content: "\e918";
+}
+.icon-ico_invoice:before {
+  content: "\e919";
+}
+.icon-ico_language:before {
+  content: "\e91a";
+}
+.icon-ico_list:before {
+  content: "\e91b";
+}
+.icon-ico_lock:before {
+  content: "\e91c";
+}
+.icon-ico_material:before {
+  content: "\e91d";
+}
+.icon-ico_minimize:before {
+  content: "\e91e";
+}
+.icon-ico_open:before {
+  content: "\e91f";
+}
+.icon-ico_order:before {
+  content: "\e920";
+}
+.icon-ico_order_manage:before {
+  content: "\e921";
+}
+.icon-ico_pdf:before {
+  content: "\e922";
+}
+.icon-ico_pricing:before {
+  content: "\e923";
+}
+.icon-ico_print:before {
+  content: "\e924";
+}
+.icon-ico_product:before {
+  content: "\e925";
+}
+.icon-ico_product_manage:before {
+  content: "\e926";
+}
+.icon-ico_purchase:before {
+  content: "\e927";
+}
+.icon-ico_purchase_manage:before {
+  content: "\e928";
+}
+.icon-ico_purchase_report:before {
+  content: "\e929";
+}
+.icon-ico_report:before {
+  content: "\e92a";
+}
+.icon-ico_restock:before {
+  content: "\e92b";
+}
+.icon-ico_restock_report:before {
+  content: "\e92c";
+}
+.icon-ico_role:before {
+  content: "\e92d";
+}
+.icon-ico_sale_report:before {
+  content: "\e92e";
+}
+.icon-ico_search:before {
+  content: "\e92f";
+}
+.icon-ico_setting:before {
+  content: "\e930";
+}
+.icon-ico_size:before {
+  content: "\e931";
+}
+.icon-ico_stock:before {
+  content: "\e932";
+}
+.icon-ico_stock_out:before {
+  content: "\e933";
+}
+.icon-ico_stock_report:before {
+  content: "\e934";
+}
+.icon-ico_stock_transfer:before {
+  content: "\e935";
+}
+.icon-ico_stock_view:before {
+  content: "\e936";
+}
+.icon-ico_supplier:before {
+  content: "\e937";
+}
+.icon-ico_system:before {
+  content: "\e938";
+}
+.icon-ico_unit:before {
+  content: "\e939";
+}
+.icon-ico_unlock:before {
+  content: "\e93a";
+}
+.icon-ico_update:before {
+  content: "\e93b";
+}
+.icon-ico_user:before {
+  content: "\e93c";
+}
+.icon-ico_userfield:before {
+  content: "\e93d";
+}
+.icon-ico_visibility:before {
+  content: "\e93e";
+}
+.icon-ico_warehouse:before {
+  content: "\e93f";
+}
+.icon-ico_warehouse_manage:before {
+  content: "\e940";
+}
+
+/* ================== new icon diso retail t10/2017 ================= */
+
+.icon-ico_info2:before {
+  content: "\e949";
+}
+.icon-ico_print2:before {
+  content: "\e94e";
+}
+.icon-ico_cancel:before {
+  content: "\e94b";
+}
+.icon-ico_delete2:before {
+  content: "\e94c";
+}
+.icon-ico_exe:before {
+  content: "\e94d";
+}
+.icon-ico_eye:before {
+  content: "\e94f";
+}
+.icon-ico_pdf2:before {
+  content: "\e959";
+}
+.icon-ico_save:before {
+  content: "\e95a";
+}
+.icon-ico_search2:before {
+  content: "\e95b";
+}
+.icon-ico_location-type:before {
+  content: "\e95c";
+}
+.icon-ico_add_1:before {
+  content: "\e95d";
+}
+.icon-ico_pallet:before {
+  content: "\e95e";
+}
+.icon-ico_pallet-not-use:before {
+  content: "\e95f";
+}
+.icon-ico_block-reason:before {
+  content: "\e960";
+}
+.icon-ico_carton:before {
+  content: "\e961";
+}
+.icon-ico_damage-type:before {
+  content: "\e962";
+}
+.icon-ico_items-master-list:before {
+  content: "\e963";
+}
+.icon-ico_product-cate:before {
+  content: "\e964";
+}
+.icon-ico_reload-csv:before {
+  content: "\e965";
+}
+.icon-ico_uom-list:before {
+  content: "\e966";
+}
+.icon-ico_uom-structure:before {
+  content: "\e967";
+}
+.icon-ico_up-csv:before {
+  content: "\e968";
+}
+.icon-ico_up-csv-1:before {
+  content: "\e969";
+}
+.icon-ico_zone-type:before {
+  content: "\e96a";
+}
+.icon-ico_packing:before {
+  content: "\e96b";
+}
+.icon-ico_inbound:before {
+  content: "\e944";
+}
+.icon-ico_outbound:before {
+  content: "\e946";
+}
+.icon-ico_picking:before {
+  content: "\e947";
+}
+.icon-ico_putaway:before {
+  content: "\e948";
+}
+.icon-ico_assign-pallet:before {
+  content: "\e945";
+}
+.icon-ico_picking-1:before {
+  content: "\e94a";
+}
+.icon-ico_asn:before {
+  content: "\e950";
+}
+.icon-ico_purchaseorder:before {
+  content: "\e951";
+}
+.icon-ico_administrator:before {
+  content: "\e952";
+}
+.icon-ico_report_1:before {
+  content: "\e953";
+}
+.icon-ico_masterdata:before {
+  content: "\e954";
+}
+.icon-ico_stockcontrol:before {
+  content: "\e955";
+}
+.icon-ico_stockcontrol-1:before {
+  content: "\e956";
+}
+.icon-ico_warehouse-1:before {
+  content: "\e957";
+}
+.icon-ico_configuration:before {
+  content: "\e958";
+}
+.icon-ico_pricing-tab:before {
+  content: "\e941";
+}
+.icon-ico_supplier_order:before {
+  content: "\e942";
+}
+.icon-ico_customer_order:before {
+  content: "\e943";
+}

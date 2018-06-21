@@ -1,0 +1,27 @@
+I:\Sang\Server\Server.Data\bin\Debug\Vino.Server.Data.dll
+I:\Sang\Server\Server.Data\bin\Debug\Vino.Server.Data.pdb
+I:\Sang\Server\Server.Data\bin\Debug\EntityFramework.dll
+I:\Sang\Server\Server.Data\bin\Debug\EntityFramework.SqlServer.dll
+I:\Sang\Server\Server.Data\bin\Debug\Falcon.Web.Core.dll
+I:\Sang\Server\Server.Data\bin\Debug\Vino.Shared.dll
+I:\Sang\Server\Server.Data\bin\Debug\Vino.Shared.pdb
+I:\Sang\Server\Server.Data\bin\Debug\EntityFramework.xml
+I:\Sang\Server\Server.Data\bin\Debug\EntityFramework.SqlServer.xml
+I:\Sang\Server\Server.Data\obj\Debug\Vino.Server.Data.csprojResolveAssemblyReference.cache
+I:\Sang\Server\Server.Data\obj\Debug\Vino.Server.Data.csproj.CoreCompileInputs.cache
+I:\Sang\Server\Server.Data\obj\Debug\Vino.Server.Data.csproj.CopyComplete
+I:\Sang\Server\Server.Data\obj\Debug\Vino.Server.Data.dll
+I:\Sang\Server\Server.Data\obj\Debug\Vino.Server.Data.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Debug\Vino.Server.Data.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Debug\Vino.Server.Data.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Debug\EntityFramework.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Debug\Falcon.Web.Core.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Debug\Vino.Shared.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Debug\Vino.Shared.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Debug\EntityFramework.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\obj\Debug\Vino.Server.Data.csprojResolveAssemblyReference.cache
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\obj\Debug\Vino.Server.Data.csproj.CoreCompileInputs.cache
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\obj\Debug\Vino.Server.Data.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\obj\Debug\Vino.Server.Data.pdb

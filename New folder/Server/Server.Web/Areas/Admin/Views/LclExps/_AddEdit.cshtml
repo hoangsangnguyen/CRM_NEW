@@ -1,0 +1,423 @@
+﻿@using System.Globalization
+@using Falcon.Web.Mvc.HtmlExtensions
+@model Vino.Server.Services.MainServices.CRM.LclExp.Models.LclExpModel
+@{
+    <style>
+        .k-combobox .k-input {
+            height: 27.5px !important
+        }
+    </style>
+}
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.JobId)
+
+@{
+    Layout = null;
+}
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">JobId:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="control-label">@Model.JobId</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">O.P IC:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.OpIcId, new SelectList(Model.ContactItems, "Value", "Text"),
+                                                                                new { @Id = @Html.FieldIdFor(m => m.OpIcId), @class = "form-control select-style-1 DrpContact" })
+                                    @Html.ValidationMessageFor(model => model.OpIcId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a data-request-url="@Url.Action("OpenModal", "Contact")" id="create-opic">Add</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Co-Loader:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.CoLoaderId, new SelectList(Model.CarrierItems, "Value", "Text"),
+                                                                                    new { @Id = @Html.FieldIdFor(m => m.CoLoaderId), @class = "form-control select-style-1 DrpCarrier" })
+                                    @Html.ValidationMessageFor(model => model.CoLoaderId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-coloader">Add</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        @*Created*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Created:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="datetime" id="@Html.FieldIdFor(model => model.Created)"
+                                           name="@Html.FieldIdFor(model => model.Created)" value="@Model.Created"
+                                           style="width: 100%" />
+                                    <script>
+                                    $(document).ready(function() {
+                                        $("#@Html.FieldIdFor(model => model.Created)").kendoDatePicker({
+                                            culture: "vi-VN",
+                                            format: "dd/MM/yyyy"
+                                        });
+                                        $("#@Html.FieldIdFor(model => model.Created)")
+                                            .prop("readonly", "readonly");
+                                    });
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.Created)
+                                </div>
+                            </div>
+                        </div>
+                        @*Vessel|Voy*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Vessel|Voy:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.VesselId, new SelectList(Model.VesselItems, "Value", "Text"),
+                         new { @Id = @Html.FieldIdFor(m => m.VesselId), @class = "form-control select-style-1" })
+                                    @Html.ValidationMessageFor(model => model.VesselId)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                        @*Agents*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Agents:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.AgentId, new SelectList(Model.CarrierItems, "Value", "Text"),
+                         new { @Id = @Html.FieldIdFor(m => m.AgentId), @class = "form-control select-style-1 DrpCarrier" })
+                                    @Html.ValidationMessageFor(model => model.AgentId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-agent">Add</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        @*ETD*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Etd:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="datetime" id="@Html.FieldIdFor(model => model.Etd)"
+                                           name="@Html.FieldIdFor(model => model.Etd)" value="@Model.Etd"
+                                           style="width: 100%" />
+                                    <script>
+                                    $(document).ready(function() {
+                                        $("#@Html.FieldIdFor(model => model.Etd)").kendoDatePicker({
+                                            culture: "vi-VN",
+                                            format: "dd/MM/yyyy"
+                                        });
+                                        $("#@Html.FieldIdFor(model => model.Etd)")
+                                            .prop("readonly", "readonly");
+                                    });
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.Etd)
+                                </div>
+                            </div>
+                        </div>
+                        @*Shipments*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Shipments:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.ShipmentId)"
+                                           name="@Html.FieldNameFor(model => model.ShipmentId)"
+                                           value="@Html.ValueFor(model => model.ShipmentId)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.ShipmentId)").kendoDropDownList({
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                dataSource: {
+                                                    transport: {
+                                                        read: {
+                                                            dataType: "json",
+                                                            url: "/api/lookupapi/GetShipments"
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.ShipmentId)
+                                </div>
+
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                        @*Commodity*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Commodity:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.CommodityId)"
+                                           name="@Html.FieldNameFor(model => model.CommodityId)"
+                                           value="@Html.ValueFor(model => model.CommodityId)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.CommodityId)").kendoDropDownList({
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                dataSource: {
+                                                    transport: {
+                                                        read: {
+                                                            dataType: "json",
+                                                            url: "/api/lookupapi/GetCommodities"
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.CommodityId)
+
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        @*Eta*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Eta:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="datetime" id="@Html.FieldIdFor(model => model.Eta)"
+                                           name="@Html.FieldIdFor(model => model.Eta)" value="@Model.Eta"
+                                           style="width: 100%" />
+                                    <script>
+                                    $(document).ready(function() {
+                                        $("#@Html.FieldIdFor(model => model.Eta)").kendoDatePicker({
+                                            culture: "vi-VN",
+                                            format: "dd/MM/yyyy"
+                                        });
+                                        $("#@Html.FieldIdFor(model => model.Eta)")
+                                            .prop("readonly", "readonly");
+                                    });
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.Eta)
+                                </div>
+                            </div>
+                        </div>
+                        @*Bkg No*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Bkg No.:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.BkgNumber)
+                                    @Html.ValidationMessageFor(model => model.BkgNumber)
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                        @*POL*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">POL:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.PolId, new SelectList(Model.PortItems, "Value", "Text"),
+                                                            new { @Id = @Html.FieldIdFor(m => m.PolId), @class = "form-control select-style-1 DrpPort" })
+                                    @Html.ValidationMessageFor(model => model.PolId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a data-request-url="@Url.Action("OpenModal", "Port")" id="create-pol">Add</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        @*M-B/l No*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">M-B/l No.:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.FalconEditorFor(m => m.MblNumber)
+                                    @Html.ValidationMessageFor(model => model.MblNumber)
+                                </div>
+                            </div>
+                        </div>
+                        @*Freight*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Freight:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.FreightId, new SelectList(Model.FreightItems, "Value", "Text"),
+                                             new { @Id = @Html.FieldIdFor(m => m.FreightId), @class = "form-control select-style-1" })
+                                    @Html.ValidationMessageFor(model => model.FreightId)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                        @*POD*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">POD:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.PodId, new SelectList(Model.PortItems, "Value", "Text"),
+                                             new { @Id = @Html.FieldIdFor(m => m.PodId), @class = "form-control select-style-1 DrpPort" })
+                                    @Html.ValidationMessageFor(model => model.PodId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a data-request-url="@Url.Action("OpenModal", "Port")" id="create-pod">Add</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        @*GW*@
+                        <div class="col-md-2">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">GW:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.FalconEditorFor(m => m.Gw)
+                                    @Html.ValidationMessageFor(model => model.Gw)
+                                </div>
+                            </div>
+                        </div>
+                        @*CBM*@
+                        <div class="col-md-2">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">CBM:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.FalconEditorFor(m => m.Cbm)
+                                    @Html.ValidationMessageFor(model => model.Cbm)
+                                </div>
+                            </div>
+                        </div>
+                        @*MBL Type*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">MBL Type:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.MblTypeId, new SelectList(Model.MblTypesItems, "Value", "Text"),
+                              new { @Id = @Html.FieldIdFor(m => m.MblTypeId), @class = "form-control select-style-1" })
+                                    @Html.ValidationMessageFor(model => model.MblTypeId)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                        @*Finish*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Finish:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.CheckBoxFor(m => m.IsFinish)
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        @*Packages*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Packages:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.FalconEditorFor(m => m.Packages)
+                                    @Html.ValidationMessageFor(model => model.Packages)
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Unit*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Unit:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.UnitId, new SelectList(Model.UnitItems, "Value", "Text"),
+                         new { @Id = @Html.FieldIdFor(m => m.UnitId), @class = "form-control select-style-1" })
+                                    @Html.ValidationMessageFor(model => model.UnitId)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                        @*Notes*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Notes:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconTextAreaFor(m => m.Notes)
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*modal*@
+        <div id="myModal" class="modal  fade " data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div id="myModalContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/Areas/Admin/Content/js/lclexps_addedit.js"></script>
+</div>
+
+

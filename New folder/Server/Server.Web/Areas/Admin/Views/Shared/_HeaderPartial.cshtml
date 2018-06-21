@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<body>
+    <section>
+        <header class="out-header">
+            <div class="out-logo">
+                <div class="logo">
+                    <a class="lg" href="index.html" title="Lee Ken 2018">
+                        <img src="~/wwwroot/images/logo.png" alt="Lee Ken 2018">
+                    </a>
+                </div>
+            </div>
+            <a class="click-search-mb" href="javascript:void(0)" title=""><i class="icon-moon icon-ico_search active"></i><i class="icon-moon icon-ico_close"></i></a>
+            <div class="out-search-top">
+                <input id="search-nav" class="input-search-top" placeholder="Search" type="text">
+                <span class="btn-search-top">
+                    <button type="button"><i class="icon-moon icon-ico_search"></i></button>
+                </span>
+            </div>
+            <div class="out-right">
+                <div class="wr-notifications">
+                    <a class="click-noti" href="javascript:void(0)"><i class="mdi mdi-bell-outline"></i><span class="noti-num">5</span></a>
+                    <div class="out-box-noti">
+                        <a class="close-click-noti" href="javascript:void(0)" title=""><i class="icon-moon icon-ico_close"></i></a>
+                        <ul>
+                            <li class="header">You have 10 notifications</li>
+                            <li>
+                                <ul>
+                                    <li> <a href="#"> <i class="mdi mdi-alert-circle-outline"></i> 5 new members joined today </a> </li>
+                                    <li> <a href="#"> <i class="mdi mdi-account-multiple-plus"></i> 5 new members joined today </a> </li>
+                                    <li> <a href="#"> <i class="mdi mdi-alert-outline"></i> 5 new members joined today </a> </li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">View all</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="wr-user">
+                    <a class="click-user" href="javascript:void(0)">
+                        <i class="mdi mdi-account-circle"></i>
+                        <span class="user-name">
+                            Lee Ken
+                            <label>Administrator</label>
+                        </span>
+                    </a>
+                    <div class="out-box-user">
+                        <a class="close-click-user" href="javascript:void(0)" title="">
+                            <i class="icon-moon icon-ico_close"></i>
+                        </a>
+                        <ul>
+                            <li class="header"><i class="mdi mdi-clipboard-account"></i> My Profile</li>
+                            <li>
+                                <ul>
+                                    <li> <a href="#"> <i class="mdi mdi-wallet"></i> My Balance </a> </li>
+                                    <li> <a href="#"> <i class="mdi mdi-account-settings-variant"></i> User Setting </a> </li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="login.html"><i class="mdi mdi-logout"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Left navbar-header -->
+        <div class="out-btn-click-nav-mobile"> <a href="javascript:void(0)" title=""><span></span></a> </div>
+        <div class="out-navbar">
+            <div class="wr-navbar">
+                <ul class="nav" id="side-menu">
+                    <li> <a href="javascript:void(0)"><i class="mdi mdi-palette"></i><span> Dashboard </span></a></li>
+                    <li> <a href="@Url.Action("Index", "Contact", null)"><i class="mdi mdi-voice"></i> <span>Sales</span></a></li>
+                    <li> <a href="@Url.Action("Index", "Customers", null)"><i class="mdi mdi-account-circle"></i> <span>Customers</span></a></li>
+
+                    <li>
+                        <a href="javascript:void(0)"><i class="mdi mdi-truck-fast"></i> <span> Exports </span></a> <a class="click-show-sub-mb" href="#"></a>
+                        <ul class="nav nav-second-level">
+                            <li> <a href="@Url.Action("Index", "Airexps", null)"><i class="mdi mdi-airplane-landing"></i><span> Air Export</span></a></li>
+                            <li> <a href="@Url.Action("Index", "FclExps", null)"><i class="mdi mdi-truck-trailer"></i><span> Fcl Export</span></a></li>
+                            <li> <a href="@Url.Action("Index", "LclExps", null)"><i class="mdi mdi-castle"></i><span> Lcl Export</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><i class="mdi mdi-airplane"></i> <span>Imports</span></a> <a class="click-show-sub-mb" href="#"></a>
+                        <ul class="nav nav-second-level">
+                            <li> <a href="@Url.Action("Index", "AirImps", null)"><i class="mdi mdi-sitemap"></i><span> Air Import</span></a></li>
+                            <li> <a href="@Url.Action("Index", "FclImps", null)"><i class="mdi mdi-eye"></i><span> Fcl Import</span></a></li>
+                            <li> <a href="@Url.Action("Index", "LclImps", null)"><i class="mdi mdi-settings"></i><span> Lcl Import</span></a></li>
+                        </ul>
+                    </li>
+                    <li> <a href="@Url.Action("Index", "Port", null)"><i class="mdi mdi-drone"></i> <span>Ports</span></a> </li>
+                    <li> <a href="@Url.Action("Index", "Carrier", null)"><i class="mdi mdi-home-map-marker"></i> <span>Carriers</span></a> </li>
+
+                    @*<li class="active"> <a href="javascript:void(0)"><i class="mdi mdi-grid"></i> <span> Consolidation</span></a> </li>*@
+                    @*<li> <a href="javascript:void(0)"><i class="mdi mdi-account-star"></i> <span>Customs</span></a></li>*@
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+
+</body>

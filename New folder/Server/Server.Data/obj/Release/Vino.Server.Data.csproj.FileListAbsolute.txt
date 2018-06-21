@@ -1,0 +1,13 @@
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Release\Vino.Server.Data.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Release\Vino.Server.Data.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Release\EntityFramework.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Release\Falcon.Web.Core.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Release\Vino.Shared.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Release\Vino.Shared.pdb
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Release\EntityFramework.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\obj\Release\Vino.Server.Data.csprojResolveAssemblyReference.cache
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\obj\Release\Vino.Server.Data.csproj.CoreCompileInputs.cache
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\obj\Release\Vino.Server.Data.dll
+D:\Workspace\Work\CRM\New folder\Server\Server.Data\obj\Release\Vino.Server.Data.pdb

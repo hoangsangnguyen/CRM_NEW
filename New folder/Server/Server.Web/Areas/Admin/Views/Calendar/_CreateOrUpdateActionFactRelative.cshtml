@@ -1,0 +1,121 @@
+﻿@model Vino.Server.Services.MainServices.Calendar.Models.ActionFactRelativeModel
+@using Falcon.Web.Mvc.HtmlExtensions
+@using Vino.Server.Services.Helper
+
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.Id)
+
+<div class="content">
+    <div class="form-horizontal">
+        @*@Html.Action("Mode", "Setting", new { modeName = "messagetemplate-advanced-mode" })*@
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @if (Model.Id > 0)
+                    {
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label>Ứng dụng</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div>@Model.AppName</div>
+                            </div>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">Hành động</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input name="@Html.FieldNameFor(model => model.ActionId)" id="@Html.FieldIdFor(model => model.ActionId)"/>
+                            @Html.ValidationMessageFor(model => model.ActionId)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">Hiện tượng</label>
+                        </div>
+                        <div class="col-md-9">
+                            <select name="@Html.FieldNameFor(model => model.FactIds)" id="@Html.FieldIdFor(model => model.FactIds)"></select>
+                            @Html.ValidationMessageFor(model => model.FactIds)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">Trọng số</label>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.FalconEditorFor(model => model.Weight)
+                            @Html.ValidationMessageFor(model => model.Weight)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">Hướng dẫn</label>
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.FalconEditorFor(model => model.Instruction)
+                            @Html.ValidationMessageFor(model => model.Instruction)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $("#@Html.FieldIdFor(model => model.ActionId)").kendoDropDownList({
+            dataTextField: "Name",
+            dataValueField: "Value",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: {
+                        dataType: "json",
+                        url: "/api/calendarapi/getaction",
+                    }
+                }
+            },
+            value: "@Model.ActionId",
+            dataBound: function (e) {
+
+                $("#@Html.FieldIdFor(model => model.FactIds)").kendoMultiSelect({
+                    dataTextField: "Name",
+                    dataValueField: "Value",
+                    dataSource: {
+                        serverFiltering: true,
+                        transport: {
+                            read: {
+                                dataType: "json",
+                                url: function () {
+                                    const actionId = $("#@Html.FieldIdFor(model => model.ActionId)").val() || 0;
+                                    return "/api/calendarapi/getfactbyactionid/" + actionId;
+                                },
+                                //data: additionSourceId
+                            }
+                        }
+                    },
+
+                    value: [@if (!string.IsNullOrEmpty(Model.Facts))
+                    {
+                        var factIds = Model.Facts.SplitIds();
+                        var fact = string.Join(",", factIds.Select(d => d));
+                        @Html.Raw(fact)
+                    }],
+                });
+
+            }
+        });
+
+        $("#@Html.FieldIdFor(model => model.ActionId)").change(function() {
+            var facts = $("#@Html.FieldIdFor(model => model.FactIds)").data("kendoMultiSelect");
+            facts.value([]);
+            facts.dataSource.page(1);
+        });
+   });
+
+</script>

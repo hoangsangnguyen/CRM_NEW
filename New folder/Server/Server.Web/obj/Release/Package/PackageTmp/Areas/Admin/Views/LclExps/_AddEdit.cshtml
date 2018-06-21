@@ -1,0 +1,279 @@
+﻿@using System.Globalization
+@using System.Xml
+@using Falcon.Web.Mvc.HtmlExtensions
+@using Vino.Server.Services.MainServices.CRM.Carrier.Model
+@using Vino.Server.Services.MainServices.CRM.Contact.Models
+@model Vino.Server.Services.MainServices.CRM.LclExp.Models.LclExpModel
+
+@{
+    Layout = null;
+}
+
+@Html.HiddenFor(m => m.Id)
+
+<body>
+    <section class="wr-main">
+        <div class="out-content-mid no-mb no-minheight">
+            <div class="container-fluid">
+                <div class="row">
+
+                    @*Job id*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Job ID</label>
+                            @Html.EditorFor(model => model.JobId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.JobId)
+                        </div>
+                    </div>
+                    @*OPIC*@
+                    <table class="col-sm-12 col-md-6 col-lg-4">
+                        <tr class="out-input">
+                            <th>O.P.I.C</th>
+                        <tr>
+                            <td>@Html.DropDownListFor(model => model.OpIcId, new SelectList(Model.ContactItems, "Value", "Text"), new { @Id = "ContactId", @class = "form-control select-style-1 DrpContact" })</td>
+                            <td><a data-request-url="@Url.Action("OpenModal", "Contact")" id="create-contact">Add</a></td>
+                        </tr>
+                        </tr>
+                        @Html.ValidationMessageFor(model => model.OpIcId)
+                    </table>
+
+                    @*CoLoader*@
+                    <table class="col-sm-12 col-md-6 col-lg-4">
+                        <tr class="out-input">
+                            <th>Co-Loader</th>
+                        <tr>
+                            <td>
+                                @Html.DropDownListFor(model => model.CoLoaderId, new SelectList(Model.CarrierItems, "Value", "Text"), new { @Id = "CoLoaderId", @class = "form-control select-style-1 DrpCarrier" })
+                            </td>
+                            <td><a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-coloader">Add</a></td>
+                        </tr>
+                        </tr>
+                        @Html.ValidationMessageFor(model => model.CoLoaderId)
+                    </table>
+
+                    @*created*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Created</label>
+                            <div class="out-datapick">
+                                <input type="datetime" name="@Html.NameFor(model => model.Created)"
+                                       value="@Html.ValueFor(m => m.Created)" readonly="readonly" class="form-control mydatepicker">
+                                <span class="input-group-addon"><i class="mdi mdi-calendar-clock"></i></span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Created)
+
+                        </div>
+                    </div>
+                    @*Vessel/Voy*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Vessel/Voy</label>
+                            @Html.DropDownListFor(model => model.VesselId, new SelectList(Model.VesselItems, "Value", "Text"), new { @class = "form-control select-style-1" })
+                            @Html.ValidationMessageFor(model => model.VesselId)
+                        </div>
+                    </div>
+                    @*agent*@
+                    <table class="col-sm-12 col-md-6 col-lg-4">
+                        <tr class="out-input">
+                            <th>Agent</th>
+                        <tr>
+                            <td>
+                                @Html.DropDownListFor(model => model.AgentId, new SelectList(Model.CarrierItems, "Value", "Text"), new { @Id = "AgentId", @class = "form-control select-style-1 DrpCarrier" })
+                            </td>
+                            <td><a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-agent">Add</a></td>
+                        </tr>
+                        </tr>  
+                        @Html.ValidationMessageFor(model => model.AgentId)
+                    </table>
+
+                    @*etd*@
+                    <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="out-input">
+                            <label>Etd</label>
+                            <div class="out-datapick">
+                                <input type="text" name="@Html.NameFor(model => model.Etd)" 
+                                       value="@Model.Etd" readonly="readonly" class="form-control mydatepicker">
+                                <span class="input-group-addon"><i class="mdi mdi-calendar-clock"></i></span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Etd)
+                        </div>
+                    </div>
+
+                    @*eta*@
+                    <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="out-input">
+                            <label>Eta</label>
+                            <div class="out-datapick">
+                                <input type="text" name="@Html.NameFor(model => model.Eta)"
+                                       value="@Model.Eta" readonly="readonly" class="form-control mydatepicker">
+                                <span class="input-group-addon"><i class="mdi mdi-calendar-clock"></i></span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Eta)
+                        </div>
+                    </div>
+
+                    @*Shipments*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Shipments</label>
+                            @Html.DropDownListFor(model => model.ShipmentId, new SelectList(Model.ShipmentItems, "Value", "Text"), new { @class = "form-control select-style-1" })
+                            @Html.ValidationMessageFor(model => model.ShipmentId)
+                        </div>
+
+                    </div>
+
+                    @*commodity*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Commodity</label>
+                            @Html.DropDownListFor(model => model.CommodityId, new SelectList(Model.CommodityItems, "Value", "Text"), new { @class = "form-control select-style-1" })
+                            @Html.ValidationMessageFor(model => model.CommodityId)
+                            @*<select id="Commodity" name="@Html.NameFor(model => model.CommodityId)" class="form-control select-style-1"></select>*@
+                        </div>
+                    </div>
+
+                    @*BKG No*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>BKG No</label>
+                            @Html.EditorFor(model => model.BkgNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BkgNumber)
+                        </div>
+                    </div>
+
+                    @*POL*@
+                    <table class="col-sm-12 col-md-6 col-lg-4">
+                        <tr class="out-input">
+                            <th>P.O.L</th>
+                            <tr>
+                                <td>
+                                    @Html.DropDownListFor(model => model.PolId, new SelectList(Model.PortItems, "Value", "Text"),
+                                        new { @Id = "PolId", @class = "form-control select-style-1 DrpPort" })
+                                </td>
+                                <td><a data-request-url="@Url.Action("OpenModal", "Port")" id="create-pol">Add</a></td>
+                            </tr>
+                        </tr>
+                        @Html.ValidationMessageFor(model => model.PolId)
+                </table>
+
+                @*POD*@
+                <table class="col-sm-12 col-md-6 col-lg-4">
+                    <tr class="out-input">
+                        <th>P.O.D</th>
+                        <tr>
+                            <td>
+                                @Html.DropDownListFor(model => model.PodId, new SelectList(Model.PortItems, "Value", "Text"),
+                                    new { @Id = "PodId", @class = "form-control select-style-1 DrpPort" })
+                            </td>
+                            <td><a data-request-url="@Url.Action("OpenModal", "Port")" id="create-pod">Add</a></td>
+                        </tr>
+                    </tr>
+                    @Html.ValidationMessageFor(model => model.PodId)
+            </table>
+
+
+            @*MBL*@
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="out-input">
+                    <label>MBL</label>
+                    @Html.EditorFor(model => model.MblNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MblNumber)
+
+                </div>
+            </div>
+
+            @*GW*@
+            <div class="col-sm-12 col-md-6 col-lg-2">
+                <div class="out-input">
+                    <label>G.W</label>
+                    @Html.EditorFor(model => model.Gw, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", step = "0.01" } })
+                    @Html.ValidationMessageFor(model => model.Gw)
+
+                </div>
+            </div>
+            @*Cbm*@
+            <div class="col-sm-12 col-md-6 col-lg-2">
+                <div class="out-input">
+                    <label>CBM</label>
+                    @Html.EditorFor(model => model.Cbm, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Cbm)
+
+                </div>
+            </div>
+
+            @*Freight*@
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="out-input">
+                    <label>Freight</label>
+                    @Html.DropDownListFor(model => model.FreightId, new SelectList(Model.FreightItems, "Value", "Text"), new { @class = "form-control select-style-1" })
+                    @Html.ValidationMessageFor(model => model.FreightId)
+
+                </div>
+            </div>
+
+            @*MBL Type*@
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="out-input">
+                    <label>MBL Type</label>
+                    @Html.DropDownListFor(model => model.MblTypeId, new SelectList(Model.MblTypesItems, "Value", "Text"), new { @class = "form-control select-style-1" })
+                    @Html.ValidationMessageFor(model => model.MblTypeId)
+
+                </div>
+            </div>
+
+            @*isFinish*@
+            <div class="col-sm-12 col-md-3 col-lg-2">
+                <div class="out-input">
+                    <div>
+                        @Html.CheckBoxFor(m => m.IsFinish, new { @class = "checkbox checkbox-primary" })
+                        <label for="@Model.IsFinish">Is Finished</label>
+
+                    </div>
+                </div>
+            </div>
+
+            @*Packages*@
+            <div class="col-sm-12 col-md-6 col-lg-2">
+                <div class="out-input">
+                    <label>Packages</label>
+                    @Html.EditorFor(model => model.Packages, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Packages)
+
+                </div>
+            </div>
+
+            @*Unit*@
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="out-input">
+                    <label>Unit</label>
+                    @Html.DropDownListFor(model => model.UnitId, new SelectList(Model.UnitItems, "Value", "Text"), new { @class = "form-control select-style-1" })
+                    @Html.ValidationMessageFor(model => model.UnitId)
+
+                </div>
+            </div>
+
+            @*Notes*@
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="out-input">
+                    <label>Notes</label>
+                    @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*modal*@
+<div id="myModal" class="modal  fade " data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="myModalContent"></div>
+        </div>
+    </div>
+</div>
+</section>
+
+<script type="text/javascript" src="/Areas/Admin/Content/js/lclexps_addedit.js"></script>
+</body>
+
+

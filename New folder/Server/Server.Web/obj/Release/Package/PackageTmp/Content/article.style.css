@@ -1,0 +1,26 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Source Sans Pro';
+}
+header {
+    background-color: #55b653;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+header > .logo {
+    padding: 10px;
+}
+header > .logo > img {
+    width: 40px;
+}
+.title-article {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 20px 0 50px;
+}

@@ -1,0 +1,264 @@
+﻿@using System.Web.Mvc.Html
+@using Falcon.Web.Mvc.HtmlExtensions
+@model Vino.Server.Services.MainServices.Calendar.Models.CalendarModel
+
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.Id)
+@{
+    var defaultGridPageSize = 10;
+    var gridPageSizes = "10,20,50,100,500";
+}
+<div class="content">
+    <div class="form-horizontal">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                @Html.RenderBootstrapTabHeader("tab-info", new LocalizedString("Thông tin"), true)
+            </ul>
+            <div class="tab-content">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label">Tên</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @Html.FalconEditorFor(model => model.Name)
+                                            @Html.ValidationMessageFor(model => model.Name)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label">Ứng dụng</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" name="@Html.FieldNameFor(model => model.App)" id="@Html.FieldIdFor(model => model.App)" value="" />
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $("#@Html.FieldIdFor(model => model.App)").kendoDropDownList({
+                                                        dataTextField: "Name",
+                                                        dataValueField: "Value",
+                                                        dataSource: {
+                                                            transport: {
+                                                                read: {
+                                                                    dataType: "json",
+                                                                    url: "/api/lookupapi/getappcode",
+                                                                }
+                                                            }
+                                                        },
+                                                        value: "@Model.App"
+                                                    });
+                                                });
+                                            </script>
+                                            @Html.ValidationMessageFor(model => model.App)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label">Chu kỳ</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @Html.FalconEditorFor(model => model.Duration)
+                                            @Html.ValidationMessageFor(model => model.Duration)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label">Mô tả</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @Html.FalconEditorFor(model => model.Description)
+                                            @Html.ValidationMessageFor(model => model.Description)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (Model.Id > 0)
+        {
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="main-grid"></div>
+
+                                <script>
+                        $(document).ready(function() {
+                            $("#main-grid").kendoGrid({
+                                dataSource: {
+                                    type: "json",
+                                    transport: {
+                                        read: {
+                                            url: "@Html.Raw(Url.Action("CalendarActionList", "Calendar"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            contentType: "application/json",
+                                            data: additionalData
+                                        },
+                                        create: {
+                                            url: "@Html.Raw(Url.Action("CalendarActionCreate", "Calendar"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: addAntiForgeryToken
+                                        },
+                                        update: {
+                                            url: "@Html.Raw(Url.Action("CalendarActionEdit", "Calendar"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: addAntiForgeryToken
+                                        },
+                                        destroy: {
+                                            url: "@Html.Raw(Url.Action("CalendarActionDelete", "Calendar"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: addAntiForgeryToken
+                                        },
+                                        parameterMap: function(data, operation) {
+                                            if (operation != "read") {
+                                                return data;
+                                            } else {
+                                                //for some reasons only such "Filter" data be parsed
+                                                return JSON.stringify(data);
+                                            }
+                                        }
+                                    },
+                                    schema: {
+                                        data: "Data",
+                                        total: "Total",
+                                        errors: "Errors",
+                                        model: {
+                                            id: "Id",
+                                            fields: {
+                                                Day: { editable: true, type: "number", validation: { required: true, min: 0 , max: @Model.Duration }  },
+                                                ActionId: { editable: true, type: "number", defaultValue: @(Model.DefaultAction?.Value ?? "0") },
+                                                ActionName: { editable: false, type: "string" },
+                                                Instruction: { editable: true, type: "string" },
+                                                CalendarId: {editable: false, type: "number", defaultValue: @Model.Id}
+                                            }
+                                        }
+                                    },
+                                    requestEnd: function(e) {
+                                        if (e.type == "create" || e.type == "update") {
+                                            this.read();
+                                        }
+                                    },
+                                    error: function(e) {
+                                        display_kendoui_grid_error(e);
+                                        // Cancel the changes
+                                        this.cancelChanges();
+                                    },
+                                    pageSize: @(defaultGridPageSize),
+                                    serverPaging: true,
+                                    serverFiltering: true,
+                                    serverSorting: true
+                                },
+                                pageable: {
+                                    refresh: true,
+                                    pageSizes: [@(gridPageSizes)],
+                                },
+                                toolbar: [{ name: "create", text: "Thêm mới" }],
+                                editable: {
+                                    confirmation: "Delete",
+                                    mode: "inline"
+                                },
+                                scrollable: false,
+                                columns: [
+                                    {
+                                        field: "Day",
+                                        title: "Ngày",
+                                        width: 200
+                                    }, {
+                                        field: "ActionId",
+                                        title: "Hành động",
+                                        editor: function (container, options) {
+                                            $(
+                                                '<input data-text-field="Name" data-value-field="Value" data-bind="value:ActionId"/>')
+                                                .appendTo(container)
+                                                .kendoDropDownList({
+                                                    dataTextField: "Name",
+                                                    dataValueField: "Value",
+                                                    dataSource: {
+                                                        transport: {
+                                                            read: "/api/calendarapi/GetActionByAppCode/@Model.App"
+                                                        }
+                                                    },
+                                                });
+                                            },
+                                        template: "#=ActionName#",
+                                    }, {
+                                        field: "Instruction",
+                                        title: "Hướng dẫn",
+                                    }, {
+                                        command: [
+                                            {
+                                                name: "edit",
+                                                text: {
+                                                    edit: "Chỉnh sửa",
+                                                    update: "Cập nhật",
+                                                    cancel: "Hủy bỏ"
+                                                }
+                                            }, {
+                                                name: "destroy",
+                                                text: "Xóa"
+                                            }
+                                        ],
+                                        width: 200
+                                    }
+                                ],
+                                edit: function (e) {
+                                    const editForm = e.container,
+                                        model = e.model,
+                                        fieldAction = $(editForm).find("input[data-bind='value:ActionId']"),
+                                        appDropDownList = $(fieldAction).data("kendoDropDownList");
+                                    appDropDownList.value(model.ActionId);
+                                }
+                            });
+                        });
+                                </script>
+
+                                <script type="text/javascript">
+                                    $(document).ready(function () {
+                                        $('#search-button').click(function () {
+                                            var grid = $('#main-grid').data('kendoGrid');
+                                            grid.dataSource.page(1);
+                                            return false;
+                                        });
+                                    });
+
+                                    function additionalData() {
+                                        var data = {
+                                            CalendarId: @Model.Id
+                                        };
+                                        addAntiForgeryToken(data);
+                                        return data;
+                                    }
+
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

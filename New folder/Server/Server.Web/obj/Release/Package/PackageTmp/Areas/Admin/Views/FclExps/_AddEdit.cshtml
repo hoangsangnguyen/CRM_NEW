@@ -1,0 +1,289 @@
+﻿@using Falcon.Web.Mvc.HtmlExtensions
+@model Vino.Server.Services.MainServices.CRM.FclExp.Models.FclExpModel
+
+<head>
+    <script src="/wwwroot/js/kendo/2014.1.528/kendo.all.min.js"></script>
+    <script src="/wwwroot/js/kendo/2014.1.528/kendo.datepicker.min.js"></script>
+    <link rel="stylesheet" href="/wwwroot/js/kendo/2014.1.318/kendo.common.min.css" />
+    <link rel="stylesheet" href="/wwwroot/js/kendo/2014.1.318/kendo.default.min.css" />
+    <link rel="stylesheet" href="/wwwroot/js/kendo/2014.1.318/kendo.default.mobile.min.css" />
+</head>
+@{
+    Layout = null;
+}
+<body>
+
+    <section class="wr-main">
+        <div class="out-content-mid no-mb no-minheight">
+            <div class="container-fluid">
+                <div class="row">
+
+                    @*Job id*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Job ID</label>
+                            @Html.EditorFor(model => model.JobId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+                        </div>
+                    </div>
+                    @*MBL Type*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>MBL Type</label>
+                            @Html.DropDownListFor(model => model.MblTypeId, new SelectList(Model.MblTypesItems, "Value", "Text"), new { @class = "form-control select-style-1" })
+
+                        </div>
+                    </div>
+                    @*S Lines*@
+                    <table class="col-sm-12 col-md-6 col-lg-4">
+                        <tr class="out-input">
+                            <th>S Lines</th>
+                        <tr>
+                            <td>
+                                @Html.DropDownListFor(model => model.SlinesId, new SelectList(Model.CarrierItems, "Value", "Text"),
+                                         new { @Id = "SlinesId", @class = "form-control select-style-1 DrpCarrier" })
+                            </td>
+                            <td><a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-Sline">Add</a></td>
+                        </tr>
+                        </tr>
+
+                    </table>
+                    @*created*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Create</label>
+                            <div class="out-datapick">
+                                <input type="text" name="@Html.NameFor(model => model.Created)" value="@Model.Created" class="form-control mydatepicker">
+                                <span class="input-group-addon"><i class="mdi mdi-calendar-clock"></i></span>
+                                @*<input id="datetimepickerr" title="datetimepicker" style="width: 100%;"/>*@
+                                @*<script>
+                                        $(document).ready(function () {
+                                            $("#datetimepickerr").kendoDateTimePicker({
+                                                value: @Model.Created.Date,
+                                                format: "dd/MM/yyyy",
+                                                dateInput: false,
+
+                                            }).addClass("form-control");
+                                        });
+                                    </script>*@
+                            </div>
+
+                        </div>
+
+                    </div>
+                    @*Vessel/Voy*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Vessel/Voy</label>
+                            @Html.DropDownListFor(model => model.VesselId, new SelectList(Model.VesselItems, "Value", "Text"), new { @class = "form-control select-style-1" })
+
+                        </div>
+                    </div>
+                    @*agent*@
+
+                    <table class="col-sm-12 col-md-6 col-lg-4">
+                        <tr class="out-input">
+                            <th>Agent</th>
+                        <tr>
+                            <td>
+                                @Html.DropDownListFor(model => model.SlinesId, new SelectList(Model.CarrierItems, "Value", "Text"),
+                                         new { @Id = "AgentId", @class = "form-control select-style-1 DrpCarrier" })
+                            </td>
+                            <td><a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-agent">Add</a></td>
+                        </tr>
+                        </tr>
+
+                    </table>
+                    @*etd*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Etd</label>
+                            <div class="out-datapick">
+                                <input type="text" name="@Html.NameFor(model => model.Etd)" value="@Model.Etd" class="form-control mydatepicker">
+                                <span class="input-group-addon"><i class="mdi mdi-calendar-clock"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    @*Shipments*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Shipments</label>
+                            @Html.DropDownListFor(model => model.ShipmentId, new SelectList(Model.ShipmentItems, "Value", "Text"), new { @class = "form-control select-style-1" })
+                        </div>
+                    </div>
+
+                    @*commodity*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Commodity</label>
+                            @Html.DropDownListFor(model => model.CommodityId, new SelectList(Model.CommodityItems, "Value", "Text"), new { @class = "form-control select-style-1" })
+
+                            @*<select id="Commodity" name="@Html.NameFor(model => model.CommodityId)" class="form-control select-style-1"></select>*@
+                        </div>
+                    </div>
+
+                    @*BKG No*@
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>BKG No</label>
+                            @Html.EditorFor(model => model.BkgNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+                        </div>
+                    </div>
+                    @*POL*@
+                    <table class="col-sm-12 col-md-6 col-lg-4">
+                        <tr class="out-input">
+                            <th>P.O.L</th>
+                        <tr>
+                            <td>
+                                @Html.DropDownListFor(model => model.PolId, new SelectList(Model.PortItems, "Value", "Text"),
+                                         new { @Id = "PolId", @class = "form-control select-style-1 DrpPort" })
+                            </td>
+                            <td><a data-request-url="@Url.Action("OpenModal", "Port")" id="create-pol">Add</a></td>
+                        </tr>
+                        </tr>
+
+                    </table>
+                    @*POD*@
+                    <table class="col-sm-12 col-md-6 col-lg-4">
+                        <tr class="out-input">
+                            <th>P.O.D</th>
+                        <tr>
+                            <td>
+                                @Html.DropDownListFor(model => model.PodId, new SelectList(Model.PortItems, "Value", "Text"),
+                                         new { @Id = "PodId", @class = "form-control select-style-1 DrpPort" })
+                        </td>
+                        <td><a data-request-url="@Url.Action("OpenModal", "Port")" id="create-pod">Add</a></td>
+                    </tr>
+                    </tr>
+                </table>
+                @*MBL*@
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="out-input">
+                        <label>MBL</label>
+                        @Html.EditorFor(model => model.Mbl, new { htmlAttributes = new { @class = "form-control" } })
+                        <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+                    </div>
+                </div>
+                @*Freight*@
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="out-input">
+                        <label>Freight</label>
+                        @Html.DropDownListFor(model => model.FreightId, new SelectList(Model.FreightItems, "Value", "Text"), new { @class = "form-control select-style-1" })
+                    </div>
+                </div>
+                @*Service*@
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="out-input">
+                        <label>Service</label>
+                        @Html.EditorFor(model => model.Service, new { htmlAttributes = new { @class = "form-control" } })
+                        <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+                    </div>
+                </div>
+
+                @*eta*@
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="out-input">
+                        <label>Eta</label>
+                        <div class="out-datapick">
+                            <input type="text" name="@Html.NameFor(model => model.Eta)" value="@Model.Eta" class="form-control mydatepicker">
+                            <span class="input-group-addon"><i class="mdi mdi-calendar-clock"></i></span>
+                        </div>
+
+                        @*<input id="datetimepicker" title="datetimepicker" />
+                            <script>
+                                $(document).ready(function () {
+                                    $("#datetimepicker").kendoDateTimePicker({
+                                        value: @Model.Eta,
+                                        format: "dd/MM/yyyy HH:mm:ss",
+                                        dateInput: false
+                                    });
+                                });
+                            </script>*@
+
+                    </div>
+                </div>
+                @*Container*@
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="out-input">
+                        <label>Container</label>
+                        @Html.DropDownListFor(model => model.ContainerId, new SelectList(Model.FreightItems, "Value", "Text"), new { @class = "form-control select-style-1" })
+                    </div>
+                </div>
+
+                @*GW*@
+                <div class="col-sm-12 col-md-6 col-lg-2">
+                    <div class="out-input">
+                        <label>G.W</label>
+                        @Html.EditorFor(model => model.Gw, new { htmlAttributes = new { @class = "form-control" } })
+                        <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+                    </div>
+                </div>
+                @*Cbm*@
+                <div class="col-sm-12 col-md-6 col-lg-2">
+                    <div class="out-input">
+                        <label>CBM</label>
+                        @Html.EditorFor(model => model.Cbm, new { htmlAttributes = new { @class = "form-control" } })
+                        <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+                    </div>
+                </div>
+                @*PO No*@
+                <div class="col-sm-12 col-md-6 col-lg-2">
+                    <div class="out-input">
+                        <label>PO No</label>
+                        @*@Html.EditorFor(model => model.JobID, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.EditorFor(model => model.PoNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+                    </div>
+                </div>
+
+                @*POIC*@
+                <table class="col-sm-12 col-md-6 col-lg-4">
+                    <tr class="out-input">
+                        <th>O.P.I.C</th>
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(model => model.OpIcId, new SelectList(Model.ContactItems, "Value", "Text"),
+                                     new { @Id = "OpIcId", @class = "form-control select-style-1 DrpContact" })
+                    </td>
+                    <td><a data-request-url="@Url.Action("OpenModal", "Contact")" id="create-opic">Add</a></td>
+                </tr>
+                </tr>
+            </table>
+            @*isFinish*@
+            <div class="col-sm-12 col-md-3 col-lg-2">
+                <div class="out-input">
+                    <div>
+                        @Html.CheckBoxFor(m => m.IsFinish, new { @class = "checkbox checkbox-primary" })
+                        @*<input id="checkbox1" value="@Html.ValueFor(m => m.IsFinish)" type="checkbox" name="@Html.NameFor(model => model.IsFinish)">*@
+
+                        <label for="@Model.IsFinish">Iss Finished</label>
+                    </div>
+                </div>
+            </div>
+            @*Notes*@
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="out-input">
+                    <label>Notes</label>
+                    @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                    @*<input type="text" class="form-control" placeholder="">*@
+                    <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*modal*@
+<div id="myModal" class="modal  fade " data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="myModalContent"></div>
+        </div>
+    </div>
+</div>
+</section>
+<script src="/Areas/Admin/Content/js/fclexps_addedit.js"></script>
+</body>
+
+

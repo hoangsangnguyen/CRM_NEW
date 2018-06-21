@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    var defaultGridPageSize = 20;
+    var gridPageSizes = "10,20,50,100,500";
+}
+<main class="out-main">
+    <section class="out-bar-top">
+        <i class="mdi mdi-truck-fast"></i>
+        <ul class="out-bar-line">
+            <li><a href="#" title="">Exports</a></li>
+            <li><a href="#" title="">Lcl Export</a></li>
+        </ul>
+    </section>
+</main>
+<div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="out-input">
+        <label style="display: block">&nbsp;</label>
+        <button id="btn_add" onclick="window.location.replace('@Url.Action("Create", "LclExps", null)')" class="btn pull-right"><i class="mdi mdi-plus-circle-outline"></i>&nbsp;Add</button>
+    </div>
+</div>
+<div class="out-content-mid-table">
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-sm-12 col-md-12 col-lg-12">
+                <table id="example" class="display nowrap" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Job ID</th>
+                            <th>ETD</th>
+                            <th>Co-Loader</th>
+                            <th>Agent</th>
+                            <th>POL</th>
+                            <th>Quantity</th>
+                            <th>GW</th>
+                            <th>CBM</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+
+            </section>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="/Areas/Admin/Content/js/lclexps_list.js"></script>
+}
+
+
+
+

@@ -1,0 +1,95 @@
+﻿@using Falcon.Web.Mvc.HtmlExtensions
+@using Vino.Server.Services.Constants
+@using Vino.Server.Services.Helper
+@model Vino.Server.Services.MainServices.Users.Models.UserModel
+
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.Id)
+
+<div class="content">
+    <div class="form-horizontal">
+        <div id="Employee-edit" class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                @Html.RenderBootstrapTabHeader("tab-info", new LocalizedString("Thông tin"), true)
+            </ul>
+            <div class="tab-content">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label class="control-label">Tên hiển thị</label>
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.FalconEditorFor(model => model.DisplayName)
+                                    @Html.ValidationMessageFor(model => model.DisplayName)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label class="control-label">Tên đăng nhập</label>
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.FalconEditorFor(model => model.UserName)
+                                   
+                                    @Html.ValidationMessageFor(model => model.UserName)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label class="control-label">Mật khẩu</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        @Html.FalconEditorFor(model => model.Password)
+                                        <div class="input-group-btn">
+                                            @if (Model.Id > 0)
+                                            {
+                                                <button type="submit" name="ChangePassword" class="btn btn-info" value="true">
+                                                    Đổi mật khẩu
+                                                </button>
+                                            }
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Password)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label class="control-label" for="role">Quyền hệ thống</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input id="role" name="@Html.FieldNameFor(model => model.RoleList)" style="width: 100%" />
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#role").kendoDropDownList({
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                dataSource: {
+                                                    transport: {
+                                                        read: {
+                                                            dataType: "json",
+                                                            url: "/api/roleapi/getroles",
+                                                        }
+                                                    }
+                                                },
+                                                value: "@Model.Roles"
+                                                @*value: [@if (!string.IsNullOrEmpty(Model.Roles))
+                                                                            {
+                                                                                var role = string.Join(",", Model.Roles.Split(',').Select(d => string.Format("\'{0}\'", d)));
+                                                                                @Html.Raw(role)
+                                                                            }]*@
+                                            });
+                                        });
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.RoleList)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

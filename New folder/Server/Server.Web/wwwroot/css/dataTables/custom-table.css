@@ -1,0 +1,89 @@
+/*== This is css custom style table === */
+
+table.dataTable thead th, table.dataTable thead td { padding: 8px 10px;}
+table.dataTable tbody th, table.dataTable tbody td { padding: 5px 10px;}
+table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td { font-size: 14px;}
+table.dataTable thead th, table.dataTable tfoot th { font-size: 14px; color: #000;}
+
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate { font-size: 14px;}
+
+/*table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd { background: #f3f3f3;}*/
+table.dataTable.no-footer { border-bottom: none!important;}
+table.dataTable thead tr th { border: 1px solid #c9c8c8!important; border-left: 0px solid #c9c8c8!important; border-right: 1px solid #c9c8c8!important; background-color: transparent!important;
+}
+table.dataTable thead{   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f1eeee), color-stop(100%, #e2e1e1))!important;
+	background: -webkit-linear-gradient(top, #f1eeee 0%, #e2e1e1 100%)!important;
+	background: -moz-linear-gradient(top, #f1eeee 0%, #e2e1e1 100%)!important;
+	background: -ms-linear-gradient(top, #f1eeee 0%, #e2e1e1 100%)!important;
+	background: -o-linear-gradient(top, #f1eeee 0%, #e2e1e1 100%)!important;
+	background: linear-gradient(to bottom, #f1eeee 0%, #e2e1e1 100%)!important;}
+table.dataTable thead tr th:first-child { border-left: 1px solid #c9c8c8!important;}
+table.dataTable tbody tr td { border: 1px solid #c9c8c8!important; border-top: none!important; border-left: none!important;}
+table.dataTable tbody tr td:first-child { border-left: 1px solid #c9c8c8!important;}
+
+.dataTables_length select { -webkit-border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; padding: 5px 7px; border: 1px solid #ddd; background: #fff url("../../images/all/sort_desc.png") no-repeat right 2px; padding-right: 15px; position: relative; font-size: 13px; color: #000; -webkit-appearance: none; -moz-appearance: none; outline: none}
+
+.dataTables_filter input {-webkit-border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; padding: 5px 7px; border: 1px solid #ddd;}
+.dataTables_info { font-size: 13px!important;}
+
+/* == paginate ==*/
+
+.dataTables_paginate.paging_simple_numbers { margin-top: 10px; font-size: 13px;}
+.dataTables_wrapper .dataTables_paginate .paginate_button { height: 30px; width: 30px; text-align: center; -webkit-border-radius: 50%; -moz-border-radius: 50%; -o-border-radius: 50%; border-radius: 50%; line-height: 28px; margin: 0 3px; padding: 0; display: inline-block; }
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+	border: 1px solid #3593bd;
+	color: #fff!important;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3eb3e8), color-stop(100%, #3593bd));
+	background: -webkit-linear-gradient(top, #3eb3e8 0%, #3593bd 100%);
+	background: -moz-linear-gradient(top, #3eb3e8 0%, #3593bd 100%);
+	background: -ms-linear-gradient(top, #3eb3e8 0%, #3593bd 100%);
+	background: -o-linear-gradient(top, #3eb3e8 0%, #3593bd 100%);
+	background: linear-gradient(to bottom, #3eb3e8 0%, #3593bd 100%)
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {	
+	border: 1px solid #3593bd;
+	color: #fff!important;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3eb3e8), color-stop(100%, #3593bd));
+	background: -webkit-linear-gradient(top, #3eb3e8 0%, #3593bd 100%);
+	background: -moz-linear-gradient(top, #3eb3e8 0%, #3593bd 100%);
+	background: -ms-linear-gradient(top, #3eb3e8 0%, #3593bd 100%);
+	background: -o-linear-gradient(top, #3eb3e8 0%, #3593bd 100%);
+	background: linear-gradient(to bottom, #3eb3e8 0%, #3593bd 100%)
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+	border: 1px solid #3593bd;
+	color: #fff!important;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3eb3e8), color-stop(100%, #3593bd));
+	background: -webkit-linear-gradient(top, #3eb3e8 0%, #3593bd 100%);
+	background: -moz-linear-gradient(top, #3eb3e8 0%, #3593bd 100%);
+	background: -ms-linear-gradient(top, #3eb3e8 0%, #3593bd 100%);
+	background: -o-linear-gradient(top, #3eb3e8 0%, #3593bd 100%);
+	background: linear-gradient(to bottom, #3eb3e8 0%, #3593bd 100%)
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous, .dataTables_wrapper .dataTables_paginate .paginate_button.next { width: auto; height: auto; -webkit-border-radius: 0%; -moz-border-radius: 0%; -o-border-radius: 0%; border-radius: 0%; margin: 0 5px; border: none!important; background-color: transparent!important}
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.next:hover { border: none!important; background: none!important; color: #3593bd!important}
+
+/*=== Select row css */
+table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.odd.selected, table.dataTable tbody tr.selected, table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_1, table.dataTable.display tbody tr.even.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_1 { background: #84d6fb!important}
+
+/* == Button style pdf csv excel ..*/
+div.dt-buttons a.dt-button { overflow: inherit!important; position: relative; height: 32px; width: 32px; border: 1px solid #ddd; border-radius: 50%;}
+div.dt-buttons a.dt-button:after { position: absolute; content: "\f1d8"; color: #666; text-align: center; font-size: 14px; top: 0; left: 0; right: 0; display: inline-block; font-family: "Material Design Icons"; font-style: normal;	text-rendering: auto; line-height: inherit;	-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale}
+
+
+div.dt-buttons a.dt-button.buttons-copy:after {content: "\f191";}
+div.dt-buttons a.dt-button.buttons-excel:after {content: "\f21b";}
+div.dt-buttons a.dt-button.buttons-csv:after {content: "\f225";}
+div.dt-buttons a.dt-button.buttons-pdf:after {content: "\f225";}
+
+div.dt-buttons a.dt-button span { position: absolute; top: -37px; font-size: 11px; background: #444; padding: 0px 10px; border-radius: 3px; min-width: 80px; text-align: center; left: 50%; margin-left: -35px; display: none; color: #fff;}
+div.dt-buttons a.dt-button:hover span { display: block}
+div.dt-buttons a.dt-button span:after { position: absolute; content: ""; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 6px solid #444; bottom: -6px; left: 50%; margin-left: -10px;}
+
+/* == responsive == */
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child::before { background-color: #3593bd; line-height: 15px; font-size: 13px; left: 5px;}
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child::before { background-color: #63cbfa; line-height: 15px;}
+
+.table.dataTable > tbody > tr.child ul.dtr-details { width: 95%;}
+
+/**/

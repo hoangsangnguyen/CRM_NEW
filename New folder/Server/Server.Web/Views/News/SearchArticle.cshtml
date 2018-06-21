@@ -1,0 +1,115 @@
+﻿@model Falcon.Web.Mvc.PageList.IPageList<Vino.Server.Services.MainServices.News.Models.NewsModel>
+
+
+<main class="main-content" role="main">
+
+
+    <!-- /templates/search.liquid -->
+    <!-- /snippets/search-bar.liquid -->
+
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2 mar-top-30">
+                    <form action="@Url.Action("SearchArticle")" method="get" class="input-group search-bar" role="search">
+                        <input type="search" name="q" value="@ViewBag.Query" placeholder="Search our news" class="input-group-field" aria-label="Search our store">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn icon-fallback-text">
+                                <span class="icon icon-search" aria-hidden="true"></span>
+                                <span class="fallback-text">Search</span>
+                            </button>
+                        </span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <div class="container mar-top-50">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <h1 class="text-left mar-bot-40">Your search for "@ViewBag.Query" revealed the following:</h1>
+                <div class="mar-bot-50 mar-bot-100-desktop">
+                    <!-- begin list search results-->
+                    @{
+                        var lastId = Model.LastOrDefault();
+                    }
+                 @foreach (var news in Model)
+                 {
+                     <div class="">
+                         <div class="row">
+                             <div class="col-sm-8 ">
+                                 <h3><a href="@Url.Action("Article","News", new {id = news.Id})" title="">@news.Title</a></h3>
+                                 <p>@news.Short</p>
+                             </div>
+                         </div>
+                         @if (lastId != null && lastId.Id != news.Id)
+                         {
+                         <hr>
+                         }
+                     </div>
+                 }
+                </div>
+
+
+                <hr>
+                @if (Model.Any())
+                {
+                    <div class="pagination">
+                        @if (Model.HasPreviousPage)
+                        {
+                            <span class="prev"><a href="@Url.Action("AllNews", "News", new {page = Model.PageIndex})" title="">←</a></span>
+                        }
+                        @if (Model.PageIndex >= 3)
+                        {
+                            <span class="page"><a href="@Url.Action("AllNews", "News", new {page = 1})" title="">1</a></span>
+                            <span class="deco">…</span>
+                        }
+                        @for (var beginIndex = Model.PageIndex - 2; beginIndex < Model.PageIndex + 3; beginIndex++)
+                        {
+                            if (beginIndex < Model.TotalPages && beginIndex >= 0)
+                            {
+
+                                if (Model.PageIndex != beginIndex)
+                                {
+                                    <span class="page"><a href="@Url.Action("AllNews", "News", new {page = beginIndex + 1})" title="">@(beginIndex + 1)</a></span>
+                                }
+                                else
+                                {
+                                    <span class="page current current">@(beginIndex + 1)</span>
+                                }
+
+                            }
+
+                        }
+                        @if (Model.PageIndex <= Model.TotalPages - 4)
+                        {
+                            <span class="deco">…</span>
+                            <span class="page"><a href="@Url.Action("AllNews", "News", new {page = Model.TotalPages})" title="">@Model.TotalPages</a></span>
+                        }
+                        @if (Model.HasNextPage)
+                        {
+                            <span class="next"><a href="@Url.Action("AllNews", "News", new {page = Model.PageIndex + 2})" title="">→</a></span>
+                        }
+
+                    </div>
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+</main>

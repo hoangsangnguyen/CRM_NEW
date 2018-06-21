@@ -1,0 +1,175 @@
+﻿@model Vino.Server.Web.Areas.Admin.Controllers.ContactController.ModelAndViewId
+
+    @{
+        var contact = Model.Contact;
+        var viewId = Model.ViewId;
+        var viewGroupId = Model.ViewGroupId;
+    }
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Thêm mới</h4>
+        </div>
+        <div class="modal-body">
+            <section class="wr-main">
+                <div class="out-content-mid no-mb no-minheight">
+                    <div class="container-fluid">
+                        <form id="form_new" action="">
+                            <div class="row">
+                                <div class="out-input">
+                                    <label>Contact ID</label>
+                                    @Html.EditorFor(model => model.Contact.ContactId, new { htmlAttributes = new { @Id = "contact-id", @class = "form-control", @readonly = "readonly" } })
+                                    @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
+                                    <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+                                </div>
+                                <div class="out-input">
+                                    <label>First Name</label>
+                                    @Html.EditorFor(model => model.Contact.FirstName, new { htmlAttributes = new { @Id = "contact-name", @class = "form-control" } })
+                                    @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
+                                    <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+
+                                </div>
+
+                                <div class="out-input">
+                                    <label>Last Name</label>
+                                    @Html.EditorFor(model => model.Contact.LastName, new { htmlAttributes = new { @Id = "contact-lastname", @class = "form-control" } })
+                                    @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
+                                    <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+
+                                </div>
+
+                                <div class="out-input">
+                                    <label>English Name</label>
+                                    @Html.EditorFor(model => model.Contact.EnglishName, new { htmlAttributes = new { @Id = "contact-englishname", @class = "form-control" } })
+                                    @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
+                                    <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+
+                                </div>
+
+                                <div class="out-input">
+                                    <label>Position</label>
+                                    @Html.DropDownListFor(model => model.Contact.PositionId, new SelectList(Model.Contact.PositionItems, "Value", "Text"), new { @Id = "contact-position", @class = "form-control select-style-1" })
+                                </div>
+
+                                <div class="out-input">
+                                    <label>Home Address</label>
+                                    @Html.EditorFor(model => model.Contact.HomeAddress, new { htmlAttributes = new { @Id = "contact-homeaddress", @class = "form-control" } })
+                                    @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
+                                    <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+
+                                </div>
+
+                                <div class="out-input">
+                                    <label>Cell Phone</label>
+                                    @Html.EditorFor(model => model.Contact.CellPhone, new { htmlAttributes = new { @Id = "contact-cellphone", @class = "form-control" } })
+                                    @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
+                                    <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+
+                                </div>
+
+                                <div class="out-input">
+                                    <label>Home Phone</label>
+                                    @Html.EditorFor(model => model.Contact.HomePhone, new { htmlAttributes = new { @Id = "contact-homephone", @class = "form-control" } })
+                                    @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
+                                    <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+
+                                </div>
+
+                                <div class="out-input">
+                                    <label>Email Address</label>
+                                    @Html.EditorFor(model => model.Contact.Email, new { htmlAttributes = new { @Id = "contact-email", @class = "form-control" } })
+                                    @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
+                                    <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+
+                                </div>
+
+                                <div class="out-input">
+                                    <label>Company Ext</label>
+                                    @Html.EditorFor(model => model.Contact.CompanyExt, new { htmlAttributes = new { @Id = "contact-company", @class = "form-control" } })
+                                    @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
+                                    <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+
+                                </div>
+
+                                <div class="out-input">
+                                    <label>signature</label>
+                                    @Html.EditorFor(model => model.Contact.Signature, new { htmlAttributes = new { @Id = "contact-signature", @class = "form-control" } })
+                                    @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
+                                    <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+
+                                </div>
+
+                                <div class="out-input">
+                                    <label>Department</label>
+                                    @Html.DropDownListFor(model => model.Contact.DepartmentId, new SelectList(Model.Contact.DepartmentItems, "Value", "Text"), new { @Id = "contact-department", @class = "form-control select-style-1" })
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </section>
+
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            <button type="button" id="btn-save-contact" onclick="SaveContact()" class="btn btn-primary">Lưu</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        function SaveContact () {
+            var model = JSON.stringify(GetDataRequest());
+
+            console.log('Request : ' + model);
+            $.ajax({
+                url: "@Url.Action("CreateContactFromSubView", "Contact")",
+                type: "POST",
+                dataType: "json",
+                contentType: 'application/json',
+                data: model,
+                cache: false,
+                async: true,
+                success: function (dataJs) {
+                    $(".DrpContact").each(function() {
+                        $(this).append($('<option>', {
+                            value: dataJs.Value,
+                            text: dataJs.Name
+                        }));
+                    });
+                    //$(".DrpContact").each(function() {
+                    //    $(this).data().kendoDropDownList.dataSource.add({ "text": dataJs.Value, "value": dataJs.Name});
+                    //});
+
+                    let viewId = @viewId;
+                    $("#" + viewId.id).val(dataJs.Value);
+                    $('#myModal').modal('hide');
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log('Error saving contacts in ajax ' + xhr.error + thrownError.error);
+                }
+            });
+        };
+
+        function GetDataRequest() {
+            return {
+                ContactId: $('#contact-id').val(),
+                FirstName: $('#contact-name').val(),
+                LastName: $('#contact-lastname').val(),
+                EnglishName: $('#contact-englishname').val(),
+                PositionId: $('#contact-position').val(),
+                HomeAddress: $('#contact-homeaddress').val(),
+                CellPhone: $('#contact-cellphone').val(),
+                HomePhone: $('#contact-homephone').val(),
+                Email: $('#contact-email').val(),
+                CompanyExt: $('#contact-company').val(),
+                Signature: $('#contact-signature').val(),
+                DepartmentId: $('#contact-department').val()
+            };
+        }
+    </script>
+
+

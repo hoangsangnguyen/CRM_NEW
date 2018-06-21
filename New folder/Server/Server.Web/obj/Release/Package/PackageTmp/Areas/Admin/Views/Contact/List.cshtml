@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<main class="out-main">
+    <section class="out-bar-top">
+        <i class="mdi mdi-truck-fast"></i>
+        <ul class="out-bar-line">
+            <li><a href="#" title="">Contacts</a></li>
+            @*<li><a href="#" title="">Air Export</a></li>*@
+        </ul>
+    </section>
+</main>
+<div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="out-input">
+        <label style="display: block">&nbsp;</label>
+        <a href="create" class="btn pull-right"><i class="mdi mdi-plus-circle-outline"></i>&nbsp;Add</a>
+    </div>
+</div>
+
+<div class="out-content-mid-table">
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-sm-12 col-md-12 col-lg-12">
+                <table id="example" class="display nowrap" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Contact ID</th>
+                            <th>Contact Name</th>
+                            <th>English Name</th>
+                            <th>Position</th>
+                            <th>Department</th>
+                        </tr>
+                    </thead>
+                </table>
+
+            </section>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/Areas/Admin/Content/js/contacts.js"></script>
+}
+

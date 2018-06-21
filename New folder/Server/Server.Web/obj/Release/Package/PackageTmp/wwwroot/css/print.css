@@ -1,0 +1,15 @@
+@media print {	
+	body { color:#000; }
+	header .top-header { display:none; }
+	header .logo { float:none; }
+	nav{ display:none; }
+	.banner { display:none; }
+	.container{ width:100%;  }
+	.velk .info-kontakt { width:100%; }
+	.social ul li a img { display:none; }
+	.cd-top { display:none; }
+}
+
+
+
+

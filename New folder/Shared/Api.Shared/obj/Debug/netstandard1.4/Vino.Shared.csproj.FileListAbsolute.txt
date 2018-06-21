@@ -1,0 +1,18 @@
+I:\Sang\Shared\Api.Shared\bin\Debug\netstandard1.4\Vino.Shared.deps.json
+I:\Sang\Shared\Api.Shared\bin\Debug\netstandard1.4\Vino.Shared.dll
+I:\Sang\Shared\Api.Shared\bin\Debug\netstandard1.4\Vino.Shared.pdb
+I:\Sang\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.csprojResolveAssemblyReference.cache
+I:\Sang\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.csproj.CoreCompileInputs.cache
+I:\Sang\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.AssemblyInfoInputs.cache
+I:\Sang\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.AssemblyInfo.cs
+I:\Sang\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.dll
+I:\Sang\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.pdb
+D:\Workspace\Work\CRM\New folder\Shared\Api.Shared\bin\Debug\netstandard1.4\Vino.Shared.deps.json
+D:\Workspace\Work\CRM\New folder\Shared\Api.Shared\bin\Debug\netstandard1.4\Vino.Shared.dll
+D:\Workspace\Work\CRM\New folder\Shared\Api.Shared\bin\Debug\netstandard1.4\Vino.Shared.pdb
+D:\Workspace\Work\CRM\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.csprojResolveAssemblyReference.cache
+D:\Workspace\Work\CRM\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.csproj.CoreCompileInputs.cache
+D:\Workspace\Work\CRM\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.AssemblyInfoInputs.cache
+D:\Workspace\Work\CRM\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.AssemblyInfo.cs
+D:\Workspace\Work\CRM\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.dll
+D:\Workspace\Work\CRM\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.pdb

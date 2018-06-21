@@ -1,0 +1,92 @@
+﻿@model List<Vino.Server.Services.MainServices.Auth.Models.RoleClaimModel>
+
+
+@Html.AntiForgeryToken()
+
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        Vai trò và quyền
+    </h1>
+    <div class="pull-right">
+        <button id="btn-save" type="button" class="btn bg-blue">
+            <i class="fa fa-plus-square"></i>
+            Lưu
+        </button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="panel-group">
+        @*hide the entire search block if no elements are displayed*@
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Vai trò/ Quyền</th>
+                                        @foreach (var role in Model)
+                                        {
+                                            <th>@role.Display</th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var claimItem = Model.FirstOrDefault();
+                                        
+                                        var strChecked = "checked";
+                                    }
+                                   @if (claimItem != null)
+                                   {
+                                       var claimList = claimItem.Claim;
+                                       if (claimList != null)
+                                        {
+                                            foreach (var claim in claimList)
+                                            {
+                                                <tr>
+                                                    <td>@claim.Name</td>
+                                                    @foreach (var role in Model)
+                                                    {
+                                                        <td><input type="checkbox" @if (role.Claim.Any(d => d.SystemName == claim.SystemName && d.Checked)) { @strChecked } class="checkbox_roleClaim" name="@string.Format("{0}_{1}",role.SystemName, claim.SystemName)" /></td>
+                                                    }
+                                                </tr>
+                                            }
+                                        }
+                                   }
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $("#btn-save").click(function() {
+            var roleClaim = $(".checkbox_roleClaim");
+            var req = [];
+
+            for (var i = 0; i < roleClaim.length; i++) {
+                if (roleClaim[i].checked) {
+                    var strRoleClaim = roleClaim[i].name.split("_");
+                    var role = strRoleClaim[0];
+                    var claim = strRoleClaim[1];
+                    req.push({ RoleSystemName: role, ClaimSystemName: claim });
+                }
+            }
+            $.post("@Html.Raw(Url.Action("RoleClaimList","Role"))", { RoleClaims: req}).done(function(data) {
+                if (!data) console.log("error");
+                location.reload();
+            }).fail(function() {
+                console.log("server error");
+            });
+        });
+
+    });
+</script>
