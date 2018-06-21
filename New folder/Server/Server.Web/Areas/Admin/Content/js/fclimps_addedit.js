@@ -13,19 +13,19 @@ $("#create-agent").click(function () {
     OpenModalCreation(url, "AgentId", "DrpCarrier");
 });
 
-$("#create-pol").click(function () {
+$("#create-PolPort").click(function () {
     const url = $(this).data('request-url');
     OpenModalCreation(url, "PolId", "DrpPort");
 });
 
-$("#create-pod").click(function () {
+$("#create-PodPort").click(function () {
     const url = $(this).data('request-url');
     OpenModalCreation(url, "PodId", "DrpPort");
 });
 
-$("#create-transitport").click(function () {
+$("#create-delivery").click(function () {
     const url = $(this).data('request-url');
-    OpenModalCreation(url, "TransitPortId", "DrpPort");
+    OpenModalCreation(url, "DeliveryId", "DrpPort");
 });
 
 function OpenModalCreation(url, viewId, viewGroupId) {

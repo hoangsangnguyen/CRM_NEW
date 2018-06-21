@@ -70,6 +70,7 @@ namespace Vino.Server.Data.CRM
         [Required]
         public int VesselId { get; set; }
 
+        public int VoyageId { get; set; }
 
         [ForeignKey("DeliveryId")]
         public virtual Port Delivery { get; set; }

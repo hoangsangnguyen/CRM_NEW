@@ -13,6 +13,7 @@ using Vino.Server.Services.MainServices.CRM.Contact;
 using Vino.Server.Services.MainServices.CRM.FclImp;
 using Vino.Server.Services.MainServices.CRM.FclImp.Models;
 using Vino.Server.Services.MainServices.CRM.Port;
+using Vino.Server.Web.Areas.Admin.Models.FclImps;
 using Vino.Shared.Constants.Common;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
@@ -43,11 +44,11 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         public ActionResult List()
         {
-            return View();
+            return View(new FclImpsListModel());
         }
 
         [HttpPost]
-        public async Task<ActionResult> GetList()
+        public async Task<ActionResult> List(DataSourceRequest common, FclImpsListModel model)
         {
             var dtoFromRepo = await _service.GetAllAsync();
             var gridModel = new DataSourceResult()
@@ -66,9 +67,9 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             {
                 JobId = "FIF" + DateTimeOffset.Now.Year % 100 + DateTimeOffset.Now.Month.ToString("D2")
                         + "/" + (index + 1).ToString().PadLeft(4, '0'),
-                Created = DateTimeOffset.Now.Date,
-                Eta = DateTimeOffset.Now.Date,
-                Etd = DateTimeOffset.Now.Date,
+                Created = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
+                Eta = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
+                Etd = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
             };
 
             await InitDataForModel(model);
@@ -86,19 +87,19 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 await InitDataForModel(dto);
                 return View(dto);
             }
-
+            var index = await _service.GetNumberEntry();
+            dto.JobId = "FIF" + DateTimeOffset.Now.Year % 100 + DateTimeOffset.Now.Month.ToString("D2")
+                    + "/" + (index + 1).ToString().PadLeft(4, '0');
             var id = await _service.CreateAsync(dto);
             if (id == 0)
             {
                 ErrorNotification("Thêm mới thất bại!");
-                Console.WriteLine("Create failed");
             }
             else
             {
                 SuccessNotification("Thêm mới thành công!");
-                Console.WriteLine("Create succeed");
             }
-            return RedirectToAction("List");
+            return RedirectToAction("Edit", new { id });
         }
 
         public async Task<ActionResult> Edit(int id = 0)
@@ -119,17 +120,16 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(FclImpModel dto)
         {
+            if (!ModelState.IsValid)
+            {
+                await InitDataForModel(dto);
+                return View(dto);
+            }
+
             Console.WriteLine(dto);
-            var idResutl = await _service.EditAsync(dto.Id, dto);
-            if (idResutl == 0)
-            {
-                ErrorNotification("Chỉnh sửa thất bại!");
-            }
-            else
-            {
-                SuccessNotification("Chỉnh sửa thành công!");
-            }
-            return RedirectToAction("List");
+            await _service.EditAsync(dto.Id, dto);
+            SuccessNotification("Chỉnh sửa thành công!");
+            return RedirectToAction("Edit", new { id = dto.Id });
         }
 
         [HttpPost]
@@ -151,12 +151,12 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             model.CarrierItems = await GetCarrierItems();
             model.ContactItems = await GetContactItems();
-            model.CommodityItems =  GetCommodityItems();
-            model.ShipmentItems =  GetShipmentItems();
+            model.CommodityItems = GetCommodityItems();
+            model.ShipmentItems = GetShipmentItems();
             model.PortItems = await GetPortItems();
-            model.VesselItems =  GetVesselItems();
-            model.MblItems =  GetMblTypeItems();
-
+            model.VesselItems = GetVesselItems();
+            model.MblItems = GetMblTypeItems();
+            model.VoyageItems = GetVoyageTypeItems();
         }
 
         private async Task<IList<SelectListItem>> GetContactItems()
@@ -239,7 +239,20 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         private IList<SelectListItem> GetMblTypeItems()
         {
             IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups =  _lookupService.GetLookupByLookupType(LookupTypes.MblType);
+            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.MblType);
+            foreach (var l in lookups)
+                items.Add(new SelectListItem
+                {
+                    Value = l.Id.ToString(),
+                    Text = l.Title
+                });
+            return items;
+        }
+
+        private IList<SelectListItem> GetVoyageTypeItems()
+        {
+            IList<SelectListItem> items = new List<SelectListItem>();
+            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.VoyageType);
             foreach (var l in lookups)
                 items.Add(new SelectListItem
                 {

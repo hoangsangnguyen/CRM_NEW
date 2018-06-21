@@ -25,21 +25,22 @@ namespace Vino.Server.Services.MainServices.CRM.FclImp.Models
             CarrierItems = new List<SelectListItem>();
             VesselItems = new List<SelectListItem>();
             ShipmentItems = new List<SelectListItem>();
+            VoyageItems = new List<SelectListItem>();
         }
 
         [Required]
         public string JobId { get; set; }
 
         [Required]
-        public DateTimeOffset Created { get; set; }
+        public string Created { get; set; }
 
         [Required]
-        public DateTimeOffset Eta { get; set; }
+        public string Eta { get; set; }
 
         [Required]
         public string MblNumber { get; set; }
 
-        public PortModel Pol { get; set; }
+        public string PolName { get; set; }
         [Required]
         public int PolId { get; set; }
         [Required]
@@ -52,9 +53,9 @@ namespace Vino.Server.Services.MainServices.CRM.FclImp.Models
         public int ShipmentId { get; set; }
 
         [Required]
-        public DateTimeOffset Etd { get; set; }
+        public string Etd { get; set; }
 
-        public CrmContactModel OpIc { get; set; }
+        public string OpIcName { get; set; }
         [Required]
         public int OpIcId { get; set; }
 
@@ -64,7 +65,7 @@ namespace Vino.Server.Services.MainServices.CRM.FclImp.Models
         [Required]
         public string PoNumber { get; set; }
 
-        public PortModel Pod { get; set; }
+        public string PodName { get; set; }
         [Required]
         public int PodId { get; set; }
         [Required]
@@ -72,16 +73,18 @@ namespace Vino.Server.Services.MainServices.CRM.FclImp.Models
         [Required]
         public int CommodityId { get; set; }
 
-        public CarrierModel SLines { get; set; }
+        public string SLinesName { get; set; }
         [Required]
         public int SlinesId { get; set; }
-        public CarrierModel Agent { get; set; }
+        public string AgentName { get; set; }
         [Required]
         public int AgentId { get; set; }
         [Required]
         public int VesselId { get; set; }
+        public int VoyageId { get; set; }
 
-        public PortModel Delivery { get; set; }
+
+        public string DeliveryName { get; set; }
         [Required]
         public int DeliveryId { get; set; }
 
@@ -101,5 +104,7 @@ namespace Vino.Server.Services.MainServices.CRM.FclImp.Models
         public IList<SelectListItem> CommodityItems { get; set; }
         public IList<SelectListItem> MblItems { get; set; }
         public IList<SelectListItem> ShipmentItems { get; set; }
+        public IList<SelectListItem> VoyageItems { get; set; }
+
     }
 }

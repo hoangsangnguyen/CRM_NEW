@@ -1,34 +1,19 @@
 ﻿@model Vino.Server.Services.MainServices.CRM.FclImp.Models.FclImpModel
 
-@{
-    ViewData["Title"] = "Create";
-}
-
-<body>
-    <section class="out-bar-top">
-        <i class="mdi mdi-truck-fast"></i>
-        <ul class="out-bar-line">
-            <li><a href="#" title="">Exports</a></li>
-            <li><a href="#" title="">Fcl Import</a></li>
-            <li><a href="#" title="">Create</a></li>
-        </ul>
-    </section>
-    @using (@Html.BeginForm("Create", "FclImps", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        @Html.Partial("_AddEdit", Model)
-        <div class="col-sm-12 col-md-12 col-lg-12">
-            <div class="out-input">
-                <label style="display: block">&nbsp;</label>
-                <a href="#" class="btn pull-right"><i class="mdi mdi-refresh"></i>&nbsp;Refresh</a>
-                <button type="submit" value="save" id="save" class="btn pull-right"><i class="mdi mdi-floppy"></i>&nbsp;Save</button>
-                <a href="List" class="btn pull-right"><i class="mdi mdi-close"></i>&nbsp;Close</a>
-            </div>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Create new fcl import
+        </h1>
+        <div class="pull-right">
+            <a class="btn bg-blue" href="@Html.Raw(Url.Action("List"))"><i class="fa fa-chevron-left" aria-hidden="true"></i> Quay Lại</a>
+            <button type="submit" name="ContinueEditing" value="true" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                Lưu
+            </button>
         </div>
-    }
-</body>
-
-
-
-
-
+    </div>
+    @Html.Partial("_AddEdit", Model)
+}

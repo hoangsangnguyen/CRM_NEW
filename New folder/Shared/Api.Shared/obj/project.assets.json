@@ -3712,11 +3712,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "D:\\Workspace\\Work\\CRM\\New folder\\Shared\\Api.Shared\\Vino.Shared.csproj",
+      "projectUniqueName": "D:\\Workspace\\Work\\DoAnThucTap\\CRM_NEW\\New folder\\Shared\\Api.Shared\\Vino.Shared.csproj",
       "projectName": "Vino.Shared",
-      "projectPath": "D:\\Workspace\\Work\\CRM\\New folder\\Shared\\Api.Shared\\Vino.Shared.csproj",
+      "projectPath": "D:\\Workspace\\Work\\DoAnThucTap\\CRM_NEW\\New folder\\Shared\\Api.Shared\\Vino.Shared.csproj",
       "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-      "outputPath": "D:\\Workspace\\Work\\CRM\\New folder\\Shared\\Api.Shared\\obj\\",
+      "outputPath": "D:\\Workspace\\Work\\DoAnThucTap\\CRM_NEW\\New folder\\Shared\\Api.Shared\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -186,8 +186,30 @@ namespace Vino.Server.Services.Infrastructure
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.FLyDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
 
             // FclImp
-            CreateMap<FclImp, FclImpModel>();
-            CreateMap<FclImpModel, FclImp>();
+            CreateMap<FclImp, FclImpModel>()
+                .ForMember(d => d.Created,
+                    opt => opt.MapFrom(x => x.Created.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                .ForMember(d => d.Eta,
+                    opt => opt.MapFrom(x => x.Eta.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                .ForMember(d => d.Etd,
+                    opt => opt.MapFrom(x => x.Etd.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                .ForMember(d => d.PolName, opt => opt.MapFrom(
+                    x => x.Pol.PortName))
+                .ForMember(d => d.OpIcName, opt => opt.MapFrom(
+                    x => x.OpIc.EnglishName))
+                .ForMember(d => d.PodName, opt => opt.MapFrom(
+                    x => x.Pod.PortName))
+                .ForMember(d => d.AgentName, opt => opt.MapFrom(
+                    x => x.Agent.FullEnglishName))
+                .ForMember(d => d.DeliveryName, opt => opt.MapFrom(
+                    x => x.Delivery.PortName));
+            CreateMap<FclImpModel, FclImp>()
+                .ForMember(d => d.Created,
+                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Created, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.Eta,
+                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Eta, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.Etd,
+                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Etd, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
 
             // LclImp
             CreateMap<LclImp, LclImpModel>()
