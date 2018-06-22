@@ -3,26 +3,6 @@
     OpenModalCreation(url, "ContactId", "DrpContact");
 });
 
-$("#create-coloader").click(function () {
-    const url = $(this).data('request-url');
-    OpenModalCreation(url, "CoLoaderId", "DrpCarrier");
-});
-
-$("#create-agent").click(function () {
-    const url = $(this).data('request-url');
-    OpenModalCreation(url, "AgentId", "DrpCarrier");
-});
-
-$("#create-pod").click(function () {
-    const url = $(this).data('request-url');
-    OpenModalCreation(url, "PodId", "DrpPort");
-});
-
-$("#create-pol").click(function () {
-    const url = $(this).data('request-url');
-    OpenModalCreation(url, "PolId", "DrpPort");
-});
-
 function OpenModalCreation(url, viewId, viewGroupId) {
     $.ajax({
         url: url,

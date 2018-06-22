@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Vino.Server.Data.Common;
 using Vino.Server.Data.CRM;
 using Vino.Server.Services.MainServices.BaseService;
@@ -13,6 +14,13 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
 {
     public class CrmCustomerModel : BaseDto
     {
+        public CrmCustomerModel()
+        {
+            ContactItems = new List<SelectListItem>();
+            LocationItems = new List<SelectListItem>();
+            CategoriesItems = new List<SelectListItem>();
+        }
+
         [MaxLength(100)]
         [Index(IsUnique = true)]
         [Required]
@@ -86,5 +94,10 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
         [EmailAddress]
         [Required]
         public string Email { get; set; }
+
+        public IList<SelectListItem> ContactItems { get; set; }
+        public IList<SelectListItem> LocationItems { get; set; }
+        public IList<SelectListItem> CategoriesItems { get; set; }
+
     }
 }

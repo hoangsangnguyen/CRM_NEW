@@ -2633,6 +2633,7 @@
     <Content Include="Areas\Admin\Views\Customers\List.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\_AddEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -3354,6 +3355,7 @@
     <Compile Include="Areas\Admin\Models\Calendar\CalendarListModel.cs" />
     <Compile Include="Areas\Admin\Models\Calendar\FactListModel.cs" />
     <Compile Include="Areas\Admin\Models\Calendar\FactSensorRelativeListModel.cs" />
+    <Compile Include="Areas\Admin\Models\Customer\CustomerListModel.cs" />
     <Compile Include="Areas\Admin\Models\FaclonUser\OperatorListModel.cs" />
     <Compile Include="Areas\Admin\Models\FaclonUser\UserHospitalListModel.cs" />
     <Compile Include="Areas\Admin\Models\FclExps\FclExpsListModel.cs" />

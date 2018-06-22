@@ -17,6 +17,7 @@ using Vino.Server.Services.MainServices.CRM.AirExp.Models;
 using Vino.Server.Services.MainServices.CRM.AirImp.Models;
 using Vino.Server.Services.MainServices.CRM.Carrier.Model;
 using Vino.Server.Services.MainServices.CRM.Contact.Models;
+using Vino.Server.Services.MainServices.CRM.Customer.Models;
 using Vino.Server.Services.MainServices.CRM.FclExp.Models;
 using Vino.Server.Services.MainServices.CRM.FclImp.Models;
 using Vino.Server.Services.MainServices.CRM.LclExp.Models;
@@ -112,6 +113,16 @@ namespace Vino.Server.Services.Infrastructure
             // carrier
             CreateMap<Carrier, CarrierModel>();
             CreateMap<CarrierModel, Carrier>();
+
+            CreateMap<CrmCustomer, CrmCustomerModel>()
+                .ForMember(d => d.LocationName, opt => opt.MapFrom(
+                    x => x.Location.Title))
+                .ForMember(d => d.ContactName, opt => opt.MapFrom(
+                    x => x.Contact.EnglishName))
+                .ForMember(d => d.CategoryName, opt => opt.MapFrom(
+                    x => x.Category.Title));
+            CreateMap<CrmCustomerModel, CrmCustomer>();
+
 
             // FclExp
             CreateMap<FclExp, FclExpModel>()
