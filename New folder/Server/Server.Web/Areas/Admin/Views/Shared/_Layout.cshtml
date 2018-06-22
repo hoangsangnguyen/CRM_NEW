@@ -143,18 +143,25 @@
                     </li>
 
                     <li class="treeview">
-                        <li class="@Html.IsActive("Customers","Index")">
-                            <a href="@Url.Action("Index", "Customers")">
-                                <i class="fa fa-industry" style="margin-left: 5px"></i>
-                                <span style="color: #0173b7">Customer</span>
-                            </a>
-                        </li>
+                    <li class="@Html.IsActive("Customers","Index")">
+                        <a href="@Url.Action("Index", "Customers")">
+                            <i class="fa fa-industry" style="margin-left: 5px"></i>
+                            <span style="color: #0173b7">Customer</span>
+                        </a>
+                    </li>
                     </li>
 
                     <li class="@Html.IsActive("Contact","Index")">
                         <a href="@Url.Action("Index", "Contact")">
                             <i class="fa fa-industry" style="margin-left: 5px"></i>
                             <span style="color: #0173b7">Contact</span>
+                        </a>
+                    </li>
+
+                    <li class="@Html.IsActive("Port","Index")">
+                        <a href="@Url.Action("Index", "Port")">
+                            <i class="fa fa-industry" style="margin-left: 5px"></i>
+                            <span style="color: #0173b7">Port</span>
                         </a>
                     </li>
 

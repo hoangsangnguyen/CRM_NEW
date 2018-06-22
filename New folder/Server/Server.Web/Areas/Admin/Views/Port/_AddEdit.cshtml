@@ -1,63 +1,118 @@
-﻿@model Vino.Server.Services.MainServices.CRM.Port.Model.PortModel
-<body>
-    <section class="wr-main">
-        <div class="out-content-mid no-mb no-minheight">
-            <div class="container-fluid">
-                <div class="row" id="form_new">
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="out-input">
-                            <label>Port Code</label>
-                            @Html.EditorFor(model => model.PortCode, new { htmlAttributes = new { @class = "form-control" } })
-                            @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
-                            <div  class="color-danger p-t-10" style="display: none;">Please input data</div>
+﻿@using System.Globalization
+@using Falcon.Web.Mvc.HtmlExtensions
+@model Vino.Server.Services.MainServices.CRM.Port.Model.PortModel
+@{
+    <style>
+        .k-combobox .k-input {
+            height: 27.5px !important
+        }
+    </style>
+}
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.Id)
+
+@{
+    Layout = null;
+}
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        @*Port Code*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Port Code:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.FalconEditorFor(m => m.PortCode)
+                                    @Html.ValidationMessageFor(m => m.PortCode)
+                                </div>
+                            </div>
+                        </div>
+                        @*Port Name*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Port Name:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.FalconEditorFor(m => m.PortName)
+                                    @Html.ValidationMessageFor(m => m.PortName)
+                                </div>
+                            </div>
+                        </div>
+                        @*Nationality*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Nationality:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.NationalityId, new SelectList(Model.NationalityItems, "Value", "Text"),
+                                        new { @Id = @Html.FieldIdFor(m => m.NationalityId), @class = "form-control select-style-1" })
+                                    @Html.ValidationMessageFor(model => model.NationalityId)
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="row" style="margin-top: 10px">
+                        @*Zone*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Zone:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.ZoneId, new SelectList(Model.ZoneItems, "Value", "Text"),
+                                        new { @Id = @Html.FieldIdFor(m => m.ZoneId), @class = "form-control select-style-1" })
+                                    @Html.ValidationMessageFor(model => model.ZoneId)
+                                </div>
+                            </div>
+                        </div>
+                       
+                        @*Local Zone*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Local Zone:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.FalconEditorFor(m => m.LocalZone)
+                                    @Html.ValidationMessageFor(m => m.LocalZone)
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="out-input">
-                            <label>Port Name</label>
-                            @Html.EditorFor(model => model.PortName, new {htmlAttributes = new {@class = "form-control"}})
-                            @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
-                            <div class="color-danger p-t-10" style="display: none;">Please input data</div>
+                        @*Model*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Model:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.ModeId, new SelectList(Model.ModeItems, "Value", "Text"),
+                                        new { @Id = @Html.FieldIdFor(m => m.ModeId), @class = "form-control select-style-1" })
+                                    @Html.ValidationMessageFor(model => model.ModeId)
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="out-input">
-                            <label>Nationality</label>
-                            @Html.DropDownListFor(model => model.NationalityId, new SelectList(Model.NationalityItems, "Value", "Text"), new {@class = "form-control select-style-1"})
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="out-input">
-                            <label>Zone</label>
-                            @Html.DropDownListFor(model => model.ZoneId, new SelectList(Model.ZoneItems, "Value", "Text"), new {@class = "form-control select-style-1"})
-                            <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="out-input">
-                            <label>Local Zone</label>
-                            @Html.EditorFor(model => model.LocalZone, new {htmlAttributes = new {@class = "form-control"}})
-                            @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
-                            <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="out-input">
-                            <label>Mode</label>
-                            @Html.DropDownListFor(model => model.ModeId, new SelectList(Model.ModeItems, "Value", "Text"), new {@class = "form-control select-style-1"})
-                        </div>
-                    </div>
-
+                  
                 </div>
             </div>
         </div>
-
-    </section>
-</body>
+        @*modal*@
+        <div id="myModal" class="modal  fade " data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div id="myModalContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 

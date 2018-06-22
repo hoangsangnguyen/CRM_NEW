@@ -11,6 +11,7 @@ using Vino.Server.Services.MainServices.CRM.Carrier.Model;
 using Vino.Server.Services.MainServices.CRM.Contact.Models;
 using Vino.Server.Services.MainServices.CRM.Port;
 using Vino.Server.Services.MainServices.CRM.Port.Model;
+using Vino.Server.Web.Areas.Admin.Models.Ports;
 using Vino.Shared.Constants.Common;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
@@ -33,13 +34,23 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         public ActionResult List()
         {
-            return View();
+            return View(new PortsListModel());
         }
 
         [HttpPost]
-        public async Task<ActionResult> GetList()
+        public async Task<ActionResult> List(DataSourceRequest common, PortsListModel model)
         {
             var dtoFromRepo =  await _service.GetAllAsync();
+            var nationalityItems = GetNationalityItems();
+            var zoneItems = GetZoneItems();
+            var modeItems = GetModeItems();
+
+            foreach (var contact in dtoFromRepo)
+            {
+                contact.NationalityName = nationalityItems.FirstOrDefault(x => x.Value == contact.NationalityId.ToString())?.Text;
+                contact.ZoneName = zoneItems.FirstOrDefault(x => x.Value == contact.ZoneId.ToString())?.Text;
+                contact.ModeName = modeItems.FirstOrDefault(x => x.Value == contact.ModeId.ToString())?.Text;
+            }
 
             var gridModel = new DataSourceResult()
             {
@@ -52,12 +63,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            var model = new PortModel()
-            {
-                NationalityItems = GetNationalityItems(),
-                ZoneItems =  GetZoneItems(),
-                ModeItems = GetModeItems(),
-            };
+            var model = new PortModel();
+            InitDataModel(model);
            
             return View(model);
         }
@@ -68,25 +75,75 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                dto.ZoneItems =  GetZoneItems();
-                dto.ModeItems = GetModeItems();
-                dto.NationalityItems = GetNationalityItems();
+                InitDataModel(dto);
                 return View(dto);
             }
 
             var id = await _service.CreateAsync(dto);
-            if (id >= 0)
+            if (id == 0)
             {
-                Console.WriteLine("Create port failed");
+                ErrorNotification("Tạo mới thất bại!");
             }
             else
             {
-                Console.WriteLine("Create port succeed");
+                SuccessNotification("Tạo mới thành công!");
             }
 
+            return RedirectToAction("Edit", new {id});
+        }
+
+        public async Task<ActionResult> Edit(int id = 0)
+        {
+            var model = await _service.GetSingleAsync(id);
+
+            if (model == null)
+            {
+                return RedirectToAction("List");
+            }
+
+            InitDataModel(model);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(PortModel dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                InitDataModel(dto);
+                return View(dto);
+            }
+
+            Console.WriteLine(dto);
+            await _service.EditAsync(dto.Id, dto);
+
+            SuccessNotification("Chỉnh sửa thành công!");
+            return RedirectToAction("Edit", new { id = dto.Id });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(int id)
+        {
+
+            var news = await _service.GetSingleAsync(id);
+            if (news == null)
+            {
+                ErrorNotification("Xóa thất bại!");
+                return RedirectToAction("List");
+            }
+
+            await _service.DeleteAsync(id);
+            SuccessNotification("Xóa thành công!");
             return RedirectToAction("List");
         }
 
+        private void InitDataModel(PortModel model)
+        {
+            model.NationalityItems = GetNationalityItems();
+            model.ZoneItems = GetZoneItems();
+            model.ModeItems = GetModeItems();
+        }
         [HttpPost]
         public async Task<ActionResult> CreateFromSubViewAsync(PortModel dto)
         {

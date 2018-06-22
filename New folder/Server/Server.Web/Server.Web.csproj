@@ -2635,6 +2635,7 @@
     <Content Include="Areas\Admin\Views\Customers\_AddEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Contact\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Port\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
@@ -3371,6 +3372,7 @@
     <Compile Include="Areas\Admin\Models\Message\MessageTemplateListModel.cs" />
     <Compile Include="Areas\Admin\Models\Message\SendEmailTestModel.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Models\Ports\PortsListModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\LogController.cs" />

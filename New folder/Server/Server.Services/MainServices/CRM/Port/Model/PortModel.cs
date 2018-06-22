@@ -26,12 +26,16 @@ namespace Vino.Server.Services.MainServices.CRM.Port.Model
         public string PortName { get; set; }
 
         public int NationalityId { get; set; }
+        public string NationalityName { get; set; }
 
         public int ZoneId { get; set; }
+        public string ZoneName { get; set; }
 
         [Required]
         public string LocalZone { get; set; }
         public int ModeId { get; set; }
+        public string ModeName { get; set; }
+
         public IList<SelectListItem> NationalityItems { get; set; }
         public IList<SelectListItem> ZoneItems { get; set; }
         public IList<SelectListItem> ModeItems { get; set; }
