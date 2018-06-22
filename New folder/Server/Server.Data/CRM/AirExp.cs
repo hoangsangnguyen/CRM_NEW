@@ -71,6 +71,9 @@ namespace Vino.Server.Data.CRM
         public virtual Port Destination { get; set; }
         public int DestinationId { get; set; }
 
+        public double Gw { get; set; }
+        public double Cw { get; set; }
+
         public string Notes { get; set; }
     }
 }

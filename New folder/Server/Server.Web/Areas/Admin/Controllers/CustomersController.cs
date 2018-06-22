@@ -78,7 +78,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             }
 
             var id = await _service.CreateAsync(dto);
-            if (id >= 0)
+            if (id == 0)
             {
                 ErrorNotification("Tạo mới thất bại!");
             }

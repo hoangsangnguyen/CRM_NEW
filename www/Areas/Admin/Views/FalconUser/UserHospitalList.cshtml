@@ -1,0 +1,176 @@
+﻿@using Falcon.Web.Mvc.HtmlExtensions
+@model Vino.Server.Web.Areas.Admin.Models.FaclonUser.UserHospitalListModel
+
+@{
+    var defaultGridPageSize = 20;
+    var gridPageSizes = "10,20,50,100,500";
+}
+
+@Html.AntiForgeryToken()
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        Danh sách quản lý bệnh viện/vận hành hệ thống
+    </h1>
+    @*<div class="pull-right">
+        <a href="@Url.Action("UserHospitalCreate")" class="btn bg-blue">
+            <i class="fa fa-plus-square"></i>
+            Thêm
+        </a>
+    </div>*@
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            @*hide the entire search block if no elements are displayed*@
+            <div class="panel panel-default panel-search">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Tên đăng nhập</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.FalconEditorFor(model => model.UserName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Bệnh viện</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="@Html.FieldIdFor(model => model.HospitalId)" name="@Html.FieldNameFor(model => model.HospitalId)" style="width: 100%"/>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.HospitalId)").kendoDropDownList({
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                dataSource: {
+                                                    transport: {
+                                                        read: {
+                                                            dataType: "json",
+                                                            url: "/api/hospitalapi/getallhospitals",
+                                                        }
+                                                    }
+                                                },
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <button type="button" id="button-search" class="btn btn-primary">
+                                        <i class="fa fa-search"></i>
+                                        Tìm kiếm
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="main-grid"></div>
+
+                    <script>
+                        $(document).ready(function() {
+                            $("#main-grid").kendoGrid({
+                                dataSource: {
+                                    type: "json",
+                                    transport: {
+                                        read: {
+                                            url: "@Html.Raw(Url.Action("UserHospitalList", "FalconUser"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: additionalData
+                                        }
+                                    },
+                                    schema: {
+                                        data: "Data",
+                                        total: "Total",
+                                        errors: "Errors"
+                                    },
+                                    error: function(e) {
+                                        display_kendoui_grid_error(e);
+                                        // Cancel the changes
+                                        this.cancelChanges();
+                                    },
+                                    pageSize: @(defaultGridPageSize),
+                                    serverPaging: true,
+                                    serverFiltering: true,
+                                    serverSorting: true
+                                },
+                                pageable: {
+                                    refresh: true,
+                                    pageSizes: [@(gridPageSizes)],
+                                    messages: {
+                                        itemsPerPage: "Số hàng trên trang",
+                                        empty: "Không có dữ liệu",
+                                        display: "{0} - {1} của {2} dữ liệu",
+                                    },
+                                },
+                                editable: {
+                                    confirmation: "Delete",
+                                    mode: "inline"
+                                },
+                                scrollable: false,
+                                columns: [
+                                    {
+                                        field: "Role",
+                                        title: "Vai trò hệ thống",
+                                        headerAttributes: { style: "text-align:center" },
+                                    },
+                                    {
+                                        field: "UserName",
+                                        title: "Tên đăng nhập",
+                                        headerAttributes: { style: "text-align:center" },
+                                    },  {
+                                        field: "HospitalName",
+                                        title: "Bệnh viện",
+                                        headerAttributes: { style: "text-align:center" },
+                                    },
+                                ]
+                            });
+                        });
+                    </script>
+
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            //search button
+                            $('#button-search').click(function() {
+                                //search
+                                var grid = $('#main-grid').data('kendoGrid');
+                                grid.dataSource.page(1); //new search. Set page size to 1
+                                //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                return false;
+                            });
+                        });
+
+                        function additionalData() {
+                            var data = {
+                                UserName: $('#UserName').val(),
+                                HospitalId: $('#HospitalId').val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                        $("".concat("#@Html.FieldIdFor(model => model.UserName)").keydown(function (event) {
+                            if (event.keyCode === 13) {
+                                $("#button-search").click();
+                                return false;
+                            }
+                        }));
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

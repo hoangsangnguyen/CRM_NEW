@@ -1,0 +1,63 @@
+﻿@model Vino.Server.Services.MainServices.CRM.Port.Model.PortModel
+<body>
+    <section class="wr-main">
+        <div class="out-content-mid no-mb no-minheight">
+            <div class="container-fluid">
+                <div class="row" id="form_new">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Port Code</label>
+                            @Html.EditorFor(model => model.PortCode, new { htmlAttributes = new { @class = "form-control" } })
+                            @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
+                            <div  class="color-danger p-t-10" style="display: none;">Please input data</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Port Name</label>
+                            @Html.EditorFor(model => model.PortName, new {htmlAttributes = new {@class = "form-control"}})
+                            @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
+                            <div class="color-danger p-t-10" style="display: none;">Please input data</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Nationality</label>
+                            @Html.DropDownListFor(model => model.NationalityId, new SelectList(Model.NationalityItems, "Value", "Text"), new {@class = "form-control select-style-1"})
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Zone</label>
+                            @Html.DropDownListFor(model => model.ZoneId, new SelectList(Model.ZoneItems, "Value", "Text"), new {@class = "form-control select-style-1"})
+                            <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Local Zone</label>
+                            @Html.EditorFor(model => model.LocalZone, new {htmlAttributes = new {@class = "form-control"}})
+                            @*<input type="text" value=@Model.JobID class="form-control" placeholder="">*@
+                            <div id="div-error-message-item" class="color-danger p-t-10" style="display: none;">Please input data</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="out-input">
+                            <label>Mode</label>
+                            @Html.DropDownListFor(model => model.ModeId, new SelectList(Model.ModeItems, "Value", "Text"), new {@class = "form-control select-style-1"})
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+

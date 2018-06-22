@@ -13,12 +13,12 @@ $("#create-agent").click(function () {
     OpenModalCreation(url, "AgentId", "DrpCarrier");
 });
 
-$("#create-pol").click(function () {
+$("#create-PolPort").click(function () {
     const url = $(this).data('request-url');
     OpenModalCreation(url, "PolId", "DrpPort");
 });
 
-$("#create-pod").click(function () {
+$("#create-PodPort").click(function () {
     const url = $(this).data('request-url');
     OpenModalCreation(url, "PodId", "DrpPort");
 });

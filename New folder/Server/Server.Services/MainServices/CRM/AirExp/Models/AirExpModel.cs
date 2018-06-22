@@ -76,6 +76,8 @@ namespace Vino.Server.Services.MainServices.CRM.AirExp.Models
         public string AgentName { get; set; }
 
         public int DestinationId { get; set; }
+        public double Gw { get; set; }
+        public double Cw { get; set; }
 
         public string Notes { get; set; }
 

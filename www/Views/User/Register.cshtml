@@ -1,0 +1,41 @@
+﻿@using Falcon.Web.Mvc.HtmlExtensions
+@model Vino.Server.Web.Models.User.RegisterModel
+<main class="main-content" role="main">
+
+    <!-- /templates/Employees/register.liquid -->
+
+    <div class="grid">
+
+        <div class="grid__item large--one-third push--large--one-third text-center">
+
+            <h1>Create Account</h1>
+
+            <div class="form-vertical">
+                <form method="post" action="" id="create_Employee" accept-charset="UTF-8">
+                    <input type="hidden" name="form_type" value="create_Employee"><input type="hidden" name="utf8" value="✓">
+
+                    @Html.ValidationSummary()
+
+                    <label for="@Html.FieldIdFor(model => model.FullName)" class="hidden-label">Full Name</label>
+                    <input type="text" name="@Html.FieldNameFor(model => model.FullName)" id="@Html.FieldIdFor(model => model.FullName)" class="input-full" placeholder="Full name" autocapitalize="words">
+
+                    <label for="@Html.FieldIdFor(model => model.UserName)" class="hidden-label">UserName</label>
+                    <input type="email" name="@Html.FieldNameFor(model => model.UserName)" id="@Html.FieldIdFor(model => model.UserName)" class="input-full" placeholder="Username" autocorrect="off" autocapitalize="off">
+
+                    <label for="@Html.FieldIdFor(model => model.Password)" class="hidden-label">Password</label>
+                    <input type="password" name="@Html.FieldNameFor(model => model.Password)" id="@Html.FieldIdFor(model => model.Password)" class="input-full" placeholder="Password">
+
+                    <p>
+                        <input type="submit" value="Create" class="btn btn--full">
+                    </p>
+                    <a href="/">Return to Store</a>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</main>
