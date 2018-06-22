@@ -30,6 +30,7 @@ namespace Vino.Server.Services.MainServices.CRM.Carrier.Model
         public string Cell { get; set; }
 
         public int CountryId { get; set; }
+        public string CountryName { get; set; }
 
         public IList<SelectListItem> CountryItems { get; set; }
     }

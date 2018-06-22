@@ -10,6 +10,7 @@ using Vino.Server.Services.MainServices.Common.Models;
 using Vino.Server.Services.MainServices.CRM.Carrier;
 using Vino.Server.Services.MainServices.CRM.Carrier.Model;
 using Vino.Server.Services.MainServices.CRM.Contact.Models;
+using Vino.Server.Web.Areas.Admin.Models.Carriers;
 using Vino.Shared.Constants.Common;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
@@ -31,14 +32,18 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         public ActionResult List()
         {
-            return View();
+            return View(new CarriersListModel());
         }
 
         [HttpPost]
-        public async Task<ActionResult> GetList()
+        public async Task<ActionResult> List(DataSourceRequest common, CarriersListModel model)
         {
             var dtoFromRepo = await _service.GetAllAsync();
-
+            var nationalityItems = GetNationalityItems();
+            foreach (var contact in dtoFromRepo)
+            {
+                contact.CountryName = nationalityItems.FirstOrDefault(x => x.Value == contact.CountryId.ToString())?.Text;
+            }
             var gridModel = new DataSourceResult()
             {
                 Data = dtoFromRepo,
@@ -63,7 +68,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CarrierModel dto)
+        public async Task<ActionResult> Create(CarrierModel dto)
         {
             if (!ModelState.IsValid)
             {
@@ -71,16 +76,64 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return View(dto);
             }
 
-            var id = _service.CreateAsync(dto);
-            if (id.Result >= 0)
+            var index = await _service.GetNumberEntry();
+            dto.Code = "CL" + (index + 1).ToString().PadLeft(4, '0');
+
+            var id = await _service.CreateAsync(dto);
+            if (id == 0)
             {
-                Console.WriteLine("Create carrier failed");
+                ErrorNotification("Tạo mới thất bại!");
             }
             else
             {
-                Console.WriteLine("Create carrier succeed");
+                SuccessNotification("Tạo mới thành công!");
             }
 
+            return RedirectToAction("Edit", new {id});
+        }
+
+        public async Task<ActionResult> Edit(int id = 0)
+        {
+            var model = await _service.GetSingleAsync(id);
+
+            if (model == null)
+            {
+                return RedirectToAction("List");
+            }
+
+            model.CountryItems = GetNationalityItems();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(CarrierModel dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                dto.CountryItems = GetNationalityItems();
+                return View(dto);
+            }
+
+            Console.WriteLine(dto);
+            await _service.EditAsync(dto.Id, dto);
+
+            SuccessNotification("Chỉnh sửa thành công!");
+            return RedirectToAction("Edit", new { id = dto.Id });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var news = await _service.GetSingleAsync(id);
+            if (news == null)
+            {
+                ErrorNotification("Xóa thất bại!");
+                return RedirectToAction("List");
+            }
+
+            await _service.DeleteAsync(id);
+            SuccessNotification("Xóa thành công!");
             return RedirectToAction("List");
         }
 

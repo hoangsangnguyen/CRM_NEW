@@ -1,30 +1,19 @@
 ﻿@model Vino.Server.Services.MainServices.CRM.Contact.Models.CrmContactModel
 
-@{
-    ViewData["Title"] = "Create";
-}
-
-<body>
-<section class="out-bar-top">
-    <i class="mdi mdi-truck-fast"></i>
-    <ul class="out-bar-line">
-        <li><a href="#" title="">Exports</a></li>
-        <li><a href="#" title="">Air Export</a></li>
-    </ul>
-</section>
-
-@using (@Html.BeginForm("Create", "Contact", FormMethod.Post))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    @Html.Partial("_AddEdit", Model)
-    <div class="col-sm-12 col-md-12 col-lg-12">
-        <div class="out-input">
-            <label style="display: block">&nbsp;</label>
-            <a href="#" class="btn pull-right"><i class="mdi mdi-refresh"></i>&nbsp;Refresh</a>
-            <button type="submit" value="save" id="save" class="btn pull-right"><i class="mdi mdi-floppy"></i>&nbsp;Save</button>
-            <a href="Index" class="btn pull-right"><i class="mdi mdi-close"></i>&nbsp;Close</a>
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Tạo mới liên hệ
+        </h1>
+        <div class="pull-right">
+            <a class="btn bg-blue" href="@Html.Raw(Url.Action("List"))"><i class="fa fa-chevron-left" aria-hidden="true"></i> Quay Lại</a>
+            <button type="submit" name="ContinueEditing" value="true" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                Lưu
+            </button>
         </div>
     </div>
+    @Html.Partial("_AddEdit", Model)
 }
-
-</body>
