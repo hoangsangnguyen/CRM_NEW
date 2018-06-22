@@ -11,6 +11,7 @@ using Vino.Server.Services.MainServices.CRM.AirExp;
 using Vino.Server.Services.MainServices.CRM.AirExp.Models;
 using Vino.Server.Services.MainServices.CRM.Contact;
 using Vino.Server.Services.MainServices.CRM.Contact.Models;
+using Vino.Server.Web.Areas.Admin.Models.Contact;
 using Vino.Shared.Constants.Common;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
@@ -33,16 +34,16 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         public ActionResult List()
         {
-            return View();
+            return View(new ContactListModel());
         }
 
         [HttpPost]
-        public async Task<ActionResult> GetList()
+        public async Task<ActionResult> List(DataSourceRequest common, ContactListModel model)
         {
             var dtoFromRepo = await _service.GetAllAsync();
+
             var positionItems = GetPositionItems();
             var departmentItems = GetDepartmentItems();
-
             foreach (var contact in dtoFromRepo)
             {
                 contact.PositionName = positionItems.FirstOrDefault(x => x.Value == contact.PositionId.ToString())?.Text;
@@ -64,11 +65,11 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             var model = new CrmContactModel()
             {
                 ContactId = "CT" + (index + 1).ToString().PadLeft(3, '0'),
-                Birthday = DateTimeOffset.Now.Date,
-                SpouseBirthday = DateTimeOffset.Now.Date,
-                PositionItems = GetPositionItems(),
-                DepartmentItems = GetDepartmentItems()
+                Birthday = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
+                SpouseBirthday = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
             };
+
+            InitDataModel(model);
 
             return View(model);
         }
@@ -81,21 +82,67 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                dto.PositionItems = GetPositionItems();
-                dto.DepartmentItems = GetDepartmentItems();
+                InitDataModel(dto);
                 return View(dto);
             }
-
+            var index = await _service.GetNumberEntry();
+            dto.ContactId = "CT" + (index + 1).ToString().PadLeft(3, '0');
             var id = await _service.CreateAsync(dto);
-            if (id >= 0)
+            if (id == 0)
             {
-                Console.WriteLine("Create contact failed");
+                ErrorNotification("Tạo mới thất bại!");
             }
             else
             {
-                Console.WriteLine("Create contact succeed");
+                SuccessNotification("Tạo mới thành công!");
             }
 
+            return RedirectToAction("Edit", new {id});
+        }
+
+        public async Task<ActionResult> Edit(int id = 0)
+        {
+            var model = await _service.GetSingleAsync(id);
+
+            if (model == null)
+            {
+                return RedirectToAction("List");
+            }
+
+            InitDataModel(model);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(CrmContactModel dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                InitDataModel(dto);
+                return View(dto);
+            }
+
+            Console.WriteLine(dto);
+            await _service.EditAsync(dto.Id, dto);
+
+            SuccessNotification("Chỉnh sửa thành công!");
+            return RedirectToAction("Edit", new { id = dto.Id });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(int id)
+        {
+
+            var news = await _service.GetSingleAsync(id);
+            if (news == null)
+            {
+                ErrorNotification("Xóa thất bại!");
+                return RedirectToAction("List");
+            }
+
+            await _service.DeleteAsync(id);
+            SuccessNotification("Xóa thành công!");
             return RedirectToAction("List");
         }
 
@@ -153,8 +200,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 Contact = new CrmContactModel()
                 {
                     ContactId = "CT" + (index + 1).ToString().PadLeft(3, '0'),
-                    Birthday = DateTimeOffset.Now.Date,
-                    SpouseBirthday = DateTimeOffset.Now.Date,
+                    Birthday = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
+                    SpouseBirthday = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                     PositionItems = GetPositionItems(),
                     DepartmentItems = GetDepartmentItems()
                 },
@@ -163,6 +210,12 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             };
 
             return PartialView("_CreateContact", viewModel);
+        }
+
+        private void InitDataModel(CrmContactModel model)
+        {
+            model.PositionItems = GetPositionItems();
+            model.DepartmentItems = GetDepartmentItems();
         }
 
         public IList<SelectListItem> GetDepartmentItems()

@@ -103,8 +103,23 @@ namespace Vino.Server.Services.Infrastructure
                 ;
 
             // Contacts
-            CreateMap<CrmContact, CrmContactModel>();
-            CreateMap<CrmContactModel, CrmContact>();
+            CreateMap<CrmContact, CrmContactModel>()
+                .ForMember(d => d.Birthday, opt => opt.MapFrom(x => x.Birthday.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                .ForMember(d => d.SpouseBirthday, opt => opt.MapFrom(x => x.SpouseBirthday.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                .ForMember(d => d.FullName, opt => opt.MapFrom(
+                    src => src.FirstName + " " + src.LastName));
+
+            CreateMap<CrmContactModel, CrmContact>()
+                .ForMember(d => d.Birthday,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.Birthday)
+                            ? (DateTimeOffset?) null
+                            : DateTimeOffset.ParseExact(x.Birthday, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.SpouseBirthday,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.SpouseBirthday)
+                            ? (DateTimeOffset?) null
+                            : DateTimeOffset.ParseExact(x.SpouseBirthday, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
 
             // ports
             CreateMap<Port, PortModel>();

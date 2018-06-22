@@ -31,10 +31,13 @@ namespace Vino.Server.Services.MainServices.CRM.Contact.Models
         [MaxLength(50)]
         public string LastName { get; set; }
 
+        public string FullName { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string EnglishName { get; set; }
 
+        [Required]
         public int PositionId { get; set; }
         public string PositionName { get; set; }
 
@@ -51,16 +54,17 @@ namespace Vino.Server.Services.MainServices.CRM.Contact.Models
 
         public string Signature { get; set; }
 
+        [Required]
         public int DepartmentId { get; set; }
         public string DepartmentName { get; set; }
 
-        public DateTimeOffset Birthday { get; set; }
+        public string Birthday { get; set; }
 
         public bool MarriageStatus { get; set; }
 
         public string SpouseName { get; set; }
 
-        public DateTimeOffset SpouseBirthday { get; set; }
+        public string SpouseBirthday { get; set; }
 
         public string FieldInterested { get; set; }
 

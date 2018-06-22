@@ -2634,6 +2634,7 @@
     <Content Include="Areas\Admin\Views\Customers\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\_AddEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
@@ -3356,6 +3357,7 @@
     <Compile Include="Areas\Admin\Models\Calendar\CalendarListModel.cs" />
     <Compile Include="Areas\Admin\Models\Calendar\FactListModel.cs" />
     <Compile Include="Areas\Admin\Models\Calendar\FactSensorRelativeListModel.cs" />
+    <Compile Include="Areas\Admin\Models\Contact\ContactListModel.cs" />
     <Compile Include="Areas\Admin\Models\Customer\CustomerListModel.cs" />
     <Compile Include="Areas\Admin\Models\FaclonUser\OperatorListModel.cs" />
     <Compile Include="Areas\Admin\Models\FaclonUser\UserHospitalListModel.cs" />
