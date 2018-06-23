@@ -22,18 +22,19 @@ namespace Vino.Server.Services.MainServices.CRM.Port.Model
         [Required]
         public string PortCode { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập tên")]
         public string PortName { get; set; }
-
-        public int NationalityId { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập nationality hoặc tạo mới")]
+        public int? NationalityId { get; set; }
         public string NationalityName { get; set; }
-
-        public int ZoneId { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập zone hoặc tạo mới")]
+        public int? ZoneId { get; set; }
         public string ZoneName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập local zone")]
         public string LocalZone { get; set; }
-        public int ModeId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn mode hoặc tạo mới")]
+        public int? ModeId { get; set; }
         public string ModeName { get; set; }
 
         public IList<SelectListItem> NationalityItems { get; set; }

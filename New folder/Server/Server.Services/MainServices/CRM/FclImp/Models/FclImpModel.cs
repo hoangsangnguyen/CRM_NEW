@@ -34,63 +34,64 @@ namespace Vino.Server.Services.MainServices.CRM.FclImp.Models
         [Required]
         public string Created { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng chọn ngày ETA")]
         public string Eta { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập MBL Number")]
         public string MblNumber { get; set; }
 
         public string PolName { get; set; }
-        [Required]
-        public int PolId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Vui lòng chọn POL hoặc tạo mới")]
+        public int? PolId { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Service")]
         public string Service { get; set; }
 
-        [Required]
-        public int MblTypeId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn MBL Type")]
+        public int? MblTypeId { get; set; }
 
-        [Required]
-        public int ShipmentId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn shipment")]
+        public int? ShipmentId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng chọn ngày ETD")]
         public string Etd { get; set; }
 
         public string OpIcName { get; set; }
-        [Required]
-        public int OpIcId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn OP.IC")]
+        public int? OpIcId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập ScName")]
         public string ScName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập PoNumber")]
         public string PoNumber { get; set; }
 
         public string PodName { get; set; }
-        [Required]
-        public int PodId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Vui lòng chọn POD hoặc tạo mới")]
+        public int? PodId { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Container")]
         public string Container { get; set; }
-        [Required]
-        public int CommodityId { get; set; }
+        [Required(ErrorMessage = "Vui lòng commodity hoặc tạo mới")]
+        public int? CommodityId { get; set; }
 
         public string SLinesName { get; set; }
-        [Required]
-        public int SlinesId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn S.Line hoặc tạo mới")]
+        public int? SlinesId { get; set; }
         public string AgentName { get; set; }
-        [Required]
-        public int AgentId { get; set; }
-        [Required]
-        public int VesselId { get; set; }
-        public int VoyageId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn agent hoặc tạo mới")]
+        public int? AgentId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn vessel hoặc tạo mới")]
+        public int? VesselId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn Voyage hoặc tạo mới")]
+        public int? VoyageId { get; set; }
 
 
         public string DeliveryName { get; set; }
-        [Required]
-        public int DeliveryId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn delivery hoặc tạo mới")]
+        public int? DeliveryId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập GW")]
         public double Gw { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập CBM")]
         public double Cbm { get; set; }
 
         [Required]

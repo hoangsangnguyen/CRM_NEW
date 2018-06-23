@@ -29,32 +29,38 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
         /**
          * Name
          */
-        [Required] public string Name { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập tên")]
+        public string Name { get; set; }
         /**
          * Full English Name
          */
-        [Required] public string FullEngishName { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập English Name")]
+        public string FullEngishName { get; set; }
 
         /**
         * Full Viet Nam Name
         */
-        [Required] public string FullVietNamName { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Full English Name")]
+        public string FullVietNamName { get; set; }
 
         /**
         * Address
         */
-        [Required] public string Address { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập địa chỉ")]
+        public string Address { get; set; }
 
         /**
         * Contact
         */
-        [Required] public int ContactId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn contact")]
+        public int? ContactId { get; set; }
         public string ContactName { get; set; }
 
         /**
        * Work phone
        */
-        [Required] public string WorkPhone { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập work phone")]
+        public string WorkPhone { get; set; }
 
         /**
        * Home Phone
@@ -64,12 +70,14 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
         /**
        * Fax No
        */
-        [Required] public string FaxNo { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Fax number")]
+        public string FaxNo { get; set; }
 
         /**
        *Location
        */
-        [Required] public int LocationId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn location")]
+        public int? LocationId { get; set; }
         public string LocationName { get; set; }
 
         /**
@@ -80,7 +88,7 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
         /**
          *Category
          */
-        [Required] public int CategoryId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn category")] public int? CategoryId { get; set; }
         public string CategoryName { get; set; }
 
         /**
@@ -92,7 +100,7 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
          * Email
          */
         [EmailAddress]
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập email")]
         public string Email { get; set; }
 
         public IList<SelectListItem> ContactItems { get; set; }

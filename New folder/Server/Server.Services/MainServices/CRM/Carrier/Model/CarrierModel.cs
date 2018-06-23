@@ -19,17 +19,18 @@ namespace Vino.Server.Services.MainServices.CRM.Carrier.Model
         [Required]
         public string Code { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập tên")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng FullEnglishName")]
         public string FullEnglishName { get; set; }
 
         public string Contact { get; set; }
 
         public string Cell { get; set; }
 
-        public int CountryId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn counttry")]
+        public int? CountryId { get; set; }
         public string CountryName { get; set; }
 
         public IList<SelectListItem> CountryItems { get; set; }

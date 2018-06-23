@@ -2637,8 +2637,8 @@
     <Content Include="Areas\Admin\Views\Contact\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Port\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Carrier\Edit.cshtml" />
+    <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
-    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\fineuploader\edit.gif" />

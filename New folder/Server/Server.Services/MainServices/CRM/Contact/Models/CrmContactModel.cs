@@ -23,22 +23,22 @@ namespace Vino.Server.Services.MainServices.CRM.Contact.Models
         [MaxLength(50)]
         public string ContactId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập First Name")]
         [MaxLength(50)]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Last Name")]
         [MaxLength(50)]
         public string LastName { get; set; }
 
         public string FullName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập English Name")]
         [MaxLength(50)]
         public string EnglishName { get; set; }
 
-        [Required]
-        public int PositionId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn position")]
+        public int? PositionId { get; set; }
         public string PositionName { get; set; }
 
         public string HomeAddress { get; set; }
@@ -54,8 +54,8 @@ namespace Vino.Server.Services.MainServices.CRM.Contact.Models
 
         public string Signature { get; set; }
 
-        [Required]
-        public int DepartmentId { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn department")]
+        public int? DepartmentId { get; set; }
         public string DepartmentName { get; set; }
 
         public string Birthday { get; set; }
