@@ -2637,6 +2637,7 @@
     <Content Include="Areas\Admin\Views\Contact\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Port\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Carrier\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\HblLclExp\List.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
@@ -3346,6 +3347,7 @@
     <Compile Include="Areas\Admin\Controllers\FalconUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\FclExpsController.cs" />
     <Compile Include="Areas\Admin\Controllers\FclImpsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HblLclExpController.cs" />
     <Compile Include="Areas\Admin\Controllers\JbimagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\LclExpsController.cs" />
     <Compile Include="Areas\Admin\Controllers\LclImpsController.cs" />
@@ -3366,6 +3368,7 @@
     <Compile Include="Areas\Admin\Models\FaclonUser\UserHospitalListModel.cs" />
     <Compile Include="Areas\Admin\Models\FclExps\FclExpsListModel.cs" />
     <Compile Include="Areas\Admin\Models\FclImps\FclImpsListModel.cs" />
+    <Compile Include="Areas\Admin\Models\HblLclExps\HblLclExpListModel.cs" />
     <Compile Include="Areas\Admin\Models\LclExps\LclExpsListModel.cs" />
     <Compile Include="Areas\Admin\Models\LclImps\LclImpsListModel.cs" />
     <Compile Include="Areas\Admin\Models\Message\MessageContentModel.cs" />

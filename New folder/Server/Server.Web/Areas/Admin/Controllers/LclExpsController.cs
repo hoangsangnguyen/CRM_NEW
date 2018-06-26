@@ -58,7 +58,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         public ActionResult List()
         {
-            return View();
+            return View(new LclExpsListModel());
         }
 
         [HttpPost]

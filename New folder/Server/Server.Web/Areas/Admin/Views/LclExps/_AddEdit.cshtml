@@ -387,7 +387,7 @@ new { @Id = @Html.FieldIdFor(m => m.MblTypeId), @class = "form-control select-st
                                 </div>
                                 <div class="col-md-7">
                                     @Html.DropDownListFor(model => model.UnitId, new SelectList(Model.UnitItems, "Value", "Text"),
-                                  new { @Id = @Html.FieldIdFor(m => m.UnitId), @class = "form-control select-style-1" })
+                                        new {@Id = @Html.FieldIdFor(m => m.UnitId), @class = "form-control select-style-1"})
                                     @Html.ValidationMessageFor(model => model.UnitId)
                                 </div>
                                 <div class="col-md-1">

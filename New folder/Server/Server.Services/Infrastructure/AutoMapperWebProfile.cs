@@ -20,6 +20,7 @@ using Vino.Server.Services.MainServices.CRM.Contact.Models;
 using Vino.Server.Services.MainServices.CRM.Customer.Models;
 using Vino.Server.Services.MainServices.CRM.FclExp.Models;
 using Vino.Server.Services.MainServices.CRM.FclImp.Models;
+using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
 using Vino.Server.Services.MainServices.CRM.LclExp.Models;
 using Vino.Server.Services.MainServices.CRM.LclImp.Models;
 using Vino.Server.Services.MainServices.CRM.Port.Model;
@@ -265,6 +266,47 @@ namespace Vino.Server.Services.Infrastructure
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Eta, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
                 .ForMember(d => d.Etd,
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Etd, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
+
+            // HblLclExp
+            CreateMap<HblLclExp, HblLclExpModel>()
+                .ForMember(d => d.ShipperName, opt => opt.MapFrom(
+                    x => x.Shipper.Name))
+                .ForMember(d => d.ConsigneeName, opt => opt.MapFrom(
+                    x => x.Consignee.Name))
+                .ForMember(d => d.NotifyPartyName, opt => opt.MapFrom(
+                    x => x.NotifyParty.Name))
+                .ForMember(d => d.PlaceOfReceiptName, opt => opt.MapFrom(
+                    x => x.PlaceOfReceipt.PortName))
+                .ForMember(d => d.PortOfLoaingName, opt => opt.MapFrom(
+                    x => x.PortOfLoaing.PortName))
+                .ForMember(d => d.PortOfDischargeName, opt => opt.MapFrom(
+                    x => x.PortOfDischarge.PortName))
+                .ForMember(d => d.TranshipmentPortName, opt => opt.MapFrom(
+                    x => x.TranshipmentPort.PortName))
+                .ForMember(d => d.ForwardingAgentName, opt => opt.MapFrom(
+                    x => x.ForwardingAgent.Name))
+                .ForMember(d => d.FinalDestinationName, opt => opt.MapFrom(
+                    x => x.FinalDestination.PortName))
+                .ForMember(d => d.PlaceOfDeliveryName, opt => opt.MapFrom(
+                    x => x.PlaceOfDelivery.PortName))
+                .ForMember(d => d.DeliveryOfGoodsName, opt => opt.MapFrom(
+                    x => x.DeliveryOfGoods.Name))
+                .ForMember(d => d.NotifyPartyName, opt => opt.MapFrom(
+                    x => x.NotifyParty.Name))
+                .ForMember(d => d.ClosingDate,
+                    opt => opt.MapFrom(x => x.ClosingDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                .ForMember(d => d.SellingDate,
+                    opt => opt.MapFrom(x => x.SellingDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                .ForMember(d => d.IssueDate,
+                    opt => opt.MapFrom(x => x.IssueDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)));
+            CreateMap<HblLclExpModel, HblLclExp>()
+                .ForMember(d => d.ClosingDate,
+                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.ClosingDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.SellingDate,
+                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.SellingDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.IssueDate,
+                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.IssueDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
+
 
         }
     }

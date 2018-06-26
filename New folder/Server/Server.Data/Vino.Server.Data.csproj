@@ -61,6 +61,7 @@
     <Compile Include="CRM\CrmCustomer.cs" />
     <Compile Include="CRM\FclExp.cs" />
     <Compile Include="CRM\FclImp.cs" />
+    <Compile Include="CRM\HblLclExp.cs" />
     <Compile Include="CRM\LclExp.cs" />
     <Compile Include="CRM\LclImp.cs" />
     <Compile Include="CRM\Port.cs" />
