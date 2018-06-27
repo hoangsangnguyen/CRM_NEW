@@ -85,5 +85,13 @@ namespace Vino.Server.Data.CRM
         [EmailAddress]
         [Required] public string Email { get; set; }
 
+        #region Map to Hbl Lcl
+
+        public ICollection<HblLclExp> Consignees { get; set; }
+        public ICollection<HblLclExp> Shippers { get; set; }
+        public ICollection<HblLclExp> NotifyParties { get; set; }
+        public ICollection<HblLclExp> DeliveryOfGoods { get; set; }
+
+        #endregion
     }
 }

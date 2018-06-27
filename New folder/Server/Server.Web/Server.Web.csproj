@@ -2638,6 +2638,8 @@
     <Content Include="Areas\Admin\Views\Port\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Carrier\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\List.cshtml" />
+    <Content Include="Areas\Admin\Views\HblLclExp\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\HblLclExp\_AddEdit.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />

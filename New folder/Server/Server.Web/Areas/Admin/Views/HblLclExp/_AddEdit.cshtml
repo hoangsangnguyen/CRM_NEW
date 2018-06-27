@@ -1,0 +1,61 @@
+﻿@using System.Globalization
+@using Falcon.Web.Mvc.HtmlExtensions
+@model Vino.Server.Services.MainServices.CRM.HblLclExp.Models.HblLclExpModel
+    @{
+        <style>
+            .k-combobox .k-input {
+                height: 27.5px !important
+            }
+        </style>
+    }
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+
+    @{
+        Layout = null;
+    }
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group form-custom">
+                                    <div class="col-md-4">
+                                        <label class="control-label">Shipper:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-custom">
+                                    <div class="col-md-4">
+                                        <label class="control-label">O.P IC:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                      
+                                    </div>
+                                    <div class="col-md-1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-custom">
+                                    <div class="col-md-4">
+                                        <label class="control-label">Co-Loader:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                    </div>
+                                    <div class="col-md-1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

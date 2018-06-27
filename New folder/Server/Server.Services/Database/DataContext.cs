@@ -192,6 +192,57 @@ namespace Vino.Server.Services.Database
 
             #endregion
 
+            #region HBL
+            // port
+            modelBuilder.Entity<HblLclExp>().HasRequired(aa => aa.Shipper)
+                .WithMany(m => m.Shippers)
+                .HasForeignKey(m => m.ShipperId)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<HblLclExp>().HasRequired(aa => aa.Consignee)
+                .WithMany(m => m.Consignees)
+                .HasForeignKey(m => m.ConsigneeId)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<HblLclExp>().HasRequired(aa => aa.NotifyParty)
+                .WithMany(m => m.NotifyParties)
+                .HasForeignKey(m => m.NotifyPartyId)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<HblLclExp>().HasRequired(aa => aa.DeliveryOfGoods)
+                .WithMany(m => m.DeliveryOfGoods)
+                .HasForeignKey(m => m.DeliveryOfGoodsId)
+                .WillCascadeOnDelete(false);
+
+            // port
+            modelBuilder.Entity<HblLclExp>().HasRequired(aa => aa.PlaceOfReceipt)
+                .WithMany(m => m.PlaceOfReceipts)
+                .HasForeignKey(m => m.PlaceOfReceiptId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<HblLclExp>().HasRequired(aa => aa.PortOfLoaing)
+                .WithMany(m => m.PortOfLoaings)
+                .HasForeignKey(m => m.PortOfLoaingId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<HblLclExp>().HasRequired(aa => aa.PortOfDischarge)
+                .WithMany(m => m.PortOfDischarges)
+                .HasForeignKey(m => m.PortOfDischargeId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<HblLclExp>().HasRequired(aa => aa.TranshipmentPort)
+                .WithMany(m => m.TranshipmentPorts)
+                .HasForeignKey(m => m.TranshipmentPortId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<HblLclExp>().HasRequired(aa => aa.FinalDestination)
+                .WithMany(m => m.FinalDestinations)
+                .HasForeignKey(m => m.FinalDestinationId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<HblLclExp>().HasRequired(aa => aa.PlaceOfDelivery)
+                .WithMany(m => m.PlaceOfDeliveries)
+                .HasForeignKey(m => m.PlaceOfDeliveryId)
+                .WillCascadeOnDelete(false);
+
+            #endregion
             #endregion
 
         }
@@ -220,6 +271,8 @@ namespace Vino.Server.Services.Database
         public DbSet<FclImp> FclImps{ get; set; }
         public DbSet<LclImp> LclImps{ get; set; }
         public DbSet<CrmCustomer> Customers { get; set; }
+        public DbSet<HblLclExp> HblLclExps { get; set; }
+
 
         #endregion
         //common
