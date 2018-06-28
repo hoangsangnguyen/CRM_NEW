@@ -21,6 +21,9 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
             CountryItems = new List<SelectListItem>();
             TypeOfMoveItems = new List<SelectListItem>();
             VesselItems = new List<SelectListItem>();
+            UnitItems = new List<SelectListItem>();
+            CommodityItems = new List<SelectListItem>();
+            PlaceItems = new List<SelectListItem>();
         }
 
         public int? LclExpId { get; set; }
@@ -103,7 +106,7 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
 
         public int NumberOfPackage { get; set; }
 
-        public int? QtyOfContainer { get; set; }
+        public int QtyOfContainer { get; set; }
 
         public string PoNumber { get; set; }
 
@@ -200,6 +203,9 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
         public List<SelectListItem> CountryItems { get; set; }
         public List<SelectListItem> TypeOfMoveItems { get; set; }
         public List<SelectListItem> VesselItems { get; set; }
+        public List<SelectListItem> UnitItems { get; set; }
+        public List<SelectListItem> CommodityItems { get; set; }
+        public List<SelectListItem> PlaceItems { get; set; }
 
 
     }

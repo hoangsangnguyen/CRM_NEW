@@ -31,7 +31,7 @@
                                     @Html.ValidationMessageFor(m => m.ShipperId)
                                 </div>
                                 <div class="col-md-1">
-                                    <a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-slines">Add</a>
+                                    <a data-request-url="@Url.Action("OpenModal", "Customers")" id="create-shipper">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -257,14 +257,14 @@
                                            name="@Html.FieldIdFor(model => model.ClosingDate)" value="@Model.ClosingDate"
                                            style="width: 100%" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.ClosingDate)").kendoDatePicker({
-                                                culture: "vi-VN",
-                                                format: "dd/MM/yyyy"
-                                            });
-                                            $("#@Html.FieldIdFor(model => model.ClosingDate)")
-                                                .prop("readonly", "readonly");
-                                        });
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.ClosingDate)").kendoDatePicker({
+                            culture: "vi-VN",
+                            format: "dd/MM/yyyy"
+                        });
+                        $("#@Html.FieldIdFor(model => model.ClosingDate)")
+                            .prop("readonly", "readonly");
+                    });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.ClosingDate)
                                 </div>
@@ -314,14 +314,14 @@
                                            name="@Html.FieldIdFor(model => model.SellingDate)" value="@Model.SellingDate"
                                            style="width: 100%" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.SellingDate)").kendoDatePicker({
-                                                culture: "vi-VN",
-                                                format: "dd/MM/yyyy"
-                                            });
-                                            $("#@Html.FieldIdFor(model => model.SellingDate)")
-                                                .prop("readonly", "readonly");
-                                        });
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.SellingDate)").kendoDatePicker({
+                            culture: "vi-VN",
+                            format: "dd/MM/yyyy"
+                        });
+                        $("#@Html.FieldIdFor(model => model.SellingDate)")
+                            .prop("readonly", "readonly");
+                    });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.SellingDate)
                                 </div>
@@ -427,8 +427,221 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        @*Container*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Container:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconTextAreaFor(m => m.Container)
+                                    @Html.ValidationMessageFor(model => model.Container)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            @*Delivery Of Goods*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Delivery Of Goods:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconDropDownListFor(m => m.DeliveryOfGoodsId, Model.CustomerItems)
+                                    @Html.ValidationMessageFor(model => model.DeliveryOfGoodsId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a data-request-url="@Url.Action("OpenModal", "Port")" id="create-slines">Add</a>
+                                </div>
+                            </div>
+                            @*NumberOfPackage*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">NumberOfPackage:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.NumberOfPackage)
+                                    @Html.ValidationMessageFor(model => model.NumberOfPackage)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            @*QtyOfContainer*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">QtyOfContainer:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.QtyOfContainer)
+                                    @Html.ValidationMessageFor(model => model.QtyOfContainer)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                            @*PoNumber*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">PoNumber:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.PoNumber)
+                                    @Html.ValidationMessageFor(model => model.PoNumber)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @*DescriptionOfGoods*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">DescriptionOfGoods:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconTextAreaFor(m => m.DescriptionOfGoods)
+                                    @Html.ValidationMessageFor(model => model.DescriptionOfGoods)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            @*GrossWeight*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">GrossWeight:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.GrossWeight)
+                                    @Html.ValidationMessageFor(model => model.GrossWeight)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+
+                            @*Unit*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Unit:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconDropDownListFor(m => m.UnitId, Model.UnitItems)
+                                    @Html.ValidationMessageFor(model => model.UnitId)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+
+                            @*Measurement*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Measurement:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.Measurement)
+                                    @Html.ValidationMessageFor(model => model.Measurement)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                        @*OnBoardStatus*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">OnBoardStatus:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconTextAreaFor(m => m.OnBoardStatus)
+                                    @Html.ValidationMessageFor(model => model.OnBoardStatus)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @*Commodity*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Commodity:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconDropDownListFor(m => m.CommodityId, Model.CommodityItems)
+                                    @Html.ValidationMessageFor(model => model.CommodityId)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                        @*PlaceOfIssue*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">PlaceOfIssue:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconDropDownListFor(m => m.PlaceOfIssueId, Model.PlaceItems)
+                                    @Html.ValidationMessageFor(model => model.PlaceOfIssueId)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Date of issue*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">IssueDate:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="datetime" id="@Html.FieldIdFor(model => model.IssueDate)"
+                                           name="@Html.FieldIdFor(model => model.IssueDate)"
+                                           value="@Model.IssueDate"
+                                           style="width: 100%" />
+                                    <script>
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.IssueDate)").kendoDatePicker({
+                            culture: "vi-VN",
+                            format: "dd/MM/yyyy"
+                        });
+                        $("#@Html.FieldIdFor(model => model.IssueDate)")
+                            .prop("readonly", "readonly");
+                    });
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.IssueDate)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*modal*@
+        <div id="myModal" class="modal  fade " data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div id="myModalContent"></div>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="/Areas/Admin/Content/js/hbllclexp_addedit.js"></script>
 </div>

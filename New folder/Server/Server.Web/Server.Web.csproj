@@ -226,6 +226,7 @@
     <Content Include="Areas\Admin\Content\js\fclexp_list.js" />
     <Content Include="Areas\Admin\Content\js\fclimps_addedit.js" />
     <Content Include="Areas\Admin\Content\js\fclimps_list.js" />
+    <Content Include="Areas\Admin\Content\js\hbllclexp_addedit.js" />
     <Content Include="Areas\Admin\Content\js\lclexps_addedit.js" />
     <Content Include="Areas\Admin\Content\js\lclexps_list.js" />
     <Content Include="Areas\Admin\Content\js\lclimps_addedit.js" />
@@ -2640,6 +2641,7 @@
     <Content Include="Areas\Admin\Views\HblLclExp\List.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\Create.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\_AddEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_CreateCustomer.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />

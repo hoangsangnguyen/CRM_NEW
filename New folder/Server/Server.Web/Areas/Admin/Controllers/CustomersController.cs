@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Falcon.Web.Mvc.Kendoui;
 using Vino.Server.Services.MainServices.Common;
+using Vino.Server.Services.MainServices.Common.Models;
 using Vino.Server.Services.MainServices.CRM.Contact;
 using Vino.Server.Services.MainServices.CRM.Contact.Models;
 using Vino.Server.Services.MainServices.CRM.Customer;
@@ -135,6 +136,54 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return RedirectToAction("List");
         }
 
+        [HttpPost]
+        public async Task<PartialViewResult> OpenModal(string viewId, string viewGroupId)
+        {
+            var index = await _service.GetNumberEntry();
+
+            var viewModel = new ModelAndViewId()
+            {
+                Customer = new CrmCustomerModel()
+                {
+                    CustomerId = "CS" + (index + 1).ToString().PadLeft(3, '0')
+                },
+                ViewId = viewId,
+                ViewGroupId = viewGroupId
+            };
+
+            await InitDataModel(viewModel.Customer);
+
+            return PartialView("_CreateContact", viewModel);
+        }
+        [HttpPost]
+        public async Task<ActionResult> CreateFromSubViewAsync(CrmCustomerModel dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                await InitDataModel(dto);
+                return new EmptyResult();
+            }
+
+            var id = await _service.CreateAsync(dto);
+            if (id >= 0)
+            {
+                Console.WriteLine("Create customer succeed");
+                var customer = await _service.GetSingleAsync(id);
+                if (customer == null)
+                    return new EmptyResult();
+
+                var name = customer.Name;
+                return Json(new NameValueModel()
+                {
+                    Value = id.ToString(),
+                    Name = name
+                });
+            }
+            Console.WriteLine("Create customer succeed");
+
+            return new EmptyResult();
+        }
+
         private async Task InitDataModel(CrmCustomerModel model)
         {
             model.ContactItems = await GetContactItems();
@@ -182,6 +231,12 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return items;
         }
 
+        public class ModelAndViewId
+        {
+            public CrmCustomerModel Customer { get; set; }
+            public string ViewId { get; set; }
+            public string ViewGroupId { get; set; }
+        }
 
     }
 }

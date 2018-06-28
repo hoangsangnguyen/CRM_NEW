@@ -58,7 +58,7 @@ namespace Vino.Server.Data.CRM
 
         public int NumberOfPackage { get; set; }
 
-        public int? QtyOfContainer { get; set; }
+        public int QtyOfContainer { get; set; }
 
         public string PoNumber { get; set; }
 
