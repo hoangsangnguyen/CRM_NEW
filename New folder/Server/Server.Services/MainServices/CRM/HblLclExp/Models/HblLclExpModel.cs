@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Vino.Server.Data.CRM;
 using Vino.Server.Services.MainServices.BaseService;
 
@@ -12,6 +13,16 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
 {
     public class HblLclExpModel : BaseDto
     {
+        public HblLclExpModel()
+        {
+            CustomerItems = new List<SelectListItem>();
+            PortItems = new List<SelectListItem>();
+            HblTypeItems = new List<SelectListItem>();
+            CountryItems = new List<SelectListItem>();
+            TypeOfMoveItems = new List<SelectListItem>();
+            VesselItems = new List<SelectListItem>();
+        }
+
         public int? LclExpId { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập BL Number")]
@@ -113,11 +124,10 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
         public string OnBoardStatus { get; set; }
 
         /*
-         * Forwareding agent and name
+         * Forwareding agent
          */
         [Required(ErrorMessage = "Vui lòng chọn Forwarding Agent")]
-        public int? ForwardingAgentId { get; set; }
-        public string ForwardingAgentName { get; set; }
+        public string ForwardingAgent { get; set; }
 
 
         public double FreightAmount { get; set; }
@@ -146,12 +156,13 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
 
         public string CountryOfOriginName { get; set; }
 
-
         public int? TypeOfMoveId { get; set; }
         public string TypeOfMoveName { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn ngày Closing")]
         public string ClosingDate { get; set; }
+
+        public string FreightPayableAt { get; set; }
 
         public int NumberOfOriginal { get; set; }
 
@@ -182,5 +193,14 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
 
         [Required(ErrorMessage = "Vui lòng chọn ngày Issue")]
         public string IssueDate { get; set; }
+
+        public List<SelectListItem> CustomerItems{ get; set; }
+        public List<SelectListItem> PortItems { get; set; }
+        public List<SelectListItem> HblTypeItems { get; set; }
+        public List<SelectListItem> CountryItems { get; set; }
+        public List<SelectListItem> TypeOfMoveItems { get; set; }
+        public List<SelectListItem> VesselItems { get; set; }
+
+
     }
 }

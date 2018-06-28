@@ -283,8 +283,6 @@ namespace Vino.Server.Services.Infrastructure
                     x => x.PortOfDischarge.PortName))
                 .ForMember(d => d.TranshipmentPortName, opt => opt.MapFrom(
                     x => x.TranshipmentPort.PortName))
-                .ForMember(d => d.ForwardingAgentName, opt => opt.MapFrom(
-                    x => x.ForwardingAgent.Name))
                 .ForMember(d => d.FinalDestinationName, opt => opt.MapFrom(
                     x => x.FinalDestination.PortName))
                 .ForMember(d => d.PlaceOfDeliveryName, opt => opt.MapFrom(

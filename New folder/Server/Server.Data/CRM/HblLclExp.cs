@@ -74,9 +74,7 @@ namespace Vino.Server.Data.CRM
         public string OnBoardStatus { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn Forwarding Agent")]
-        public int? ForwardingAgentId { get; set; }
-        public virtual Carrier ForwardingAgent { get; set; }
-
+        public string ForwardingAgent { get; set; }
 
         public double FreightAmount { get; set; }
         public double ExRef { get; set; }
@@ -97,6 +95,8 @@ namespace Vino.Server.Data.CRM
 
         [Required(ErrorMessage = "Vui lòng chọn ngày Closing")]
         public DateTimeOffset ClosingDate { get; set; }
+
+        public string FreightPayableAt { get; set; }
 
         public int NumberOfOriginal { get; set; }
 
