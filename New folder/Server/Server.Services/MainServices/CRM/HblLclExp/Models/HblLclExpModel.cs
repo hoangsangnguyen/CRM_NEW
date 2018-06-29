@@ -197,15 +197,15 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
         [Required(ErrorMessage = "Vui lòng chọn ngày Issue")]
         public string IssueDate { get; set; }
 
-        public List<SelectListItem> CustomerItems{ get; set; }
-        public List<SelectListItem> PortItems { get; set; }
-        public List<SelectListItem> HblTypeItems { get; set; }
-        public List<SelectListItem> CountryItems { get; set; }
-        public List<SelectListItem> TypeOfMoveItems { get; set; }
-        public List<SelectListItem> VesselItems { get; set; }
-        public List<SelectListItem> UnitItems { get; set; }
-        public List<SelectListItem> CommodityItems { get; set; }
-        public List<SelectListItem> PlaceItems { get; set; }
+        public IList<SelectListItem> CustomerItems{ get; set; }
+        public IList<SelectListItem> PortItems { get; set; }
+        public IList<SelectListItem> HblTypeItems { get; set; }
+        public IList<SelectListItem> CountryItems { get; set; }
+        public IList<SelectListItem> TypeOfMoveItems { get; set; }
+        public IList<SelectListItem> VesselItems { get; set; }
+        public IList<SelectListItem> UnitItems { get; set; }
+        public IList<SelectListItem> CommodityItems { get; set; }
+        public IList<SelectListItem> PlaceItems { get; set; }
 
 
     }

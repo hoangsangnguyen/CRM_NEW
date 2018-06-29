@@ -153,7 +153,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
             await InitDataModel(viewModel.Customer);
 
-            return PartialView("_CreateContact", viewModel);
+            return PartialView("_CreateCustomer", viewModel);
         }
         [HttpPost]
         public async Task<ActionResult> CreateFromSubViewAsync(CrmCustomerModel dto)
@@ -161,6 +161,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             if (!ModelState.IsValid)
             {
                 await InitDataModel(dto);
+
                 return new EmptyResult();
             }
 

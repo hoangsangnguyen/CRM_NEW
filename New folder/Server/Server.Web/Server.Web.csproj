@@ -2642,6 +2642,7 @@
     <Content Include="Areas\Admin\Views\HblLclExp\Create.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\_AddEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_CreateCustomer.cshtml" />
+    <Content Include="Areas\Admin\Views\HblLclExp\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />

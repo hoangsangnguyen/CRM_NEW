@@ -27,7 +27,8 @@
                                     <label class="control-label">Shipper:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.ShipperId, Model.CustomerItems)
+                                    @Html.FalconDropDownListFor(m => m.ShipperId, new SelectList(Model.CustomerItems, "Value", "Text"),
+                                        new { @Id = @Html.FieldIdFor(m => m.ShipperId), @class = "form-control select-style-1 DrpCustomer" })
                                     @Html.ValidationMessageFor(m => m.ShipperId)
                                 </div>
                                 <div class="col-md-1">
@@ -41,11 +42,12 @@
                                     <label class="control-label">Consignee:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.ConsigneeId, Model.CustomerItems)
+                                    @Html.FalconDropDownListFor(m => m.ConsigneeId, new SelectList(Model.CustomerItems, "Value", "Text"),
+                                        new { @Id = @Html.FieldIdFor(m => m.ConsigneeId), @class = "form-control select-style-1 DrpCustomer" })
                                     @Html.ValidationMessageFor(m => m.ConsigneeId)
                                 </div>
                                 <div class="col-md-1">
-                                    <a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-slines">Add</a>
+                                    <a data-request-url="@Url.Action("OpenModal", "Customers")" id="create-consignee">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -55,11 +57,12 @@
                                     <label class="control-label">Notify party:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.NotifyPartyId, Model.CustomerItems)
+                                    @Html.FalconDropDownListFor(m => m.NotifyPartyId, new SelectList(Model.CustomerItems, "Value", "Text"),
+                                        new { @Id = @Html.FieldIdFor(m => m.NotifyPartyId), @class = "form-control select-style-1 DrpCustomer" })
                                     @Html.ValidationMessageFor(m => m.NotifyPartyId)
                                 </div>
                                 <div class="col-md-1">
-                                    <a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-slines">Add</a>
+                                    <a data-request-url="@Url.Action("OpenModal", "Customers")" id="create-NotifyParty">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -191,11 +194,12 @@
                                     <label class="control-label">Final Destination:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.FinalDestinationId, Model.PortItems)
+                                    @Html.FalconDropDownListFor(m => m.FinalDestinationId, new SelectList(Model.PortItems, "Value", "Text"),
+                                        new { @Id = @Html.FieldIdFor(m => m.FinalDestinationId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.FinalDestinationId)
                                 </div>
                                 <div class="col-md-1">
-                                    <a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-slines">Add</a>
+                                    <a data-request-url="@Url.Action("OpenModal", "Port")" id="create-FinalDestination">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -206,11 +210,12 @@
                                     <label class="control-label">Place Of Delivery:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.PlaceOfDeliveryId, Model.PortItems)
+                                    @Html.FalconDropDownListFor(m => m.PlaceOfDeliveryId, new SelectList(Model.PortItems, "Value", "Text"),
+                                        new { @Id = @Html.FieldIdFor(m => m.PlaceOfDeliveryId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.PlaceOfDeliveryId)
                                 </div>
                                 <div class="col-md-1">
-                                    <a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-slines">Add</a>
+                                    <a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-PlaceOfDelivery">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -370,11 +375,12 @@
                                     <label class="control-label">PortOfDischarge:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.PortOfDischargeId, Model.PortItems)
+                                    @Html.FalconDropDownListFor(m => m.PortOfDischargeId, new SelectList(Model.PortItems, "Value", "Text"),
+                                        new { @Id = @Html.FieldIdFor(m => m.PortOfDischargeId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.PortOfDischargeId)
                                 </div>
                                 <div class="col-md-1">
-                                    <a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-slines">Add</a>
+                                    <a data-request-url="@Url.Action("OpenModal", "Carrier")" id="create-PortOfDischarge">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -388,11 +394,12 @@
                                     <label class="control-label">Place Of Receipt:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.PlaceOfReceiptId, Model.PortItems)
+                                    @Html.FalconDropDownListFor(m => m.PlaceOfReceiptId, new SelectList(Model.PortItems, "Value", "Text"),
+                                        new { @Id = @Html.FieldIdFor(m => m.PlaceOfReceiptId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.PlaceOfReceiptId)
                                 </div>
                                 <div class="col-md-1">
-                                    <a data-request-url="@Url.Action("OpenModal", "Port")" id="create-slines">Add</a>
+                                    <a data-request-url="@Url.Action("OpenModal", "Port")" id="create-PlaceOfReceipt">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -403,11 +410,12 @@
                                     <label class="control-label">Port Of Loaing:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.PortOfLoaingId, Model.PortItems)
+                                    @Html.FalconDropDownListFor(m => m.PortOfLoaingId, new SelectList(Model.PortItems, "Value", "Text"),
+                                        new { @Id = @Html.FieldIdFor(m => m.PortOfLoaingId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.PortOfLoaingId)
                                 </div>
                                 <div class="col-md-1">
-                                    <a data-request-url="@Url.Action("OpenModal", "Port")" id="create-slines">Add</a>
+                                    <a data-request-url="@Url.Action("OpenModal", "Port")" id="create-PortOfLoaing">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -418,11 +426,12 @@
                                     <label class="control-label">TranshipmentPort:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.TranshipmentPortId, Model.PortItems)
+                                    @Html.FalconDropDownListFor(m => m.TranshipmentPortId, new SelectList(Model.PortItems, "Value", "Text"),
+                                        new { @Id = @Html.FieldIdFor(m => m.TranshipmentPortId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.TranshipmentPortId)
                                 </div>
                                 <div class="col-md-1">
-                                    <a data-request-url="@Url.Action("OpenModal", "Port")" id="create-slines">Add</a>
+                                    <a data-request-url="@Url.Action("OpenModal", "Port")" id="create-TranshipmentPort">Add</a>
                                 </div>
                             </div>
                         </div>
