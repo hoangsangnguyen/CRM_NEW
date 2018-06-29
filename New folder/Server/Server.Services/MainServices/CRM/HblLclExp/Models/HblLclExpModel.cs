@@ -26,6 +26,7 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
             PlaceItems = new List<SelectListItem>();
         }
 
+        [Required(ErrorMessage = "Vui lòng chọn LclExp")]
         public int? LclExpId { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập BL Number")]

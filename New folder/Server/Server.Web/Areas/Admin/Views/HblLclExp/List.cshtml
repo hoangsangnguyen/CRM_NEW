@@ -8,7 +8,7 @@
 @Html.AntiForgeryToken()
 <div class="content-header clearfix">
     <h1 class="pull-left">
-        Danh sách Lcl Export
+        Danh sách HBL Lcl Express
     </h1>
     <div class="pull-right">
         <a href="@Url.Action("Create")" class="btn bg-blue">
@@ -22,84 +22,65 @@
     <div class="form-horizontal">
         <div class="panel-group">
             @*hide the entire search block if no elements are displayed*@
-            @*<div class="panel panel-default panel-search">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-5">
-                                        <label class="control-label">Từ ngày</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input type="datetime" id="@Html.FieldIdFor(model => model.CreatedAt)" value="@Model.CreatedAt" width="100%" />
-                                        <script>
-                                            $(document).ready(function() {
-                                                $("#@Html.FieldIdFor(model => model.CreatedAt)").kendoDatePicker({
-                                                    culture: "vi-VN",
-                                                    format: "dd-MM-yyyy"
-                                                });
-                                                $("#@Html.FieldIdFor(model => model.CreatedAt)")
-                                                    .prop("readonly", "readonly");
+            <div class="panel panel-default panel-search">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label class="control-label">Lcl express:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="@Html.FieldIdFor(model => model.LclExpId)"
+                                           name="@Html.NameFor(model => model.LclExpId)"
+                                           value="@Html.ValueFor(model => model.LclExpId)" />
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder : "Chọn mã phiếu...",
+                                                minLength: 2,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LclExpApi/GetAll",
+                                                            dataType: "json",
+                                                            data: filterLclExp
+                                                        }
+                                                    }
+                                                }
                                             });
-                                        </script>
-                                    </div>
+                                            function filterLclExp() {
+                                                var data = {
+                                                    Name: $("#@Html.FieldIdFor(model => model.LclExpId)").data("kendoComboBox").input.val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-5">
-                                        <label class="control-label">Đến ngày</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input type="datetime" id="@Html.FieldIdFor(model => model.ExpiredAt)" value="@Model.ExpiredAt" style="width: 100%" />
-                                        <script>
-                                            $(document).ready(function() {
-                                                $("#@Html.FieldIdFor(model => model.ExpiredAt)").kendoDatePicker({
-                                                    culture: "vi-VN",
-                                                    format: "dd-MM-yyyy"
-                                                });
-                                                $("#@Html.FieldIdFor(model => model.ExpiredAt)")
-                                                    .prop("readonly", "readonly");
-                                            });
-                                        </script>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-3">
-                                        <label class="control-label">Công bố</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        @Html.FalconDropDownListFor(m => m.PublishedId, Model.AvailablePublishedOptions)
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-5">
-                                        <label class="control-label">Loại tin</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconDropDownListFor(m => m.TypeId, Model.AvailableTypeOptions)
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <div class="col-md-12 col-md-offset-5 nopadding">
-                                        <button type="button" id="button-search" class="btn btn-primary">
-                                            <i class="fa fa-search"></i>
-                                            Tìm kiếm
-                                        </button>
-                                    </div>
+                        </div>
+                      
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="col-md-12 col-md-offset-5 nopadding">
+                                    <button type="button" id="button-search" class="btn btn-primary">
+                                        <i class="fa fa-search"></i>
+                                        Tìm kiếm
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>*@
+                </div>
+            </div>
+
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div id="main-grid"></div>
@@ -195,7 +176,7 @@
                                         width: 100,
                                         headerAttributes: { style: "text-align:center" },
                                         attributes: { style: "text-align:center" },
-                                        template: '<a class="btn btn-default" href="Edit/#=Id#"><i class="fa fa-pencil"></i>Chi tiết</a>'
+                                        template: '<a class="btn btn-default" href="/admin/HblLclExp/Edit/#=Id#"><i class="fa fa-pencil"></i>Chi tiết</a>'
                                     }
                                 ]
                             });
@@ -216,8 +197,8 @@
 
                         function additionalData() {
                             var data = {
-                                @*CreatedAt: $('#@Html.FieldIdFor(model => model.CreatedAt)').val(),
-                                ExpiredAt: $('#@Html.FieldIdFor(model => model.ExpiredAt)').val(),
+                                LclExpId: $('#@Html.FieldIdFor(model => model.LclExpId)').val(),
+                                @*ExpiredAt: $('#@Html.FieldIdFor(model => model.ExpiredAt)').val(),
                                 TypeId: $('#@Html.FieldIdFor(model => model.TypeId)').val(),
                                 PublishedId: $('#@Html.FieldIdFor(model => model.PublishedId)').val()*@
                             };

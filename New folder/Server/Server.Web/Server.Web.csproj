@@ -211,6 +211,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\PdfMapping\HblLclExpPdfConfig.xml" />
     <Content Include="App_Data\PdfMapping\LclPdfXmlConfig.xml" />
     <Content Include="App_Data\PdfMapping\PdfMappingConfig.xml" />
     <Content Include="Areas\Admin\Content\js\airexps_addedit.js" />
@@ -2643,6 +2644,7 @@
     <Content Include="Areas\Admin\Views\HblLclExp\_AddEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_CreateCustomer.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\Edit.cshtml" />
+    <Content Include="App_Data\PdfMapping\HBL_V1.pdf" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
@@ -3335,6 +3337,7 @@
     <Compile Include="Api\CrmContactApiController.cs" />
     <Compile Include="Api\CustomerApiController.cs" />
     <Compile Include="Api\EmployeeeApiController.cs" />
+    <Compile Include="Api\LclExpApiController.cs" />
     <Compile Include="Api\LookupApiController.cs" />
     <Compile Include="Api\PortApiController.cs" />
     <Compile Include="Api\RoleApiController.cs" />

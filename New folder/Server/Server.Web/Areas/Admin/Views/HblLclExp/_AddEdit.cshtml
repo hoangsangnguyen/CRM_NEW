@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.ShipperId, new SelectList(Model.CustomerItems, "Value", "Text"),
-                                        new { @Id = @Html.FieldIdFor(m => m.ShipperId), @class = "form-control select-style-1 DrpCustomer" })
+                                         new { @Id = @Html.FieldIdFor(m => m.ShipperId), @class = "form-control select-style-1 DrpCustomer" })
                                     @Html.ValidationMessageFor(m => m.ShipperId)
                                 </div>
                                 <div class="col-md-1">
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.ConsigneeId, new SelectList(Model.CustomerItems, "Value", "Text"),
-                                        new { @Id = @Html.FieldIdFor(m => m.ConsigneeId), @class = "form-control select-style-1 DrpCustomer" })
+                                         new { @Id = @Html.FieldIdFor(m => m.ConsigneeId), @class = "form-control select-style-1 DrpCustomer" })
                                     @Html.ValidationMessageFor(m => m.ConsigneeId)
                                 </div>
                                 <div class="col-md-1">
@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.NotifyPartyId, new SelectList(Model.CustomerItems, "Value", "Text"),
-                                        new { @Id = @Html.FieldIdFor(m => m.NotifyPartyId), @class = "form-control select-style-1 DrpCustomer" })
+                                         new { @Id = @Html.FieldIdFor(m => m.NotifyPartyId), @class = "form-control select-style-1 DrpCustomer" })
                                     @Html.ValidationMessageFor(m => m.NotifyPartyId)
                                 </div>
                                 <div class="col-md-1">
@@ -186,16 +186,61 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
+                        @*Lcl bill types*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label class="control-label">Lcl express:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.LclExpId)"
+                                           name="@Html.NameFor(model => model.LclExpId)"
+                                           value="@Html.ValueFor(model => model.LclExpId)"/>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn mã phiếu...",
+                                                minLength: 2,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LclExpApi/GetAll",
+                                                            dataType: "json",
+                                                            data: filterLclExp
+                                                        }
+                                                    }
+                                                }
+                                            });
 
+                                            function filterLclExp() {
+                                                var data = {
+                                                    Name: $("#@Html.FieldIdFor(model => model.LclExpId)")
+                                                        .data("kendoComboBox").input.val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.LclExpId)
+                                    <div class="col-md-1"></div>
+                                </div>
+                            </div>
+                        </div>
                         @*FinalDestination*@
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group form-custom">
                                 <div class="col-md-4">
                                     <label class="control-label">Final Destination:</label>
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.FinalDestinationId, new SelectList(Model.PortItems, "Value", "Text"),
-                                        new { @Id = @Html.FieldIdFor(m => m.FinalDestinationId), @class = "form-control select-style-1 DrpPort" })
+                                        new {@Id = @Html.FieldIdFor(m => m.FinalDestinationId), @class = "form-control select-style-1 DrpPort"})
                                     @Html.ValidationMessageFor(model => model.FinalDestinationId)
                                 </div>
                                 <div class="col-md-1">
@@ -204,14 +249,14 @@
                             </div>
                         </div>
                         @*Place Of Delivery*@
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group form-custom">
                                 <div class="col-md-4">
                                     <label class="control-label">Place Of Delivery:</label>
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.PlaceOfDeliveryId, new SelectList(Model.PortItems, "Value", "Text"),
-                                        new { @Id = @Html.FieldIdFor(m => m.PlaceOfDeliveryId), @class = "form-control select-style-1 DrpPort" })
+                                        new {@Id = @Html.FieldIdFor(m => m.PlaceOfDeliveryId), @class = "form-control select-style-1 DrpPort"})
                                     @Html.ValidationMessageFor(model => model.PlaceOfDeliveryId)
                                 </div>
                                 <div class="col-md-1">
@@ -221,6 +266,14 @@
                         </div>
 
                     </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+               
                     <div class="row">
 
                         @*FinalDestination*@
@@ -376,7 +429,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.PortOfDischargeId, new SelectList(Model.PortItems, "Value", "Text"),
-                                        new { @Id = @Html.FieldIdFor(m => m.PortOfDischargeId), @class = "form-control select-style-1 DrpPort" })
+                                         new { @Id = @Html.FieldIdFor(m => m.PortOfDischargeId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.PortOfDischargeId)
                                 </div>
                                 <div class="col-md-1">
@@ -395,7 +448,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.PlaceOfReceiptId, new SelectList(Model.PortItems, "Value", "Text"),
-                                        new { @Id = @Html.FieldIdFor(m => m.PlaceOfReceiptId), @class = "form-control select-style-1 DrpPort" })
+                                         new { @Id = @Html.FieldIdFor(m => m.PlaceOfReceiptId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.PlaceOfReceiptId)
                                 </div>
                                 <div class="col-md-1">
@@ -411,7 +464,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.PortOfLoaingId, new SelectList(Model.PortItems, "Value", "Text"),
-                                        new { @Id = @Html.FieldIdFor(m => m.PortOfLoaingId), @class = "form-control select-style-1 DrpPort" })
+                                         new { @Id = @Html.FieldIdFor(m => m.PortOfLoaingId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.PortOfLoaingId)
                                 </div>
                                 <div class="col-md-1">
@@ -427,7 +480,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.TranshipmentPortId, new SelectList(Model.PortItems, "Value", "Text"),
-                                        new { @Id = @Html.FieldIdFor(m => m.TranshipmentPortId), @class = "form-control select-style-1 DrpPort" })
+                                         new { @Id = @Html.FieldIdFor(m => m.TranshipmentPortId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.TranshipmentPortId)
                                 </div>
                                 <div class="col-md-1">

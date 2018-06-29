@@ -205,6 +205,7 @@
     <Compile Include="MainServices\CRM\Customer\CrmCustomerService.cs" />
     <Compile Include="MainServices\CRM\Customer\ICrmCustomerService.cs" />
     <Compile Include="MainServices\CRM\Customer\Models\CrmCustomerModel.cs" />
+    <Compile Include="MainServices\CRM\HblLclExp\HblLclExpPdfService.cs" />
     <Compile Include="MainServices\CRM\HblLclExp\HblLclExpService.cs" />
     <Compile Include="MainServices\CRM\HblLclExp\IHblLclExpService.cs" />
     <Compile Include="MainServices\CRM\HblLclExp\Models\HblLclExpModel.cs" />

@@ -4,11 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
+using AutoMapper;
 using Falcon.Web.Mvc.Kendoui;
+using Vino.Server.Data.CRM;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.CRM.Customer;
 using Vino.Server.Services.MainServices.CRM.HblLclExp;
 using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
+using Vino.Server.Services.MainServices.CRM.LclExp;
+using Vino.Server.Services.MainServices.CRM.Pdf.Models;
 using Vino.Server.Services.MainServices.CRM.Port;
 using Vino.Server.Web.Areas.Admin.Models.HblLclExps;
 using Vino.Server.Web.Areas.Admin.Models.LclExps;
@@ -19,31 +24,42 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
     public class HblLclExpController : BaseController
     {
         private readonly HblLclExpService _service;
+        private readonly LclExpService _lclExpService;
         private readonly CrmCustomerService _customerService;
         private readonly LookupService _lookupService;
         private readonly PortService _portService;
+        private readonly HblLclExpPdfService _pdfService;
+
 
 
         public HblLclExpController(HblLclExpService service,
+            LclExpService lclExpService,
             CrmCustomerService customerService,
             LookupService lookupService,
-            PortService portService)
+            PortService portService,
+            HblLclExpPdfService pdfService)
         {
             this._service = service;
+            _lclExpService = lclExpService;
             _customerService = customerService;
             _lookupService = lookupService;
             _portService = portService;
+            _pdfService = pdfService;
         }
 
+        #region HblLclExp
         // GET: Admin/HblLclExp
         public ActionResult Index()
         {
             return RedirectToAction("List");
         }
 
-        public ActionResult List()
+        public ActionResult List(int? id)
         {
-            return View(new HblLclExpListModel());
+            return View(new HblLclExpListModel()
+            {
+                LclExpId = id
+            });
         }
 
         [HttpPost]
@@ -68,9 +84,9 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             {
                 //JobId = "FLL" + DateTimeOffset.Now.Year % 100 + DateTimeOffset.Now.Month.ToString("D2")
                 //        + "/" + (index + 1).ToString().PadLeft(4, '0'),
-                //Created = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
-                //Eta = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
-                //Etd = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
+                ClosingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
+                SellingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
+                IssueDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
             };
 
             await InitContentForModel(model);
@@ -82,8 +98,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(HblLclExpModel dto)
         {
-
-
             if (!ModelState.IsValid)
             {
                 await InitContentForModel(dto);
@@ -149,6 +163,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             SuccessNotification("Xóa thành công!");
             return RedirectToAction("List");
         }
+
+        #endregion
+
+        #region Init Data for model
 
         private async Task InitContentForModel(HblLclExpModel model)
         {
@@ -252,5 +270,56 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 });
             return items;
         }
+
+        #endregion
+
+
+        #region PDF Export
+        public async Task<ActionResult> CreateAndDownload(int id)
+        {
+            var itemExpt = this.GetConfigMapping();
+            var model = await _service.GetSingleAsync(id);
+            if (model.Id <= 0)
+            {
+                return RedirectToAction("Edit", new { id = id });
+            }
+
+            var pdfContent = _pdfService.GetLclImpPdfContent(itemExpt, model);
+            if (pdfContent.Length > 0)
+            {
+                Response.Clear();
+                Response.ClearContent();
+                Response.ClearHeaders();
+                Response.BufferOutput = true;
+                Response.ContentType = "application/pdf";
+                Response.AppendHeader("Content-Disposition", "attachment; filename=\"" + model.GetType().Name +
+                                                             +'_' + model.Id + ".pdf" + "\"");
+                Response.BinaryWrite(pdfContent);
+                Response.End();
+            }
+
+            return Json(null);
+        }
+        private PdfMappingConfig GetConfigMapping()
+        {
+            XmlDocument xmlConfig = null;
+            var configMappingPath = System.Web.HttpContext.Current.Server.MapPath("~/App_Data/PdfMapping/PdfMappingConfig.xml");
+            xmlConfig = new XmlDocument();
+            xmlConfig.Load(configMappingPath);
+            XmlNodeList fileNode = null;
+            var nodePath = "PdfMapping/Template";
+            fileNode = xmlConfig.SelectSingleNode(nodePath)?.SelectNodes("File");
+            foreach (XmlNode node in fileNode)
+            {
+                return new PdfMappingConfig()
+                {
+                    PdfTemplatePath = System.Web.HttpContext.Current.Server.MapPath(node.Attributes["pdffile"].Value),
+                    XmlMappingPath = System.Web.HttpContext.Current.Server.MapPath(node.Attributes["xmlfile"].Value)
+                };
+            }
+            return null;
+        }
+
+        #endregion
     }
 }

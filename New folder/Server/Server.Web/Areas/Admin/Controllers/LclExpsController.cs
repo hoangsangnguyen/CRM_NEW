@@ -309,7 +309,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
             var entity = Mapper.Map<LclExp>(model);
 
-            var pdfContent = _pdfService.GetLclImpPdfContent(itemExpt, entity);
+            var pdfContent = _pdfService.GetLclImpPdfContent(itemExpt, model);
             if (pdfContent.Length > 0)
             {
                 Response.Clear();

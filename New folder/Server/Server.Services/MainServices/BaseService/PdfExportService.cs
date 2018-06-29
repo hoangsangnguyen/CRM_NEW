@@ -12,9 +12,9 @@ using Vino.Server.Services.Helper;
 
 namespace Vino.Server.Services.MainServices.BaseService
 {
-    public class PdfExportService<TEntity> where TEntity : BaseEntity
+    public class PdfExportService<TDto> where TDto : BaseDto
     {
-        public byte[] GetLclImpPdfContent(PdfMappingConfig lclPdfModel, TEntity inputData)
+        public byte[] GetLclImpPdfContent(PdfMappingConfig lclPdfModel, TDto inputData)
         {
             // bind data to model export
             //crm_LcLImp exportModel = new crm_LcLImp();
@@ -25,7 +25,7 @@ namespace Vino.Server.Services.MainServices.BaseService
             return CreatePdfContent(lclPdfModel, inputData);
         }
 
-        private byte[] CreatePdfContent(PdfMappingConfig pdfConfig, TEntity mpaviewmodel)
+        private byte[] CreatePdfContent(PdfMappingConfig pdfConfig, TDto mpaviewmodel)
         {
             Doc doc = new Doc();
             doc.Read(pdfConfig.PdfTemplatePath);
@@ -46,7 +46,7 @@ namespace Vino.Server.Services.MainServices.BaseService
             return data;
         }
 
-        private void PdfBindingData(List<Field> pdfFields, List<PdfMappingViewModel> pdfMappings, TEntity viewModel)
+        private void PdfBindingData(List<Field> pdfFields, List<PdfMappingViewModel> pdfMappings, TDto viewModel)
         {
             int pdfFieldsCount = pdfFields.Count;
             IEnumerable<Field> pdfItems = pdfFields.Where(x => x.FieldType != FieldType.Unknown);
