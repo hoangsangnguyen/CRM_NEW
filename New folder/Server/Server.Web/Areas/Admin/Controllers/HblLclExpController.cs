@@ -76,7 +76,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return Json(gridModel);
         }
 
-        public async Task<ActionResult> Create()
+        public async Task<ActionResult> Create(int? id)
         {
             var index = await _service.GetNumberEntry();
 
@@ -87,6 +87,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 ClosingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 SellingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 IssueDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
+                LclExpId = id
             };
 
             await InitContentForModel(model);

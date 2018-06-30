@@ -4,14 +4,14 @@
     var defaultGridPageSize = 20;
     var gridPageSizes = "10,20,50,100,500";
 }
-
+<input type="hidden" />
 @Html.AntiForgeryToken()
 <div class="content-header clearfix">
     <h1 class="pull-left">
         Danh sách HBL Lcl Express
     </h1>
     <div class="pull-right">
-        <a href="@Url.Action("Create")" class="btn bg-blue">
+        <a href="@Url.Action("Create", new {id = Model.LclExpId})" class="btn bg-blue">
             <i class="fa fa-plus-square"></i>
             Thêm
         </a>

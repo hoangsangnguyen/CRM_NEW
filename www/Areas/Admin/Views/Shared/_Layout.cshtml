@@ -162,7 +162,7 @@
                             <span style="color: #0173b7">Port</span>
                         </a>
                     </li>
-                    
+
                     <li class="@Html.IsActive("Carrier","Index")">
                         <a href="@Url.Action("Index", "Carrier")">
                             <i class="fa fa-industry" style="margin-left: 5px"></i>
@@ -239,6 +239,27 @@
                                     <span style="color: #0173b7">
                                         Fcl Import
                                     </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview
+                        @Html.IsActive("Producing", "InternalProductionManage,ExternalProductionManage")
+                        @Html.IsHidden("ManageEmployee,ManageSupplier,ManageCustomer,ManageProduct")">
+                        <a href="#">
+                            <i class="fa fa-industry"></i>
+                            <span style="color: #0173b7">HBL</span>
+                            <span class="pull-right-container" style="color: #0173b7">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+
+                            <li class="@Html.IsActive("HblLclExp","Index")">
+                                <a href="@Url.Action("Index", "HblLclExp")">
+                                    <i class="fa fa-arrow-circle-right" style="margin-left: 5px"></i>
+                                    <span style="color: #0173b7">Lcl Hbl</span>
                                 </a>
                             </li>
                         </ul>
