@@ -51,10 +51,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         // GET: Admin/HblLclExp
         public ActionResult Index()
         {
-            return RedirectToAction("List");
+            return RedirectToAction("HblList");
         }
 
-        public ActionResult List(int? id)
+        public ActionResult HblList(int? id)
         {
             return View(new HblLclExpListModel()
             {
@@ -63,7 +63,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> List(DataSourceRequest common, HblLclExpListModel model)
+        public async Task<ActionResult> HblList(DataSourceRequest common, HblLclExpListModel model)
         {
             var dtoFromRepo = await _service.GetAllAsync();
 
@@ -124,7 +124,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
             if (model == null)
             {
-                return RedirectToAction("List");
+                return RedirectToAction("HblList");
             }
 
             await InitContentForModel(model);
@@ -157,12 +157,12 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             if (news == null)
             {
                 ErrorNotification("Xóa thất bại!");
-                return RedirectToAction("List");
+                return RedirectToAction("HblList");
             }
 
             await _service.DeleteAsync(id);
             SuccessNotification("Xóa thành công!");
-            return RedirectToAction("List");
+            return RedirectToAction("HblList");
         }
 
         #endregion
