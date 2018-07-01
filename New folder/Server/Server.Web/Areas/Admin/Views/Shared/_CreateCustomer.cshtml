@@ -1,16 +1,14 @@
 ﻿@using System.Globalization
 @using Falcon.Web.Mvc.HtmlExtensions
-@model Vino.Server.Web.Areas.Admin.Controllers.CustomersController.ModelAndViewId
-@{
-    var contact = Model.Customer;
-    var viewId = Model.ViewId;
-    var viewGroupId = Model.ViewGroupId;
-}
+@model Vino.Server.Services.MainServices.CRM.Customer.Models.CrmCustomerModel
+
+@*@model Vino.Server.Web.Areas.Admin.Controllers.CustomersController.ModelAndViewId*@
 
 @{
+    var groupIds = @ViewBag.ViewGroupIds;
     Layout = null;
 }
-@Html.HiddenFor(m => m.Customer.CustomerId)
+@Html.HiddenFor(m => m.CustomerId)
 
 <div class="content">
     <div class="form-horizontal">
@@ -23,179 +21,179 @@
                 <div class="panel-body">
                     <div class="row">
                         @*CustomerId*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Customer Id:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <label class="control-label">@Model.Customer.CustomerId</label>
-                                </div>
-                                <div class="col-md-1"></div>
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">Customer Id:</label>
                             </div>
-                        @*Name*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Name:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.Customer.Name)
-                                    @Html.ValidationMessageFor(model => model.Customer.Name)
-                                </div>
-                                <div class="col-md-1"></div>
+                            <div class="col-md-7">
+                                <label class="control-label">@Model.CustomerId</label>
                             </div>
-                        @*English Name*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">English Name:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.Customer.FullEngishName)
-                                    @Html.ValidationMessageFor(model => model.Customer.FullEngishName)
-                                </div>
-                                <div class="col-md-1"></div>
-                            </div>
+                            <div class="col-md-1"></div>
                         </div>
+                        @*Name*@
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">Name:</label>
+                            </div>
+                            <div class="col-md-7">
+                                @Html.FalconEditorFor(m => m.Name)
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        @*English Name*@
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">English Name:</label>
+                            </div>
+                            <div class="col-md-7">
+                                @Html.FalconEditorFor(m => m.FullEngishName)
+                                @Html.ValidationMessageFor(model => model.FullEngishName)
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </div>
                     <div class="row" style="margin-top: 10px">
                         @*VietNamese Name*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">VietNamese Name:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.Customer.FullVietNamName)
-                                    @Html.ValidationMessageFor(model => model.Customer.FullVietNamName)
-                                </div>
-                                <div class="col-md-1"></div>
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">VietNamese Name:</label>
                             </div>
+                            <div class="col-md-7">
+                                @Html.FalconEditorFor(m => m.FullVietNamName)
+                                @Html.ValidationMessageFor(model => model.FullVietNamName)
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
 
                         @*Address*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Address :</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.Customer.Address)
-                                    @Html.ValidationMessageFor(model => model.Customer.Address)
-                                </div>
-                                <div class="col-md-1"></div>
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">Address :</label>
                             </div>
+                            <div class="col-md-7">
+                                @Html.FalconEditorFor(m => m.Address)
+                                @Html.ValidationMessageFor(model => model.Address)
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
 
                         @*Contact*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Contact:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.DropDownListFor(model => model.Customer.ContactId, new SelectList(Model.Customer.ContactItems, "Value", "Text"),
-                                             new { @Id = @Html.FieldIdFor(m => m.Customer.ContactId), @class = "form-control select-style-1 DrpContact" })
-                                    @Html.ValidationMessageFor(model => model.Customer.ContactId)
-                                </div>
-                                <div class="col-md-1">
-                                    <a data-request-url="@Url.Action("OpenModal", "Contact")" id="create-contact">Add</a>
-                                </div>
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">Contact:</label>
+                            </div>
+                            <div class="col-md-7">
+                                @Html.DropDownListFor(model => model.ContactId, new SelectList(Model.ContactItems, "Value", "Text"),
+                                              new { @Id = @Html.FieldIdFor(m => m.ContactId), @class = "form-control select-style-1 DrpContact" })
+                                @Html.ValidationMessageFor(model => model.ContactId)
+                            </div>
+                            <div class="col-md-1">
+                                <a data-request-url="@Url.Action("OpenModal", "Contact")" id="create-contact">Add</a>
+                            </div>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px">
                         @*Workphone*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Work phone :</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.Customer.WorkPhone)
-                                    @Html.ValidationMessageFor(model => model.Customer.WorkPhone)
-                                </div>
-                                <div class="col-md-1"></div>
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">Work phone :</label>
                             </div>
+                            <div class="col-md-7">
+                                @Html.FalconEditorFor(m => m.WorkPhone)
+                                @Html.ValidationMessageFor(model => model.WorkPhone)
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
 
                         @*Fax No*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Fax No :</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.Customer.FaxNo)
-                                    @Html.ValidationMessageFor(model => model.Customer.FaxNo)
-                                </div>
-                                <div class="col-md-1"></div>
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">Fax No :</label>
                             </div>
+                            <div class="col-md-7">
+                                @Html.FalconEditorFor(m => m.FaxNo)
+                                @Html.ValidationMessageFor(model => model.FaxNo)
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
 
                         @*Location*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Location:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.DropDownListFor(model => model.Customer.LocationId, new SelectList(Model.Customer.LocationItems, "Value", "Text"),
-                                             new { @Id = @Html.FieldIdFor(m => m.Customer.LocationId), @class = "form-control select-style-1" })
-                                    @Html.ValidationMessageFor(model => model.Customer.LocationId)
-                                </div>
-                                <div class="col-md-1">
-                                </div>
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">Location:</label>
                             </div>
+                            <div class="col-md-7">
+                                @Html.DropDownListFor(model => model.LocationId, new SelectList(Model.LocationItems, "Value", "Text"),
+                                              new { @Id = @Html.FieldIdFor(m => m.LocationId), @class = "form-control select-style-1" })
+                                @Html.ValidationMessageFor(model => model.LocationId)
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div>
                     </div>
                     <div class="row" style="margin-top: 10px">
                         @*Home phone*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Home phone :</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.Customer.HomePhone)
-                                    @Html.ValidationMessageFor(model => model.Customer.HomePhone)
-                                </div>
-                                <div class="col-md-1"></div>
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">Home phone :</label>
                             </div>
+                            <div class="col-md-7">
+                                @Html.FalconEditorFor(m => m.HomePhone)
+                                @Html.ValidationMessageFor(model => model.HomePhone)
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
 
                         @*Tax code*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Tax code:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.Customer.Taxcode)
-                                    @Html.ValidationMessageFor(model => model.Customer.Taxcode)
-                                </div>
-                                <div class="col-md-1"></div>
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">Tax code:</label>
                             </div>
+                            <div class="col-md-7">
+                                @Html.FalconEditorFor(m => m.Taxcode)
+                                @Html.ValidationMessageFor(model => model.Taxcode)
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
 
                         @*Category*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Category:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.DropDownListFor(model => model.Customer.CategoryId, new SelectList(Model.Customer.CategoriesItems, "Value", "Text"),
-                                             new { @Id = @Html.FieldIdFor(m => m.Customer.CategoryId), @class = "form-control select-style-1" })
-                                    @Html.ValidationMessageFor(model => model.Customer.CategoryId)
-                                </div>
-                                <div class="col-md-1">
-                                </div>
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">Category:</label>
+                            </div>
+                            <div class="col-md-7">
+                                @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.CategoriesItems, "Value", "Text"),
+                                              new { @Id = @Html.FieldIdFor(m => m.CategoryId), @class = "form-control select-style-1" })
+                                @Html.ValidationMessageFor(model => model.CategoryId)
+                            </div>
+                            <div class="col-md-1">
+                            </div>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px">
                         @*Website*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Website :</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.Customer.Website)
-                                    @Html.ValidationMessageFor(model => model.Customer.Website)
-                                </div>
-                                <div class="col-md-1"></div>
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">Website :</label>
                             </div>
+                            <div class="col-md-7">
+                                @Html.FalconEditorFor(m => m.Website)
+                                @Html.ValidationMessageFor(model => model.Website)
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
                         @*Email*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Email :</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.Customer.Email)
-                                    @Html.ValidationMessageFor(model => model.Customer.Email)
-                                </div>
-                                <div class="col-md-1"></div>
+                        <div class="form-group form-custom">
+                            <div class="col-md-4">
+                                <label class="control-label">Email :</label>
                             </div>
+                            <div class="col-md-7">
+                                @Html.FalconEditorFor(m => m.Email)
+                                @Html.ValidationMessageFor(model => model.Email)
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
 
                     </div>
                 </div>
@@ -220,8 +218,7 @@
 
         function SaveCustomer () {
             var model = JSON.stringify(GetDataRequest());
-
-            console.log('Request : ' + model);
+            //console.log('Request : ' + model);
             $.ajax({
                 url: "@Url.Action("CreateFromSubViewAsync", "Customers")",
                 type: "POST",
@@ -231,14 +228,29 @@
                 cache: false,
                 async: true,
                 success: function (dataJs) {
-                    $(".DrpCustomer").each(function() {
-                        $(this).append($('<option>', {
-                            value: dataJs.Value,
-                            text: dataJs.Name
-                        }));
+                    //$(".DrpCustomer").each(function() {
+                    //    $(this).append($('<option>', {
+                    //        value: dataJs.Value,
+                    //        text: dataJs.Name
+                    //    }));
+                    //});
+
+                    @*console.log('viewgroup : ' + @ViewBag.ViewGroupIds);
+                    debugger;*@
+                    //$(".DrpCustomer").each(function() {
+                    //    console.log('item : ' + $(this).toString());
+
+                    //    $(this).data("kendoComboBox").dataSource.read();
+                    //});
+                    debugger;
+                    var listId = dataJs.GroupIds.split(',');
+                    $.each(listId, function(index, value) { 
+                        alert(index + ': ' + value);
+                        $("#" + value).data("kendoComboBox").dataSource.read();
                     });
-                    let viewId = @viewId;
-                    $("#" + viewId.id).val(dataJs.Value);
+
+                    let viewId = @ViewBag.ViewId;
+                    $("#" + viewId.id).data("kendoComboBox").value(dataJs.Value);
                     $('#myModal').modal('hide');
 
                 },
@@ -250,20 +262,20 @@
 
         function GetDataRequest() {
             return {
-                CustomerId : '@Model.Customer.CustomerId',
-                Name: $('#@Html.FieldIdFor(m => m.Customer.Name)').val(),
-                FullEngishName: $('#@Html.FieldIdFor(m => m.Customer.FullEngishName)').val(),
-                FullVietNamName: $('#@Html.FieldIdFor(m => m.Customer.FullVietNamName)').val(),
-                Address: $('#@Html.FieldIdFor(m => m.Customer.Address)').val(),
-                ContactId: $('#@Html.FieldIdFor(m => m.Customer.ContactId)').val(),
-                WorkPhone: $('#@Html.FieldIdFor(m => m.Customer.WorkPhone)').val(),
-                FaxNo: $('#@Html.FieldIdFor(m => m.Customer.FaxNo)').val(),
-                LocationId: $('#@Html.FieldIdFor(m => m.Customer.LocationId)').val(),
-                HomePhone: $('#@Html.FieldIdFor(m => m.Customer.HomePhone)').val(),
-                Taxcode: $('#@Html.FieldIdFor(m => m.Customer.Taxcode)').val(),
-                CategoryId: $('#@Html.FieldIdFor(m => m.Customer.CategoryId)').val(),
-                Website: $('#@Html.FieldIdFor(m => m.Customer.Website)').val(),
-                Email: $('#@Html.FieldIdFor(m => m.Customer.Email)').val()
+                CustomerId : '@Model.CustomerId',
+                Name: $('#@Html.FieldIdFor(m => m.Name)').val(),
+                FullEngishName: $('#@Html.FieldIdFor(m => m.FullEngishName)').val(),
+                FullVietNamName: $('#@Html.FieldIdFor(m => m.FullVietNamName)').val(),
+                Address: $('#@Html.FieldIdFor(m => m.Address)').val(),
+                ContactId: $('#@Html.FieldIdFor(m => m.ContactId)').val(),
+                WorkPhone: $('#@Html.FieldIdFor(m => m.WorkPhone)').val(),
+                FaxNo: $('#@Html.FieldIdFor(m => m.FaxNo)').val(),
+                LocationId: $('#@Html.FieldIdFor(m => m.LocationId)').val(),
+                HomePhone: $('#@Html.FieldIdFor(m => m.HomePhone)').val(),
+                Taxcode: $('#@Html.FieldIdFor(m => m.Taxcode)').val(),
+                CategoryId: $('#@Html.FieldIdFor(m => m.CategoryId)').val(),
+                Website: $('#@Html.FieldIdFor(m => m.Website)').val(),
+                Email: $('#@Html.FieldIdFor(m => m.Email)').val()
 
             };
         }

@@ -137,7 +137,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> OpenModal(string viewId, string viewGroupId)
+        public async Task<PartialViewResult> OpenModal(string viewId, string[] viewGroupId)
         {
             var index = await _service.GetNumberEntry();
 
@@ -151,9 +151,15 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 ViewGroupId = viewGroupId
             };
 
-            await InitDataModel(viewModel.Customer);
-
-            return PartialView("_CreateCustomer", viewModel);
+            ViewBag.ViewId = viewId;
+            ViewBag.ViewGroupIds = viewGroupId;
+            TempData["IdGroups"] = viewGroupId;
+            var model = new CrmCustomerModel()
+            {
+                CustomerId = "CS" + (index + 1).ToString().PadLeft(3, '0')
+            };
+            await InitDataModel(model);
+            return PartialView("_CreateCustomer", model);
         }
         [HttpPost]
         public async Task<ActionResult> CreateFromSubViewAsync(CrmCustomerModel dto)
@@ -174,10 +180,12 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                     return new EmptyResult();
 
                 var name = customer.Name;
-                return Json(new NameValueModel()
+                var test = (object[])TempData["IdGroups"];
+                return Json(new 
                 {
-                    Value = id.ToString(),
-                    Name = name
+                    GroupIds = String.Join(",",test),
+                    Name = customer,
+                    Value = customer.Id.ToString()
                 });
             }
             Console.WriteLine("Create customer succeed");
@@ -236,7 +244,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             public CrmCustomerModel Customer { get; set; }
             public string ViewId { get; set; }
-            public string ViewGroupId { get; set; }
+            public string[] ViewGroupId { get; set; }
         }
 
     }

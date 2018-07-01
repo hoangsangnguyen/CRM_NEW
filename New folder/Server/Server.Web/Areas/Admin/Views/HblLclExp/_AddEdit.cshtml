@@ -27,8 +27,44 @@
                                     <label class="control-label">Shipper:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.ShipperId, new SelectList(Model.CustomerItems, "Value", "Text"),
-                                         new { @Id = @Html.FieldIdFor(m => m.ShipperId), @class = "form-control select-style-1 DrpCustomer" })
+                                    @*@Html.FalconDropDownListFor(m => m.ShipperId, new SelectList(Model.CustomerItems, "Value", "Text"),
+        new { @Id = @Html.FieldIdFor(m => m.ShipperId), @class = "form-control select-style-1 DrpCustomer" })*@
+                                    <input id="@Html.FieldIdFor(model => model.ShipperId)"
+                                           name="@Html.NameFor(model => model.ShipperId)"
+                                           value="@Html.ValueFor(model => model.ShipperId)"
+                                           class="DrpCustomer"
+                                           />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.ShipperId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn shipper...",
+                                                minLength: 2,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/CustomerApi/GetAllCustomers",
+                                                            dataType: "json",
+                                                            data: filterShipper
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterShipper() {
+                                                var data = {
+                                                    Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                     @Html.ValidationMessageFor(m => m.ShipperId)
                                 </div>
                                 <div class="col-md-1">
@@ -42,8 +78,43 @@
                                     <label class="control-label">Consignee:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.ConsigneeId, new SelectList(Model.CustomerItems, "Value", "Text"),
-                                         new { @Id = @Html.FieldIdFor(m => m.ConsigneeId), @class = "form-control select-style-1 DrpCustomer" })
+                                    @*@Html.FalconDropDownListFor(m => m.ConsigneeId, new SelectList(Model.CustomerItems, "Value", "Text"),
+                        new { @Id = @Html.FieldIdFor(m => m.ConsigneeId), @class = "form-control select-style-1 DrpCustomer" })*@
+                                    <input id="@Html.FieldIdFor(model => model.ConsigneeId)"
+                                           name="@Html.NameFor(model => model.ConsigneeId)"
+                                           value="@Html.ValueFor(model => model.ConsigneeId)"
+                                           class="DrpCustomer"/>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.ConsigneeId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn consignee...",
+                                                minLength: 2,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/CustomerApi/GetAllCustomers",
+                                                            dataType: "json",
+                                                            data: filterConsignee
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterConsignee() {
+                                                var data = {
+                                                    Name: $("#@Html.FieldIdFor(model => model.ConsigneeId)")
+                                                        .data("kendoComboBox").input.val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                     @Html.ValidationMessageFor(m => m.ConsigneeId)
                                 </div>
                                 <div class="col-md-1">
@@ -57,8 +128,43 @@
                                     <label class="control-label">Notify party:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.NotifyPartyId, new SelectList(Model.CustomerItems, "Value", "Text"),
-                                         new { @Id = @Html.FieldIdFor(m => m.NotifyPartyId), @class = "form-control select-style-1 DrpCustomer" })
+                                    @*@Html.FalconDropDownListFor(m => m.NotifyPartyId, new SelectList(Model.CustomerItems, "Value", "Text"),
+                        new { @Id = @Html.FieldIdFor(m => m.NotifyPartyId), @class = "form-control select-style-1 DrpCustomer" })*@
+                                    <input id="@Html.FieldIdFor(model => model.NotifyPartyId)"
+                                           name="@Html.NameFor(model => model.NotifyPartyId)"
+                                           value="@Html.ValueFor(model => model.NotifyPartyId)"
+                                           class="DrpCustomer"/>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.NotifyPartyId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn consignee...",
+                                                minLength: 2,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/CustomerApi/GetAllCustomers",
+                                                            dataType: "json",
+                                                            data: filterNotifyParty
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterNotifyParty() {
+                                                var data = {
+                                                    Name: $("#@Html.FieldIdFor(model => model.NotifyPartyId)")
+                                                        .data("kendoComboBox").input.val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                     @Html.ValidationMessageFor(m => m.NotifyPartyId)
                                 </div>
                                 <div class="col-md-1">
@@ -195,7 +301,7 @@
                                 <div class="col-md-7">
                                     <input id="@Html.FieldIdFor(model => model.LclExpId)"
                                            name="@Html.NameFor(model => model.LclExpId)"
-                                           value="@Html.ValueFor(model => model.LclExpId)"/>
+                                           value="@Html.ValueFor(model => model.LclExpId)" />
                                     <script>
                                         $(document).ready(function() {
                                             $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
@@ -240,7 +346,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.FinalDestinationId, new SelectList(Model.PortItems, "Value", "Text"),
-                                        new {@Id = @Html.FieldIdFor(m => m.FinalDestinationId), @class = "form-control select-style-1 DrpPort"})
+                                                  new { @Id = @Html.FieldIdFor(m => m.FinalDestinationId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.FinalDestinationId)
                                 </div>
                                 <div class="col-md-1">
@@ -256,7 +362,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.PlaceOfDeliveryId, new SelectList(Model.PortItems, "Value", "Text"),
-                                        new {@Id = @Html.FieldIdFor(m => m.PlaceOfDeliveryId), @class = "form-control select-style-1 DrpPort"})
+                                                  new { @Id = @Html.FieldIdFor(m => m.PlaceOfDeliveryId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.PlaceOfDeliveryId)
                                 </div>
                                 <div class="col-md-1">
@@ -273,7 +379,7 @@
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-body">
-               
+
                     <div class="row">
 
                         @*FinalDestination*@
@@ -429,7 +535,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.PortOfDischargeId, new SelectList(Model.PortItems, "Value", "Text"),
-                                         new { @Id = @Html.FieldIdFor(m => m.PortOfDischargeId), @class = "form-control select-style-1 DrpPort" })
+                                                   new { @Id = @Html.FieldIdFor(m => m.PortOfDischargeId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.PortOfDischargeId)
                                 </div>
                                 <div class="col-md-1">
@@ -448,7 +554,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.PlaceOfReceiptId, new SelectList(Model.PortItems, "Value", "Text"),
-                                         new { @Id = @Html.FieldIdFor(m => m.PlaceOfReceiptId), @class = "form-control select-style-1 DrpPort" })
+                                                   new { @Id = @Html.FieldIdFor(m => m.PlaceOfReceiptId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.PlaceOfReceiptId)
                                 </div>
                                 <div class="col-md-1">
@@ -464,7 +570,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.PortOfLoaingId, new SelectList(Model.PortItems, "Value", "Text"),
-                                         new { @Id = @Html.FieldIdFor(m => m.PortOfLoaingId), @class = "form-control select-style-1 DrpPort" })
+                                                   new { @Id = @Html.FieldIdFor(m => m.PortOfLoaingId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.PortOfLoaingId)
                                 </div>
                                 <div class="col-md-1">
@@ -480,7 +586,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     @Html.FalconDropDownListFor(m => m.TranshipmentPortId, new SelectList(Model.PortItems, "Value", "Text"),
-                                         new { @Id = @Html.FieldIdFor(m => m.TranshipmentPortId), @class = "form-control select-style-1 DrpPort" })
+                                                   new { @Id = @Html.FieldIdFor(m => m.TranshipmentPortId), @class = "form-control select-style-1 DrpPort" })
                                     @Html.ValidationMessageFor(model => model.TranshipmentPortId)
                                 </div>
                                 <div class="col-md-1">

@@ -1,16 +1,16 @@
 ﻿$("#create-shipper").click(function () {
     const url = $(this).data('request-url');
-    OpenModalCreation(url, "ShipperId", "DrpCustomer");
+    OpenModalCreation(url, "ShipperId", ["ShipperId","ConsigneeId","NotifyPartyId"]);
 });
 
 $("#create-consignee").click(function () {
     const url = $(this).data('request-url');
-    OpenModalCreation(url, "ConsigneeId", "DrpCustomer");
+    OpenModalCreation(url, "ConsigneeId", ["ShipperId", "ConsigneeId", "NotifyPartyId"]);
 });
 
 $("#create-NotifyParty").click(function () {
     const url = $(this).data('request-url');
-    OpenModalCreation(url, "NotifyPartyId", "DrpCustomer");
+    OpenModalCreation(url, "NotifyPartyId", ["ShipperId", "ConsigneeId", "NotifyPartyId"]);
 });
 
 $("#create-FinalDestination").click(function () {
