@@ -151,13 +151,14 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 ViewGroupId = viewGroupId
             };
 
-            ViewBag.ViewId = viewId;
-            ViewBag.ViewGroupIds = viewGroupId;
+            TempData["IdView"] = viewId;
             TempData["IdGroups"] = viewGroupId;
+
             var model = new CrmCustomerModel()
             {
                 CustomerId = "CS" + (index + 1).ToString().PadLeft(3, '0')
             };
+
             await InitDataModel(model);
             return PartialView("_CreateCustomer", model);
         }
@@ -167,29 +168,32 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             if (!ModelState.IsValid)
             {
                 await InitDataModel(dto);
-
-                return new EmptyResult();
+                return RedirectToAction("OpenModal");
             }
 
             var id = await _service.CreateAsync(dto);
             if (id >= 0)
             {
-                Console.WriteLine("Create customer succeed");
+                SuccessNotification("Create new customer succeed");
                 var customer = await _service.GetSingleAsync(id);
                 if (customer == null)
-                    return new EmptyResult();
+                {
+                    await InitDataModel(dto);
+                    return RedirectToAction("OpenModal");
+                }
 
-                var name = customer.Name;
-                var test = (object[])TempData["IdGroups"];
+                var idGroups = (object[])TempData["IdGroups"];
+                var idViews =  TempData["IdView"];
                 return Json(new 
                 {
-                    GroupIds = String.Join(",",test),
-                    Name = customer,
+                    GroupIds = String.Join(",", idGroups),
+                    ViewIds = idViews,
+                    Name = customer.Name,
                     Value = customer.Id.ToString()
                 });
             }
-            Console.WriteLine("Create customer succeed");
 
+            ErrorNotification("Create new customer failed");
             return new EmptyResult();
         }
 

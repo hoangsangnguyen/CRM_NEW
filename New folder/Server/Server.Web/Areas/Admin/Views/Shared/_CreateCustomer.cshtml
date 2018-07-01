@@ -228,29 +228,14 @@
                 cache: false,
                 async: true,
                 success: function (dataJs) {
-                    //$(".DrpCustomer").each(function() {
-                    //    $(this).append($('<option>', {
-                    //        value: dataJs.Value,
-                    //        text: dataJs.Name
-                    //    }));
-                    //});
-
-                    @*console.log('viewgroup : ' + @ViewBag.ViewGroupIds);
-                    debugger;*@
-                    //$(".DrpCustomer").each(function() {
-                    //    console.log('item : ' + $(this).toString());
-
-                    //    $(this).data("kendoComboBox").dataSource.read();
-                    //});
-                    debugger;
-                    var listId = dataJs.GroupIds.split(',');
-                    $.each(listId, function(index, value) { 
-                        alert(index + ': ' + value);
+                    let groupIds = dataJs.GroupIds.split(',');
+                    $.each(groupIds, function(index, value) {
                         $("#" + value).data("kendoComboBox").dataSource.read();
                     });
 
-                    let viewId = @ViewBag.ViewId;
-                    $("#" + viewId.id).data("kendoComboBox").value(dataJs.Value);
+                    let viewIds = dataJs.ViewIds;
+                    $("#" + viewIds).data("kendoComboBox").value(dataJs.Value);
+                   
                     $('#myModal').modal('hide');
 
                 },
