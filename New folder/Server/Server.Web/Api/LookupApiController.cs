@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.WebPages;
+using Falcon.Web.Core.Helpers;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.Common.Models;
 using Vino.Shared.Constants;
@@ -28,7 +30,7 @@ namespace Vino.Server.Web.Api
             var lookupTypes = _lookupService.GetLookupTypes();
             lookupTypes.Insert(0, new NameValueModel()
             {
-                Name =  "Tất cả"
+                Name = "Tất cả"
             });
             return lookupTypes;
         }
@@ -44,14 +46,15 @@ namespace Vino.Server.Web.Api
             return lookups;
         }
 
-        public List<NameValueModel> GetLookupWithCode(LookupTypes type)
+        public List<NameValueModel> GetLookupWithCode(LookupTypes type, bool withAll = false)
         {
             var lookups = _lookupService.GetLookupByLookupType(type).Select(d => new NameValueModel()
             {
                 Name = d.Title,
                 Value = d.Code
             }).ToList();
-            lookups.Insert(0, new NameValueModel() { Name = "Tất cả" });
+            if (withAll)
+                lookups.Insert(0, new NameValueModel() { Name = "Tất cả" });
             return lookups;
         }
 
@@ -101,7 +104,7 @@ namespace Vino.Server.Web.Api
                 Name = d.Title,
                 Value = d.Code
             }).ToList();
-            
+
             apps.Insert(0, new NameValueModel()
             {
                 Name = "Tất cả"
@@ -167,7 +170,20 @@ namespace Vino.Server.Web.Api
             return items;
         }
 
+        public List<NameValueModel> GetTypeOfBillWithIds(string name, bool withAll = false)
+        {
+            var typeOfBills = _lookupService.GetLookupByLookupType(LookupTypes.TypeOfBill)
+                .Select(d => new NameValueModel()
+                {
+                    Name = d.Title,
+                    Value = d.Id.ToString()
+                }).Where(x => x.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name)).ToList();
 
+            if (withAll)
+                typeOfBills.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return typeOfBills;
+        }
         #endregion
 
         #region Payment
@@ -184,63 +200,41 @@ namespace Vino.Server.Web.Api
 
 
         #endregion
+
+        #region HblType
+
+
+
+        #endregion
         public List<NameValueModel> GetUnitTypes()
-	    {
-		    var units = _lookupService.GetLookupByLookupType(LookupTypes.UnitType).Select(d => new NameValueModel()
-		    {
-			    Name = d.Title,
-			    Value = d.Code
-		    }).ToList();
-		    return units;
-	    }
+        {
+            var units = _lookupService.GetLookupByLookupType(LookupTypes.UnitType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Code
+            }).ToList();
+            return units;
+        }
 
-	    public List<NameValueModel> GetStandardEvents()
-	    {
-		    var units = _lookupService.GetLookupByLookupType(LookupTypes.ProducingEvents).Select(d => new NameValueModel()
-		    {
-			    Name = d.Title,
-			    Value = d.Code
-		    }).ToList();
-		    return units;
-	    }
+        public List<NameValueModel> GetStandardEvents()
+        {
+            var units = _lookupService.GetLookupByLookupType(LookupTypes.ProducingEvents).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Code
+            }).ToList();
+            return units;
+        }
 
-	    public List<NameValueModel> GetAllBookTypes()
-	    {
-		    var bookTypes = _lookupService.GetLookupByLookupType(LookupTypes.BookType).Select(d => new NameValueModel()
-		    {
-			    Name = d.Title,
-			    Value = d.Code.ToString()
-		    }).ToList();
-		    return bookTypes;
-	    }
-		public List<NameValueModel> GetAllSessionTypes()
-		{
-			var bookTypes = _lookupService.GetLookupByLookupType(LookupTypes.SessionType).Select(d => new NameValueModel()
-			{
-				Name = d.Title,
-				Value = d.Code.ToString()
-			}).ToList();
-			return bookTypes;
-		}
-		public async Task<List<NameValueModel>> GetProductGroupForBreeds()
-	    {
-		    var lookups = await _lookupService.GetAlLookups();
+        public List<NameValueModel> GetAllBookTypes()
+        {
+            var bookTypes = _lookupService.GetLookupByLookupType(LookupTypes.BookType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Code.ToString()
+            }).ToList();
+            return bookTypes;
+        }
 
-			var res= lookups.Where(w=>w.Type==LookupTypes.ProductGroup && 
-			              w.Code== ProductGroups.VatTu || 
-			              w.Code== ProductGroups.PhanBon ||
-			              w.Code== ProductGroups.ThuocBvtv)
-			    .Select(d => new NameValueModel()
-			    {
-				    Name = d.Title,
-				    Value = d.Id.ToString()
-			    }).ToList();
-			res.Insert(0,new NameValueModel
-			{
-				Name = "Tất cả",
-				Value = "0"
-			});
-		    return res;
-	    }
-	}
+    }
 }

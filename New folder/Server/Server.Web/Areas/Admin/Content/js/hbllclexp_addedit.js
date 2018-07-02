@@ -15,33 +15,39 @@ $("#create-NotifyParty").click(function () {
 
 $("#create-FinalDestination").click(function () {
     const url = $(this).data('request-url');
-    OpenModalCreation(url, "FinalDestinationId", "DrpPort");
+    OpenModalCreation(url, "FinalDestinationId", ["FinalDestinationId", "PlaceOfDeliveryId",
+        "PortOfDischargeId", "PlaceOfReceiptId", "PortOfLoaingId", "TranshipmentPortId"]);
 });
 
 $("#create-PlaceOfDelivery").click(function () {
     const url = $(this).data('request-url');
-    OpenModalCreation(url, "PlaceOfDeliveryId", "DrpPort");
+    OpenModalCreation(url, "PlaceOfDeliveryId", ["FinalDestinationId", "PlaceOfDeliveryId",
+        "PortOfDischargeId", "PlaceOfReceiptId", "PortOfLoaingId", "TranshipmentPortId"]);
 });
 
 $("#create-PortOfDischarge").click(function () {
     const url = $(this).data('request-url');
-    OpenModalCreation(url, "PortOfDischargeId", "DrpPort");
+    OpenModalCreation(url, "PortOfDischargeId", ["FinalDestinationId", "PlaceOfDeliveryId",
+        "PortOfDischargeId", "PlaceOfReceiptId", "PortOfLoaingId", "TranshipmentPortId"]);
 });
 
 $("#create-PlaceOfReceipt").click(function () {
     const url = $(this).data('request-url');
-    OpenModalCreation(url, "PlaceOfReceiptId", "DrpPort");
+    OpenModalCreation(url, "PlaceOfReceiptId", ["FinalDestinationId", "PlaceOfDeliveryId",
+        "PortOfDischargeId", "PlaceOfReceiptId", "PortOfLoaingId", "TranshipmentPortId"]);
 });
 
 
 $("#create-PortOfLoaing").click(function () {
     const url = $(this).data('request-url');
-    OpenModalCreation(url, "PortOfLoaingId", "DrpPort");
+    OpenModalCreation(url, "PortOfLoaingId", ["FinalDestinationId", "PlaceOfDeliveryId",
+        "PortOfDischargeId", "PlaceOfReceiptId", "PortOfLoaingId", "TranshipmentPortId"]);
 });
 
 $("#create-TranshipmentPort").click(function () {
     const url = $(this).data('request-url');
-    OpenModalCreation(url, "TranshipmentPortId", "DrpPort");
+    OpenModalCreation(url, "TranshipmentPortId", ["FinalDestinationId", "PlaceOfDeliveryId",
+        "PortOfDischargeId", "PlaceOfReceiptId", "PortOfLoaingId", "TranshipmentPortId"]);
 });
 function OpenModalCreation(url, viewId, viewGroupId) {
     $.ajax({

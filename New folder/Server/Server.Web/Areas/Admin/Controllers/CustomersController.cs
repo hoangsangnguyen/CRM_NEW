@@ -141,16 +141,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             var index = await _service.GetNumberEntry();
 
-            var viewModel = new ModelAndViewId()
-            {
-                Customer = new CrmCustomerModel()
-                {
-                    CustomerId = "CS" + (index + 1).ToString().PadLeft(3, '0')
-                },
-                ViewId = viewId,
-                ViewGroupId = viewGroupId
-            };
-
             TempData["IdView"] = viewId;
             TempData["IdGroups"] = viewGroupId;
 

@@ -2630,7 +2630,7 @@
     <Content Include="Areas\Admin\Views\FalconUser\_CreateOrUpdateUser.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_CreateContact.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_CreateCarrier.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_CreatePort.cshtml" />
+    <Content Include="Areas\Admin\Views\Port\_CreatePort.cshtml" />
     <Content Include="App_Data\PdfMapping\fcl_template.pdf" />
     <Content Include="Areas\Admin\Views\Customers\List.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Create.cshtml" />
@@ -2642,7 +2642,7 @@
     <Content Include="Areas\Admin\Views\HblLclExp\HblList.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\Create.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\_AddEdit.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_CreateCustomer.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\_CreateCustomer.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\Edit.cshtml" />
     <Content Include="App_Data\PdfMapping\HBL_V1.pdf" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />

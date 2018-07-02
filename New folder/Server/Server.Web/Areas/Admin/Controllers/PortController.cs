@@ -7,8 +7,6 @@ using System.Web.Mvc;
 using Falcon.Web.Mvc.Kendoui;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.Common.Models;
-using Vino.Server.Services.MainServices.CRM.Carrier.Model;
-using Vino.Server.Services.MainServices.CRM.Contact.Models;
 using Vino.Server.Services.MainServices.CRM.Port;
 using Vino.Server.Services.MainServices.CRM.Port.Model;
 using Vino.Server.Web.Areas.Admin.Models.Ports;
@@ -144,33 +142,52 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             model.ZoneItems = GetZoneItems();
             model.ModeItems = GetModeItems();
         }
+
+        [HttpPost]
+        public PartialViewResult OpenModal(string viewId, string[] viewGroupId)
+        {
+            TempData["IdView"] = viewId;
+            TempData["IdGroups"] = viewGroupId;
+
+            var model = new PortModel();
+            InitDataModel(model);
+
+            return PartialView("_CreatePort", model);
+        }
+
         [HttpPost]
         public async Task<ActionResult> CreateFromSubViewAsync(PortModel dto)
         {
             if (!ModelState.IsValid)
             {
-                //dto.ZoneItems = GetZoneItems();
-                //dto.ModeItems = GetModeItems();
-                //dto.NationalityItems = GetNationalityItems();
+                InitDataModel(dto);
                 return new EmptyResult();
             }
 
             var id = await _service.CreateAsync(dto);
             if (id >= 0)
             {
-                Console.WriteLine("Create port succeed");
+                SuccessNotification("Create port succeed");
                 var port = await _service.GetSingleAsync(id);
                 if (port == null)
-                    return new EmptyResult();
-
-                var name = port.PortName;
-                return Json(new NameValueModel()
                 {
-                    Value = id.ToString(),
-                    Name = name
+                    InitDataModel(dto);
+                    return RedirectToAction("OpenModal");
+                }
+
+                var idGroups = (object[])TempData["IdGroups"];
+                var idViews = TempData["IdView"];
+
+                return Json(new
+                {
+                    GroupIds = String.Join(",", idGroups),
+                    ViewIds = idViews,
+                    Value = port.Id.ToString(),
+                    Name = port.PortName
                 });
             }
-            Console.WriteLine("Create port succeed");
+            
+            ErrorNotification("Create port failed");
 
             return new EmptyResult();
         }
@@ -212,22 +229,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return items;
         }
 
-        [HttpPost]
-        public PartialViewResult OpenModal(string viewId, string viewGroupId)
-        {
-            var viewModel = new ModelAndViewId()
-            {
-                Port = new PortModel()
-                {
-                    ZoneItems = GetZoneItems(),
-                    ModeItems = GetModeItems(),
-                    NationalityItems = GetNationalityItems(),
-                },
-                ViewId = viewId,
-                ViewGroupId = viewGroupId
-            };
-            return PartialView("_CreatePort", viewModel);
-        }
 
         public class ModelAndViewId
         {

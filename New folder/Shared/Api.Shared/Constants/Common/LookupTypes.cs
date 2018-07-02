@@ -1,5 +1,12 @@
 ﻿namespace Vino.Shared.Constants.Common
 {
+    public class a
+    {
+        public enum MyEnum
+        {
+            AA = 1
+        }
+    }
     public enum LookupTypes
     {
         /// <summary>
