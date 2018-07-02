@@ -201,11 +201,7 @@ namespace Vino.Server.Web.Api
 
         #endregion
 
-        #region HblType
-
-
-
-        #endregion
+        #region Unit type
         public List<NameValueModel> GetUnitTypes()
         {
             var units = _lookupService.GetLookupByLookupType(LookupTypes.UnitType).Select(d => new NameValueModel()
@@ -215,7 +211,24 @@ namespace Vino.Server.Web.Api
             }).ToList();
             return units;
         }
+        #endregion
 
+        #region Countries
+        public List<NameValueModel> GetCountries(string name = "", bool withAll = false)
+        {
+            var countries = _lookupService.GetLookupByLookupType(LookupTypes.NationalityType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Code
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name)).ToList();
+            if (withAll)
+                countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return countries;
+        }
+
+
+        #endregion
         public List<NameValueModel> GetStandardEvents()
         {
             var units = _lookupService.GetLookupByLookupType(LookupTypes.ProducingEvents).Select(d => new NameValueModel()

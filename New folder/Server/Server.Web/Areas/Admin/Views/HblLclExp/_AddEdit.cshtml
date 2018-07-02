@@ -40,7 +40,7 @@
                                                 dataTextField: "Name",
                                                 dataValueField: "Value",
                                                 placeholder: "Chọn shipper...",
-                                                minLength: 2,
+                                                minLength: 1,
                                                 dataSource: {
                                                     type: "json",
                                                     serverFiltering: true,
@@ -87,7 +87,7 @@
                                                 dataTextField: "Name",
                                                 dataValueField: "Value",
                                                 placeholder: "Chọn consignee...",
-                                                minLength: 2,
+                                                minLength: 1,
                                                 dataSource: {
                                                     type: "json",
                                                     serverFiltering: true,
@@ -134,7 +134,7 @@
                                                 dataTextField: "Name",
                                                 dataValueField: "Value",
                                                 placeholder: "Chọn consignee...",
-                                                minLength: 2,
+                                                minLength: 1,
                                                 dataSource: {
                                                     type: "json",
                                                     serverFiltering: true,
@@ -219,7 +219,7 @@
                                                 dataTextField: "Name",
                                                 dataValueField: "Value",
                                                 placeholder: "Chọn Hbl type...",
-                                                minLength: 2,
+                                                minLength: 1,
                                                 dataSource: {
                                                     type: "json",
                                                     serverFiltering: true,
@@ -335,7 +335,7 @@
                                                 dataTextField: "Name",
                                                 dataValueField: "Value",
                                                 placeholder: "Chọn mã phiếu...",
-                                                minLength: 2,
+                                                minLength: 1,
                                                 dataSource: {
                                                     type: "json",
                                                     serverFiltering: true,
@@ -381,7 +381,7 @@
                                                 dataTextField: "Name",
                                                 dataValueField: "Value",
                                                 placeholder: "Chọn final destination...",
-                                                minLength: 2,
+                                                minLength: 1,
                                                 dataSource: {
                                                     type: "json",
                                                     serverFiltering: true,
@@ -429,7 +429,7 @@
                                                 dataTextField: "Name",
                                                 dataValueField: "Value",
                                                 placeholder: "Chọn place of delivery...",
-                                                minLength: 2,
+                                                minLength: 1,
                                                 dataSource: {
                                                     type: "json",
                                                     serverFiltering: true,
@@ -479,7 +479,40 @@
                                     <label class="control-label">Country Of Origin:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.CountryOfOriginId, Model.CountryItems)
+                                    <input id="@Html.FieldIdFor(model => model.CountryOfOriginId)"
+                                           name="@Html.NameFor(model => model.CountryOfOriginId)"
+                                           value="@Html.ValueFor(model => model.CountryOfOriginId)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.CountryOfOriginId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn country...",
+                                                minLength: 1,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LookupApi/GetCountries",
+                                                            dataType: "json",
+                                                            data: filterCountry
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterCountry() {
+                                                var data = {
+                                                    name: $("#@Html.FieldIdFor(model => model.CountryOfOriginId)")
+                                                        .data("kendoComboBox").input.val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                     @Html.ValidationMessageFor(model => model.CountryOfOriginId)
                                 </div>
                                 <div class="col-md-1">
@@ -838,7 +871,40 @@
                                     <label class="control-label">Delivery Of Goods:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.DeliveryOfGoodsId, Model.CustomerItems)
+                                    <input id="@Html.FieldIdFor(model => model.DeliveryOfGoodsId)"
+                                           name="@Html.NameFor(model => model.DeliveryOfGoodsId)"
+                                           value="@Html.ValueFor(model => model.DeliveryOfGoodsId)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.DeliveryOfGoodsId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn delivery of goods...",
+                                                minLength: 1,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/CustomerApi/GetAllCustomers",
+                                                            dataType: "json",
+                                                            data: filterDeliveryOfGoods
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterDeliveryOfGoods() {
+                                                var data = {
+                                                    Name: $("#@Html.FieldIdFor(model => model.DeliveryOfGoodsId)")
+                                                        .data("kendoComboBox").input.val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                     @Html.ValidationMessageFor(model => model.DeliveryOfGoodsId)
                                 </div>
                                 <div class="col-md-1">
