@@ -146,19 +146,6 @@ namespace Vino.Server.Web.Api
 
         #endregion
 
-        #region Commodities
-        public List<NameValueModel> GetCommodities()
-        {
-            var items = _lookupService.GetLookupByLookupType(LookupTypes.CommoditiesType).Select(d => new NameValueModel()
-            {
-                Name = d.Title,
-                Value = d.Code
-            }).ToList();
-            return items;
-        }
-
-
-        #endregion
         #region Type of bill
         public List<NameValueModel> GetTypeOfBill()
         {
@@ -201,33 +188,78 @@ namespace Vino.Server.Web.Api
 
         #endregion
 
-        #region Unit type
-        public List<NameValueModel> GetUnitTypes()
-        {
-            var units = _lookupService.GetLookupByLookupType(LookupTypes.UnitType).Select(d => new NameValueModel()
-            {
-                Name = d.Title,
-                Value = d.Code
-            }).ToList();
-            return units;
-        }
-        #endregion
-
         #region Countries
         public List<NameValueModel> GetCountries(string name = "", bool withAll = false)
         {
             var countries = _lookupService.GetLookupByLookupType(LookupTypes.NationalityType).Select(d => new NameValueModel()
             {
                 Name = d.Title,
-                Value = d.Code
-            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name)).ToList();
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
             if (withAll)
                 countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
 
             return countries;
         }
+        #endregion
+        #region Countries
+        public List<NameValueModel> GetTypeOfMove(string name = "", bool withAll = false)
+        {
+            var countries = _lookupService.GetLookupByLookupType(LookupTypes.TypeOfMove).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
 
+            return countries;
+        }
+        #endregion
 
+        #region Vessels
+        public List<NameValueModel> GetVessels(string name = "", bool withAll = false)
+        {
+            var countries = _lookupService.GetLookupByLookupType(LookupTypes.VesselType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return countries;
+        }
+        #endregion
+
+        #region Commodities
+        public List<NameValueModel> GetCommodities(string name = "", bool withAll = false)
+        {
+            var countries = _lookupService.GetLookupByLookupType(LookupTypes.CommoditiesType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return countries;
+        }
+        #endregion
+
+        #region Unit
+        public List<NameValueModel> GetUnitTypes(string name = "", bool withAll = false)
+        {
+            var countries = _lookupService.GetLookupByLookupType(LookupTypes.UnitType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return countries;
+        }
         #endregion
         public List<NameValueModel> GetStandardEvents()
         {

@@ -210,16 +210,17 @@
                                 </div>
                                 <div class="col-md-7">
                                     <input id="@Html.FieldIdFor(model => model.HblType)"
-                                           name="@Html.NameFor(model => model.HblType)"
+                                           name=""
                                            value="@Html.ValueFor(model => model.HblType)" />
                                     <script>
                                         $(document).ready(function () {
                                             $("#@Html.FieldIdFor(model => model.HblType)").kendoComboBox({
                                                 filter: "contains",
+                                                placeholder: "Chọn Hbl type...",
                                                 dataTextField: "Name",
                                                 dataValueField: "Value",
-                                                placeholder: "Chọn Hbl type...",
                                                 minLength: 1,
+                                                suggest : true,
                                                 dataSource: {
                                                     type: "json",
                                                     serverFiltering: true,
@@ -235,6 +236,7 @@
 
                                             function filterHblType() {
                                                 var data = {
+                                                   // name : ""
                                                     name: $("#@Html.FieldIdFor(model => model.HblType)")
                                                         .data("kendoComboBox").input.val()
                                                 };
@@ -526,7 +528,40 @@
                                     <label class="control-label">Type Of Move:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.TypeOfMoveId, Model.TypeOfMoveItems)
+                                    <input id="@Html.FieldIdFor(model => model.TypeOfMoveId)"
+                                           name="@Html.NameFor(model => model.TypeOfMoveId)"
+                                           value="@Html.ValueFor(model => model.TypeOfMoveId)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.TypeOfMoveId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn type of move...",
+                                                minLength: 1,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LookupApi/GetTypeOfMove",
+                                                            dataType: "json",
+                                                            data: filterTypeOfMove
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterTypeOfMove() {
+                                                var data = {
+                                                    name: $("#@Html.FieldIdFor(model => model.TypeOfMoveId)")
+                                                        .data("kendoComboBox").input.val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                     @Html.ValidationMessageFor(model => model.TypeOfMoveId)
                                 </div>
                                 <div class="col-md-1">
@@ -627,7 +662,40 @@
                                     <label class="control-label">Local Vessel:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.LocalVessel, Model.VesselItems)
+                                    <input id="@Html.FieldIdFor(model => model.LocalVessel)"
+                                           name="@Html.NameFor(model => model.LocalVessel)"
+                                           value="@Html.ValueFor(model => model.LocalVessel)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.LocalVessel)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn local vessel...",
+                                                minLength: 2,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LookupApi/GetVessels",
+                                                            dataType: "json",
+                                                            data: filterVessels
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterVessels() {
+                                                var data = {
+                                                    Name: $("#@Html.FieldIdFor(model => model.LocalVessel)")
+                                                        .data("kendoComboBox").input.val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                     @Html.ValidationMessageFor(model => model.LocalVessel)
                                 </div>
                                 <div class="col-md-1">
@@ -642,7 +710,40 @@
                                     <label class="control-label">Ocean Vessel:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.OceanVessel, Model.VesselItems)
+                                    <input id="@Html.FieldIdFor(model => model.OceanVessel)"
+                                           name="@Html.NameFor(model => model.OceanVessel)"
+                                           value="@Html.ValueFor(model => model.OceanVessel)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.OceanVessel)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn ocean vessel...",
+                                                minLength: 2,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LookupApi/GetVessels",
+                                                            dataType: "json",
+                                                            data: filterVessels
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterVessels() {
+                                                var data = {
+                                                    Name: $("#@Html.FieldIdFor(model => model.OceanVessel)")
+                                                        .data("kendoComboBox").input.val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                     @Html.ValidationMessageFor(model => model.OceanVessel)
                                 </div>
                                 <div class="col-md-1">
@@ -989,7 +1090,40 @@
                                     <label class="control-label">Unit:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.UnitId, Model.UnitItems)
+                                    <input id="@Html.FieldIdFor(model => model.UnitId)"
+                                           name="@Html.NameFor(model => model.UnitId)"
+                                           value="@Html.ValueFor(model => model.UnitId)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.UnitId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn unit...",
+                                                minLength: 1,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LooupApi/GetUnitTypes",
+                                                            dataType: "json",
+                                                            data: filterUnits
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterUnits() {
+                                                var data = {
+                                                    Name: $("#@Html.FieldIdFor(model => model.UnitId)")
+                                                        .data("kendoComboBox").input.val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                     @Html.ValidationMessageFor(model => model.UnitId)
                                 </div>
                                 <div class="col-md-1">
@@ -1033,7 +1167,40 @@
                                     <label class="control-label">Commodity:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.CommodityId, Model.CommodityItems)
+                                    <input id="@Html.FieldIdFor(model => model.CommodityId)"
+                                           name="@Html.NameFor(model => model.CommodityId)"
+                                           value="@Html.ValueFor(model => model.CommodityId)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.CommodityId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn commodity...",
+                                                minLength: 1,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LookupApi/GetCommodities",
+                                                            dataType: "json",
+                                                            data: filterCommodities
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterCommodities() {
+                                                var data = {
+                                                    Name: $("#@Html.FieldIdFor(model => model.CommodityId)")
+                                                        .data("kendoComboBox").input.val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                     @Html.ValidationMessageFor(model => model.CommodityId)
                                 </div>
                                 <div class="col-md-1">

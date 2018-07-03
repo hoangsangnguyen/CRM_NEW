@@ -782,6 +782,23 @@ namespace Vino.Server.Services.Installation
                 Type = LookupTypes.CategoryType
             });
             #endregion
+
+            #region TypeOfMove
+            db.Lookups.Add(new Lookup()
+            {
+                Code = "FCL/FCL-CY/CY",
+                Title = "FCL/FCL-CY/CY",
+                Type = LookupTypes.TypeOfMove
+            });
+            db.Lookups.Add(new Lookup()
+            {
+                Code = "LCL/LCL-CFS/CFS",
+                Title = "LCL/LCL-CFS/CFS",
+                Type = LookupTypes.TypeOfMove
+            });
+
+
+            #endregion
             await db.SaveChangesAsync();
         }
 

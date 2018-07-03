@@ -1,0 +1,5 @@
+- Fix popup dialog when open new
+- Fix validation Message for field in popup.
+- Fix filter combobox
+- Edit all form from dropdownlist to combobox.
+- Print full script of pdf file.

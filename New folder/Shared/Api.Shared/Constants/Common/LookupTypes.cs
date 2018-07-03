@@ -83,6 +83,7 @@
         VoyageType = 58,
         LocationType = 59,
         CategoryType = 60,
+        TypeOfMove = 61,
 
     }
 }

@@ -33,7 +33,7 @@
                         @*Name*@
                         <div class="form-group form-custom">
                             <div class="col-md-4">
-                                <label class="control-label">Name:</label>
+                                <label class="control-label">Name*:</label>
                             </div>
                             <div class="col-md-7">
                                 @Html.FalconEditorFor(m => m.Name)
@@ -69,7 +69,7 @@
                         @*Address*@
                         <div class="form-group form-custom">
                             <div class="col-md-4">
-                                <label class="control-label">Address :</label>
+                                <label class="control-label">Address*:</label>
                             </div>
                             <div class="col-md-7">
                                 @Html.FalconEditorFor(m => m.Address)
@@ -81,7 +81,7 @@
                         @*Contact*@
                         <div class="form-group form-custom">
                             <div class="col-md-4">
-                                <label class="control-label">Contact:</label>
+                                <label class="control-label">Contact*:</label>
                             </div>
                             <div class="col-md-7">
                                 @Html.DropDownListFor(model => model.ContactId, new SelectList(Model.ContactItems, "Value", "Text"),
@@ -97,7 +97,7 @@
                         @*Workphone*@
                         <div class="form-group form-custom">
                             <div class="col-md-4">
-                                <label class="control-label">Work phone :</label>
+                                <label class="control-label">Work phone:</label>
                             </div>
                             <div class="col-md-7">
                                 @Html.FalconEditorFor(m => m.WorkPhone)
@@ -109,7 +109,7 @@
                         @*Fax No*@
                         <div class="form-group form-custom">
                             <div class="col-md-4">
-                                <label class="control-label">Fax No :</label>
+                                <label class="control-label">Fax No:</label>
                             </div>
                             <div class="col-md-7">
                                 @Html.FalconEditorFor(m => m.FaxNo)
@@ -121,7 +121,7 @@
                         @*Location*@
                         <div class="form-group form-custom">
                             <div class="col-md-4">
-                                <label class="control-label">Location:</label>
+                                <label class="control-label">Location*:</label>
                             </div>
                             <div class="col-md-7">
                                 @Html.DropDownListFor(model => model.LocationId, new SelectList(Model.LocationItems, "Value", "Text"),
