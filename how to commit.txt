@@ -1,0 +1,7 @@
+Các bước commit:
+git status : xem thay đổi hiện tại.
+git add .    : add tất cả các file
+git add TÊN-FILE : nếu anh muốn add chỉ 1 vài file
+git commit -m "MESSAGE" : commit lên server
+git pull : update code mới về. Nếu có bị conflig thì anh sửa và quay lại bước 2
+git push : đẩy lên server.
