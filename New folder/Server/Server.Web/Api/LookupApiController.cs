@@ -276,6 +276,74 @@ namespace Vino.Server.Web.Api
             return countries;
         }
         #endregion
+
+        #region Location
+        public List<NameValueModel> GetLocations(string name = "", bool withAll = false)
+        {
+            var countries = _lookupService.GetLookupByLookupType(LookupTypes.LocationType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return countries;
+        }
+
+
+        #endregion
+
+        #region Categories
+        public List<NameValueModel> GetCategories(string name = "", bool withAll = false)
+        {
+            var countries = _lookupService.GetLookupByLookupType(LookupTypes.CategoryType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return countries;
+        }
+
+
+        #endregion
+
+        #region Zones
+        public List<NameValueModel> GetZones(string name = "", bool withAll = false)
+        {
+            var countries = _lookupService.GetLookupByLookupType(LookupTypes.ZoneType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return countries;
+        }
+
+
+        #endregion
+
+        #region Modes
+        public List<NameValueModel> GetModes(string name = "", bool withAll = false)
+        {
+            var countries = _lookupService.GetLookupByLookupType(LookupTypes.ModeType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return countries;
+        }
+
+
+        #endregion
         public List<NameValueModel> GetStandardEvents()
         {
             var units = _lookupService.GetLookupByLookupType(LookupTypes.ProducingEvents).Select(d => new NameValueModel()

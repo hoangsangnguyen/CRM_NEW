@@ -274,6 +274,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             }
             else
             {
+                request.Id = id;
                 SuccessNotification("Tạo mới thành công!");
             }
 
@@ -282,7 +283,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             ViewBag.formId = formId;
             ViewBag.viewId = viewId;
 
-            return View(new CrmCustomerModel());
+            return View(request);
         }
         #endregion
 

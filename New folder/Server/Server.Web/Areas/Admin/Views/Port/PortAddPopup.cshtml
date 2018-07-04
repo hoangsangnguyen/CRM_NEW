@@ -1,8 +1,8 @@
 ﻿@using Falcon.Web.Mvc.HtmlExtensions
-@model Vino.Server.Services.MainServices.CRM.Customer.Models.CrmCustomerModel
+@model Vino.Server.Services.MainServices.CRM.Port.Model.PortModel
 @{
     Layout = "~/Areas/Admin/Views/Shared/_PopupLayout.cshtml";
-    ViewBag.Title = "Tạo mới khách hàng";
+    ViewBag.Title = "Tạo mới port";
     <style>
         .k-combobox .k-input {
             height: 27.5px !important
@@ -14,11 +14,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             try {
-                var event = new CustomEvent("customer", { detail: { viewId: '@ViewBag.viewId', valueId: '@Model.Id'}});
-                @*window.opener.document.forms['@(ViewBag.formId)'].@(ViewBag.btnId).dispatchEvent(new CustomEvent("customer",
-                        {
-                            detail: { viewId: @(ViewBag.viewId), valueId: @Model.Id, reload: true }
-                    }));*@
+                var event = new CustomEvent("port", { detail: { viewId: '@ViewBag.viewId', valueId: '@Model.Id'}});
                 window.opener.document.forms['@(ViewBag.formId)'].@(ViewBag.btnId).dispatchEvent(event);
             } catch
             (e) {
@@ -32,10 +28,10 @@
     @Html.AntiForgeryToken()
     <div class="content-header clearfix">
         <h1 class="pull-left">
-            Tạo mới khách hàng
+            Tạo mới port
         </h1>
         <div class="pull-right">
         </div>
     </div>
-    @Html.Partial("~/Areas/Admin/Views/Customers/_CreateCustomer.cshtml", Model)
+    @Html.Partial("~/Areas/Admin/Views/port/_Createport.cshtml", Model)
 }

@@ -71,7 +71,7 @@ namespace Vino.Server.Data.CRM
         /**
          *Category
          */
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public virtual Lookup Category { get; set; }
 
         /**

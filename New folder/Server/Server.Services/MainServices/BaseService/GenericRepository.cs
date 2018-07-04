@@ -61,7 +61,7 @@ namespace Vino.Server.Services.MainServices.BaseService
             {
                 throw new InvalidOperationException("Database context could not create data.");
             }
-
+            
             return entity.Id;
         }
 

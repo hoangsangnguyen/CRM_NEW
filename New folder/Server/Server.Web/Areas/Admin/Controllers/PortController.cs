@@ -143,6 +143,43 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             model.ModeItems = GetModeItems();
         }
 
+        #region Popup add Port
+
+        public ActionResult PortAddPopup(string viewId)
+        {
+            var model = new PortModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> PortAddPopup(string viewId, string btnId,
+            string formId, PortModel request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+
+            var id = await _service.CreateAsync(request);
+            if (id == 0)
+            {
+                ErrorNotification("Tạo mới thất bại!");
+            }
+            else
+            {
+                request.Id = id;
+                SuccessNotification("Tạo mới thành công!");
+            }
+
+            ViewBag.RefreshPage = true;
+            ViewBag.btnId = btnId;
+            ViewBag.formId = formId;
+            ViewBag.viewId = viewId;
+
+            return View(request);
+        }
+        #endregion
+
         [HttpPost]
         public PartialViewResult OpenModal(string viewId, string[] viewGroupId)
         {
