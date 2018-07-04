@@ -295,6 +295,9 @@ namespace Vino.Server.Services.Infrastructure
                     opt => opt.MapFrom(x => x.ClosingDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
                 .ForMember(d => d.SellingDate,
                     opt => opt.MapFrom(x => x.SellingDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                .ForMember(d => d.ExRef,
+                    opt => opt.MapFrom(x =>
+                        x.ExRef.HasValue ? x.ExRef.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : ""))
                 .ForMember(d => d.IssueDate,
                     opt => opt.MapFrom(x => x.IssueDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)));
             CreateMap<HblLclExpModel, HblLclExp>()

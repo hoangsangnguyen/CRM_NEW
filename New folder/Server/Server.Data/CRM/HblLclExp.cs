@@ -77,7 +77,7 @@ namespace Vino.Server.Data.CRM
         public string ForwardingAgent { get; set; }
 
         public double FreightAmount { get; set; }
-        public double ExRef { get; set; }
+        public DateTimeOffset? ExRef { get; set; }
         public double ReferenceNumber { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọng Final Destination")]

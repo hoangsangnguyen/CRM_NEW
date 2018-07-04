@@ -122,7 +122,10 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
 
 
         public double FreightAmount { get; set; }
-        public double ExRef { get; set; }
+        /// <summary>
+        /// mean out of date
+        /// </summary>
+        public string ExRef { get; set; }
         public double ReferenceNumber { get; set; }
 
         /*
