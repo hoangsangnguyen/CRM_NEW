@@ -34,7 +34,6 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
         /**
          * Full English Name
          */
-        [Required(ErrorMessage = "Vui lòng nhập English Name")]
         public string FullEngishName { get; set; }
 
         /**
@@ -59,7 +58,6 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
         /**
        * Work phone
        */
-        [Required(ErrorMessage = "Vui lòng nhập work phone")]
         public string WorkPhone { get; set; }
 
         /**
@@ -70,7 +68,6 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
         /**
        * Fax No
        */
-        [Required(ErrorMessage = "Vui lòng nhập Fax number")]
         public string FaxNo { get; set; }
 
         /**
@@ -83,12 +80,12 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
         /**
         * Taxcode
         */
-        [Required] public string Taxcode { get; set; }
+        public string Taxcode { get; set; }
 
         /**
          *Category
          */
-        [Required(ErrorMessage = "Vui lòng chọn category")] public int? CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public string CategoryName { get; set; }
 
         /**
@@ -100,7 +97,6 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
          * Email
          */
         [EmailAddress]
-        [Required(ErrorMessage = "Vui lòng nhập email")]
         public string Email { get; set; }
 
         public IList<SelectListItem> ContactItems { get; set; }

@@ -799,6 +799,39 @@ namespace Vino.Server.Services.Installation
 
 
             #endregion
+
+            #region Places
+            db.Lookups.Add(new Lookup()
+            {
+                Code = "cat-lai-kho-1",
+                Title = "CAT LAI KHO 1",
+                Type = LookupTypes.PlaceType
+            });
+            db.Lookups.Add(new Lookup()
+            {
+                Code = "hai-phong-viet-nam",
+                Title = "HAI PHONG , VIETNAM",
+                Type = LookupTypes.PlaceType
+            });
+            db.Lookups.Add(new Lookup()
+            {
+                Code = "ho-chi-minh-port-viet-nam",
+                Title = "HO CHI MINH PORT, VIETNAM",
+                Type = LookupTypes.PlaceType
+            });
+            db.Lookups.Add(new Lookup()
+            {
+                Code = "ho-chi-minh-viet-nam",
+                Title = "HOCHIMINH CITY, VIET NAM",
+                Type = LookupTypes.PlaceType
+            });
+            db.Lookups.Add(new Lookup()
+            {
+                Code = "quy-nhon-viet-nam",
+                Title = "QUINHON, VIETNAM",
+                Type = LookupTypes.PlaceType
+            });
+            #endregion
             await db.SaveChangesAsync();
         }
 

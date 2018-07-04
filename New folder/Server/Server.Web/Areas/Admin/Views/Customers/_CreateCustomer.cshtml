@@ -2,13 +2,15 @@
 @using Falcon.Web.Mvc.HtmlExtensions
 @model Vino.Server.Services.MainServices.CRM.Customer.Models.CrmCustomerModel
 
-@*@model Vino.Server.Web.Areas.Admin.Controllers.CustomersController.ModelAndViewId*@
+
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.CustomerId)
 
 @{
     var groupIds = @ViewBag.ViewGroupIds;
     Layout = null;
 }
-@Html.HiddenFor(m => m.CustomerId)
 
 <div class="content">
     <div class="form-horizontal">
@@ -85,7 +87,7 @@
                             </div>
                             <div class="col-md-7">
                                 @Html.DropDownListFor(model => model.ContactId, new SelectList(Model.ContactItems, "Value", "Text"),
-                                              new { @Id = @Html.FieldIdFor(m => m.ContactId), @class = "form-control select-style-1 DrpContact" })
+                                                             new { @Id = @Html.FieldIdFor(m => m.ContactId), @class = "form-control select-style-1 DrpContact" })
                                 @Html.ValidationMessageFor(model => model.ContactId)
                             </div>
                             <div class="col-md-1">
@@ -125,7 +127,7 @@
                             </div>
                             <div class="col-md-7">
                                 @Html.DropDownListFor(model => model.LocationId, new SelectList(Model.LocationItems, "Value", "Text"),
-                                              new { @Id = @Html.FieldIdFor(m => m.LocationId), @class = "form-control select-style-1" })
+                                                             new { @Id = @Html.FieldIdFor(m => m.LocationId), @class = "form-control select-style-1" })
                                 @Html.ValidationMessageFor(model => model.LocationId)
                             </div>
                             <div class="col-md-1">
@@ -164,7 +166,7 @@
                             </div>
                             <div class="col-md-7">
                                 @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.CategoriesItems, "Value", "Text"),
-                                              new { @Id = @Html.FieldIdFor(m => m.CategoryId), @class = "form-control select-style-1" })
+                                                             new { @Id = @Html.FieldIdFor(m => m.CategoryId), @class = "form-control select-style-1" })
                                 @Html.ValidationMessageFor(model => model.CategoryId)
                             </div>
                             <div class="col-md-1">
@@ -215,10 +217,8 @@
     <script type="text/javascript" src="/Areas/Admin/Content/js/customer_addedit.js"></script>
 </div>
 <script type="text/javascript">
-
         function SaveCustomer () {
             var model = JSON.stringify(GetDataRequest());
-            //console.log('Request : ' + model);
             $.ajax({
                 url: "@Url.Action("CreateFromSubViewAsync", "Customers")",
                 type: "POST",
@@ -235,7 +235,7 @@
 
                     let viewIds = dataJs.ViewIds;
                     $("#" + viewIds).data("kendoComboBox").value(dataJs.Value);
-                   
+
                     $('#myModal').modal('hide');
 
                 },

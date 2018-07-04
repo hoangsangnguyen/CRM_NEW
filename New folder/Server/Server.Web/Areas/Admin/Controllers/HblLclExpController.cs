@@ -10,6 +10,7 @@ using Falcon.Web.Mvc.Kendoui;
 using Vino.Server.Data.CRM;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.CRM.Customer;
+using Vino.Server.Services.MainServices.CRM.Customer.Models;
 using Vino.Server.Services.MainServices.CRM.HblLclExp;
 using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
 using Vino.Server.Services.MainServices.CRM.LclExp;
@@ -24,26 +25,17 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
     public class HblLclExpController : BaseController
     {
         private readonly HblLclExpService _service;
-        private readonly LclExpService _lclExpService;
         private readonly CrmCustomerService _customerService;
-        private readonly LookupService _lookupService;
-        private readonly PortService _portService;
         private readonly HblLclExpPdfService _pdfService;
 
 
 
         public HblLclExpController(HblLclExpService service,
-            LclExpService lclExpService,
             CrmCustomerService customerService,
-            LookupService lookupService,
-            PortService portService,
             HblLclExpPdfService pdfService)
         {
             this._service = service;
-            _lclExpService = lclExpService;
             _customerService = customerService;
-            _lookupService = lookupService;
-            _portService = portService;
             _pdfService = pdfService;
         }
 
@@ -89,9 +81,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 IssueDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 LclExpId = id
             };
-
-            await InitContentForModel(model);
-
             return View(model);
         }
 
@@ -101,7 +90,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                await InitContentForModel(dto);
                 return View(dto);
             }
             var index = await _service.GetNumberEntry();
@@ -127,8 +115,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return RedirectToAction("HblList");
             }
 
-            await InitContentForModel(model);
-
             return View(model);
         }
 
@@ -138,7 +124,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                await InitContentForModel(dto);
                 return View(dto);
             }
 
@@ -166,114 +151,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         }
 
         #endregion
-
-        #region Init Data for model
-
-        private async Task InitContentForModel(HblLclExpModel model)
-        {
-            model.CustomerItems = await GetCustomerItems();
-            model.HblTypeItems = GetTypeOfBillItems();
-            model.PortItems = await GetPortItems();
-            model.CommodityItems = GetCommodityItems();
-            model.UnitItems = GetUnitItems();
-            model.VesselItems = GetVesselItems();
-            model.CountryItems = GetNationalityItems();
-        }
-
-        private async Task<IList<SelectListItem>> GetCustomerItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var customers = await _customerService.GetAllAsync();
-            foreach (var l in customers)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Name
-                });
-
-            return items;
-        }
-
-        private IList<SelectListItem> GetTypeOfBillItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.TypeOfBill);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private async Task<IList<SelectListItem>> GetPortItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var contacts = await _portService.GetAllAsync();
-            foreach (var l in contacts)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.PortName
-                });
-
-            return items;
-        }
-        private IList<SelectListItem> GetCommodityItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.CommoditiesType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetVesselItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.VesselType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetUnitItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.UnitType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetNationalityItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.NationalityType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        #endregion
-
 
         #region PDF Export
         public async Task<ActionResult> CreateAndDownload(int id)
@@ -322,5 +199,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         }
 
         #endregion
+
+      
     }
 }

@@ -261,6 +261,21 @@ namespace Vino.Server.Web.Api
             return countries;
         }
         #endregion
+
+        #region Places
+        public List<NameValueModel> GetPlaces(string name = "", bool withAll = false)
+        {
+            var countries = _lookupService.GetLookupByLookupType(LookupTypes.PlaceType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return countries;
+        }
+        #endregion
         public List<NameValueModel> GetStandardEvents()
         {
             var units = _lookupService.GetLookupByLookupType(LookupTypes.ProducingEvents).Select(d => new NameValueModel()

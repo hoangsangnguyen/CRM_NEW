@@ -34,40 +34,41 @@
                                            name="@Html.NameFor(model => model.ShipperId)"
                                            value="@Html.ValueFor(model => model.ShipperId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.ShipperId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn shipper...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/CustomerApi/GetAllCustomers",
-                                                            dataType: "json",
-                                                            data: filterShipper
-                                                        }
-                                                    }
+                                $(document).ready(function() {
+                                    $("#@Html.FieldIdFor(model => model.ShipperId)").kendoComboBox({
+                                        filter: "contains",
+                                        dataTextField: "Name",
+                                        dataValueField: "Value",
+                                        placeholder: "Chọn shipper...",
+                                        minLength: 1,
+                                        dataSource: {
+                                            type: "json",
+                                            serverFiltering: true,
+                                            transport: {
+                                                read: {
+                                                    url: "/api/CustomerApi/GetAllCustomers",
+                                                    dataType: "json",
+                                                    data: filterShipper
                                                 }
-                                            });
-
-                                            function filterShipper() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
                                             }
-                                        });
+                                        }
+                                    });
+
+                                    function filterShipper() {
+                                        var data = {
+                                            Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                .data("kendoComboBox").input.val()
+                                        };
+                                        addAntiForgeryToken(data);
+                                        return data;
+                                    }
+                                });
                                     </script>
                                     @Html.ValidationMessageFor(m => m.ShipperId)
                                 </div>
                                 <div class="col-md-1">
-                                    <a data-request-url="@Url.Action("OpenModal", "Customers")" id="create-shipper">Add</a>
+                                    <a onclick="openCustomerPopup('@Html.FieldIdFor(m => m.ShipperId)')">Add</a>
+                                    @*  <a data-request-url="@Url.Action("OpenModal", "Customers")" id="create-shipper">Add</a>*@
                                 </div>
                             </div>
                         </div>
@@ -81,35 +82,35 @@
                                            name="@Html.NameFor(model => model.ConsigneeId)"
                                            value="@Html.ValueFor(model => model.ConsigneeId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.ConsigneeId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn consignee...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/CustomerApi/GetAllCustomers",
-                                                            dataType: "json",
-                                                            data: filterConsignee
-                                                        }
-                                                    }
+                                $(document).ready(function() {
+                                    $("#@Html.FieldIdFor(model => model.ConsigneeId)").kendoComboBox({
+                                        filter: "contains",
+                                        dataTextField: "Name",
+                                        dataValueField: "Value",
+                                        placeholder: "Chọn consignee...",
+                                        minLength: 1,
+                                        dataSource: {
+                                            type: "json",
+                                            serverFiltering: true,
+                                            transport: {
+                                                read: {
+                                                    url: "/api/CustomerApi/GetAllCustomers",
+                                                    dataType: "json",
+                                                    data: filterConsignee
                                                 }
-                                            });
-
-                                            function filterConsignee() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.ConsigneeId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
                                             }
-                                        });
+                                        }
+                                    });
+
+                                    function filterConsignee() {
+                                        var data = {
+                                            Name: $("#@Html.FieldIdFor(model => model.ConsigneeId)")
+                                                .data("kendoComboBox").input.val()
+                                        };
+                                        addAntiForgeryToken(data);
+                                        return data;
+                                    }
+                                });
                                     </script>
                                     @Html.ValidationMessageFor(m => m.ConsigneeId)
                                 </div>
@@ -128,35 +129,35 @@
                                            name="@Html.NameFor(model => model.NotifyPartyId)"
                                            value="@Html.ValueFor(model => model.NotifyPartyId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.NotifyPartyId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn consignee...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/CustomerApi/GetAllCustomers",
-                                                            dataType: "json",
-                                                            data: filterNotifyParty
-                                                        }
-                                                    }
+                                $(document).ready(function() {
+                                    $("#@Html.FieldIdFor(model => model.NotifyPartyId)").kendoComboBox({
+                                        filter: "contains",
+                                        dataTextField: "Name",
+                                        dataValueField: "Value",
+                                        placeholder: "Chọn consignee...",
+                                        minLength: 1,
+                                        dataSource: {
+                                            type: "json",
+                                            serverFiltering: true,
+                                            transport: {
+                                                read: {
+                                                    url: "/api/CustomerApi/GetAllCustomers",
+                                                    dataType: "json",
+                                                    data: filterNotifyParty
                                                 }
-                                            });
-
-                                            function filterNotifyParty() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.NotifyPartyId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
                                             }
-                                        });
+                                        }
+                                    });
+
+                                    function filterNotifyParty() {
+                                        var data = {
+                                            Name: $("#@Html.FieldIdFor(model => model.NotifyPartyId)")
+                                                .data("kendoComboBox").input.val()
+                                        };
+                                        addAntiForgeryToken(data);
+                                        return data;
+                                    }
+                                });
                                     </script>
                                     @Html.ValidationMessageFor(m => m.NotifyPartyId)
                                 </div>
@@ -213,37 +214,37 @@
                                            name=""
                                            value="@Html.ValueFor(model => model.HblType)" />
                                     <script>
-                                        $(document).ready(function () {
-                                            $("#@Html.FieldIdFor(model => model.HblType)").kendoComboBox({
-                                                filter: "contains",
-                                                placeholder: "Chọn Hbl type...",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                minLength: 1,
-                                                suggest : true,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LookupApi/GetTypeOfBillWithIds",
-                                                            dataType: "json",
-                                                            data: filterHblType
-                                                        }
-                                                    }
+                                $(document).ready(function () {
+                                    $("#@Html.FieldIdFor(model => model.HblType)").kendoComboBox({
+                                        filter: "contains",
+                                        placeholder: "Chọn Hbl type...",
+                                        dataTextField: "Name",
+                                        dataValueField: "Value",
+                                        minLength: 1,
+                                        suggest : true,
+                                        dataSource: {
+                                            type: "json",
+                                            serverFiltering: true,
+                                            transport: {
+                                                read: {
+                                                    url: "/api/LookupApi/GetTypeOfBillWithIds",
+                                                    dataType: "json",
+                                                    data: filterHblType
                                                 }
-                                            });
-
-                                            function filterHblType() {
-                                                var data = {
-                                                   // name : ""
-                                                    name: $("#@Html.FieldIdFor(model => model.HblType)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
                                             }
-                                        });
+                                        }
+                                    });
+
+                                    function filterHblType() {
+                                        var data = {
+                                            // name : ""
+                                            name: $("#@Html.FieldIdFor(model => model.HblType)")
+                                                .data("kendoComboBox").input.val()
+                                        };
+                                        addAntiForgeryToken(data);
+                                        return data;
+                                    }
+                                });
                                     </script>
                                     @Html.ValidationMessageFor(m => m.HblType)
                                 </div>
@@ -331,35 +332,35 @@
                                            name="@Html.NameFor(model => model.LclExpId)"
                                            value="@Html.ValueFor(model => model.LclExpId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn mã phiếu...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LclExpApi/GetAll",
-                                                            dataType: "json",
-                                                            data: filterLclExp
-                                                        }
-                                                    }
+                                $(document).ready(function() {
+                                    $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
+                                        filter: "contains",
+                                        dataTextField: "Name",
+                                        dataValueField: "Value",
+                                        placeholder: "Chọn mã phiếu...",
+                                        minLength: 1,
+                                        dataSource: {
+                                            type: "json",
+                                            serverFiltering: true,
+                                            transport: {
+                                                read: {
+                                                    url: "/api/LclExpApi/GetAll",
+                                                    dataType: "json",
+                                                    data: filterLclExp
                                                 }
-                                            });
-
-                                            function filterLclExp() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.LclExpId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
                                             }
-                                        });
+                                        }
+                                    });
+
+                                    function filterLclExp() {
+                                        var data = {
+                                            Name: $("#@Html.FieldIdFor(model => model.LclExpId)")
+                                                .data("kendoComboBox").input.val()
+                                        };
+                                        addAntiForgeryToken(data);
+                                        return data;
+                                    }
+                                });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.LclExpId)
                                     <div class="col-md-1"></div>
@@ -377,35 +378,35 @@
                                            name="@Html.NameFor(model => model.FinalDestinationId)"
                                            value="@Html.ValueFor(model => model.FinalDestinationId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.FinalDestinationId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn final destination...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/PortApi/GetAll",
-                                                            dataType: "json",
-                                                            data: filterPort
-                                                        }
-                                                    }
+                                $(document).ready(function() {
+                                    $("#@Html.FieldIdFor(model => model.FinalDestinationId)").kendoComboBox({
+                                        filter: "contains",
+                                        dataTextField: "Name",
+                                        dataValueField: "Value",
+                                        placeholder: "Chọn final destination...",
+                                        minLength: 1,
+                                        dataSource: {
+                                            type: "json",
+                                            serverFiltering: true,
+                                            transport: {
+                                                read: {
+                                                    url: "/api/PortApi/GetAll",
+                                                    dataType: "json",
+                                                    data: filterPort
                                                 }
-                                            });
-
-                                            function filterPort() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.FinalDestinationId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
                                             }
-                                        });
+                                        }
+                                    });
+
+                                    function filterPort() {
+                                        var data = {
+                                            Name: $("#@Html.FieldIdFor(model => model.FinalDestinationId)")
+                                                .data("kendoComboBox").input.val()
+                                        };
+                                        addAntiForgeryToken(data);
+                                        return data;
+                                    }
+                                });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.FinalDestinationId)
                                 </div>
@@ -425,35 +426,35 @@
                                            name="@Html.NameFor(model => model.PlaceOfDeliveryId)"
                                            value="@Html.ValueFor(model => model.PlaceOfDeliveryId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.PlaceOfDeliveryId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn place of delivery...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/PortApi/GetAll",
-                                                            dataType: "json",
-                                                            data: filterPort
-                                                        }
-                                                    }
+                                $(document).ready(function() {
+                                    $("#@Html.FieldIdFor(model => model.PlaceOfDeliveryId)").kendoComboBox({
+                                        filter: "contains",
+                                        dataTextField: "Name",
+                                        dataValueField: "Value",
+                                        placeholder: "Chọn place of delivery...",
+                                        minLength: 1,
+                                        dataSource: {
+                                            type: "json",
+                                            serverFiltering: true,
+                                            transport: {
+                                                read: {
+                                                    url: "/api/PortApi/GetAll",
+                                                    dataType: "json",
+                                                    data: filterPort
                                                 }
-                                            });
-
-                                            function filterPort() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.PlaceOfDeliveryId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
                                             }
-                                        });
+                                        }
+                                    });
+
+                                    function filterPort() {
+                                        var data = {
+                                            Name: $("#@Html.FieldIdFor(model => model.PlaceOfDeliveryId)")
+                                                .data("kendoComboBox").input.val()
+                                        };
+                                        addAntiForgeryToken(data);
+                                        return data;
+                                    }
+                                });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.PlaceOfDeliveryId)
                                 </div>
@@ -485,35 +486,35 @@
                                            name="@Html.NameFor(model => model.CountryOfOriginId)"
                                            value="@Html.ValueFor(model => model.CountryOfOriginId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.CountryOfOriginId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn country...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LookupApi/GetCountries",
-                                                            dataType: "json",
-                                                            data: filterCountry
-                                                        }
-                                                    }
-                                                }
-                                            });
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.CountryOfOriginId)").kendoComboBox({
+                            filter: "contains",
+                            dataTextField: "Name",
+                            dataValueField: "Value",
+                            placeholder: "Chọn country...",
+                            minLength: 1,
+                            dataSource: {
+                                type: "json",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "/api/LookupApi/GetCountries",
+                                        dataType: "json",
+                                        data: filterCountry
+                                    }
+                                }
+                            }
+                        });
 
-                                            function filterCountry() {
-                                                var data = {
-                                                    name: $("#@Html.FieldIdFor(model => model.CountryOfOriginId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
+                        function filterCountry() {
+                            var data = {
+                                name: $("#@Html.FieldIdFor(model => model.CountryOfOriginId)")
+                                    .data("kendoComboBox").input.val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                    });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.CountryOfOriginId)
                                 </div>
@@ -532,35 +533,35 @@
                                            name="@Html.NameFor(model => model.TypeOfMoveId)"
                                            value="@Html.ValueFor(model => model.TypeOfMoveId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.TypeOfMoveId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn type of move...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LookupApi/GetTypeOfMove",
-                                                            dataType: "json",
-                                                            data: filterTypeOfMove
-                                                        }
-                                                    }
-                                                }
-                                            });
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.TypeOfMoveId)").kendoComboBox({
+                            filter: "contains",
+                            dataTextField: "Name",
+                            dataValueField: "Value",
+                            placeholder: "Chọn type of move...",
+                            minLength: 1,
+                            dataSource: {
+                                type: "json",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "/api/LookupApi/GetTypeOfMove",
+                                        dataType: "json",
+                                        data: filterTypeOfMove
+                                    }
+                                }
+                            }
+                        });
 
-                                            function filterTypeOfMove() {
-                                                var data = {
-                                                    name: $("#@Html.FieldIdFor(model => model.TypeOfMoveId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
+                        function filterTypeOfMove() {
+                            var data = {
+                                name: $("#@Html.FieldIdFor(model => model.TypeOfMoveId)")
+                                    .data("kendoComboBox").input.val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                    });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.TypeOfMoveId)
                                 </div>
@@ -604,8 +605,41 @@
                                     <label class="control-label">Freight Payable:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.FreightPayableAt)
-                                    @Html.ValidationMessageFor(model => model.FreightPayableAt)
+                                    <input id="@Html.FieldIdFor(model => model.FreightPayableId)"
+                                           name="@Html.NameFor(model => model.FreightPayableId)"
+                                           value="@Html.ValueFor(model => model.FreightPayableId)" />
+                                    <script>
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.FreightPayableId)").kendoComboBox({
+                            filter: "contains",
+                            dataTextField: "Name",
+                            dataValueField: "Value",
+                            placeholder: "Chọn freight payable...",
+                            minLength: 1,
+                            dataSource: {
+                                type: "json",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "/api/LookupApi/GetPlaces",
+                                        dataType: "json",
+                                        data: filterPlaces
+                                    }
+                                }
+                            }
+                        });
+
+                        function filterPlaces() {
+                            var data = {
+                                Name: $("#@Html.FieldIdFor(model => model.FreightPayableId)")
+                                    .data("kendoComboBox").input.val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                    });
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.FreightPayableId)
                                 </div>
                                 <div class="col-md-1">
                                 </div>
@@ -666,35 +700,35 @@
                                            name="@Html.NameFor(model => model.LocalVessel)"
                                            value="@Html.ValueFor(model => model.LocalVessel)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.LocalVessel)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn local vessel...",
-                                                minLength: 2,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LookupApi/GetVessels",
-                                                            dataType: "json",
-                                                            data: filterVessels
-                                                        }
-                                                    }
-                                                }
-                                            });
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.LocalVessel)").kendoComboBox({
+                            filter: "contains",
+                            dataTextField: "Name",
+                            dataValueField: "Value",
+                            placeholder: "Chọn local vessel...",
+                            minLength: 2,
+                            dataSource: {
+                                type: "json",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "/api/LookupApi/GetVessels",
+                                        dataType: "json",
+                                        data: filterVessels
+                                    }
+                                }
+                            }
+                        });
 
-                                            function filterVessels() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.LocalVessel)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
+                        function filterVessels() {
+                            var data = {
+                                Name: $("#@Html.FieldIdFor(model => model.LocalVessel)")
+                                    .data("kendoComboBox").input.val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                    });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.LocalVessel)
                                 </div>
@@ -714,35 +748,35 @@
                                            name="@Html.NameFor(model => model.OceanVessel)"
                                            value="@Html.ValueFor(model => model.OceanVessel)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.OceanVessel)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn ocean vessel...",
-                                                minLength: 2,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LookupApi/GetVessels",
-                                                            dataType: "json",
-                                                            data: filterVessels
-                                                        }
-                                                    }
-                                                }
-                                            });
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.OceanVessel)").kendoComboBox({
+                            filter: "contains",
+                            dataTextField: "Name",
+                            dataValueField: "Value",
+                            placeholder: "Chọn ocean vessel...",
+                            minLength: 2,
+                            dataSource: {
+                                type: "json",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "/api/LookupApi/GetVessels",
+                                        dataType: "json",
+                                        data: filterVessels
+                                    }
+                                }
+                            }
+                        });
 
-                                            function filterVessels() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.OceanVessel)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
+                        function filterVessels() {
+                            var data = {
+                                Name: $("#@Html.FieldIdFor(model => model.OceanVessel)")
+                                    .data("kendoComboBox").input.val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                    });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.OceanVessel)
                                 </div>
@@ -762,35 +796,35 @@
                                            name="@Html.NameFor(model => model.PortOfDischargeId)"
                                            value="@Html.ValueFor(model => model.PortOfDischargeId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.PortOfDischargeId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn port of discharge...",
-                                                minLength: 2,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/PortApi/GetAll",
-                                                            dataType: "json",
-                                                            data: filterPort
-                                                        }
-                                                    }
-                                                }
-                                            });
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.PortOfDischargeId)").kendoComboBox({
+                            filter: "contains",
+                            dataTextField: "Name",
+                            dataValueField: "Value",
+                            placeholder: "Chọn port of discharge...",
+                            minLength: 2,
+                            dataSource: {
+                                type: "json",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "/api/PortApi/GetAll",
+                                        dataType: "json",
+                                        data: filterPort
+                                    }
+                                }
+                            }
+                        });
 
-                                            function filterPort() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.PortOfDischargeId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
+                        function filterPort() {
+                            var data = {
+                                Name: $("#@Html.FieldIdFor(model => model.PortOfDischargeId)")
+                                    .data("kendoComboBox").input.val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                    });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.PortOfDischargeId)
                                 </div>
@@ -813,35 +847,35 @@
                                            name="@Html.NameFor(model => model.PlaceOfReceiptId)"
                                            value="@Html.ValueFor(model => model.PlaceOfReceiptId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.PlaceOfReceiptId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn place of receipt...",
-                                                minLength: 2,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/PortApi/GetAll",
-                                                            dataType: "json",
-                                                            data: filterPort
-                                                        }
-                                                    }
-                                                }
-                                            });
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.PlaceOfReceiptId)").kendoComboBox({
+                            filter: "contains",
+                            dataTextField: "Name",
+                            dataValueField: "Value",
+                            placeholder: "Chọn place of receipt...",
+                            minLength: 2,
+                            dataSource: {
+                                type: "json",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "/api/PortApi/GetAll",
+                                        dataType: "json",
+                                        data: filterPort
+                                    }
+                                }
+                            }
+                        });
 
-                                            function filterPort() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.PlaceOfReceiptId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
+                        function filterPort() {
+                            var data = {
+                                Name: $("#@Html.FieldIdFor(model => model.PlaceOfReceiptId)")
+                                    .data("kendoComboBox").input.val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                    });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.PlaceOfReceiptId)
                                 </div>
@@ -861,35 +895,35 @@
                                            name="@Html.NameFor(model => model.PortOfLoaingId)"
                                            value="@Html.ValueFor(model => model.PortOfLoaingId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.PortOfLoaingId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn port of loading...",
-                                                minLength: 2,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/PortApi/GetAll",
-                                                            dataType: "json",
-                                                            data: filterPort
-                                                        }
-                                                    }
-                                                }
-                                            });
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.PortOfLoaingId)").kendoComboBox({
+                            filter: "contains",
+                            dataTextField: "Name",
+                            dataValueField: "Value",
+                            placeholder: "Chọn port of loading...",
+                            minLength: 2,
+                            dataSource: {
+                                type: "json",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "/api/PortApi/GetAll",
+                                        dataType: "json",
+                                        data: filterPort
+                                    }
+                                }
+                            }
+                        });
 
-                                            function filterPort() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.PortOfLoaingId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
+                        function filterPort() {
+                            var data = {
+                                Name: $("#@Html.FieldIdFor(model => model.PortOfLoaingId)")
+                                    .data("kendoComboBox").input.val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                    });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.PortOfLoaingId)
                                 </div>
@@ -909,35 +943,35 @@
                                            name="@Html.NameFor(model => model.TranshipmentPortId)"
                                            value="@Html.ValueFor(model => model.TranshipmentPortId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.TranshipmentPortId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn port transhipment...",
-                                                minLength: 2,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/PortApi/GetAll",
-                                                            dataType: "json",
-                                                            data: filterPort
-                                                        }
-                                                    }
-                                                }
-                                            });
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.TranshipmentPortId)").kendoComboBox({
+                            filter: "contains",
+                            dataTextField: "Name",
+                            dataValueField: "Value",
+                            placeholder: "Chọn port transhipment...",
+                            minLength: 2,
+                            dataSource: {
+                                type: "json",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "/api/PortApi/GetAll",
+                                        dataType: "json",
+                                        data: filterPort
+                                    }
+                                }
+                            }
+                        });
 
-                                            function filterPort() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.TranshipmentPortId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
+                        function filterPort() {
+                            var data = {
+                                Name: $("#@Html.FieldIdFor(model => model.TranshipmentPortId)")
+                                    .data("kendoComboBox").input.val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                    });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.TranshipmentPortId)
                                 </div>
@@ -976,35 +1010,35 @@
                                            name="@Html.NameFor(model => model.DeliveryOfGoodsId)"
                                            value="@Html.ValueFor(model => model.DeliveryOfGoodsId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.DeliveryOfGoodsId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn delivery of goods...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/CustomerApi/GetAllCustomers",
-                                                            dataType: "json",
-                                                            data: filterDeliveryOfGoods
-                                                        }
-                                                    }
-                                                }
-                                            });
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.DeliveryOfGoodsId)").kendoComboBox({
+                            filter: "contains",
+                            dataTextField: "Name",
+                            dataValueField: "Value",
+                            placeholder: "Chọn delivery of goods...",
+                            minLength: 1,
+                            dataSource: {
+                                type: "json",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "/api/CustomerApi/GetAllCustomers",
+                                        dataType: "json",
+                                        data: filterDeliveryOfGoods
+                                    }
+                                }
+                            }
+                        });
 
-                                            function filterDeliveryOfGoods() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.DeliveryOfGoodsId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
+                        function filterDeliveryOfGoods() {
+                            var data = {
+                                Name: $("#@Html.FieldIdFor(model => model.DeliveryOfGoodsId)")
+                                    .data("kendoComboBox").input.val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                    });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.DeliveryOfGoodsId)
                                 </div>
@@ -1094,35 +1128,35 @@
                                            name="@Html.NameFor(model => model.UnitId)"
                                            value="@Html.ValueFor(model => model.UnitId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.UnitId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn unit...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LooupApi/GetUnitTypes",
-                                                            dataType: "json",
-                                                            data: filterUnits
-                                                        }
-                                                    }
-                                                }
-                                            });
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.UnitId)").kendoComboBox({
+                            filter: "contains",
+                            dataTextField: "Name",
+                            dataValueField: "Value",
+                            placeholder: "Chọn unit...",
+                            minLength: 1,
+                            dataSource: {
+                                type: "json",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "/api/LookupApi/GetUnitTypes",
+                                        dataType: "json",
+                                        data: filterUnits
+                                    }
+                                }
+                            }
+                        });
 
-                                            function filterUnits() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.UnitId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
+                        function filterUnits() {
+                            var data = {
+                                Name: $("#@Html.FieldIdFor(model => model.UnitId)")
+                                    .data("kendoComboBox").input.val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                    });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.UnitId)
                                 </div>
@@ -1171,35 +1205,35 @@
                                            name="@Html.NameFor(model => model.CommodityId)"
                                            value="@Html.ValueFor(model => model.CommodityId)" />
                                     <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.CommodityId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn commodity...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LookupApi/GetCommodities",
-                                                            dataType: "json",
-                                                            data: filterCommodities
-                                                        }
-                                                    }
-                                                }
-                                            });
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.CommodityId)").kendoComboBox({
+                            filter: "contains",
+                            dataTextField: "Name",
+                            dataValueField: "Value",
+                            placeholder: "Chọn commodity...",
+                            minLength: 1,
+                            dataSource: {
+                                type: "json",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "/api/LookupApi/GetCommodities",
+                                        dataType: "json",
+                                        data: filterCommodities
+                                    }
+                                }
+                            }
+                        });
 
-                                            function filterCommodities() {
-                                                var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.CommodityId)")
-                                                        .data("kendoComboBox").input.val()
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
+                        function filterCommodities() {
+                            var data = {
+                                Name: $("#@Html.FieldIdFor(model => model.CommodityId)")
+                                    .data("kendoComboBox").input.val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                    });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.CommodityId)
                                 </div>
@@ -1207,6 +1241,7 @@
                                 </div>
                             </div>
                         </div>
+
                         @*PlaceOfIssue*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -1214,7 +1249,40 @@
                                     <label class="control-label">PlaceOfIssue:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconDropDownListFor(m => m.PlaceOfIssueId, Model.PlaceItems)
+                                    <input id="@Html.FieldIdFor(model => model.PlaceOfIssueId)"
+                                           name="@Html.NameFor(model => model.PlaceOfIssueId)"
+                                           value="@Html.ValueFor(model => model.PlaceOfIssueId)" />
+                                    <script>
+                    $(document).ready(function() {
+                        $("#@Html.FieldIdFor(model => model.PlaceOfIssueId)").kendoComboBox({
+                            filter: "contains",
+                            dataTextField: "Name",
+                            dataValueField: "Value",
+                            placeholder: "Chọn places of issue...",
+                            minLength: 1,
+                            dataSource: {
+                                type: "json",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "/api/LookupApi/GetPlaces",
+                                        dataType: "json",
+                                        data: filterPlaces
+                                    }
+                                }
+                            }
+                        });
+
+                        function filterPlaces() {
+                            var data = {
+                                Name: $("#@Html.FieldIdFor(model => model.PlaceOfIssueId)")
+                                    .data("kendoComboBox").input.val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                    });
+                                    </script>
                                     @Html.ValidationMessageFor(model => model.PlaceOfIssueId)
                                 </div>
                                 <div class="col-md-1">
@@ -1254,13 +1322,33 @@
             </div>
         </div>
         @*modal*@
-        <div id="myModal" class="modal  fade " data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div id="myModalContent"></div>
-                </div>
+    <div id="myModal" class="modal  fade " data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div id="myModalContent"></div>
             </div>
         </div>
     </div>
+    <input type="submit" id="btnRefreshCustomerItems" style="display: none" />
+    </div>
+    <script>
+        function openCustomerPopup(viewId) {
+            var url = '/Admin/Customers/CustomerAddPopup?viewId=' +
+                viewId +
+                '&btnId=btnRefreshCustomerItems&formId=hblLclExp-edit-form';
+            OpenWindow(url, 800, 800, true);
+                    }
+
+        $(document).ready(function() {
+            $('#btnRefreshCustomerItems').click(function (event) {
+                    //refresh combobox
+                $("#@Html.FieldIdFor(m => m.ShipperId)").data("kendoComboBox").dataSource.read();
+                $("#@Html.FieldIdFor(m => m.ConsigneeId)").data("kendoComboBox").dataSource.read();
+                $("#@Html.FieldIdFor(m => m.NotifyPartyId)").data("kendoComboBox").dataSource.read();
+                $("#" + event.data.viewId).data("kendoComboBox").value(event.data.valueId);
+                return false;
+            })});
+
+    </script>
     <script type="text/javascript" src="/Areas/Admin/Content/js/hbllclexp_addedit.js"></script>
 </div>

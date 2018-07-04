@@ -84,6 +84,8 @@
         LocationType = 59,
         CategoryType = 60,
         TypeOfMove = 61,
+        PlaceType = 62,
+
 
     }
 }

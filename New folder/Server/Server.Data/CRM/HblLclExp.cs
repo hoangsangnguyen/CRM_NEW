@@ -96,7 +96,7 @@ namespace Vino.Server.Data.CRM
         [Required(ErrorMessage = "Vui lòng chọn ngày Closing")]
         public DateTimeOffset ClosingDate { get; set; }
 
-        public string FreightPayableAt { get; set; }
+        public int? FreightPayableId { get; set; }
 
         public int NumberOfOriginal { get; set; }
 

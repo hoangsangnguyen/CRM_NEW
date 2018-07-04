@@ -56,7 +56,7 @@ function OpenModalCreation(url, viewId, viewGroupId) {
         cache: false,
         async: true,
         contentType: 'application/json',
-        data: JSON.stringify({ viewId: viewId, viewGroupId: viewGroupId }),
+        data: JSON.stringify({ viewId: viewId, viewGroupId: viewGroupId, model: null }),
         success: function (dataJs) {
             $('#myModalContent').html(dataJs);
             $("#myModal").modal("show");

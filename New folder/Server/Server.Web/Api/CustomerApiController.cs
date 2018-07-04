@@ -26,7 +26,7 @@ namespace Vino.Server.Web.Api
         {
             var models = (await _service.GetAllAsync()).Select(d => new NameValueModel()
             {
-                Name = d.Name,
+                Name = d.FullVietNamName,
                 Value = d.Id.ToString()
             }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name)).ToList();
             if (withAll)

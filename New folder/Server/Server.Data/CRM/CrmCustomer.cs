@@ -24,7 +24,7 @@ namespace Vino.Server.Data.CRM
         /**
          * Full English Name
          */
-        [Required] public string FullEngishName { get; set; }
+        public string FullEngishName { get; set; }
 
         /**
         * Full Viet Nam Name
@@ -45,7 +45,7 @@ namespace Vino.Server.Data.CRM
         /**
        * Work phone
        */
-        [Required] public string WorkPhone { get; set; }
+        public string WorkPhone { get; set; }
 
         /**
        * Home Phone
@@ -55,7 +55,7 @@ namespace Vino.Server.Data.CRM
         /**
        * Fax No
        */
-        [Required] public string FaxNo { get; set; }
+       public string FaxNo { get; set; }
 
        /**
       *Location
@@ -66,12 +66,12 @@ namespace Vino.Server.Data.CRM
          /**
          * Taxcode
          */
-        [Required] public string Taxcode { get; set; }
+        public string Taxcode { get; set; }
 
         /**
          *Category
          */
-        [Required] public int CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public virtual Lookup Category { get; set; }
 
         /**
@@ -83,7 +83,7 @@ namespace Vino.Server.Data.CRM
          * Email
          */
         [EmailAddress]
-        [Required] public string Email { get; set; }
+        public string Email { get; set; }
 
         #region Map to Hbl Lcl
 

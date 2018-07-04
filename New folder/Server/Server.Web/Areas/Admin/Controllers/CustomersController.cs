@@ -137,28 +137,34 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> OpenModal(string viewId, string[] viewGroupId)
+        public async Task<PartialViewResult> OpenModal(string viewId, string[] viewGroupId, CrmCustomerModel model = null)
         {
             var index = await _service.GetNumberEntry();
 
             TempData["IdView"] = viewId;
             TempData["IdGroups"] = viewGroupId;
+            TempData.Keep();
 
-            var model = new CrmCustomerModel()
+            if (model == null)
             {
-                CustomerId = "CS" + (index + 1).ToString().PadLeft(3, '0')
-            };
-
+                model = new CrmCustomerModel()
+                {
+                    CustomerId = "CS" + (index + 1).ToString().PadLeft(3, '0')
+                };
+            }
             await InitDataModel(model);
+
             return PartialView("_CreateCustomer", model);
         }
         [HttpPost]
         public async Task<ActionResult> CreateFromSubViewAsync(CrmCustomerModel dto)
         {
+            var idGroups = (object[])TempData["IdGroups"];
+            var idViews = TempData["IdView"];
+
             if (!ModelState.IsValid)
             {
-                await InitDataModel(dto);
-                return RedirectToAction("OpenModal");
+                return Json(dto);
             }
 
             var id = await _service.CreateAsync(dto);
@@ -169,11 +175,9 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 if (customer == null)
                 {
                     await InitDataModel(dto);
-                    return RedirectToAction("OpenModal");
+                    return RedirectToAction("OpenModal", dto);
                 }
 
-                var idGroups = (object[])TempData["IdGroups"];
-                var idViews =  TempData["IdView"];
                 return Json(new 
                 {
                     GroupIds = String.Join(",", idGroups),
@@ -240,6 +244,47 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             public string ViewId { get; set; }
             public string[] ViewGroupId { get; set; }
         }
+
+        #region Popup add Customer
+
+        public async Task<ActionResult> CustomerAddPopup(string viewId)
+        {
+            var index = await _service.GetNumberEntry();
+            var model = new CrmCustomerModel()
+            {
+                CustomerId = "CS" + (index + 1).ToString().PadLeft(3, '0'),
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CustomerAddPopup(string viewId, string btnId, string formId
+            , CrmCustomerModel request)
+        {
+            if (!ModelState.IsValid)
+            {
+                await InitDataModel(request);
+                return View(request);
+            }
+
+            var id = await _service.CreateAsync(request);
+            if (id == 0)
+            {
+                ErrorNotification("Tạo mới thất bại!");
+            }
+            else
+            {
+                SuccessNotification("Tạo mới thành công!");
+            }
+
+            ViewBag.RefreshPage = true;
+            ViewBag.btnId = btnId;
+            ViewBag.formId = formId;
+            ViewBag.viewId = viewId;
+
+            return View(new CrmCustomerModel());
+        }
+        #endregion
 
     }
 }

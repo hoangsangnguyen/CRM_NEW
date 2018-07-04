@@ -13,19 +13,6 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
 {
     public class HblLclExpModel : BaseDto
     {
-        public HblLclExpModel()
-        {
-            CustomerItems = new List<SelectListItem>();
-            PortItems = new List<SelectListItem>();
-            HblTypeItems = new List<SelectListItem>();
-            CountryItems = new List<SelectListItem>();
-            TypeOfMoveItems = new List<SelectListItem>();
-            VesselItems = new List<SelectListItem>();
-            UnitItems = new List<SelectListItem>();
-            CommodityItems = new List<SelectListItem>();
-            PlaceItems = new List<SelectListItem>();
-        }
-
         [Required(ErrorMessage = "Vui lòng chọn LclExp")]
         public int? LclExpId { get; set; }
 
@@ -166,7 +153,8 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
         [Required(ErrorMessage = "Vui lòng chọn ngày Closing")]
         public string ClosingDate { get; set; }
 
-        public string FreightPayableAt { get; set; }
+        public int? FreightPayableId { get; set; }
+        public string FreightPayableName { get; set; }
 
         public int NumberOfOriginal { get; set; }
 
@@ -197,17 +185,5 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
 
         [Required(ErrorMessage = "Vui lòng chọn ngày Issue")]
         public string IssueDate { get; set; }
-
-        public IList<SelectListItem> CustomerItems{ get; set; }
-        public IList<SelectListItem> PortItems { get; set; }
-        public IList<SelectListItem> HblTypeItems { get; set; }
-        public IList<SelectListItem> CountryItems { get; set; }
-        public IList<SelectListItem> TypeOfMoveItems { get; set; }
-        public IList<SelectListItem> VesselItems { get; set; }
-        public IList<SelectListItem> UnitItems { get; set; }
-        public IList<SelectListItem> CommodityItems { get; set; }
-        public IList<SelectListItem> PlaceItems { get; set; }
-
-
     }
 }
