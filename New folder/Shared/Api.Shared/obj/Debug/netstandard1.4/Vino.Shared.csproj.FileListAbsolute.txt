@@ -25,3 +25,12 @@ D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Shared\Api.Shared\obj\Debug\net
 D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.AssemblyInfo.cs
 D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.dll
 D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.pdb
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Shared\Api.Shared\bin\Debug\netstandard1.4\Vino.Shared.deps.json
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Shared\Api.Shared\bin\Debug\netstandard1.4\Vino.Shared.dll
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Shared\Api.Shared\bin\Debug\netstandard1.4\Vino.Shared.pdb
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.csprojAssemblyReference.cache
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.csproj.CoreCompileInputs.cache
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.AssemblyInfoInputs.cache
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.AssemblyInfo.cs
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.dll
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Shared\Api.Shared\obj\Debug\netstandard1.4\Vino.Shared.pdb

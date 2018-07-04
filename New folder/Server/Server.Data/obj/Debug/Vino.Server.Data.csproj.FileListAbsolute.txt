@@ -38,3 +38,17 @@ D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Data\obj\Debug\Vi
 D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Data\obj\Debug\Vino.Server.Data.csproj.CoreCompileInputs.cache
 D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Data\obj\Debug\Vino.Server.Data.dll
 D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Data\obj\Debug\Vino.Server.Data.pdb
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\bin\Debug\Vino.Server.Data.dll
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\bin\Debug\Vino.Server.Data.pdb
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\bin\Debug\EntityFramework.dll
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\bin\Debug\Falcon.Web.Core.dll
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\bin\Debug\Vino.Shared.dll
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\bin\Debug\Vino.Shared.pdb
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\bin\Debug\EntityFramework.xml
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\obj\Debug\Vino.Server.Data.csprojAssemblyReference.cache
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\obj\Debug\Vino.Server.Data.csproj.CoreCompileInputs.cache
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\obj\Debug\Vino.Server.Data.csproj.CopyComplete
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\obj\Debug\Vino.Server.Data.dll
+D:\LOGISTIC\LATEST CODE\CRM_NEW\New folder\Server\Server.Data\obj\Debug\Vino.Server.Data.pdb
