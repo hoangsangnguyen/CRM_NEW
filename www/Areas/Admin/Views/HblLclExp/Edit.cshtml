@@ -5,7 +5,7 @@
 @{
     ViewData["Title"] = "Create";
 }
-@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", id = "hblLclExp-edit-form" }))
 {
     @Html.AntiForgeryToken()
     <div class="content-header clearfix">
@@ -13,7 +13,7 @@
             Chỉnh sửa HBL Lcl export @Model.HblTypeName
         </h1>
         <div class="pull-right">
-            <a class="btn bg-blue" href="@Html.Raw(Url.Action("List"))"><i class="fa fa-chevron-left" aria-hidden="true"></i> Quay Lại</a>
+            <a class="btn bg-blue" href="@Html.Raw(Url.Action("HblList"))"><i class="fa fa-chevron-left" aria-hidden="true"></i> Quay Lại</a>
 
             <button type="submit" name="ContinueEditing" value="true" class="btn bg-blue">
                 <i class="fa fa-floppy-o"></i>

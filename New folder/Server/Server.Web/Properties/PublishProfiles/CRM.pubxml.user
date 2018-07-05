@@ -10,7 +10,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/Db.config">
-      <publishTime>05/21/2018 22:05:57</publishTime>
+      <publishTime>07/04/2018 20:28:12</publishTime>
     </File>
     <File Include="App_Data/PdfMapping/fcl_template.pdf">
       <publishTime>06/10/2018 15:46:44</publishTime>
@@ -67,7 +67,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/27/2018 02:50:00</publishTime>
     </File>
     <File Include="Areas/Admin/Content/js/hbllclexp_addedit.js">
-      <publishTime>06/29/2018 21:46:35</publishTime>
+      <publishTime>07/04/2018 06:03:38</publishTime>
     </File>
     <File Include="Areas/Admin/Content/js/lclexps_addedit.js">
       <publishTime>06/21/2018 06:34:11</publishTime>
@@ -153,6 +153,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Admin/Views/Customers/Create.cshtml">
       <publishTime>06/22/2018 21:32:04</publishTime>
     </File>
+    <File Include="Areas/Admin/Views/Customers/CustomerAddPopup.cshtml">
+      <publishTime>07/04/2018 23:49:18</publishTime>
+    </File>
     <File Include="Areas/Admin/Views/Customers/Edit.cshtml">
       <publishTime>06/22/2018 22:55:40</publishTime>
     </File>
@@ -161,6 +164,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Areas/Admin/Views/Customers/_AddEdit.cshtml">
       <publishTime>06/22/2018 21:52:01</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Customers/_CreateCustomer.cshtml">
+      <publishTime>07/05/2018 06:12:09</publishTime>
     </File>
     <File Include="Areas/Admin/Views/EmailAccount/Create.cshtml">
       <publishTime>05/21/2018 08:22:20</publishTime>
@@ -238,10 +244,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/22/2018 06:37:11</publishTime>
     </File>
     <File Include="Areas/Admin/Views/HblLclExp/Create.cshtml">
-      <publishTime>06/27/2018 22:46:07</publishTime>
+      <publishTime>07/04/2018 06:52:07</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/HblLclExp/CustomerAddPopup.cshtml">
+      <publishTime>07/04/2018 06:39:18</publishTime>
     </File>
     <File Include="Areas/Admin/Views/HblLclExp/Edit.cshtml">
-      <publishTime>06/30/2018 06:23:42</publishTime>
+      <publishTime>07/04/2018 06:51:50</publishTime>
     </File>
     <File Include="Areas/Admin/Views/HblLclExp/HblList.cshtml">
       <publishTime>06/30/2018 20:10:40</publishTime>
@@ -250,7 +259,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/30/2018 16:33:01</publishTime>
     </File>
     <File Include="Areas/Admin/Views/HblLclExp/_AddEdit.cshtml">
-      <publishTime>06/30/2018 06:02:29</publishTime>
+      <publishTime>07/05/2018 06:53:43</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Jbimages/Upload.cshtml">
       <publishTime>05/21/2018 08:22:14</publishTime>
@@ -330,8 +339,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Admin/Views/Port/List.cshtml">
       <publishTime>06/23/2018 06:23:40</publishTime>
     </File>
+    <File Include="Areas/Admin/Views/Port/PortAddPopup.cshtml">
+      <publishTime>07/05/2018 05:55:10</publishTime>
+    </File>
     <File Include="Areas/Admin/Views/Port/_AddEdit.cshtml">
       <publishTime>06/23/2018 06:28:19</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Port/_CreatePort.cshtml">
+      <publishTime>07/05/2018 06:16:52</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Role/RoleClaimList.cshtml">
       <publishTime>05/21/2018 08:22:18</publishTime>
@@ -736,31 +751,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/21/2018 08:22:46</publishTime>
     </File>
     <File Include="bin/Vino.Server.Data.dll">
-      <publishTime>06/30/2018 19:05:20</publishTime>
+      <publishTime>07/05/2018 06:59:30</publishTime>
     </File>
     <File Include="bin/Vino.Server.Data.pdb">
-      <publishTime>06/30/2018 19:05:20</publishTime>
+      <publishTime>07/05/2018 06:59:30</publishTime>
     </File>
     <File Include="bin/Vino.Server.Services.dll">
-      <publishTime>06/30/2018 19:05:22</publishTime>
+      <publishTime>07/05/2018 06:59:32</publishTime>
     </File>
     <File Include="bin/Vino.Server.Services.dll.config">
       <publishTime>05/21/2018 08:22:40</publishTime>
     </File>
     <File Include="bin/Vino.Server.Services.pdb">
-      <publishTime>06/30/2018 19:05:22</publishTime>
+      <publishTime>07/05/2018 06:59:32</publishTime>
     </File>
     <File Include="bin/Vino.Server.Web.dll">
-      <publishTime>06/30/2018 20:11:48</publishTime>
+      <publishTime>07/05/2018 06:59:42</publishTime>
     </File>
     <File Include="bin/Vino.Server.Web.pdb">
-      <publishTime>06/30/2018 20:11:48</publishTime>
+      <publishTime>07/05/2018 06:59:42</publishTime>
     </File>
     <File Include="bin/Vino.Shared.dll">
-      <publishTime>06/30/2018 19:05:19</publishTime>
+      <publishTime>07/05/2018 06:59:29</publishTime>
     </File>
     <File Include="bin/Vino.Shared.pdb">
-      <publishTime>06/30/2018 19:05:19</publishTime>
+      <publishTime>07/05/2018 06:59:29</publishTime>
     </File>
     <File Include="Content/AdminLte24/css/AdminLTE.css">
       <publishTime>06/02/2018 18:28:59</publishTime>
