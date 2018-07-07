@@ -1,0 +1,126 @@
+﻿@model Vino.Server.Web.Areas.Admin.Models.Message.MessageTemplateContentModel
+@using Falcon.Web.Mvc.HtmlExtensions
+
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.Id)
+
+<div class="content">
+    <div class="form-horizontal">
+        @*@Html.Action("Mode", "Setting", new { modeName = "messagetemplate-advanced-mode" })*@
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">Tên template</label>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.FalconDisplayFor(model => model.Name)
+                            @Html.HiddenFor(model => model.Name)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">Chủ đề</label>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.FalconEditorFor(model => model.Subject)
+                            @Html.ValidationMessageFor(model => model.Subject)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">Nội dung</label>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Body, "RichEditor")
+                            @Html.ValidationMessageFor(model => model.Body)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">BCC</label>
+
+                        </div>
+                        <div class="col-md-9">
+                            @Html.FalconEditorFor(model => model.BccEmailAddresses)
+                            @Html.ValidationMessageFor(model => model.BccEmailAddresses)
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">Tài khoản email</label>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.FalconEditorFor(model => model.EmailAccountId)
+                            @Html.ValidationMessageFor(model => model.EmailAccountId)
+                        </div>
+                    </div>*@
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">Hoạt động</label>
+                            
+                        </div>
+                        <div class="col-md-9">
+                            @Html.FalconEditorFor(model => model.IsActive)
+                            @Html.ValidationMessageFor(model => model.IsActive)
+                        </div>
+                    </div>
+                    @*<div class="form-group advanced-setting">
+                        <div class="col-md-3">
+                            <label class="control-label">Gửi ngay</label>
+                            
+                        </div>
+                        <div class="col-md-9">
+                            @Html.FalconEditorFor(model => model.SendImmediately)
+                            @Html.ValidationMessageFor(model => model.SendImmediately)
+                        </div>
+                    </div>*@
+                    @*<div class="form-group advanced-setting" id="pnl-send-after">
+                        <div class="col-md-3">
+                            <label class="control-label">Thời gian chờ</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    @Html.FalconEditorFor(model => model.DelayBeforeSend)
+                                    @Html.ValidationMessageFor(model => model.DelayBeforeSend)
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.NopDropDownListFor(model => model.DelayPeriodId, ((MessageDelayPeriod)Model.DelayPeriodId).ToSelectList(), htmlAttributes: new { style = "max-width: 200px;" })
+                                    @Html.ValidationMessageFor(model => model.DelayPeriodId)
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                    @*<div class="form-group advanced-setting">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.AttachedDownloadId)
+                            </div>
+                            <div class="col-md-9">
+                                @{
+                                    //Static file attachments do not support URLs yet
+                                    //A store owner have to upload a file
+                                    //we store a value into "ViewData" and then use it in the Download.cshtml file
+                                    ViewData["nop.DownloadEditor.DisableUrl"] = true;
+                                }
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.NopEditorFor(model => model.HasAttachedDownload)
+                                        @T("Admin.ContentManagement.MessageTemplates.Fields.AttachedDownload.Exists")
+                                    </label>
+                                </div>
+                                <div id="pnlAttachedDownload">
+                                    @Html.NopEditorFor(model => model.AttachedDownloadId)
+                                    @Html.ValidationMessageFor(model => model.AttachedDownloadId)
+                                </div>
+                            </div>
+                        </div>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

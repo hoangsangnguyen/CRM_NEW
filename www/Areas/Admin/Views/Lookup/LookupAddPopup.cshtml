@@ -1,0 +1,37 @@
+﻿@using Falcon.Web.Mvc.HtmlExtensions
+@model Vino.Server.Services.MainServices.Common.Models.LookupModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_PopupLayout.cshtml";
+    ViewBag.Title = "Tạo mới port";
+    <style>
+        .k-combobox .k-input {
+            height: 27.5px !important
+        }
+    </style>
+}
+@if (ViewBag.RefreshPage == true)
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            try {
+                var event = new CustomEvent("lookup", { detail: { viewId: '@ViewBag.viewId', valueId: '@Model.Id'}});
+                window.opener.document.forms['@(ViewBag.formId)'].@(ViewBag.btnId).dispatchEvent(event);
+            } catch
+            (e) {
+            }
+            window.close();
+        })
+    </script>
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Tạo mới port
+        </h1>
+        <div class="pull-right">
+        </div>
+    </div>
+    @Html.Partial("~/Areas/Admin/Views/Lookup/_popupCreateLookup.cshtml", Model)
+}

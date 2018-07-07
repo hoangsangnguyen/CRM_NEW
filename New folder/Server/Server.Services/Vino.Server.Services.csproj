@@ -201,6 +201,8 @@
     <Compile Include="MainServices\BaseService\BaseDto.cs" />
     <Compile Include="MainServices\BaseService\GenericRepository.cs" />
     <Compile Include="MainServices\BaseService\PdfExportService.cs" />
+    <Compile Include="MainServices\Common\Models\OrderGenCodeModel.cs" />
+    <Compile Include="MainServices\Common\OrderGenCodeService.cs" />
     <Compile Include="MainServices\CRM\AirExp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\Topic\ITopicService.cs" />
     <Compile Include="MainServices\CRM\Topic\Model\TopicModel.cs" />

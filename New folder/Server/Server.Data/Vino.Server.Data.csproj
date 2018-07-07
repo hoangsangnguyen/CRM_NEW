@@ -53,6 +53,7 @@
     <Compile Include="Common\District.cs" />
     <Compile Include="Common\Lookup.cs" />
     <Compile Include="Common\ImageRecord.cs" />
+    <Compile Include="Common\OrderGenCode.cs" />
     <Compile Include="Common\Province.cs" />
     <Compile Include="CRM\AirExp.cs" />
     <Compile Include="CRM\AirImp.cs" />

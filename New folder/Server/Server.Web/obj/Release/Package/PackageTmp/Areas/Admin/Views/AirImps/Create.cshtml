@@ -1,0 +1,19 @@
+﻿@model Vino.Server.Services.MainServices.CRM.AirImp.Models.AirImpModel
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Create new air import
+        </h1>
+        <div class="pull-right">
+            <a class="btn bg-blue" href="@Html.Raw(Url.Action("List"))"><i class="fa fa-chevron-left" aria-hidden="true"></i> Quay Lại</a>
+            <button type="submit" name="ContinueEditing" value="true" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                Lưu
+            </button>
+        </div>
+    </div>
+    @Html.Partial("_AddEdit", Model)
+}

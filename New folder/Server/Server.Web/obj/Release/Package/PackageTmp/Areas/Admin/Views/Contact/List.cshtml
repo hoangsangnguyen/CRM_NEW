@@ -1,0 +1,221 @@
+﻿@using Falcon.Web.Mvc.HtmlExtensions
+@model Vino.Server.Web.Areas.Admin.Models.Contact.ContactListModel
+@{
+    var defaultGridPageSize = 20;
+    var gridPageSizes = "10,20,50,100,500";
+}
+
+@Html.AntiForgeryToken()
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        Danh sách liên hệ
+    </h1>
+    <div class="pull-right">    
+        <a href="@Url.Action("Create")" class="btn bg-blue">
+            <i class="fa fa-plus-square"></i>
+            Thêm
+        </a>
+    </div>
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            @*hide the entire search block if no elements are displayed*@
+            @*<div class="panel panel-default panel-search">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group form-custom">
+                                    <div class="col-md-5">
+                                        <label class="control-label">Từ ngày</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="datetime" id="@Html.FieldIdFor(model => model.CreatedAt)" value="@Model.CreatedAt" width="100%" />
+                                        <script>
+                                            $(document).ready(function() {
+                                                $("#@Html.FieldIdFor(model => model.CreatedAt)").kendoDatePicker({
+                                                    culture: "vi-VN",
+                                                    format: "dd-MM-yyyy"
+                                                });
+                                                $("#@Html.FieldIdFor(model => model.CreatedAt)")
+                                                    .prop("readonly", "readonly");
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-custom">
+                                    <div class="col-md-5">
+                                        <label class="control-label">Đến ngày</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="datetime" id="@Html.FieldIdFor(model => model.ExpiredAt)" value="@Model.ExpiredAt" style="width: 100%" />
+                                        <script>
+                                            $(document).ready(function() {
+                                                $("#@Html.FieldIdFor(model => model.ExpiredAt)").kendoDatePicker({
+                                                    culture: "vi-VN",
+                                                    format: "dd-MM-yyyy"
+                                                });
+                                                $("#@Html.FieldIdFor(model => model.ExpiredAt)")
+                                                    .prop("readonly", "readonly");
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group form-custom">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Công bố</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.FalconDropDownListFor(m => m.PublishedId, Model.AvailablePublishedOptions)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-custom">
+                                    <div class="col-md-5">
+                                        <label class="control-label">Loại tin</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        @Html.FalconDropDownListFor(m => m.TypeId, Model.AvailableTypeOptions)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="col-md-12 col-md-offset-5 nopadding">
+                                        <button type="button" id="button-search" class="btn btn-primary">
+                                            <i class="fa fa-search"></i>
+                                            Tìm kiếm
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="main-grid"></div>
+
+                    <script>
+                        $(document).ready(function() {
+                            $("#main-grid").kendoGrid({
+                                dataSource: {
+                                    type: "json",
+                                    transport: {
+                                        read: {
+                                            url: "@Html.Raw(Url.Action("List", "Contact"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: additionalData
+                                        }
+                                    },
+                                    schema: {
+                                        data: "Data",
+                                        total: "Total",
+                                        errors: "Errors"
+                                    },
+                                    error: function(e) {
+                                        display_kendoui_grid_error(e);
+                                        // Cancel the changes
+                                        this.cancelChanges();
+                                    },
+                                    pageSize: @(defaultGridPageSize),
+                                    serverPaging: true,
+                                    serverFiltering: true,
+                                    serverSorting: true
+                                },
+                                pageable: {
+                                    refresh: true,
+                                    pageSizes: [@(gridPageSizes)],
+                                    messages: {
+                                        itemsPerPage: "Số hàng trên trang",
+                                        empty: "Không có contact",
+                                        display: "{0} - {1} của {2} contact",
+                                    }
+                                },
+                                editable: {
+                                    confirmation: "Delete",
+                                    mode: "inline"
+                                },
+                                scrollable: false,
+                                columns: [
+                                    {
+                                        field: "ContactId",
+                                        title: "Contact Id",
+                                        headerAttributes: { style: "text-align:left" },
+                                    },{
+                                        field: "FullName",
+                                        title: "Contact Name",
+                                        headerAttributes: { style: "text-align:left" },
+                                    }, {
+                                        field: "EnglishName",
+                                        title: "English Name",
+                                        headerAttributes: { style: "text-align:left" },
+                                        attributes: { style: "text-align:left" }
+                                    }, {
+                                        field: "PositionName",
+                                        title: "Position",
+                                        headerAttributes: { style: "text-align:left" },
+                                    }, {
+                                        field: "DepartmentName",
+                                        title: "Department",
+                                        headerAttributes: { style: "text-align:left" },
+                                    }, {
+                                        field: "Id",
+                                        title: " ",
+                                        width: 100,
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" },
+                                        template: '<a class="btn btn-default" href="Edit/#=Id#"><i class="fa fa-pencil"></i>Chi tiết</a>'
+                                    }
+                                ]
+                            });
+                        });
+                    </script>
+
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            //search button
+                            $('#button-search').click(function() {
+                                //search
+                                var grid = $('#main-grid').data('kendoGrid');
+                                grid.dataSource.page(1); //new search. Set page size to 1
+                                //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                return false;
+                            });
+                        });
+
+                        function additionalData() {
+                            var data = {
+                                @*CreatedAt: $('#@Html.FieldIdFor(model => model.CreatedAt)').val(),
+                                ExpiredAt: $('#@Html.FieldIdFor(model => model.ExpiredAt)').val(),
+                                TypeId: $('#@Html.FieldIdFor(model => model.TypeId)').val(),
+                                PublishedId: $('#@Html.FieldIdFor(model => model.PublishedId)').val()*@
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                        @*$("".concat("#@Html.FieldIdFor(model => model.CreatedAt),",
+                            "#@Html.FieldIdFor(model => model.ExpiredAt),",
+                            "#@Html.FieldIdFor(model => model.TypeId)"
+                        )).keydown(function (event) {
+                            if (event.keyCode === 13) {
+                                $("#button-search").click();
+                                return false;
+                            }
+                        });*@
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

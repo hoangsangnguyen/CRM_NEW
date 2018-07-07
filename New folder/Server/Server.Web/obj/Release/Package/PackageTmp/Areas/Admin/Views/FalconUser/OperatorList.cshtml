@@ -1,0 +1,172 @@
+﻿@using Falcon.Web.Mvc.HtmlExtensions
+@model Vino.Server.Web.Areas.Admin.Models.FaclonUser.OperatorListModel
+
+@{
+    var defaultGridPageSize = 20;
+    var gridPageSizes = "10,20,50,100,500";
+}
+
+@Html.AntiForgeryToken()
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        Danh sách vận hành hệ thống
+    </h1>
+    <div class="pull-right">
+        <a href="@Url.Action("OperatorCreate")" class="btn bg-blue">
+            <i class="fa fa-plus-square"></i>
+            Thêm
+        </a>
+    </div>
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            @*hide the entire search block if no elements are displayed*@
+            <div class="panel panel-default panel-search">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Tên đăng nhập</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.FalconEditorFor(model => model.UserName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Tên hiển thị</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.FalconEditorFor(model => model.DisplayName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <button type="button" id="button-search" class="btn btn-primary">
+                                        <i class="fa fa-search"></i>
+                                        Tìm kiếm
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="main-grid"></div>
+
+                    <script>
+                        $(document).ready(function() {
+                            $("#main-grid").kendoGrid({
+                                dataSource: {
+                                    type: "json",
+                                    transport: {
+                                        read: {
+                                            url: "@Html.Raw(Url.Action("OperatorList", "FalconUser"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: additionalData
+                                        }
+                                    },
+                                    schema: {
+                                        data: "Data",
+                                        total: "Total",
+                                        errors: "Errors"
+                                    },
+                                    error: function(e) {
+                                        display_kendoui_grid_error(e);
+                                        // Cancel the changes
+                                        this.cancelChanges();
+                                    },
+                                    pageSize: @(defaultGridPageSize),
+                                    serverPaging: true,
+                                    serverFiltering: true,
+                                    serverSorting: true
+                                },
+                                pageable: {
+                                    refresh: true,
+                                    pageSizes: [@(gridPageSizes)],
+                                    messages: {
+                                        itemsPerPage: "Số hàng trên trang",
+                                        empty: "Không có vận hành hệ thống",
+                                        display: "{0} - {1} của {2} vận hành hệ thống",
+                                    },
+                                },
+                                editable: {
+                                    confirmation: "Delete",
+                                    mode: "inline"
+                                },
+                                scrollable: false,
+                                columns: [
+                                    {
+                                        field: "DisplayName",
+                                        title: "Tên hiển thị",
+                                        headerAttributes: { style: "text-align:center" },
+                                    }, {
+                                        field: "UserName",
+                                        title: "Tên đăng nhập",
+                                        headerAttributes: { style: "text-align:center" },
+                                    },  {
+                                        field: "Roles",
+                                        title: "Quyền",
+                                        headerAttributes: { style: "text-align:center" },
+                                    }, {
+                                        field: "Active",
+                                        title: "Hoạt động",
+                                        template: '#if(Active){#<i class="fa fa-check-square-o" aria-hidden="true"></i>#}else{#<i class="fa fa-square-o" aria-hidden="true"></i>#}#',
+                                        headerAttributes: { style: "text-align:center" },
+                                    }, {
+                                        field: "Id",
+                                        title: " ",
+                                        width: 100,
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" },
+                                        template: '<a class="btn btn-default" href="OperatorEdit/#=Id#"><i class="fa fa-pencil"></i>Chi tiết</a>'
+                                    }
+                                ]
+                            });
+                        });
+                    </script>
+
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            //search button
+                            $('#button-search').click(function() {
+                                //search
+                                var grid = $('#main-grid').data('kendoGrid');
+                                grid.dataSource.page(1); //new search. Set page size to 1
+                                //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                return false;
+                            });
+                        });
+
+                        function additionalData() {
+                            var data = {
+                                Title: $('#Title').val(),
+                                Code: $('#Code').val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+                        $("".concat("#@Html.FieldIdFor(model => model.UserName),",
+                            "#@Html.FieldIdFor(model => model.DisplayName)")).keydown(function (event) {
+                            if (event.keyCode === 13) {
+                                $("#button-search").click();
+                                return false;
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
