@@ -9,15 +9,18 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <div class="col-md-3">
-                            <label class="control-label" for="lookuptype">Loại lookup</label>
+                            <label class="control-label" for="@Html.FieldIdFor(m => m.Type)">Loại lookup</label>
                         </div>
                         <div class="col-md-9">
-                            <input id="lookuptype" style="width: 100%" name="Type" @if (Model.Id > 0) { <text> disabled="" </text> } />
+                            <input id="@Html.FieldIdFor(m => m.Type)"
+                                   value="@Html.ValueFor(m => m.Type)"
+                                   style="width: 100%" name="@Html.NameFor(m => m.Type)"
+                                   @if (Model.Id > 0) { <text> disabled="" </text> } />
                             <script>
                                 $(document).ready(function () {
-                                    $("#lookuptype").kendoDropDownList({
+                                    $("#@Html.FieldIdFor(m => m.Type)").kendoDropDownList({
                                         dataTextField: "Name",
-                                        dataValueField: "Value",
+                                        dataValueField: "Name",
                                         dataSource: {
                                             transport: {
                                                 read: {
@@ -25,8 +28,7 @@
                                                     url: "/api/lookupapi/getlookuptype",
                                                 }
                                             }
-                                        },
-                                        value: '@Model.Type'
+                                        }
                                     });
                                 });
                             </script>
