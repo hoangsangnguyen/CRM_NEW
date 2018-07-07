@@ -202,6 +202,8 @@
     <Compile Include="MainServices\BaseService\GenericRepository.cs" />
     <Compile Include="MainServices\BaseService\PdfExportService.cs" />
     <Compile Include="MainServices\CRM\AirExp\Models\SearchingRequest.cs" />
+    <Compile Include="MainServices\CRM\Topic\ITopicService.cs" />
+    <Compile Include="MainServices\CRM\Topic\Model\TopicModel.cs" />
     <Compile Include="MainServices\CRM\Customer\CrmCustomerService.cs" />
     <Compile Include="MainServices\CRM\Customer\ICrmCustomerService.cs" />
     <Compile Include="MainServices\CRM\Customer\Models\CrmCustomerModel.cs" />
@@ -247,6 +249,7 @@
     <Compile Include="MainServices\CRM\Port\IPortService.cs" />
     <Compile Include="MainServices\CRM\Port\Model\PortModel.cs" />
     <Compile Include="MainServices\CRM\Port\PortService.cs" />
+    <Compile Include="MainServices\CRM\Topic\TopicService.cs" />
     <Compile Include="MainServices\Employees\EmployeeService.cs" />
     <Compile Include="MainServices\Employees\Models\EmployeeModel.cs" />
     <Compile Include="MainServices\Employees\SearchEmployeeRequest.cs" />

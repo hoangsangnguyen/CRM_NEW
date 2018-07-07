@@ -832,6 +832,15 @@ namespace Vino.Server.Services.Installation
                 Type = LookupTypes.PlaceType
             });
             #endregion
+
+            #region Topic type
+            db.Lookups.Add(new Lookup()
+            {
+                Code = TopicType.Company,
+                Title = "Company",
+                Type = LookupTypes.TopicType
+            });
+            #endregion
             await db.SaveChangesAsync();
         }
 

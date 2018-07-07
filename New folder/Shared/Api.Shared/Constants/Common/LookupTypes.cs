@@ -85,7 +85,7 @@
         CategoryType = 60,
         TypeOfMove = 61,
         PlaceType = 62,
-
+        TopicType = 63,
 
     }
 }

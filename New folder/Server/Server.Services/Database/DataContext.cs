@@ -272,6 +272,7 @@ namespace Vino.Server.Services.Database
         public DbSet<LclImp> LclImps{ get; set; }
         public DbSet<CrmCustomer> Customers { get; set; }
         public DbSet<HblLclExp> HblLclExps { get; set; }
+        public DbSet<Topic> Topics{ get; set; }
 
 
         #endregion

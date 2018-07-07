@@ -24,6 +24,7 @@ using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
 using Vino.Server.Services.MainServices.CRM.LclExp.Models;
 using Vino.Server.Services.MainServices.CRM.LclImp.Models;
 using Vino.Server.Services.MainServices.CRM.Port.Model;
+using Vino.Server.Services.MainServices.CRM.Topic.Model;
 using Vino.Server.Services.MainServices.Media.Models;
 using Vino.Server.Services.MainServices.Message.Models;
 using Vino.Server.Services.MainServices.System.Email.Models;
@@ -308,6 +309,11 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.IssueDate,
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.IssueDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
 
+            // Topic
+            CreateMap<Topic, TopicModel>()
+                .ForMember(d => d.ImagePath, opt => opt.MapFrom(
+                    x => x.Image.RelativePath));
+            CreateMap<TopicModel, Topic>();
 
         }
     }

@@ -35,6 +35,16 @@ namespace Vino.Server.Web.Api
             return lookupTypes;
         }
 
+        public List<NameValueModel> GetLookupsByType(LookupTypes type)
+        {
+            var lookups = _lookupService.GetLookupByLookupType(type).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.TypeName
+            }).ToList();
+            return lookups;
+        }
+           
         public List<NameValueModel> GetLookupWithId(LookupTypes type)
         {
             var lookups = _lookupService.GetLookupByLookupType(type).Select(d => new NameValueModel()
@@ -332,6 +342,23 @@ namespace Vino.Server.Web.Api
         public List<NameValueModel> GetModes(string name = "", bool withAll = false)
         {
             var countries = _lookupService.GetLookupByLookupType(LookupTypes.ModeType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return countries;
+        }
+
+
+        #endregion
+
+        #region Topic
+        public List<NameValueModel> GetTopicTypes(string name = "", bool withAll = false)
+        {
+            var countries = _lookupService.GetLookupByLookupType(LookupTypes.TopicType).Select(d => new NameValueModel()
             {
                 Name = d.Title,
                 Value = d.Id.ToString()

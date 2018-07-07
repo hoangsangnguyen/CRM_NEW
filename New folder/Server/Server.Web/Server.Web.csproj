@@ -2650,6 +2650,10 @@
     <Content Include="Areas\Admin\Views\Port\PortAddPopup.cshtml" />
     <Content Include="Areas\Admin\Views\Lookup\LookupAddPopup.cshtml" />
     <Content Include="Areas\Admin\Views\Lookup\_popupCreateLookup.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\_AddEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Topic\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
@@ -3366,6 +3370,7 @@
     <Compile Include="Areas\Admin\Controllers\LclImpsController.cs" />
     <Compile Include="Areas\Admin\Controllers\MessageTemplateController.cs" />
     <Compile Include="Areas\Admin\Controllers\PortController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TopicController.cs" />
     <Compile Include="Areas\Admin\Models\AirExps\AirExpsListModel.cs" />
     <Compile Include="Areas\Admin\Models\AirImps\AirImpListModel.cs" />
     <Compile Include="Areas\Admin\Models\Calendar\ActionFactRelativeListModel.cs" />
@@ -3391,6 +3396,7 @@
     <Compile Include="Areas\Admin\Models\Message\SendEmailTestModel.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Models\Ports\PortsListModel.cs" />
+    <Compile Include="Areas\Admin\Models\Topic\TopicListModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\LogController.cs" />

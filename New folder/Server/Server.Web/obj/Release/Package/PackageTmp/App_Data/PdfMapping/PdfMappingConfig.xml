@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<PdfMapping>
-  <Template>
-    <!--<File pdffile="~/App_Data/PdfMapping/fcl_template.pdf"  xmlfile="~/App_Data/PdfMapping/LclPdfXmlConfig.xml"/>-->
-    <File pdffile="~/App_Data/PdfMapping/HBL_V1.pdf"  xmlfile="~/App_Data/PdfMapping/HblLclExpPdfConfig.xml"/>
-
-  </Template>
-</PdfMapping>

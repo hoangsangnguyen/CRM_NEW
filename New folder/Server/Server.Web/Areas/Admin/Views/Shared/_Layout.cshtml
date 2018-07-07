@@ -141,6 +141,13 @@
                             <i class="fa fa-dashboard"></i> <span style="color: #0173b7">Trang chủ</span>
                         </a>
                     </li>
+                    
+                    <li class="@Html.IsActive("Topic","Index")">
+                        <a href="@Url.Action("Index", "Topic")">
+                            <i class="fa fa-industry" style="margin-left: 5px"></i>
+                            <span style="color: #0173b7">Giới thiệu công ty</span>
+                        </a>
+                    </li>
 
                     <li class="@Html.IsActive("Customers","Index")">
                         <a href="@Url.Action("Index", "Customers")">
