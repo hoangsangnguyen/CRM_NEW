@@ -2648,6 +2648,8 @@
     <Content Include="Areas\Admin\Views\HblLclExp\CustomerAddPopup.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\CustomerAddPopup.cshtml" />
     <Content Include="Areas\Admin\Views\Port\PortAddPopup.cshtml" />
+    <Content Include="Areas\Admin\Views\Lookup\LookupAddPopup.cshtml" />
+    <Content Include="Areas\Admin\Views\Lookup\_popupCreateLookup.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />

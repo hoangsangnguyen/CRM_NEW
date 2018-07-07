@@ -244,6 +244,9 @@
                         </ul>
                     </li>
 
+
+
+
                     <li class="treeview
                         @Html.IsActive("Producing", "InternalProductionManage,ExternalProductionManage")
                         @Html.IsHidden("ManageEmployee,ManageSupplier,ManageCustomer,ManageProduct")">
@@ -264,6 +267,14 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="@Html.IsActive("Lookup","LookupList")">
+                        <a href="@Url.Action("LookupList", "Lookup")">
+                            <i class="fa fa-industry" style="margin-left: 5px"></i>
+                            <span style="color: #0173b7">Lookup</span>
+                        </a>
+                    </li>
+
                 </ul>
             </section>
             <!-- /.sidebar -->

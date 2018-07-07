@@ -9,6 +9,7 @@ using Falcon.Web.Core.Helpers;
 using Falcon.Web.Mvc.PageList;
 using Vino.Server.Data.Common;
 using Vino.Server.Services.Database;
+using Vino.Server.Services.Helper;
 using Vino.Server.Services.MainServices.Common.Models;
 using Vino.Shared.Constants;
 using Vino.Shared.Constants.Common;
@@ -105,7 +106,7 @@ namespace Vino.Server.Services.MainServices.Common
         {
             var lookup = new Lookup()
             {
-                Code = model.Code,
+                Code = CreateSeoName(model.Code),
                 Title = model.Title,
                 Order = model.Order,
                 Type = model.Type,
@@ -116,6 +117,22 @@ namespace Vino.Server.Services.MainServices.Common
             model.Id = lookup.Id;
         }
 
+        public string CreateSeoName(string name, string additionString = "")
+        {
+            if (name == null)
+                return "";
+            var seoname = name.ConvertToUnSign();
+
+            seoname = seoname.CreateSlug();
+
+            if (string.IsNullOrEmpty(additionString)) return seoname;
+
+            seoname += "-" + additionString;
+
+            return seoname;
+
+        }
+
         public async Task UpdateLookup(LookupModel model)
         {
             var lookupUpdate = _dataContext.Lookups.Find(model.Id);
@@ -123,7 +140,7 @@ namespace Vino.Server.Services.MainServices.Common
 
             lookupUpdate.Title = model.Title;
             lookupUpdate.Order = model.Order;
-            lookupUpdate.Code = model.Code;
+            lookupUpdate.Code = CreateSeoName(model.Code);
             lookupUpdate.App = model.App;
             await _dataContext.SaveChangesAsync();
         }

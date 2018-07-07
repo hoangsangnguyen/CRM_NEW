@@ -4,4 +4,6 @@
 - Edit all form from dropdownlist to combobox.
 - Print full script of pdf file.
 
+- Create new country ( doing)
+
 http://aardonyx.bid

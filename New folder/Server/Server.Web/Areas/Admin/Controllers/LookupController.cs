@@ -9,6 +9,7 @@ using Vino.Server.Services.MainServices.Auth;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.Common.Models;
 using Vino.Server.Web.Areas.Admin.Models.Lookup;
+using Vino.Shared.Constants.Common;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
 {
@@ -146,6 +147,39 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             await _lookupService.DeleteLookup(id);
             SuccessNotification("Xóa thành công!");
             return RedirectToAction("LookupList");
+        }
+        #endregion
+
+
+        #region Popup add Port
+
+        public ActionResult LookupAddPopup(string viewId, LookupTypes type)
+        {
+            var model = new LookupModel()
+            {
+                Type = type
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> LookupAddPopup(string viewId, string btnId,
+            string formId, LookupModel request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+
+            await _lookupService.InsertLookup(request);
+            SuccessNotification("Thêm thành công!");
+
+            ViewBag.RefreshPage = true;
+            ViewBag.btnId = btnId;
+            ViewBag.formId = formId;
+            ViewBag.viewId = viewId;
+
+            return View(request);
         }
         #endregion
     }

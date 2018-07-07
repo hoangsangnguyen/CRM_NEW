@@ -292,16 +292,16 @@
                                 </div>
                             </div>
                             @*ExRef*@
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Ex Ref:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input type="datetime" id="@Html.FieldIdFor(model => model.ExRef)"
-                                               name="@Html.FieldIdFor(model => model.ExRef)"
-                                               value="@Model.ExRef"
-                                               style="width: 100%" />
-                                        <script>
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Ex Ref:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="datetime" id="@Html.FieldIdFor(model => model.ExRef)"
+                                           name="@Html.FieldIdFor(model => model.ExRef)"
+                                           value="@Model.ExRef"
+                                           style="width: 100%" />
+                                    <script>
                                             $(document).ready(function() {
                                                 $("#@Html.FieldIdFor(model => model.ExRef)").kendoDatePicker({
                                                     culture: "vi-VN",
@@ -310,11 +310,11 @@
                                                 $("#@Html.FieldIdFor(model => model.ExRef)")
                                                     .prop("readonly", "readonly");
                                             });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.ExRef)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.ExRef)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
                             </div>
                         </div>
                         @*Reference No*@
@@ -534,6 +534,7 @@
                                     @Html.ValidationMessageFor(model => model.CountryOfOriginId)
                                 </div>
                                 <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.CountryOfOriginId)')">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -1007,7 +1008,7 @@
                 </div>
             </div>
         </div>
-       
+
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -1364,52 +1365,75 @@
             </div>
         </div>
         <input type="submit" id="btnRefreshCustomerItems" style="display: none" />
-        <input type="submit" id="btnRefreshPortItems" style="display: none" />
+    <input type="submit" id="btnRefreshPortItems" style="display: none" />
+    <input type="submit" id="btnRefreshLookupItems" style="display: none" />
+
     </div>
     <script>
 
-    function openCustomerPopup(viewId) {
+        function openCustomerPopup(viewId) {
 
-        var url = '/Admin/Customers/CustomerAddPopup?viewId=' +
-            viewId +
-            '&btnId=btnRefreshCustomerItems&formId=hblLclExp-edit-form';
-        OpenWindow(url, 800, 800, true);
-    }
+            var url = '/Admin/Customers/CustomerAddPopup?viewId=' +
+                viewId +
+                '&btnId=btnRefreshCustomerItems&formId=hblLclExp-edit-form';
+            OpenWindow(url, 800, 800, true);
+        }
 
-    function openPortPopup(viewId) {
+        function openPortPopup(viewId) {
 
-        var url = '/Admin/Port/PortAddPopup?viewId=' +
-            viewId +
-            '&btnId=btnRefreshPortItems&formId=hblLclExp-edit-form';
-        OpenWindow(url, 800, 800, true);
-    }
-    $(document).ready(function () {
+            var url = '/Admin/Port/PortAddPopup?viewId=' +
+                viewId +
+                '&btnId=btnRefreshPortItems&formId=hblLclExp-edit-form';
+            OpenWindow(url, 800, 800, true);
+        }
 
-        $('#btnRefreshCustomerItems')[0].addEventListener("customer", function(event) {
-            //refresh combobox
-            console.log(event);
-            $("#@Html.FieldIdFor(m => m.ShipperId)").data("kendoComboBox").dataSource.read();
-            $("#@Html.FieldIdFor(m => m.ConsigneeId)").data("kendoComboBox").dataSource.read();
-            $("#@Html.FieldIdFor(m => m.NotifyPartyId)").data("kendoComboBox").dataSource.read();
-            $("#" + event.detail.viewId).data("kendoComboBox").value(event.detail.valueId);
+        function openLookupPopup(viewId) {
 
-            return false;
-        })});
+            var url = '/Admin/Lookup/LookupAddPopup?viewId=' +
+                viewId + "&type=" + '@LookupTypes.NationalityType' +
+                '&btnId=btnRefreshLookupItems&formId=hblLclExp-edit-form';
+            OpenWindow(url, 800, 800, true);
+        }
 
-        $('#btnRefreshPortItems')[0].addEventListener("port", function(event) {
-        //refresh combobox
-        console.log(event);
-        $("#@Html.FieldIdFor(m => m.FinalDestinationId)").data("kendoComboBox").dataSource.read();
-        $("#@Html.FieldIdFor(m => m.PlaceOfDeliveryId)").data("kendoComboBox").dataSource.read();
-        $("#@Html.FieldIdFor(m => m.PortOfDischargeId)").data("kendoComboBox").dataSource.read();
-        $("#@Html.FieldIdFor(m => m.PlaceOfReceiptId)").data("kendoComboBox").dataSource.read();
-        $("#@Html.FieldIdFor(m => m.PortOfLoaingId)").data("kendoComboBox").dataSource.read();
-        $("#@Html.FieldIdFor(m => m.TranshipmentPortId)").data("kendoComboBox").dataSource.read();
+        $(document).ready(function() {
 
-        $("#" + event.detail.viewId).data("kendoComboBox").value(event.detail.valueId);
+            $('#btnRefreshCustomerItems')[0].addEventListener("customer",
+                function(event) {
+                    //refresh combobox
+                    console.log(event);
+                    $("#@Html.FieldIdFor(m => m.ShipperId)").data("kendoComboBox").dataSource.read();
+                    $("#@Html.FieldIdFor(m => m.ConsigneeId)").data("kendoComboBox").dataSource.read();
+                    $("#@Html.FieldIdFor(m => m.NotifyPartyId)").data("kendoComboBox").dataSource.read();
+                    $("#" + event.detail.viewId).data("kendoComboBox").value(event.detail.valueId);
 
-        return false;
-    });
+                    return false;
+                });
+
+            $('#btnRefreshLookupItems')[0].addEventListener("lookup",
+                function(event) {
+                    //refresh combobox
+                    $("#" + event.detail.viewId).data("kendoComboBox").dataSource.read();
+                    $("#" + event.detail.viewId).data("kendoComboBox").value(event.detail.valueId);
+
+                    return false;
+                });
+
+            $('#btnRefreshPortItems')[0].addEventListener("port",
+                function(event) {
+                    //refresh combobox
+                    console.log(event);
+                    $("#@Html.FieldIdFor(m => m.FinalDestinationId)").data("kendoComboBox").dataSource.read();
+                    $("#@Html.FieldIdFor(m => m.PlaceOfDeliveryId)").data("kendoComboBox").dataSource.read();
+                    $("#@Html.FieldIdFor(m => m.PortOfDischargeId)").data("kendoComboBox").dataSource.read();
+                    $("#@Html.FieldIdFor(m => m.PlaceOfReceiptId)").data("kendoComboBox").dataSource.read();
+                    $("#@Html.FieldIdFor(m => m.PortOfLoaingId)").data("kendoComboBox").dataSource.read();
+                    $("#@Html.FieldIdFor(m => m.TranshipmentPortId)").data("kendoComboBox").dataSource.read();
+
+                    $("#" + event.detail.viewId).data("kendoComboBox").value(event.detail.valueId);
+
+                    return false;
+                });
+        });
     </script>
     <script type="text/javascript" src="/Areas/Admin/Content/js/hbllclexp_addedit.js"></script>
 </div>

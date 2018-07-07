@@ -1,0 +1,93 @@
+﻿@using Falcon.Web.Mvc.HtmlExtensions
+@model Vino.Server.Services.MainServices.Common.Models.LookupModel
+@{
+}
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label" for="lookuptype">Loại lookup</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input id="lookuptype" style="width: 100%" name="Type" @if (Model.Id > 0) { <text> disabled="" </text> } />
+                            <script>
+                                $(document).ready(function () {
+                                    $("#lookuptype").kendoDropDownList({
+                                        dataTextField: "Name",
+                                        dataValueField: "Value",
+                                        dataSource: {
+                                            transport: {
+                                                read: {
+                                                    dataType: "json",
+                                                    url: "/api/lookupapi/getlookuptype",
+                                                }
+                                            }
+                                        },
+                                        value: '@Model.Type'
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">Tên hiển thị</label>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.FalconEditorFor(model => model.Title)
+                            @Html.ValidationMessageFor(model => model.Title)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">Mã số</label>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.FalconEditorFor(model => model.Code)
+                            @Html.ValidationMessageFor(model => model.Code)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">Sắp xếp</label>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.FalconEditorFor(model => model.Order)
+                            @Html.ValidationMessageFor(model => model.Order)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">App</label>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.FalconEditorFor(model => model.App)
+                            @Html.ValidationMessageFor(model => model.App)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="btn-close" class="btn btn-default" data-dismiss="modal">Đóng</button>
+        <button type="submit" id="btn-save-contact" class="btn btn-primary">Lưu</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btn-close').click(function () {
+            window.close();
+        });
+    });
+</script>
+
+
+
+
+
