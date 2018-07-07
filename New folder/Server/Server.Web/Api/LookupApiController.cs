@@ -40,7 +40,7 @@ namespace Vino.Server.Web.Api
             var lookups = _lookupService.GetLookupByLookupType(type).Select(d => new NameValueModel()
             {
                 Name = d.Title,
-                Value = d.TypeName
+                Value = d.Code
             }).ToList();
             return lookups;
         }

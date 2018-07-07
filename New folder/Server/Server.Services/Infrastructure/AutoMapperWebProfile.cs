@@ -45,6 +45,7 @@ namespace Vino.Server.Services.Infrastructure
             CreateMap<Lookup, LookupModel>().ReverseMap();
             CreateMap<Lookup, LookupDto>().ReverseMap();
             CreateMap<Setting, SettingModel>().ReverseMap();
+            CreateMap<OrderGenCode, OrderGenCodeModel>().ReverseMap();
 
             //logs
             CreateMap<Log, LogModel>()

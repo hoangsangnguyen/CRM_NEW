@@ -47,7 +47,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
             foreach (var topicModel in dtoFromRepo)
             {
-                topicModel.TypeName = topicName.FirstOrDefault(x => x.TypeName == topicModel.Type)?.Title;
+                topicModel.TypeName = topicName.FirstOrDefault(x => x.Code == topicModel.Type)?.Title;
             }
             var gridModel = new DataSourceResult()
             {

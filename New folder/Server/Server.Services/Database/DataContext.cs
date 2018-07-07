@@ -277,6 +277,8 @@ namespace Vino.Server.Services.Database
 
         #endregion
         //common
+        public DbSet<OrderGenCode> OrderGenCodes { get; set; }
+
         public DbSet<Lookup> Lookups { get; set; }
         public DbSet<ImageRecord> ImageRecords { get; set; }
         public DbSet<EmailAccount> EmailAccounts { get; set; }

@@ -16,9 +16,11 @@ using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
 using Vino.Server.Services.MainServices.CRM.LclExp;
 using Vino.Server.Services.MainServices.CRM.Pdf.Models;
 using Vino.Server.Services.MainServices.CRM.Port;
+using Vino.Server.Services.MainServices.CRM.Topic;
 using Vino.Server.Web.Areas.Admin.Models.HblLclExps;
 using Vino.Server.Web.Areas.Admin.Models.LclExps;
 using Vino.Shared.Constants.Common;
+using Vino.Shared.Constants.Warehouse;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
 {
@@ -27,16 +29,23 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         private readonly HblLclExpService _service;
         private readonly CrmCustomerService _customerService;
         private readonly HblLclExpPdfService _pdfService;
-
-
+        private readonly TopicService _topicService;
+        private readonly OrderGenCodeService _orderGenCodeService;
+        private readonly LclExpService _lclExpService;
 
         public HblLclExpController(HblLclExpService service,
             CrmCustomerService customerService,
-            HblLclExpPdfService pdfService)
+            HblLclExpPdfService pdfService,
+            TopicService topicService,
+            OrderGenCodeService orderGenCodeService,
+            LclExpService lclExpService)
         {
-            this._service = service;
+            _service = service;
             _customerService = customerService;
             _pdfService = pdfService;
+            _topicService = topicService;
+            _orderGenCodeService = orderGenCodeService;
+            _lclExpService = lclExpService;
         }
 
         #region HblLclExp
@@ -70,7 +79,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         public async Task<ActionResult> Create(int? id)
         {
-            var index = await _service.GetNumberEntry();
+            var topic = await _topicService.GetTopicByTopicType(TopicType.Company);
+            
 
             var model = new HblLclExpModel()
             {
@@ -79,8 +89,22 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 ClosingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 SellingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 IssueDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
-                LclExpId = id
+                LclExpId = id,
+                ForwardingAgent = topic?.Name + "-" + topic?.Address + "-" + topic?.Phone
             };
+
+            var now = DateTimeOffset.Now;
+            // init code for BlNumber
+            if (id != null && id > 0)
+            {
+                var lclExp = 
+            }
+
+            var orderGenCode = _orderGenCodeService.GetOrderGenCode(BookPrefixes.DeliveyWarehouse, now.LocalDateTime.Date);
+            if (orderGenCode != null)
+            {
+                model.BlNumber = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{(orderGenCode.CurrentNumber + 1):D3}";
+            }
             return View(model);
         }
 
