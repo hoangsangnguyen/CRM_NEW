@@ -22,20 +22,9 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
     public class AirImpsController : BaseController
     {
         private readonly AirImpService _service;
-        private readonly ContactService _contactService;
-        private readonly PortService _portService;
-        private readonly CarrierService _carrierService;
-
-        private readonly LookupService _lookupService;
-        public AirImpsController(AirImpService service, ContactService contactService,
-            PortService portService, CarrierService carrierService,
-            LookupService lookupService)
+        public AirImpsController(AirImpService service)
         {
             _service = service;
-            _contactService = contactService;
-            _portService = portService;
-            _lookupService = lookupService;
-            _carrierService = carrierService;
         }
         // GET: Admin/AirImps
         public ActionResult Index()
@@ -74,8 +63,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
             };
 
-            await InitDataForModel(model);
-
             return View(model);
         }
 
@@ -86,7 +73,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             Console.WriteLine(dto);
             if (!ModelState.IsValid)
             {
-                await InitDataForModel(dto);
                 return View(dto);
             }
 
@@ -114,8 +100,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return RedirectToAction("List");
             }
 
-            await InitDataForModel(model);
-
             return View(model);
         }
 
@@ -125,7 +109,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                await InitDataForModel(dto);
                 return View(dto);
             }
 
@@ -149,110 +132,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             await _service.DeleteAsync(id);
             SuccessNotification("Xóa thành công!");
             return RedirectToAction("List");
-        }
-
-        private async Task InitDataForModel(AirImpModel model)
-        {
-            model.CarrierItems = await GetCarrierItems();
-            model.ContactItems = await GetContactItems();
-            model.CommodityItems = GetCommodityItems();
-            model.ShipmentItems = GetShipmentItems();
-            model.PortItems = await GetPortItems();
-            model.TypeOfBillItems = GetTypeOfBIllsItems();
-            model.UnitItems = GetUnitsItems();
-
-        }
-
-        private async Task<IList<SelectListItem>> GetContactItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var contacts = await _contactService.GetAllAsync();
-            foreach (var l in contacts)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.EnglishName
-                });
-
-            return items;
-        }
-
-        private async Task<IList<SelectListItem>> GetCarrierItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var contacts = await _carrierService.GetAllAsync();
-            foreach (var l in contacts)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Name
-                });
-
-            return items;
-        }
-        private async Task<IList<SelectListItem>> GetPortItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var ports = await _portService.GetAllAsync();
-            foreach (var port in ports)
-            {
-                items.Add(new SelectListItem()
-                {
-                    Value = port.Id.ToString(),
-                    Text = port.PortName
-                });
-            }
-
-            return items;
-        }
-        private IList<SelectListItem> GetCommodityItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.CommoditiesType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-        private IList<SelectListItem> GetShipmentItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.ShipmentType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetTypeOfBIllsItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.TypeOfBill);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-        private IList<SelectListItem> GetUnitsItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.UnitType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
         }
     }
 }

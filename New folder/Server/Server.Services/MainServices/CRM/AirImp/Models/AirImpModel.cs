@@ -10,14 +10,6 @@ namespace Vino.Server.Services.MainServices.CRM.AirImp.Models
     {
         public AirImpModel()
         {
-            CommodityItems = new List<SelectListItem>();
-            ContactItems = new List<SelectListItem>();
-            ShipmentItems = new List<SelectListItem>();
-            PortItems = new List<SelectListItem>();
-            CarrierItems = new List<SelectListItem>();
-            TypeOfBillItems = new List<SelectListItem>();
-            UnitItems = new List<SelectListItem>();
-
         }
 
         [Required]
@@ -87,15 +79,6 @@ namespace Vino.Server.Services.MainServices.CRM.AirImp.Models
         public string Scn { get; set; }
 
         public string Notes { get; set; }
-
-        public IList<SelectListItem> CommodityItems { get; set; }
-        public IList<SelectListItem> ContactItems { get; set; }
-        public IList<SelectListItem> ShipmentItems { get; set; }
-        public IList<SelectListItem> PortItems { get; set; }
-        public IList<SelectListItem> CarrierItems { get; set; }
-        public IList<SelectListItem> TypeOfBillItems { get; set; }
-        public IList<SelectListItem> UnitItems { get; set; }
-
 
     }
 }
