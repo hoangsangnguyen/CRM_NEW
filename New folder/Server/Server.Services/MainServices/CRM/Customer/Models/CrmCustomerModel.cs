@@ -16,9 +16,6 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
     {
         public CrmCustomerModel()
         {
-            ContactItems = new List<SelectListItem>();
-            LocationItems = new List<SelectListItem>();
-            CategoriesItems = new List<SelectListItem>();
         }
 
         [MaxLength(100)]
@@ -98,10 +95,6 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
          */
         [EmailAddress]
         public string Email { get; set; }
-
-        public IList<SelectListItem> ContactItems { get; set; }
-        public IList<SelectListItem> LocationItems { get; set; }
-        public IList<SelectListItem> CategoriesItems { get; set; }
 
     }
 }

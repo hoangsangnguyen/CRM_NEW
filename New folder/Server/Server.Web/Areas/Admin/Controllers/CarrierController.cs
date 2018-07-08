@@ -42,10 +42,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         public async Task<ActionResult> List(DataSourceRequest common, CarriersListModel model)
         {
             var dtoFromRepo = await _service.GetAllAsync();
-            var nationalityItems = GetNationalityItems();
+            var nationalityItems = _lookupService.GetLookupByLookupType(LookupTypes.NationalityType);
             foreach (var contact in dtoFromRepo)
             {
-                contact.CountryName = nationalityItems.FirstOrDefault(x => x.Value == contact.CountryId.ToString())?.Text;
+                contact.CountryName = nationalityItems.FirstOrDefault(x => x.Id == contact.CountryId)?.Title;
             }
             var gridModel = new DataSourceResult()
             {
@@ -63,7 +63,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             CarrierModel model = new CarrierModel()
             {
                 Code = "CL" + (index + 1).ToString().PadLeft(4, '0'),
-                CountryItems = GetNationalityItems()
             };
 
             return View(model);
@@ -103,7 +102,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return RedirectToAction("List");
             }
 
-            model.CountryItems = GetNationalityItems();
             return View(model);
         }
 
@@ -113,7 +111,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                dto.CountryItems = GetNationalityItems();
                 return View(dto);
             }
 
@@ -186,86 +183,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         }
         #endregion
 
-        [HttpPost]
-        public async Task<ActionResult> CreateFromSubViewAsync(CarrierModel dto)
-        {
-            if (!ModelState.IsValid)
-            {
-                dto.CountryItems = GetNationalityItems();
-                return new EmptyResult();
-            }
-
-            var id = await _service.CreateAsync(dto);
-            if (id >= 0)
-            {
-                Console.WriteLine("Create carrier succeed");
-                var carrier = await _service.GetSingleAsync(id);
-                if (carrier == null)
-                    return new EmptyResult();
-
-                var name = carrier.FullEnglishName;
-                return Json(new NameValueModel()
-                {
-                    Value = id.ToString(),
-                    Name = name
-                });
-            }
-            Console.WriteLine("Create carrier succeed");
-
-            return new EmptyResult();
-        }
-
-        private IList<SelectListItem> GetNationalityItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.NationalityType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        [HttpPost]
-        public ActionResult GetNationalityItemsFromView()
-        {
-            var items = new List<NameValueModel>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.NationalityType);
-            foreach (var l in lookups)
-                items.Add(new NameValueModel()
-                {
-                    Value = l.Id.ToString(),
-                    Name = l.Title
-                });
-            return Json(items);
-        }
-
-        [HttpPost]
-        public async Task<PartialViewResult> OpenModal(string viewId, string viewGroupId)
-        {
-            var index = await _service.GetNumberEntry();
-
-            var viewModel = new ModelAndViewId()
-            {
-                Carrier = new CarrierModel()
-                {
-                    Code = "CL" + (index + 1).ToString().PadLeft(4, '0'),
-                    CountryItems = GetNationalityItems()
-                },
-                ViewId = viewId,
-                ViewGroupId = viewGroupId
-            };
-            return PartialView("_CreateCarrier", viewModel);
-        }
-
-        public class ModelAndViewId
-        {
-            public CarrierModel Carrier { get; set; }
-            public string ViewId { get; set; }
-            public string ViewGroupId { get; set; }
-        }
     }
 
    

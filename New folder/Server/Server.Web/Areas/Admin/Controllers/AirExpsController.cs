@@ -1,43 +1,22 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using Falcon.Web.Mvc.Kendoui;
-using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.CRM.AirExp;
 using Vino.Server.Services.MainServices.CRM.AirExp.Models;
-using Vino.Server.Services.MainServices.CRM.Carrier;
-using Vino.Server.Services.MainServices.CRM.Contact;
-using Vino.Server.Services.MainServices.CRM.Port;
 using Vino.Server.Web.Areas.Admin.Models.AirExps;
-using Vino.Shared.Constants.Common;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
 {
     public class AirExpsController : BaseController
     {
         private readonly AirExpService _service;
-        private readonly ContactService _contactService;
-        private readonly PortService _portService;
-        private readonly CarrierService _carrierService;
-
-        private readonly LookupService _lookupService;
-        public AirExpsController(AirExpService service, ContactService contactService,
-            PortService portService, CarrierService carrierService,
-            LookupService lookupService)
+        public AirExpsController(AirExpService service)
         {
             _service = service;
-            _contactService = contactService;
-            _portService = portService;
-            _lookupService = lookupService;
-            _carrierService = carrierService;
         }
 
-        // Test thay đổi
         // GET: Admin/AirExps
         public ActionResult Index()
         {
@@ -76,8 +55,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 FlyDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
             };
 
-            await InitContentForModel(model);
-
             return View(model);
         }
 
@@ -87,7 +64,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                await InitContentForModel(dto);
                 return View(dto);
 
             }
@@ -109,18 +85,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return RedirectToAction("Edit" , new {id});
         }
 
-        private async Task InitContentForModel(AirExpModel model)
-        {
-            model.ContactItems = await GetContactItems();
-            model.CommodityItems = GetCommodityItems();
-            model.ShipmentItems = GetShipmentItems();
-            model.PaymentItems = GetPaymentItems();
-            model.TypeOfBillItems = GetTypeOfBillItems();
-            model.UnitItems = GetUnitItems();
-            model.PortItems = await GetPortItems();
-            model.CarrierItems = await GetCarrierItems();
-        }
-
         public async Task<ActionResult> Edit(int id = 0)
         {
             var model = await _service.GetSingleAsync(id);
@@ -129,8 +93,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             {
                 return RedirectToAction("List");
             }
-
-            await InitContentForModel(model);
 
             return View(model);
         }
@@ -141,7 +103,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                await InitContentForModel(dto);
                 return View(dto);
             }
 
@@ -167,110 +128,5 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             SuccessNotification("Xóa thành công!");
             return RedirectToAction("List");
         }
-
-        private async Task<IList<SelectListItem>> GetContactItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var contacts = await _contactService.GetAllAsync();
-            foreach (var l in contacts)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.EnglishName
-                });
-
-            return items;
-        }
-
-        private async Task<IList<SelectListItem>> GetCarrierItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var contacts = await _carrierService.GetAllAsync();
-            foreach (var l in contacts)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Name
-                });
-
-            return items;
-        }
-        private async Task<IList<SelectListItem>> GetPortItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var contacts = await _portService.GetAllAsync();
-            foreach (var l in contacts)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.PortName
-                });
-
-            return items;
-        }
-        private IList<SelectListItem> GetCommodityItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.CommoditiesType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-        private IList<SelectListItem> GetShipmentItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.ShipmentType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetPaymentItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.PaymentType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetTypeOfBillItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.TypeOfBill);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetUnitItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.UnitType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
     }
 }

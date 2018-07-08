@@ -15,8 +15,6 @@ namespace Vino.Server.Services.MainServices.CRM.Contact.Models
     {
         public CrmContactModel()
         {
-            PositionItems = new List<SelectListItem>();
-            DepartmentItems = new List<SelectListItem>();
         }
 
         [Required]
@@ -67,9 +65,6 @@ namespace Vino.Server.Services.MainServices.CRM.Contact.Models
         public string SpouseBirthday { get; set; }
 
         public string FieldInterested { get; set; }
-
-        public IList<SelectListItem> PositionItems { get; set; }
-        public IList<SelectListItem> DepartmentItems { get; set; }
 
     }
 }

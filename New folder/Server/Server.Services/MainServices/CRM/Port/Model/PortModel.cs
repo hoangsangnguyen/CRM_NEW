@@ -15,9 +15,6 @@ namespace Vino.Server.Services.MainServices.CRM.Port.Model
     {
         public PortModel()
         {
-            NationalityItems = new List<SelectListItem>();
-            ZoneItems = new List<SelectListItem>();
-            ModeItems = new List<SelectListItem>();
         }
         [Required]
         public string PortCode { get; set; }
@@ -36,10 +33,6 @@ namespace Vino.Server.Services.MainServices.CRM.Port.Model
         [Required(ErrorMessage = "Vui lòng chọn mode hoặc tạo mới")]
         public int? ModeId { get; set; }
         public string ModeName { get; set; }
-
-        public IList<SelectListItem> NationalityItems { get; set; }
-        public IList<SelectListItem> ZoneItems { get; set; }
-        public IList<SelectListItem> ModeItems { get; set; }
 
     }
 }

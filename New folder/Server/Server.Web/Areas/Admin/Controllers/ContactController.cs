@@ -42,12 +42,12 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             var dtoFromRepo = await _service.GetAllAsync();
 
-            var positionItems = GetPositionItems();
-            var departmentItems = GetDepartmentItems();
+            var positionItems = _lookupService.GetLookupByLookupType(LookupTypes.PositionType);
+            var departmentItems = _lookupService.GetLookupByLookupType(LookupTypes.DepartmentType);
             foreach (var contact in dtoFromRepo)
             {
-                contact.PositionName = positionItems.FirstOrDefault(x => x.Value == contact.PositionId.ToString())?.Text;
-                contact.DepartmentName = departmentItems.FirstOrDefault(x => x.Value == contact.DepartmentId.ToString())?.Text;
+                contact.PositionName = positionItems.FirstOrDefault(x => x.Id == contact.PositionId)?.Title;
+                contact.DepartmentName = departmentItems.FirstOrDefault(x => x.Id == contact.DepartmentId)?.Title;
             }
 
             var gridModel = new DataSourceResult()
@@ -69,8 +69,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 SpouseBirthday = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
             };
 
-            InitDataModel(model);
-
             return View(model);
         }
 
@@ -82,7 +80,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                InitDataModel(dto);
                 return View(dto);
             }
             var index = await _service.GetNumberEntry();
@@ -109,7 +106,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return RedirectToAction("List");
             }
 
-            InitDataModel(model);
             return View(model);
         }
 
@@ -119,7 +115,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                InitDataModel(dto);
                 return View(dto);
             }
 
@@ -230,54 +225,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                     Text = l.Title
                 });
             return items;
-        }
-
-        [HttpPost]
-        public async Task<PartialViewResult> OpenModal(string viewId, string viewGroupId)
-        {
-            var index = await _service.GetNumberEntry();
-
-            var viewModel = new ModelAndViewId()
-            {
-                Contact = new CrmContactModel()
-                {
-                    ContactId = "CT" + (index + 1).ToString().PadLeft(3, '0'),
-                    Birthday = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
-                    SpouseBirthday = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
-                    PositionItems = GetPositionItems(),
-                    DepartmentItems = GetDepartmentItems()
-                },
-                ViewId = viewId,
-                ViewGroupId = viewGroupId
-            };
-
-            return PartialView("_CreateContact", viewModel);
-        }
-
-        private void InitDataModel(CrmContactModel model)
-        {
-            model.PositionItems = GetPositionItems();
-            model.DepartmentItems = GetDepartmentItems();
-        }
-
-        public IList<SelectListItem> GetDepartmentItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.DepartmentType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        public class ModelAndViewId
-        {
-            public CrmContactModel Contact { get; set; }
-            public string ViewId { get; set; }
-            public string ViewGroupId { get; set; }
         }
 
     }

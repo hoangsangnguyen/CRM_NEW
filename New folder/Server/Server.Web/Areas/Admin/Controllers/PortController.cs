@@ -40,15 +40,15 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         public async Task<ActionResult> List(DataSourceRequest common, PortsListModel model)
         {
             var dtoFromRepo = await _service.GetAllAsync();
-            var nationalityItems = GetNationalityItems();
-            var zoneItems = GetZoneItems();
-            var modeItems = GetModeItems();
+            var nationalityItems = _lookupService.GetLookupByLookupType(LookupTypes.NationalityType);
+            var zoneItems = _lookupService.GetLookupByLookupType(LookupTypes.ZoneType);
+            var modeItems = _lookupService.GetLookupByLookupType(LookupTypes.ModeType);
 
             foreach (var contact in dtoFromRepo)
             {
-                contact.NationalityName = nationalityItems.FirstOrDefault(x => x.Value == contact.NationalityId.ToString())?.Text;
-                contact.ZoneName = zoneItems.FirstOrDefault(x => x.Value == contact.ZoneId.ToString())?.Text;
-                contact.ModeName = modeItems.FirstOrDefault(x => x.Value == contact.ModeId.ToString())?.Text;
+                contact.NationalityName = nationalityItems.FirstOrDefault(x => x.Id == contact.NationalityId)?.Title;
+                contact.ZoneName = zoneItems.FirstOrDefault(x => x.Id == contact.ZoneId)?.Title;
+                contact.ModeName = modeItems.FirstOrDefault(x => x.Id == contact.ModeId)?.Title;
             }
 
             var gridModel = new DataSourceResult()
@@ -62,10 +62,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            var model = new PortModel();
-            InitDataModel(model);
-
-            return View(model);
+            return View(new PortModel());
         }
 
         [HttpPost]
@@ -74,7 +71,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                InitDataModel(dto);
                 return View(dto);
             }
 
@@ -100,7 +96,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return RedirectToAction("List");
             }
 
-            InitDataModel(model);
             return View(model);
         }
 
@@ -110,7 +105,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                InitDataModel(dto);
                 return View(dto);
             }
 
@@ -136,14 +130,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             SuccessNotification("Xóa thành công!");
             return RedirectToAction("List");
         }
-
-        private void InitDataModel(PortModel model)
-        {
-            model.NationalityItems = GetNationalityItems();
-            model.ZoneItems = GetZoneItems();
-            model.ModeItems = GetModeItems();
-        }
-
+      
         #endregion
 
         #region Popup add Port
@@ -182,100 +169,5 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return View(request);
         }
         #endregion
-
-        [HttpPost]
-        public PartialViewResult OpenModal(string viewId, string[] viewGroupId)
-        {
-            TempData["IdView"] = viewId;
-            TempData["IdGroups"] = viewGroupId;
-
-            var model = new PortModel();
-            InitDataModel(model);
-
-            return PartialView("_CreatePort", model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> CreateFromSubViewAsync(PortModel dto)
-        {
-            if (!ModelState.IsValid)
-            {
-                InitDataModel(dto);
-                return new EmptyResult();
-            }
-
-            var id = await _service.CreateAsync(dto);
-            if (id >= 0)
-            {
-                SuccessNotification("Create port succeed");
-                var port = await _service.GetSingleAsync(id);
-                if (port == null)
-                {
-                    InitDataModel(dto);
-                    return RedirectToAction("OpenModal");
-                }
-
-                var idGroups = (object[])TempData["IdGroups"];
-                var idViews = TempData["IdView"];
-
-                return Json(new
-                {
-                    GroupIds = String.Join(",", idGroups),
-                    ViewIds = idViews,
-                    Value = port.Id.ToString(),
-                    Name = port.PortName
-                });
-            }
-            
-            ErrorNotification("Create port failed");
-
-            return new EmptyResult();
-        }
-
-        private IList<SelectListItem> GetNationalityItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.NationalityType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-        private IList<SelectListItem> GetZoneItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.ZoneType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-        private IList<SelectListItem> GetModeItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.ModeType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-
-        public class ModelAndViewId
-        {
-            public PortModel Port { get; set; }
-            public string ViewId { get; set; }
-            public string ViewGroupId { get; set; }
-        }
-
     }
 }

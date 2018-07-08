@@ -13,7 +13,6 @@ namespace Vino.Server.Services.MainServices.CRM.Carrier.Model
     {
         public CarrierModel()
         {
-            CountryItems = new List<SelectListItem>();
         }
 
         [Required]
@@ -33,6 +32,5 @@ namespace Vino.Server.Services.MainServices.CRM.Carrier.Model
         public int? CountryId { get; set; }
         public string CountryName { get; set; }
 
-        public IList<SelectListItem> CountryItems { get; set; }
     }
 }

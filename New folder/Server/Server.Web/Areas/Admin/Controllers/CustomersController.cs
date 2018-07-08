@@ -63,7 +63,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             {
                 CustomerId = "CS" + (index + 1).ToString().PadLeft(3, '0'),
             };
-            await InitDataModel(model);
 
             return View(model);
         }
@@ -74,7 +73,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                await InitDataModel(dto);
                 return View(dto);
             }
 
@@ -100,8 +98,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return RedirectToAction("List");
             }
 
-            await InitDataModel(model);
-
             return View(model);
         }
 
@@ -111,7 +107,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                await InitDataModel(dto);
                 return View(dto);
             }
 
@@ -152,8 +147,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                     CustomerId = "CS" + (index + 1).ToString().PadLeft(3, '0')
                 };
             }
-            await InitDataModel(model);
-
             return PartialView("_CreateCustomer", model);
         }
         [HttpPost]
@@ -174,7 +167,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 var customer = await _service.GetSingleAsync(id);
                 if (customer == null)
                 {
-                    await InitDataModel(dto);
                     return RedirectToAction("OpenModal", dto);
                 }
 
@@ -189,60 +181,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
             ErrorNotification("Create new customer failed");
             return new EmptyResult();
-        }
-
-        private async Task InitDataModel(CrmCustomerModel model)
-        {
-            model.ContactItems = await GetContactItems();
-            model.LocationItems = GetLocationItems();
-            model.CategoriesItems = GetCategoryItems();
-        }
-
-        private async Task<IList<SelectListItem>> GetContactItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var contacts = await _contactService.GetAllAsync();
-            foreach (var l in contacts)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.EnglishName
-                });
-
-            return items;
-        }
-
-        private IList<SelectListItem> GetLocationItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.LocationType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetCategoryItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.CategoryType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        public class ModelAndViewId
-        {
-            public CrmCustomerModel Customer { get; set; }
-            public string ViewId { get; set; }
-            public string[] ViewGroupId { get; set; }
         }
 
         #region Popup add Customer
@@ -263,7 +201,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                await InitDataModel(request);
                 return View(request);
             }
 

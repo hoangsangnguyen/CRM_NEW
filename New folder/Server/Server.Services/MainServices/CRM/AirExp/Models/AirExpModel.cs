@@ -17,15 +17,6 @@ namespace Vino.Server.Services.MainServices.CRM.AirExp.Models
     {
         public AirExpModel()
         {
-            CommodityItems = new List<SelectListItem>();
-
-            ContactItems = new List<SelectListItem>();
-            ShipmentItems = new List<SelectListItem>();
-            PaymentItems = new List<SelectListItem>();
-            TypeOfBillItems = new List<SelectListItem>();
-            UnitItems = new List<SelectListItem>();
-            PortItems = new List<SelectListItem>();
-            CarrierItems = new List<SelectListItem>();
         }
 
         [Required]
@@ -92,16 +83,6 @@ namespace Vino.Server.Services.MainServices.CRM.AirExp.Models
         public double Cw { get; set; }
 
         public string Notes { get; set; }
-
-        public IList<SelectListItem> CommodityItems { get; set; }
-        public IList<SelectListItem> ContactItems { get; set; }
-        public IList<SelectListItem> ShipmentItems { get; set; }
-        public IList<SelectListItem> PaymentItems { get; set; }
-        public IList<SelectListItem> TypeOfBillItems { get; set; }
-        public IList<SelectListItem> UnitItems { get; set; }
-        public IList<SelectListItem> PortItems { get; set; }
-        public IList<SelectListItem> CarrierItems { get; set; }
-
 
     }
 }
