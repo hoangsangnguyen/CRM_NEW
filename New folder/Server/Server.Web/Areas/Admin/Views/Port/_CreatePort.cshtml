@@ -3,41 +3,41 @@
 @{
 }
 <div class="content">
-<div class="form-horizontal">
-    <div class="panel-group">
-        <div class="panel panel-default">
-            <div class="panel-body">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
                     <div class="row">
-                            <div class="col-md-4">
-                                <label class="control-label">Port Code:</label>
-                            </div>
-                            <div class="col-md-7">
-                                @Html.EditorFor(model => model.PortCode,
-                                         new { htmlAttributes = new { Id = Html.FieldIdFor(m => m.PortCode), @class = "form-control" } })
-                                @Html.ValidationMessageFor(m => m.PortCode)
-                            </div>
-                            <div class="col-md-1">
-                            </div>
+                        <div class="col-md-4">
+                            <label class="control-label">Port Code:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.PortCode,
+                                          new { htmlAttributes = new { Id = Html.FieldIdFor(m => m.PortCode), @class = "form-control" } })
+                            @Html.ValidationMessageFor(m => m.PortCode)
+                        </div>
+                        <div class="col-md-1">
+                        </div>
 
-                            <div class="col-md-4">
-                                <label class="control-label">Port Name:</label>
-                            </div>
-                            <div class="col-md-7">
-                                @Html.EditorFor(model => model.PortName,
-                                 new { htmlAttributes = new { Id = Html.FieldIdFor(m => m.PortName), @class = "form-control" } })
-                                @Html.ValidationMessageFor(m => m.PortName)
-                            </div>
-                            <div class="col-md-1">
-                            </div>
+                        <div class="col-md-4">
+                            <label class="control-label">Port Name:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.PortName,
+                                  new { htmlAttributes = new { Id = Html.FieldIdFor(m => m.PortName), @class = "form-control" } })
+                            @Html.ValidationMessageFor(m => m.PortName)
+                        </div>
+                        <div class="col-md-1">
+                        </div>
 
-                            <div class="col-md-4">
-                                <label class="control-label">Country Of Origin:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input id="@Html.FieldIdFor(model => model.NationalityId)"
-                                       name="@Html.NameFor(model => model.NationalityId)"
-                                       value="@Html.ValueFor(model => model.NationalityId)" />
-                                <script>
+                        <div class="col-md-4">
+                            <label class="control-label">Country Of Origin:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input id="@Html.FieldIdFor(model => model.NationalityId)"
+                                   name="@Html.NameFor(model => model.NationalityId)"
+                                   value="@Html.ValueFor(model => model.NationalityId)" />
+                            <script>
                                     $(document).ready(function() {
                                         $("#@Html.FieldIdFor(model => model.NationalityId)").kendoComboBox({
                                             filter: "contains",
@@ -67,22 +67,22 @@
                                             return data;
                                         }
                                     });
-                                </script>
-                                @Html.ValidationMessageFor(model => model.NationalityId)
-                            </div>
+                            </script>
+                            @Html.ValidationMessageFor(model => model.NationalityId)
+                        </div>
                         <div class="col-md-1">
                             <a data-request-url="" id="create-contact">Add New Nationality</a>
 
                         </div>
 
-                            <div class="col-md-4">
-                                <label class="control-label">Zone:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input id="@Html.FieldIdFor(model => model.ZoneId)"
-                                       name="@Html.NameFor(model => model.ZoneId)"
-                                       value="@Html.ValueFor(model => model.ZoneId)" />
-                                <script>
+                        <div class="col-md-4">
+                            <label class="control-label">Zone:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input id="@Html.FieldIdFor(model => model.ZoneId)"
+                                   name="@Html.NameFor(model => model.ZoneId)"
+                                   value="@Html.ValueFor(model => model.ZoneId)" />
+                            <script>
                                     $(document).ready(function() {
                                         $("#@Html.FieldIdFor(model => model.ZoneId)").kendoComboBox({
                                             filter: "contains",
@@ -112,31 +112,31 @@
                                             return data;
                                         }
                                     });
-                                </script>
-                                @Html.ValidationMessageFor(model => model.ZoneId)
-                            </div>
-                            <div class="col-md-1">
-                                <a data-request-url="" id="create-contact">Add New Zone</a>
-                            </div>
+                            </script>
+                            @Html.ValidationMessageFor(model => model.ZoneId)
+                        </div>
+                        <div class="col-md-1">
+                            <a data-request-url="" id="create-contact">Add New Zone</a>
+                        </div>
 
-                            <div class="col-md-4">
-                                <label class="control-label">Local zone:</label>
-                            </div>
-                            <div class="col-md-7">
-                                @Html.FalconEditorFor(m => m.LocalZone)
-                                @Html.ValidationMessageFor(model => model.LocalZone)
-                            </div>
-                            <div class="col-md-1">
-                            </div>
+                        <div class="col-md-4">
+                            <label class="control-label">Local zone:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.FalconEditorFor(m => m.LocalZone)
+                            @Html.ValidationMessageFor(model => model.LocalZone)
+                        </div>
+                        <div class="col-md-1">
+                        </div>
 
-                            <div class="col-md-4">
-                                <label class="control-label">Mode:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input id="@Html.FieldIdFor(model => model.ModeId)"
-                                       name="@Html.NameFor(model => model.ModeId)"
-                                       value="@Html.ValueFor(model => model.ModeId)" />
-                                <script>
+                        <div class="col-md-4">
+                            <label class="control-label">Mode:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input id="@Html.FieldIdFor(model => model.ModeId)"
+                                   name="@Html.NameFor(model => model.ModeId)"
+                                   value="@Html.ValueFor(model => model.ModeId)" />
+                            <script>
                                     $(document).ready(function() {
                                         $("#@Html.FieldIdFor(model => model.ModeId)").kendoComboBox({
                                             filter: "contains",
@@ -166,12 +166,12 @@
                                             return data;
                                         }
                                     });
-                                </script>
-                                @Html.ValidationMessageFor(model => model.ModeId)
-                            </div>
-                            <div class="col-md-1">
-                                <a data-request-url="" id="create-contact">Add New Mode</a>
-                            </div>
+                            </script>
+                            @Html.ValidationMessageFor(model => model.ModeId)
+                        </div>
+                        <div class="col-md-1">
+                            <a data-request-url="" id="create-contact">Add New Mode</a>
+                        </div>
 
                     </div>
                 </div>

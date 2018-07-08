@@ -212,7 +212,8 @@ namespace Vino.Server.Web.Api
             return countries;
         }
         #endregion
-        #region Countries
+
+        #region Type of move
         public List<NameValueModel> GetTypeOfMove(string name = "", bool withAll = false)
         {
             var countries = _lookupService.GetLookupByLookupType(LookupTypes.TypeOfMove).Select(d => new NameValueModel()
@@ -371,6 +372,41 @@ namespace Vino.Server.Web.Api
 
 
         #endregion
+
+        #region Position
+        public List<NameValueModel> GetPositions(string name = "", bool withAll = false)
+        {
+            var countries = _lookupService.GetLookupByLookupType(LookupTypes.PositionType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return countries;
+        }
+
+
+        #endregion
+
+        #region Department
+        public List<NameValueModel> GetDepartments(string name = "", bool withAll = false)
+        {
+            var countries = _lookupService.GetLookupByLookupType(LookupTypes.DepartmentType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                countries.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return countries;
+        }
+
+
+        #endregion
+
         public List<NameValueModel> GetStandardEvents()
         {
             var units = _lookupService.GetLookupByLookupType(LookupTypes.ProducingEvents).Select(d => new NameValueModel()

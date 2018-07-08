@@ -95,20 +95,20 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
             var now = DateTimeOffset.Now;
             // init code for BlNumber
-            //if (id != null && id > 0)
-            //{
-            //    var lclExp = await _lclExpService.GetSingleAsync(id.Value);
-            //    if (lclExp != null)
-            //    {
-            //        var orderGenCode = _orderGenCodeService.GetOrderGenCode(BookPrefixes.DeliveyWarehouse, now.LocalDateTime.Date);
-            //        if (orderGenCode != null)
-            //        {
-            //            model.BlNumber = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{(orderGenCode.CurrentNumber + 1):D3}";
-            //        }
-            //    }
-            //}
+            if (id != null && id > 0)
+            {
+                var lclExp = await _lclExpService.GetSingleAsync(id.Value);
+                if (lclExp != null)
+                {
+                    var orderGenCode = _orderGenCodeService.GetOrderGenCode(BookPrefixes.HblLclExp, now.LocalDateTime.Date);
+                    if (orderGenCode != null)
+                    {
+                        model.BlNumber = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{(orderGenCode.CurrentNumber + 1):D3}";
+                    }
+                }
+            }
 
-           
+
             return View(model);
         }
 

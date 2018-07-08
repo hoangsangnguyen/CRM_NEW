@@ -24,6 +24,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             _lookupService = lookupService;
         }
 
+        #region Port
         // GET: Admin/Contact
         public ActionResult Index()
         {
@@ -38,7 +39,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> List(DataSourceRequest common, PortsListModel model)
         {
-            var dtoFromRepo =  await _service.GetAllAsync();
+            var dtoFromRepo = await _service.GetAllAsync();
             var nationalityItems = GetNationalityItems();
             var zoneItems = GetZoneItems();
             var modeItems = GetModeItems();
@@ -63,7 +64,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             var model = new PortModel();
             InitDataModel(model);
-           
+
             return View(model);
         }
 
@@ -87,7 +88,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 SuccessNotification("Tạo mới thành công!");
             }
 
-            return RedirectToAction("Edit", new {id});
+            return RedirectToAction("Edit", new { id });
         }
 
         public async Task<ActionResult> Edit(int id = 0)
@@ -142,6 +143,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             model.ZoneItems = GetZoneItems();
             model.ModeItems = GetModeItems();
         }
+
+        #endregion
 
         #region Popup add Port
 

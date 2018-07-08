@@ -2654,6 +2654,8 @@
     <Content Include="Areas\Admin\Views\Topic\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Topic\_AddEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Topic\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\ContactAddPopup.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\_CreateContact.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />

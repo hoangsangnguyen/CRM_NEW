@@ -26,7 +26,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             _lookupService = lookupService;
         }
 
-        // GET: Admin/Contact
+        #region Contact
         public ActionResult Index()
         {
             return RedirectToAction("List");
@@ -97,7 +97,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 SuccessNotification("Tạo mới thành công!");
             }
 
-            return RedirectToAction("Edit", new {id});
+            return RedirectToAction("Edit", new { id });
         }
 
         public async Task<ActionResult> Edit(int id = 0)
@@ -145,6 +145,48 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             SuccessNotification("Xóa thành công!");
             return RedirectToAction("List");
         }
+        #endregion
+
+        #region Popup add Port
+
+        public async Task<ActionResult> ContactAddPopup(string viewId)
+        {
+            var model = new CrmContactModel();
+            var index = await _service.GetNumberEntry();
+            model.ContactId = "CT" + (index + 1).ToString().PadLeft(3, '0');
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ContactAddPopup(string viewId, string btnId,
+            string formId, CrmContactModel request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+
+            var id = await _service.CreateAsync(request);
+            if (id == 0)
+            {
+                ErrorNotification("Tạo mới thất bại!");
+            }
+            else
+            {
+                request.Id = id;
+                SuccessNotification("Tạo mới thành công!");
+            }
+
+            ViewBag.RefreshPage = true;
+            ViewBag.btnId = btnId;
+            ViewBag.formId = formId;
+            ViewBag.viewId = viewId;
+
+            return View(request);
+        }
+        #endregion
+
+        // GET: Admin/Contact
 
         [HttpPost]
         public async Task<ActionResult> CreateContactFromSubView(CrmContactModel dto)
