@@ -1,21 +1,12 @@
-﻿@using System.Globalization
-@using Falcon.Web.Mvc.HtmlExtensions
+﻿@using Falcon.Web.Mvc.HtmlExtensions
 @using Vino.Shared.Constants.Common
 @model Vino.Server.Services.MainServices.CRM.Carrier.Model.CarrierModel
 @{
-    <style>
-        .k-combobox .k-input {
-            height: 27.5px !important
-        }
-    </style>
 }
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.Id)
 @Html.HiddenFor(model => model.Code)
 
-@{
-    Layout = null;
-}
 <div class="content">
     <div class="form-horizontal">
         <div class="panel-group">
@@ -170,4 +161,3 @@
 
     });
 </script>
-

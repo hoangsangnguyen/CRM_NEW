@@ -24,6 +24,9 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             _service = service;
             _lookupService = lookupService;
         }
+
+        #region Carrier
+
         // GET: Admin/Carrier
         public ActionResult Index()
         {
@@ -59,7 +62,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
             CarrierModel model = new CarrierModel()
             {
-                Code = "CL" + (index+1).ToString().PadLeft(4, '0'),
+                Code = "CL" + (index + 1).ToString().PadLeft(4, '0'),
                 CountryItems = GetNationalityItems()
             };
 
@@ -72,7 +75,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                dto.CountryItems = GetNationalityItems();
                 return View(dto);
             }
 
@@ -89,7 +91,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 SuccessNotification("Tạo mới thành công!");
             }
 
-            return RedirectToAction("Edit", new {id});
+            return RedirectToAction("Edit", new { id });
         }
 
         public async Task<ActionResult> Edit(int id = 0)
@@ -136,6 +138,53 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             SuccessNotification("Xóa thành công!");
             return RedirectToAction("List");
         }
+
+        #endregion
+
+
+        #region Popup add Carrier
+
+        public async Task<ActionResult> CarrierAddPopup(string viewId)
+        {
+            var index = await _service.GetNumberEntry();
+
+            var model = new CarrierModel()
+            {
+                Code = "CL" + (index + 1).ToString().PadLeft(4, '0'),
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CarrierAddPopup(string viewId, string btnId,
+            string formId, CarrierModel request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+            var index = await _service.GetNumberEntry();
+            request.Code = "CL" + (index + 1).ToString().PadLeft(4, '0');
+            var id = await _service.CreateAsync(request);
+            if (id == 0)
+            {
+                ErrorNotification("Tạo mới thất bại!");
+            }
+            else
+            {
+                request.Id = id;
+                SuccessNotification("Tạo mới thành công!");
+            }
+
+            ViewBag.RefreshPage = true;
+            ViewBag.btnId = btnId;
+            ViewBag.formId = formId;
+            ViewBag.viewId = viewId;
+
+            return View(request);
+        }
+        #endregion
 
         [HttpPost]
         public async Task<ActionResult> CreateFromSubViewAsync(CarrierModel dto)

@@ -2656,6 +2656,8 @@
     <Content Include="Areas\Admin\Views\Topic\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Contact\ContactAddPopup.cshtml" />
     <Content Include="Areas\Admin\Views\Contact\_CreateContact.cshtml" />
+    <Content Include="Areas\Admin\Views\Carrier\_CreateCarrier.cshtml" />
+    <Content Include="Areas\Admin\Views\Carrier\CarrierAddPopup.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
