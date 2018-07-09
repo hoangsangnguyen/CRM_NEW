@@ -1,16 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
-using Vino.Server.Data.CRM;
 using Vino.Server.Services.MainServices.BaseService;
-using Vino.Server.Services.MainServices.CRM.Carrier.Model;
-using Vino.Server.Services.MainServices.CRM.Contact.Models;
-using Vino.Server.Services.MainServices.CRM.Port.Model;
 
 namespace Vino.Server.Services.MainServices.CRM.FclImp.Models
 {
@@ -18,14 +10,6 @@ namespace Vino.Server.Services.MainServices.CRM.FclImp.Models
     {
         public FclImpModel()
         {
-            CommodityItems = new List<SelectListItem>();
-            ContactItems = new List<SelectListItem>();
-            ShipmentItems = new List<SelectListItem>();
-            PortItems = new List<SelectListItem>();
-            CarrierItems = new List<SelectListItem>();
-            VesselItems = new List<SelectListItem>();
-            ShipmentItems = new List<SelectListItem>();
-            VoyageItems = new List<SelectListItem>();
         }
 
         [Required]
@@ -97,15 +81,6 @@ namespace Vino.Server.Services.MainServices.CRM.FclImp.Models
         [Required]
         public bool IsFinish { get; set; }
         public string Notes { get; set; }
-
-        public IList<SelectListItem> ContactItems { get; set; }
-        public IList<SelectListItem> CarrierItems { get; set; }
-        public IList<SelectListItem> PortItems { get; set; }
-        public IList<SelectListItem> VesselItems { get; set; }
-        public IList<SelectListItem> CommodityItems { get; set; }
-        public IList<SelectListItem> MblItems { get; set; }
-        public IList<SelectListItem> ShipmentItems { get; set; }
-        public IList<SelectListItem> VoyageItems { get; set; }
 
     }
 }
