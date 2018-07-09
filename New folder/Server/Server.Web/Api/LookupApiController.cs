@@ -445,6 +445,23 @@ namespace Vino.Server.Web.Api
 
 
         #endregion
+
+        #region Voyage
+        public List<NameValueModel> GetVoyages(string name = "", bool withAll = false)
+        {
+            var mblTypes = _lookupService.GetLookupByLookupType(LookupTypes.VoyageType).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                mblTypes.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return mblTypes;
+        }
+
+
+        #endregion
         public List<NameValueModel> GetStandardEvents()
         {
             var units = _lookupService.GetLookupByLookupType(LookupTypes.ProducingEvents).Select(d => new NameValueModel()

@@ -19,16 +19,6 @@ namespace Vino.Server.Services.MainServices.CRM.LclImp.Models
     {
         public LclImpModel()
         {
-            CommodityItems = new List<SelectListItem>();
-            ContactItems = new List<SelectListItem>();
-            ShipmentItems = new List<SelectListItem>();
-            PortItems = new List<SelectListItem>();
-            CarrierItems = new List<SelectListItem>();
-            VesselItems = new List<SelectListItem>();
-            MblItems = new List<SelectListItem>();
-            UnitItems = new List<SelectListItem>();
-            VoyageItems = new List<SelectListItem>();
-
         }
 
         [Required]
@@ -107,17 +97,6 @@ namespace Vino.Server.Services.MainServices.CRM.LclImp.Models
         public double Cbm { get; set; }
 
         public string Notes { get; set; }
-
-        public IList<SelectListItem> ContactItems { get; set; }
-        public IList<SelectListItem> CarrierItems { get; set; }
-        public IList<SelectListItem> PortItems { get; set; }
-        public IList<SelectListItem> VesselItems { get; set; }
-        public IList<SelectListItem> CommodityItems { get; set; }
-        public IList<SelectListItem> MblItems { get; set; }
-        public IList<SelectListItem> ShipmentItems { get; set; }
-        public IList<SelectListItem> UnitItems { get; set; }
-        public IList<SelectListItem> VoyageItems { get; set; }
-
 
     }
 }

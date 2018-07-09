@@ -70,8 +70,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 Etd = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
             };
 
-            await InitDataForModel(model);
-
             return View(model);
         }
 
@@ -82,7 +80,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             Console.WriteLine(dto);
             if (!ModelState.IsValid)
             {
-                await InitDataForModel(dto);
                 return View(dto);
             }
             var index = await _service.GetNumberEntry();
@@ -110,8 +107,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return RedirectToAction("List");
             }
 
-            await InitDataForModel(model);
-
             return View(model);
         }
 
@@ -121,7 +116,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                await InitDataForModel(dto);
                 return View(dto);
             }
 
@@ -146,133 +140,5 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return RedirectToAction("List");
         }
 
-        private async Task InitDataForModel(LclImpModel model)
-        {
-            model.CarrierItems = await GetCarrierItems();
-            model.ContactItems = await GetContactItems();
-            model.CommodityItems = GetCommodityItems();
-            model.ShipmentItems = GetShipmentItems();
-            model.PortItems = await GetPortItems();
-            model.VesselItems = GetVesselItems();
-            model.MblItems = GetMblTypeItems();
-            model.VoyageItems = GetVoyageTypeItems();
-            model.UnitItems = GetUnitTypeItems();
-        }
-
-        private async Task<IList<SelectListItem>> GetContactItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var contacts = await _contactService.GetAllAsync();
-            foreach (var l in contacts)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.EnglishName
-                });
-
-            return items;
-        }
-
-        private async Task<IList<SelectListItem>> GetCarrierItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var contacts = await _carrierService.GetAllAsync();
-            foreach (var l in contacts)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Name
-                });
-
-            return items;
-        }
-        private async Task<IList<SelectListItem>> GetPortItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var contacts = await _portService.GetAllAsync();
-            foreach (var l in contacts)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.PortName
-                });
-
-            return items;
-        }
-        private IList<SelectListItem> GetCommodityItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.CommoditiesType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-        private IList<SelectListItem> GetShipmentItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.ShipmentType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetVesselItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.VesselType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-        private IList<SelectListItem> GetMblTypeItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.MblType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetVoyageTypeItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.VoyageType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetUnitTypeItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.UnitType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
     }
 }
