@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Vino.Server.Services.MainServices.BaseService;
-using Vino.Server.Services.MainServices.CRM.Carrier.Model;
-using Vino.Server.Services.MainServices.CRM.Contact.Models;
-using Vino.Server.Services.MainServices.CRM.Port.Model;
 
 namespace Vino.Server.Services.MainServices.CRM.FclExp.Models
 {
@@ -17,15 +10,6 @@ namespace Vino.Server.Services.MainServices.CRM.FclExp.Models
     {
         public FclExpModel()
         {
-            CommodityItems = new List<SelectListItem>();
-            ContactItems = new List<SelectListItem>();
-            ShipmentItems = new List<SelectListItem>();
-            PortItems = new List<SelectListItem>();
-            CarrierItems = new List<SelectListItem>();
-            MblTypesItems = new List<SelectListItem>();
-            VesselItems = new List<SelectListItem>();
-            FreightItems = new List<SelectListItem>();
-
         }
 
         [Required]
@@ -79,16 +63,6 @@ namespace Vino.Server.Services.MainServices.CRM.FclExp.Models
         [Required(ErrorMessage = "Vui lòng nhập GW")]
         public double Cbm { get; set; }
         public string Notes { get; set; }
-
-        public IList<SelectListItem> CommodityItems { get; set; }
-        public IList<SelectListItem> ContactItems { get; set; }
-        public IList<SelectListItem> ShipmentItems { get; set; }
-        public IList<SelectListItem> PortItems { get; set; }
-        public IList<SelectListItem> CarrierItems { get; set; }
-        public IList<SelectListItem> MblTypesItems { get; set; }
-        public IList<SelectListItem> VesselItems { get; set; }
-        public IList<SelectListItem> FreightItems { get; set; }
-
 
     }
 }
