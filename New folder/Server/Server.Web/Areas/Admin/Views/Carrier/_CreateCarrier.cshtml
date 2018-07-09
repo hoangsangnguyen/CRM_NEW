@@ -153,7 +153,9 @@
     }
 
     $(document).ready(function () {
-
+        $('#btn-close').click(function () {
+            window.close();
+        });
         $('#btnRefreshLookupItems')[0].addEventListener("lookup",
             function (event) {
                 //refresh combobox

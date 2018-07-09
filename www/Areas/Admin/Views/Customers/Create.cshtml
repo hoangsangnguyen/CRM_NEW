@@ -1,6 +1,6 @@
 ﻿@model Vino.Server.Services.MainServices.CRM.Customer.Models.CrmCustomerModel
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", id = "customer-edit-form" }))
 {
     @Html.AntiForgeryToken()
     <div class="content-header clearfix">

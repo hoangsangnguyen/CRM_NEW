@@ -30,21 +30,12 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
     public class LclExpsController : BaseController
     {
         private readonly LclExpService _service;
-        private readonly ContactService _contactService;
-        private readonly PortService _portService;
-        private readonly CarrierService _carrierService;
         private readonly LclExpPdfExportService _pdfService;
 
-        private readonly LookupService _lookupService;
-        public LclExpsController(LclExpService service, ContactService contactService,
-            PortService portService, CarrierService carrierService,
-            LookupService lookupService, LclExpPdfExportService pdfService)
+        public LclExpsController(LclExpService service
+           , LclExpPdfExportService pdfService)
         {
             _service = service;
-            _contactService = contactService;
-            _portService = portService;
-            _lookupService = lookupService;
-            _carrierService = carrierService;
             _pdfService = pdfService;
         }
 
@@ -88,8 +79,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 Etd = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
             };
 
-            await InitDataForModel(model);
-
             return View(model);
         }
 
@@ -100,7 +89,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             Console.WriteLine(dto);
             if (!ModelState.IsValid)
             {
-                await InitDataForModel(dto);
                 return View(dto);
             }
             var index = await _service.GetNumberEntry();
@@ -128,8 +116,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return RedirectToAction("List");
             }
 
-            await InitDataForModel(model);
-
             return View(model);
         }
 
@@ -139,7 +125,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                await InitDataForModel(dto);
                 return View(dto);
             }
 
@@ -165,136 +150,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return RedirectToAction("List");
         }
 
-        private async Task InitDataForModel(LclExpModel model)
-        {
-            model.CarrierItems = await GetCarrierItems();
-            model.ContactItems = await GetContactItems();
-            model.CommodityItems =  GetCommodityItems();
-            model.ShipmentItems = GetShipmentItems();
-            model.PortItems = await GetPortItems();
-            model.MblTypesItems =  GetMblTypeItems();
-            model.VesselItems =  GetVesselItems();
-            model.FreightItems = GetFreightItems();
-            model.UnitItems =  GetUnitItems();
-        }
-
-        private async Task<IList<SelectListItem>> GetContactItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var contacts = await _contactService.GetAllAsync();
-            foreach (var l in contacts)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.EnglishName
-                });
-
-            return items;
-        }
-
-        private async Task<IList<SelectListItem>> GetCarrierItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var contacts = await _carrierService.GetAllAsync();
-            foreach (var l in contacts)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Name
-                });
-
-            return items;
-        }
-        private async Task<IList<SelectListItem>> GetPortItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var contacts = await _portService.GetAllAsync();
-            foreach (var l in contacts)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.PortName
-                });
-
-            return items;
-        }
-
-        private IList<SelectListItem> GetCommodityItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.CommoditiesType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-        private IList<SelectListItem> GetShipmentItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.ShipmentType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetMblTypeItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups =  _lookupService.GetLookupByLookupType(LookupTypes.MblType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetVesselItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.VesselType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetFreightItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.FreightType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
-
-        private IList<SelectListItem> GetUnitItems()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>();
-            var lookups = _lookupService.GetLookupByLookupType(LookupTypes.UnitType);
-            foreach (var l in lookups)
-                items.Add(new SelectListItem
-                {
-                    Value = l.Id.ToString(),
-                    Text = l.Title
-                });
-            return items;
-        }
         #endregion
 
         #region PDF Export

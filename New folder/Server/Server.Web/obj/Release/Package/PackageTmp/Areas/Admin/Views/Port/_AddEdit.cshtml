@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
 @using Falcon.Web.Mvc.HtmlExtensions
+@using Vino.Shared.Constants.Common
 @model Vino.Server.Services.MainServices.CRM.Port.Model.PortModel
 @{
     <style>
@@ -26,10 +27,11 @@
                                 <div class="col-md-4">
                                     <label class="control-label">Port Code:</label>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     @Html.FalconEditorFor(m => m.PortCode)
                                     @Html.ValidationMessageFor(m => m.PortCode)
                                 </div>
+                                <div class="col-md-1"></div>
                             </div>
                         </div>
                         @*Port Name*@
@@ -38,10 +40,11 @@
                                 <div class="col-md-4">
                                     <label class="control-label">Port Name:</label>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     @Html.FalconEditorFor(m => m.PortName)
                                     @Html.ValidationMessageFor(m => m.PortName)
                                 </div>
+                                <div class="col-md-1"></div>
                             </div>
                         </div>
                         @*Nationality*@
@@ -50,10 +53,46 @@
                                 <div class="col-md-4">
                                     <label class="control-label">Nationality:</label>
                                 </div>
-                                <div class="col-md-8">
-                                    @Html.DropDownListFor(model => model.NationalityId, new SelectList(Model.NationalityItems, "Value", "Text"),
-                                        new { @Id = @Html.FieldIdFor(m => m.NationalityId), @class = "form-control select-style-1" })
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.NationalityId)"
+                                           name="@Html.NameFor(model => model.NationalityId)"
+                                           value="@Html.ValueFor(model => model.NationalityId)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.NationalityId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn nationality...",
+                                                minLength: 1,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LookupApi/GetCountries",
+                                                            dataType: "json",
+                                                            data: filterNationality
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterNationality() {
+                                                var data = {
+                                                    @*Name: $("#@Html.FieldIdFor(model => model.PlaceOfIssueId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                                    Name : ""
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                     @Html.ValidationMessageFor(model => model.NationalityId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.NationalityId)', '@LookupTypes.NationalityType')">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -65,24 +104,62 @@
                                 <div class="col-md-4">
                                     <label class="control-label">Zone:</label>
                                 </div>
-                                <div class="col-md-8">
-                                    @Html.DropDownListFor(model => model.ZoneId, new SelectList(Model.ZoneItems, "Value", "Text"),
-                                        new { @Id = @Html.FieldIdFor(m => m.ZoneId), @class = "form-control select-style-1" })
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.ZoneId)"
+                                           name="@Html.NameFor(model => model.ZoneId)"
+                                           value="@Html.ValueFor(model => model.ZoneId)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.ZoneId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn zone...",
+                                                minLength: 1,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LookupApi/GetZones",
+                                                            dataType: "json",
+                                                            data: filterZones
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterZones() {
+                                                var data = {
+                                                    @*Name: $("#@Html.FieldIdFor(model => model.PlaceOfIssueId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                                    Name : ""
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                     @Html.ValidationMessageFor(model => model.ZoneId)
                                 </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.ZoneId)', '@LookupTypes.ZoneType')">Add</a>
+                                </div>
+
                             </div>
                         </div>
-                       
+
                         @*Local Zone*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
                                 <div class="col-md-4">
                                     <label class="control-label">Local Zone:</label>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     @Html.FalconEditorFor(m => m.LocalZone)
                                     @Html.ValidationMessageFor(m => m.LocalZone)
                                 </div>
+                                <div class="col-md-1"></div>
                             </div>
                         </div>
 
@@ -92,27 +169,81 @@
                                 <div class="col-md-4">
                                     <label class="control-label">Model:</label>
                                 </div>
-                                <div class="col-md-8">
-                                    @Html.DropDownListFor(model => model.ModeId, new SelectList(Model.ModeItems, "Value", "Text"),
-                                        new { @Id = @Html.FieldIdFor(m => m.ModeId), @class = "form-control select-style-1" })
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.ModeId)"
+                                           name="@Html.NameFor(model => model.ModeId)"
+                                           value="@Html.ValueFor(model => model.ModeId)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.ModeId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn mode...",
+                                                minLength: 1,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LookupApi/GetModes",
+                                                            dataType: "json",
+                                                            data: filterModes
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterModes() {
+                                                var data = {
+                                                    @*Name: $("#@Html.FieldIdFor(model => model.PlaceOfIssueId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                                    Name : ""
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
                                     @Html.ValidationMessageFor(model => model.ModeId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.ModeId)', '@LookupTypes.ModeType')">Add</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                  
-                </div>
-            </div>
-        </div>
-        @*modal*@
-        <div id="myModal" class="modal  fade " data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div id="myModalContent"></div>
+
                 </div>
             </div>
         </div>
     </div>
+    <input type="submit" id="btnRefreshLookupItems" style="display: none" />
+
 </div>
+
+<script>
+
+    function openLookupPopup(viewId, type) {
+
+        var url = '/Admin/Lookup/LookupAddPopup?viewId=' +
+            viewId + "&type=" + type +
+            '&btnId=btnRefreshLookupItems&formId=port-edit-form';
+        OpenWindow(url, 800, 800, true);
+    }
+
+    $(document).ready(function () {
+
+        $('#btnRefreshLookupItems')[0].addEventListener("lookup",
+            function (event) {
+                //refresh combobox
+                $("#" + event.detail.viewId).data("kendoComboBox").dataSource.read();
+                $("#" + event.detail.viewId).data("kendoComboBox").value(event.detail.valueId);
+
+                return false;
+            });
+
+    });
+</script>
 
 

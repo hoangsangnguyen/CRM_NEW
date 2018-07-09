@@ -1,6 +1,6 @@
 ﻿@model Vino.Server.Services.MainServices.CRM.AirExp.Models.AirExpModel
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", id = "AirExp-edit-form" }))
 {
     @Html.AntiForgeryToken()
     <div class="content-header clearfix">

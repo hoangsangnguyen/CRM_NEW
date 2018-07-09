@@ -16,16 +16,6 @@ namespace Vino.Server.Services.MainServices.CRM.LclExp.Models
     {
         public LclExpModel()
         {
-            CommodityItems = new List<SelectListItem>();
-            ContactItems = new List<SelectListItem>();
-            ShipmentItems = new List<SelectListItem>();
-            PortItems = new List<SelectListItem>();
-            CarrierItems = new List<SelectListItem>();
-            MblTypesItems = new List<SelectListItem>();
-            VesselItems = new List<SelectListItem>();
-            FreightItems = new List<SelectListItem>();
-            UnitItems = new List<SelectListItem>();
-
         }
 
         [Required]
@@ -56,7 +46,7 @@ namespace Vino.Server.Services.MainServices.CRM.LclExp.Models
         public int? OpIcId { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn Vessel hoặc thêm mới")]
-        public int VesselId { get; set; }
+        public int? VesselId { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn shipment hoặc thêm mới")]
         public int? ShipmentId { get; set; }
@@ -100,16 +90,6 @@ namespace Vino.Server.Services.MainServices.CRM.LclExp.Models
         public int? FreightId { get; set; }
 
         public string Notes { get; set; }
-
-        public IList<SelectListItem> CommodityItems { get; set; }
-        public IList<SelectListItem> ContactItems { get; set; }
-        public IList<SelectListItem> ShipmentItems { get; set; }
-        public IList<SelectListItem> PortItems { get; set; }
-        public IList<SelectListItem> CarrierItems { get; set; }
-        public IList<SelectListItem> MblTypesItems { get; set; }
-        public IList<SelectListItem> VesselItems { get; set; }
-        public IList<SelectListItem> FreightItems { get; set; }
-        public IList<SelectListItem> UnitItems { get; set; }
 
     }
 }
