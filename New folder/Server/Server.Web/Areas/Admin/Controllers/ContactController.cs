@@ -13,6 +13,7 @@ using Vino.Server.Services.MainServices.CRM.Contact;
 using Vino.Server.Services.MainServices.CRM.Contact.Models;
 using Vino.Server.Web.Areas.Admin.Models.Contact;
 using Vino.Shared.Constants.Common;
+using Vino.Shared.Constants.Warehouse;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
 {
@@ -20,10 +21,15 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
     {
         private readonly ContactService _service;
         private readonly LookupService _lookupService;
-        public ContactController(ContactService service, LookupService lookupService)
+        private readonly OrderGenCodeService _genCodeService;
+
+        public ContactController(ContactService service,
+            LookupService lookupService,
+            OrderGenCodeService genCodeService)
         {
             _service = service;
             _lookupService = lookupService;
+            _genCodeService = genCodeService;
         }
 
         #region Contact
@@ -59,15 +65,21 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return Json(gridModel);
         }
 
-        public async Task<ActionResult> Create()
+        public ActionResult Create()
         {
-            var index = await _service.GetNumberEntry();
             var model = new CrmContactModel()
             {
-                ContactId = "CT" + (index + 1).ToString().PadLeft(3, '0'),
                 Birthday = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 SpouseBirthday = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
             };
+
+            var now = DateTimeOffset.Now;
+            // init code for customer
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.Contact, now.LocalDateTime.Date);
+            if (orderGenCode != null)
+            {
+                model.ContactId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{(orderGenCode.CurrentNumber + 1):D3}";
+            }
 
             return View(model);
         }
@@ -77,13 +89,18 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         public async Task<ActionResult> Create(CrmContactModel dto)
         {
 
-
             if (!ModelState.IsValid)
             {
                 return View(dto);
             }
-            var index = await _service.GetNumberEntry();
-            dto.ContactId = "CT" + (index + 1).ToString().PadLeft(3, '0');
+
+            var now = DateTimeOffset.Now;
+            // init code for contact
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.Contact, now.LocalDateTime.Date);
+            orderGenCode.CurrentNumber += 1;
+            _genCodeService.UpdateOrderGenCode(orderGenCode);
+            dto.ContactId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{orderGenCode.CurrentNumber:D3}";
+
             var id = await _service.CreateAsync(dto);
             if (id == 0)
             {

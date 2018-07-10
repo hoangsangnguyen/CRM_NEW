@@ -11,19 +11,12 @@ using System.Xml;
 using AutoMapper;
 using Falcon.Web.Mvc.Kendoui;
 using Vino.Server.Data.CRM;
-using Vino.Server.Services.Infrastructure;
 using Vino.Server.Services.MainServices.Common;
-using Vino.Server.Services.MainServices.CRM.Carrier;
-using Vino.Server.Services.MainServices.CRM.Contact;
-using Vino.Server.Services.MainServices.CRM.FclExp;
-using Vino.Server.Services.MainServices.CRM.FclExp.Models;
 using Vino.Server.Services.MainServices.CRM.LclExp;
 using Vino.Server.Services.MainServices.CRM.LclExp.Models;
 using Vino.Server.Services.MainServices.CRM.Pdf.Models;
-using Vino.Server.Services.MainServices.CRM.Port;
 using Vino.Server.Web.Areas.Admin.Models.LclExps;
-using Vino.Server.Web.Helper;
-using Vino.Shared.Constants.Common;
+using Vino.Shared.Constants.Warehouse;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
 {
@@ -31,12 +24,16 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
     {
         private readonly LclExpService _service;
         private readonly LclExpPdfExportService _pdfService;
+        private readonly OrderGenCodeService _genCodeService;
 
-        public LclExpsController(LclExpService service
-           , LclExpPdfExportService pdfService)
+
+        public LclExpsController(LclExpService service,
+            LclExpPdfExportService pdfService,
+            OrderGenCodeService genCodeService)
         {
             _service = service;
             _pdfService = pdfService;
+            _genCodeService = genCodeService;
         }
 
         #region LclExp CRUD
@@ -66,18 +63,23 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return Json(gridModel);
         }
 
-        public async Task<ActionResult> Create()
+        public ActionResult Create()
         {
-            var index = await _service.GetNumberEntry();
-
             var model = new LclExpModel()
             {
-                JobId = "FLL" + DateTimeOffset.Now.Year % 100 + DateTimeOffset.Now.Month.ToString("D2") 
-                        + "/" + (index+1).ToString().PadLeft(4, '0'),
                 Created = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 Eta = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 Etd = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
             };
+
+
+            var now = DateTimeOffset.Now;
+            // init code
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.LclExp, now.LocalDateTime.Date);
+            if (orderGenCode != null)
+            {
+                model.JobId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{(orderGenCode.CurrentNumber + 1):D4}";
+            }
 
             return View(model);
         }
@@ -91,9 +93,14 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             {
                 return View(dto);
             }
-            var index = await _service.GetNumberEntry();
-            dto.JobId = "FLL" + DateTimeOffset.Now.Year % 100 + DateTimeOffset.Now.Month.ToString("D2")
-                    + "/" + (index + 1).ToString().PadLeft(4, '0');
+
+            var now = DateTimeOffset.Now;
+            // init code
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.LclExp, now.LocalDateTime.Date);
+            orderGenCode.CurrentNumber += 1;
+            _genCodeService.UpdateOrderGenCode(orderGenCode);
+
+            dto.JobId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{(orderGenCode.CurrentNumber + 1):D4}";
 
             var id = await _service.CreateAsync(dto);
             if (id == 0)

@@ -12,6 +12,7 @@ using Vino.Server.Services.MainServices.CRM.Carrier.Model;
 using Vino.Server.Services.MainServices.CRM.Contact.Models;
 using Vino.Server.Web.Areas.Admin.Models.Carriers;
 using Vino.Shared.Constants.Common;
+using Vino.Shared.Constants.Warehouse;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
 {
@@ -19,10 +20,15 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
     {
         private readonly CarrierService _service;
         private readonly LookupService _lookupService;
-        public CarrierController(CarrierService service, LookupService lookupService)
+        private readonly OrderGenCodeService _genCodeService;
+
+        public CarrierController(CarrierService service,
+            LookupService lookupService,
+            OrderGenCodeService genCodeService)
         {
             _service = service;
             _lookupService = lookupService;
+            _genCodeService = genCodeService;
         }
 
         #region Carrier
@@ -56,15 +62,18 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return Json(gridModel);
         }
 
-        public async Task<ActionResult> Create()
+        public ActionResult Create()
         {
-            var index = await _service.GetNumberEntry();
+            var model = new CarrierModel();
 
-            CarrierModel model = new CarrierModel()
+            var now = DateTimeOffset.Now;
+            // init code for customer
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.Carrier, now.LocalDateTime.Date);
+            if (orderGenCode != null)
             {
-                Code = "CL" + (index + 1).ToString().PadLeft(4, '0'),
-            };
-
+                model.Code = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{(orderGenCode.CurrentNumber + 1):D3}";
+            }
+            
             return View(model);
         }
 
@@ -77,8 +86,13 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return View(dto);
             }
 
-            var index = await _service.GetNumberEntry();
-            dto.Code = "CL" + (index + 1).ToString().PadLeft(4, '0');
+            var now = DateTimeOffset.Now;
+            // init code for customer
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.Carrier, now.LocalDateTime.Date);
+            orderGenCode.CurrentNumber += 1;
+            _genCodeService.UpdateOrderGenCode(orderGenCode);
+
+            dto.Code = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{orderGenCode.CurrentNumber:D3}";
 
             var id = await _service.CreateAsync(dto);
             if (id == 0)

@@ -6,25 +6,24 @@ using System.Web;
 using System.Web.Mvc;
 using Falcon.Web.Mvc.Kendoui;
 using Vino.Server.Services.MainServices.Common;
-using Vino.Server.Services.MainServices.CRM.AirExp;
 using Vino.Server.Services.MainServices.CRM.AirImp;
 using Vino.Server.Services.MainServices.CRM.AirImp.Models;
-using Vino.Server.Services.MainServices.CRM.Carrier;
-using Vino.Server.Services.MainServices.CRM.Contact;
-using Vino.Server.Services.MainServices.CRM.FclExp;
-using Vino.Server.Services.MainServices.CRM.FclExp.Models;
-using Vino.Server.Services.MainServices.CRM.Port;
 using Vino.Server.Web.Areas.Admin.Models.AirImps;
 using Vino.Shared.Constants.Common;
+using Vino.Shared.Constants.Warehouse;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
 {
     public class AirImpsController : BaseController
     {
         private readonly AirImpService _service;
-        public AirImpsController(AirImpService service)
+        private readonly OrderGenCodeService _genCodeService;
+
+        public AirImpsController(AirImpService service,
+            OrderGenCodeService genCodeService)
         {
             _service = service;
+            _genCodeService = genCodeService;
         }
         // GET: Admin/AirImps
         public ActionResult Index()
@@ -50,18 +49,23 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return Json(gridModel);
         }
 
-        public async Task<ActionResult> Create()
+        public ActionResult Create()
         {
-            var index = await _service.GetNumberEntry();
             var model = new AirImpModel()
             {
-                JobId = "AI" + DateTimeOffset.Now.Year % 100 + DateTimeOffset.Now.Month.ToString("D2")
-                        + "/" + (index + 1).ToString().PadLeft(4, '0'),
                 Created = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 Eta = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 FLyDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
 
             };
+
+            var now = DateTimeOffset.Now;
+            // init code for customer
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.AirImp, now.LocalDateTime.Date);
+            if (orderGenCode != null)
+            {
+                model.JobId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{(orderGenCode.CurrentNumber + 1):D4}";
+            }
 
             return View(model);
         }
@@ -76,9 +80,14 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return View(dto);
             }
 
-            var index = await _service.GetNumberEntry();
-            dto.JobId = "AI" + DateTimeOffset.Now.Year % 100 + DateTimeOffset.Now.Month.ToString("D2")
-                        + "/" + (index + 1).ToString().PadLeft(4, '0');
+            var now = DateTimeOffset.Now;
+            // init code for customer
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.AirImp, now.LocalDateTime.Date);
+            orderGenCode.CurrentNumber += 1;
+            _genCodeService.UpdateOrderGenCode(orderGenCode);
+
+            dto.JobId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{(orderGenCode.CurrentNumber + 1):D4}";
+
             var id = await _service.CreateAsync(dto);
             if (id == 0)
             {

@@ -13,26 +13,20 @@ using Vino.Server.Services.MainServices.CRM.LclImp.Models;
 using Vino.Server.Services.MainServices.CRM.Port;
 using Vino.Server.Web.Areas.Admin.Models.LclImps;
 using Vino.Shared.Constants.Common;
+using Vino.Shared.Constants.Warehouse;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
 {
     public class LclImpsController : BaseController
     {
         private readonly LclImpService _service;
-        private readonly ContactService _contactService;
-        private readonly PortService _portService;
-        private readonly CarrierService _carrierService;
+        private readonly OrderGenCodeService _genCodeService;
 
-        private readonly LookupService _lookupService;
-        public LclImpsController(LclImpService service, ContactService contactService,
-            PortService portService, CarrierService carrierService,
-            LookupService lookupService)
+        public LclImpsController(LclImpService service,
+            OrderGenCodeService genCodeService)
         {
             _service = service;
-            _contactService = contactService;
-            _portService = portService;
-            _lookupService = lookupService;
-            _carrierService = carrierService;
+            _genCodeService = genCodeService;
         }
         // GET: Admin/LclImps
         public ActionResult Index()
@@ -58,17 +52,22 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return Json(gridModel);
         }
 
-        public async Task<ActionResult> Create()
+        public ActionResult Create()
         {
-            var index = await _service.GetNumberEntry();
             var model = new LclImpModel()
             {
-                JobId = "FIL" + DateTimeOffset.Now.Year % 100 + DateTimeOffset.Now.Month.ToString("D2")
-                        + "/" + (index + 1).ToString().PadLeft(4, '0'),
                 Created = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 Eta = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 Etd = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
             };
+
+            var now = DateTimeOffset.Now;
+            // init code
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.LclImp, now.LocalDateTime.Date);
+            if (orderGenCode != null)
+            {
+                model.JobId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{(orderGenCode.CurrentNumber + 1):D4}";
+            }
 
             return View(model);
         }
@@ -82,9 +81,13 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             {
                 return View(dto);
             }
-            var index = await _service.GetNumberEntry();
-            dto.JobId = "FIL" + DateTimeOffset.Now.Year % 100 + DateTimeOffset.Now.Month.ToString("D2")
-                        + "/" + (index + 1).ToString().PadLeft(4, '0');
+            var now = DateTimeOffset.Now;
+            // init code
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.LclImp, now.LocalDateTime.Date);
+            orderGenCode.CurrentNumber += 1;
+            _genCodeService.UpdateOrderGenCode(orderGenCode);
+
+            dto.JobId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{(orderGenCode.CurrentNumber + 1):D4}";
 
             var id = await _service.CreateAsync(dto);
             if (id == 0)

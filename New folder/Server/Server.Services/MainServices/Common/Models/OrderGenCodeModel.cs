@@ -13,7 +13,7 @@ namespace Vino.Server.Services.MainServices.Common.Models
         /// <summary>
         /// Ngay hien tai
         /// </summary>
-        public DateTime CurrentDate { get; set; }
+        public DateTimeOffset CurrentDate { get; set; }
 
         public int Begin { get; set; }
         public int CurrentNumber { get; set; }

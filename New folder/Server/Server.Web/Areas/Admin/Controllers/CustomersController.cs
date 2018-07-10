@@ -13,22 +13,20 @@ using Vino.Server.Services.MainServices.CRM.Customer;
 using Vino.Server.Services.MainServices.CRM.Customer.Models;
 using Vino.Server.Web.Areas.Admin.Models.Customer;
 using Vino.Shared.Constants.Common;
+using Vino.Shared.Constants.Warehouse;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
 {
     public class CustomersController : BaseController
     {
         private readonly CrmCustomerService _service;
-        private readonly LookupService _lookupService;
-        private readonly ContactService _contactService;
+        private readonly OrderGenCodeService _genCodeService;
 
         public CustomersController(CrmCustomerService service,
-            LookupService lookupService,
-            ContactService contactService)
+            OrderGenCodeService genCodeService)
         {
             _service = service;
-            _lookupService = lookupService;
-            _contactService = contactService;
+            _genCodeService = genCodeService;
         }
 
         // GET: Admin/Customer
@@ -56,14 +54,17 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return Json(gridModel);
         }
 
-        public async Task<ActionResult> Create()
+        public ActionResult Create()
         {
-            var index = await _service.GetNumberEntry();
-            var model = new CrmCustomerModel()
-            {
-                CustomerId = "CS" + (index + 1).ToString().PadLeft(3, '0'),
-            };
+            var model = new CrmCustomerModel();
 
+            var now = DateTimeOffset.Now;
+            // init code for customer
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.Customer, now.LocalDateTime.Date);
+            if (orderGenCode != null)
+            {
+                model.CustomerId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{(orderGenCode.CurrentNumber + 1):D3}";
+            }
             return View(model);
         }
 
@@ -75,6 +76,14 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             {
                 return View(dto);
             }
+
+            var now = DateTimeOffset.Now;
+            // init code for customer
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.Customer, now.LocalDateTime.Date);
+            orderGenCode.CurrentNumber += 1;
+            _genCodeService.UpdateOrderGenCode(orderGenCode);
+
+            dto.CustomerId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{orderGenCode.CurrentNumber:D3}";
 
             var id = await _service.CreateAsync(dto);
             if (id == 0)
