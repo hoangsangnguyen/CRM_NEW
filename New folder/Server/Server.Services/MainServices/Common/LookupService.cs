@@ -11,7 +11,6 @@ using Vino.Server.Data.Common;
 using Vino.Server.Services.Database;
 using Vino.Server.Services.Helper;
 using Vino.Server.Services.MainServices.Common.Models;
-using Vino.Shared.Constants;
 using Vino.Shared.Constants.Common;
 using Vino.Shared.Dto;
 
@@ -104,6 +103,9 @@ namespace Vino.Server.Services.MainServices.Common
 
         public async Task InsertLookup(LookupModel model)
         {
+            if (string.IsNullOrEmpty(model.Code))
+                model.Code = CreateSeoName(model.Title);
+
             var lookup = new Lookup()
             {
                 Code = CreateSeoName(model.Code),
@@ -140,7 +142,11 @@ namespace Vino.Server.Services.MainServices.Common
 
             lookupUpdate.Title = model.Title;
             lookupUpdate.Order = model.Order;
-            lookupUpdate.Code = CreateSeoName(model.Code);
+            if (string.IsNullOrEmpty(model.Code))
+                lookupUpdate.Code = CreateSeoName(model.Title);
+            else
+                lookupUpdate.Code = CreateSeoName(model.Code);
+
             lookupUpdate.App = model.App;
             await _dataContext.SaveChangesAsync();
         }

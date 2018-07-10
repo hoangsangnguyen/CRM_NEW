@@ -87,6 +87,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             }
 
             if (!ModelState.IsValid) return View(model);
+
             await _lookupService.InsertLookup(model);
             SuccessNotification("Thêm thành công!");
             return model.ContinueEditing

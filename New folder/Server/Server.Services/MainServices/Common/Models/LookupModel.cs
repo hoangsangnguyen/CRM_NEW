@@ -14,10 +14,10 @@ namespace Vino.Server.Services.MainServices.Common.Models
         /// Dung lam khoa de so sanh member trong 1 type, thay cho Id
         /// </summary>
         [MaxLength(32)]
-        [Required(ErrorMessage = "Vui lòng nhập mã số")]
         public string Code { get; set; }
         public int Order { get; set; }
         [MaxLength(256)]
+        [Required(ErrorMessage = "Vui lòng nhập tên hiển thị")]
         public string Title { get; set; }
         [MaxLength(3, ErrorMessage = "Không quá 3 ký tự")]
         public string App { get; set; }
