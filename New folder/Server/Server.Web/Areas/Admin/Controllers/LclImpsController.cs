@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -12,7 +13,6 @@ using Vino.Server.Services.MainServices.CRM.LclImp;
 using Vino.Server.Services.MainServices.CRM.LclImp.Models;
 using Vino.Server.Services.MainServices.CRM.Port;
 using Vino.Server.Web.Areas.Admin.Models.LclImps;
-using Vino.Shared.Constants.Common;
 using Vino.Shared.Constants.Warehouse;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
@@ -42,7 +42,18 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> List(DataSourceRequest common, LclImpsListModel model)
         {
-            var dtoFromRepo = await _service.GetAllAsync();
+            var dateFrom = string.IsNullOrWhiteSpace(model.FromDt) ? (DateTimeOffset?)null : DateTimeOffset.Parse(model.FromDt, new CultureInfo("vi-VN"));
+            var dateTo = string.IsNullOrWhiteSpace(model.ToDt) ? (DateTimeOffset?)null : DateTimeOffset.Parse(model.ToDt, new CultureInfo("vi-VN"));
+
+            var dtoFromRepo = await _service.SearchModels(new SearchingRequest()
+            {
+                Page = common.Page - 1,
+                PageSize = common.PageSize,
+                FromDt = dateFrom,
+                ToDt = dateTo,
+                OpIcId = model.OpIcId,
+                Mbl = model.Mbl
+            });
             var gridModel = new DataSourceResult()
             {
                 Data = dtoFromRepo,

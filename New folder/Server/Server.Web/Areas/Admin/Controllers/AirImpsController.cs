@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -9,7 +10,6 @@ using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.CRM.AirImp;
 using Vino.Server.Services.MainServices.CRM.AirImp.Models;
 using Vino.Server.Web.Areas.Admin.Models.AirImps;
-using Vino.Shared.Constants.Common;
 using Vino.Shared.Constants.Warehouse;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
@@ -39,7 +39,18 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> List(DataSourceRequest common, AirImpListModel model)
         {
-            var dtoFromRepo = await _service.GetAllAsync();
+            var dateFrom = string.IsNullOrWhiteSpace(model.FromDt) ? (DateTimeOffset?)null : DateTimeOffset.Parse(model.FromDt, new CultureInfo("vi-VN"));
+            var dateTo = string.IsNullOrWhiteSpace(model.ToDt) ? (DateTimeOffset?)null : DateTimeOffset.Parse(model.ToDt, new CultureInfo("vi-VN"));
+
+            var dtoFromRepo = await _service.SearchModels(new SearchingRequest()
+            {
+                Page = common.Page - 1,
+                PageSize = common.PageSize,
+                FromDt = dateFrom,
+                ToDt = dateTo,
+                OpIcId = model.OpIcId,
+                MawbNumber = model.MawbNumber
+            });
             var gridModel = new DataSourceResult()
             {
                 Data = dtoFromRepo,

@@ -24,9 +24,9 @@ namespace Vino.Server.Services.MainServices.CRM.AirExp
             _context = context;
         }
 
-        public async Task<IList<AirExpModel>> SearchList(SearchingRequest request)
+        public async Task<IPageList<AirExpModel>> SearchModels(SearchingRequest request)
         {
-            var query = _context.AirExps.Where(x => !x.Deleted);
+            var query = _context.AirExps.AsNoTracking().Where(w => !w.Deleted);
             if (request.FromDt.HasValue)
                 query = query.Where(w => w.Created >= request.FromDt.Value);
             if (request.ToDt.HasValue)
@@ -35,10 +35,19 @@ namespace Vino.Server.Services.MainServices.CRM.AirExp
                 query = query.Where(w => w.Created < to);
             }
 
+            if (!string.IsNullOrEmpty(request.MawbNumber))
+            {
+                query = query.Where(w => w.MawbNumber.ToLower().Contains(request.MawbNumber.ToLower()));
+            }
+
+            if (request.OpIcId.HasValue && request.OpIcId.Value > 0)
+            {
+                query = query.Where(w => w.OpicId == request.OpIcId);
+            }
             query = query.OrderByDescending(d => d.Created);
-            var items = await query.Skip(request.Page * request.PageSize)
+            var receives = await query.Skip(request.Page * request.PageSize)
                 .Take(request.PageSize).ToListAsync();
-            var models = items.MapTo<AirExpModel>();
+            var models = receives.MapTo<AirExpModel>();
             return new PageList<AirExpModel>(models, request.Page, request.PageSize, query.Count());
         }
     }

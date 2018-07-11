@@ -10,6 +10,5 @@ namespace Vino.Server.Services.MainServices.CRM.AirExp
 {
     public interface IAirExpService : IGenericRepository<Data.CRM.AirExp, AirExpModel, AirExpModel>
     {
-        Task<IList<AirExpModel>> SearchList(SearchingRequest request);
     }
 }

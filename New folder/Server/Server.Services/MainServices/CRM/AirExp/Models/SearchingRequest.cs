@@ -10,7 +10,10 @@ namespace Vino.Server.Services.MainServices.CRM.AirExp.Models
     {
         public int Page { get; set; }
         public int PageSize { get; set; }
+
         public DateTimeOffset? FromDt { get; set; }
         public DateTimeOffset? ToDt { get; set; }
+        public string MawbNumber { get; set; }
+        public int? OpIcId { get; set; }
     }
 }
