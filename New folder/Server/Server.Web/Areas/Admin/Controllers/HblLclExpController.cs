@@ -14,6 +14,7 @@ using Vino.Server.Services.MainServices.CRM.HblLclExp;
 using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
 using Vino.Server.Services.MainServices.CRM.LclExp;
 using Vino.Server.Services.MainServices.CRM.Pdf.Models;
+using Vino.Server.Services.MainServices.CRM.Port;
 using Vino.Server.Services.MainServices.CRM.Topic;
 using Vino.Server.Web.Areas.Admin.Models.HblLclExps;
 using Vino.Shared.Constants.Common;
@@ -27,22 +28,26 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         private readonly CrmCustomerService _customerService;
         private readonly HblLclExpPdfService _pdfService;
         private readonly TopicService _topicService;
-        private readonly OrderGenCodeService _orderGenCodeService;
+        private readonly OrderGenCodeService _genCodeService;
         private readonly LclExpService _lclExpService;
+        private readonly PortService _portService;
+
 
         public HblLclExpController(HblLclExpService service,
             CrmCustomerService customerService,
             HblLclExpPdfService pdfService,
             TopicService topicService,
-            OrderGenCodeService orderGenCodeService,
-            LclExpService lclExpService)
+            OrderGenCodeService genCodeService,
+            LclExpService lclExpService,
+            PortService portService)
         {
             _service = service;
             _customerService = customerService;
             _pdfService = pdfService;
             _topicService = topicService;
-            _orderGenCodeService = orderGenCodeService;
+            _genCodeService = genCodeService;
             _lclExpService = lclExpService;
+            _portService = portService;
         }
 
         #region HblLclExp
@@ -77,12 +82,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         public async Task<ActionResult> Create(int? id)
         {
             var topic = await _topicService.GetTopicByTopicType(TopicType.Company);
-            
+
 
             var model = new HblLclExpModel()
             {
-                //JobId = "FLL" + DateTimeOffset.Now.Year % 100 + DateTimeOffset.Now.Month.ToString("D2")
-                //        + "/" + (index + 1).ToString().PadLeft(4, '0'),
                 ClosingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 SellingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 IssueDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
@@ -97,7 +100,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 var lclExp = await _lclExpService.GetSingleAsync(id.Value);
                 if (lclExp != null)
                 {
-                    var orderGenCode = _orderGenCodeService.GetOrderGenCode(BookPrefixes.HblLclExp, now.LocalDateTime.Date);
+                    var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.HblLclExp, now.LocalDateTime.Date);
                     if (orderGenCode != null)
                     {
                         model.BlNumber = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{(orderGenCode.CurrentNumber + 1):D3}";
@@ -117,7 +120,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             {
                 return View(dto);
             }
-            var index = await _service.GetNumberEntry();
             var id = await _service.CreateAsync(dto);
             if (id == 0)
             {
@@ -225,6 +227,56 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         #endregion
 
-      
+        #region OpenModal
+
+        [HttpPost]
+        public PartialViewResult OpenModal(string viewResultId, string formId, LclExpAndPodModel model = null)
+        {
+            TempData["viewResultId"] = viewResultId;
+            TempData["formId"] = formId;
+
+            if (model == null)
+                model = new LclExpAndPodModel();
+
+            return PartialView("_FirstCreation", model);
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> CreateFromSubViewAsync(LclExpAndPodModel dto)
+        {
+            var viewResultId = TempData["viewResultId"];
+            var formId = TempData["formId"];
+
+            if (!ModelState.IsValid)
+            {
+                return Json(dto);
+            }
+
+            var blNumber = "";
+
+            var port = await _portService.GetSingleAsync(dto.PortId.GetValueOrDefault());
+            if (port == null)
+                return new EmptyResult();
+
+            var now = DateTimeOffset.Now;
+            // init code
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.HblLclExp + port.PortCode, now.LocalDateTime.Date);
+            if (orderGenCode != null)
+            {
+                blNumber = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{(orderGenCode.CurrentNumber + 1):D4}";
+            }
+
+            SuccessNotification("Create new customer succeed");
+            return Json(new
+            {
+                viewResultId,
+                formId,
+                blNumber
+            });
+
+        }
+
+        #endregion
     }
 }

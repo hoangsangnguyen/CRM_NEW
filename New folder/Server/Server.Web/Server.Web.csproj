@@ -2658,6 +2658,7 @@
     <Content Include="Areas\Admin\Views\Contact\_CreateContact.cshtml" />
     <Content Include="Areas\Admin\Views\Carrier\_CreateCarrier.cshtml" />
     <Content Include="Areas\Admin\Views\Carrier\CarrierAddPopup.cshtml" />
+    <Content Include="Areas\Admin\Views\HblLclExp\_FirstCreation.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
@@ -3391,6 +3392,7 @@
     <Compile Include="Areas\Admin\Models\FclExps\FclExpsListModel.cs" />
     <Compile Include="Areas\Admin\Models\FclImps\FclImpsListModel.cs" />
     <Compile Include="Areas\Admin\Models\HblLclExps\HblLclExpListModel.cs" />
+    <Compile Include="Areas\Admin\Models\HblLclExps\LclExpAndPodModel.cs" />
     <Compile Include="Areas\Admin\Models\LclExps\LclExpsListModel.cs" />
     <Compile Include="Areas\Admin\Models\LclImps\LclImpsListModel.cs" />
     <Compile Include="Areas\Admin\Models\Message\MessageContentModel.cs" />

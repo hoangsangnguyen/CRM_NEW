@@ -49,14 +49,15 @@ $("#create-TranshipmentPort").click(function () {
     OpenModalCreation(url, "TranshipmentPortId", ["FinalDestinationId", "PlaceOfDeliveryId",
         "PortOfDischargeId", "PlaceOfReceiptId", "PortOfLoaingId", "TranshipmentPortId"]);
 });
-function OpenModalCreation(url, viewId, viewGroupId) {
+function OpenModalFirstCreation(viewResultId, formId) {
+    console.log('First creation');
     $.ajax({
-        url: url,
+        url: '/Admin/HblLclExp/OpenModal',
         type: "POST",
         cache: false,
-        async: true,
+        async: false,
         contentType: 'application/json',
-        data: JSON.stringify({ viewId: viewId, viewGroupId: viewGroupId, model: null }),
+        data: JSON.stringify({ viewResultId: viewResultId, formId: formId}),
         success: function (dataJs) {
             $('#myModalContent').html(dataJs);
             $("#myModal").modal("show");

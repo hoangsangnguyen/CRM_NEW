@@ -1,0 +1,162 @@
+﻿@model Vino.Server.Web.Areas.Admin.Models.HblLclExps.LclExpAndPodModel
+@using Falcon.Web.Mvc.HtmlExtensions
+
+@{
+    var viewResultId = @ViewBag.viewResultId;
+    var formId = @ViewBag.vieWResultId;
+}
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Thêm mới</h4>
+    </div>
+    <div class="modal-body">
+        <section class="wr-main">
+            <div class="out-content-mid no-mb no-minheight">
+                <div class="container-fluid">
+                    <form id="form_new" action="">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-custom">
+                                    <div class="col-md-4">
+                                        <label class="control-label">Lcl Exp:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="@Html.FieldIdFor(model => model.LclExpId)"
+                                               name="@Html.NameFor(model => model.LclExpId)"
+                                               value="@Html.ValueFor(model => model.LclExpId)" />
+                                        <script>
+                                            $(document).ready(function() {
+                                                $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
+                                                    filter: "contains",
+                                                    dataTextField: "Name",
+                                                    dataValueField: "Value",
+                                                    placeholder: "Chọn lcl exp...",
+                                                    minLength: 1,
+                                                    dataSource: {
+                                                        type: "json",
+                                                        serverFiltering: true,
+                                                        transport: {
+                                                            read: {
+                                                                url: "/api/LclExpApi/GetAll",
+                                                                dataType: "json",
+                                                                data: filterLclExp
+                                                            }
+                                                        }
+                                                    }
+                                                });
+
+                                                function filterLclExp() {
+                                                    var data = {
+                                                        @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                                                .data("kendoComboBox").input.val()*@
+                                                        Name : ""
+                                                    };
+                                                    addAntiForgeryToken(data);
+                                                    return data;
+                                                }
+                                            });
+                                        </script>
+                                        @Html.ValidationMessageFor(model => model.LclExpId)
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-custom">
+                                    <div class="col-md-4">
+                                        <label class="control-label">Port:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="@Html.FieldIdFor(model => model.PortId)"
+                                               name="@Html.NameFor(model => model.PortId)"
+                                               value="@Html.ValueFor(model => model.PortId)" />
+                                        <script>
+                                            $(document).ready(function() {
+                                                $("#@Html.FieldIdFor(model => model.PortId)").kendoComboBox({
+                                                    filter: "contains",
+                                                    dataTextField: "Name",
+                                                    dataValueField: "Value",
+                                                    placeholder: "Chọn port...",
+                                                    minLength: 1,
+                                                    dataSource: {
+                                                        type: "json",
+                                                        serverFiltering: true,
+                                                        transport: {
+                                                            read: {
+                                                                url: "/api/PortApi/GetAll",
+                                                                dataType: "json",
+                                                                data: filterPort
+                                                            }
+                                                        }
+                                                    }
+                                                });
+
+                                                function filterPort() {
+                                                    var data = {
+                                                        @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                                                .data("kendoComboBox").input.val()*@
+                                                        Name : ""
+                                                    };
+                                                    addAntiForgeryToken(data);
+                                                    return data;
+                                                }
+                                            });
+                                        </script>
+                                        @Html.ValidationMessageFor(model => model.PortId)
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+        <button type="button" id="btn-save-contact" onclick="Save()" class="btn btn-primary">Lưu</button>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function Save () {
+            var model = JSON.stringify(GetDataRequest());
+
+            console.log('Request : ' + model);
+            $.ajax({
+                url: "@Url.Action("CreateFromSubViewAsync", "HblLclExp")",
+                type: "POST",
+                dataType: "json",
+                contentType: 'application/json',
+                data: model,
+                cache: false,
+                async: true,
+                success: function (dataJs) {
+                    $("#BlNumber").val(dataJs.blNumber);
+
+                    $('#myModal').modal('hide');
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log('Error saving contacts in ajax ' + xhr.error + thrownError.error);
+                }
+            });
+        };
+
+        function GetDataRequest() {
+            return {
+                LclExpId: $('#@Html.FieldIdFor(m => m.LclExpId)').val(),
+                PortId: $('#@Html.FieldIdFor(m => m.PortId)').val()
+            };
+        }
+</script>
+
+
+
