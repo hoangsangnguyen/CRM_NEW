@@ -17,54 +17,54 @@
     Layout = null;
 }
 
-    <div class="content">
-        <div class="form-horizontal">
+<div class="content">
+    <div class="form-horizontal">
 
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
 
-                            @*Bl Number*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">B/L No:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input readonly="readonly" type="text"
-                                               class="form-control" id="@Html.FieldIdFor(model => model.BlNumber)"
-                                               name="@Html.FieldIdFor(model => model.BlNumber)" value="@Model.BlNumber" />
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                        @*Bl Number*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">B/L No:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input readonly="readonly" type="text"
+                                           class="form-control" id="@Html.FieldIdFor(model => model.BlNumber)"
+                                           name="@Html.FieldIdFor(model => model.BlNumber)" value="@Model.BlNumber" />
+                                </div>
+                                <div class="col-md-1">
                                 </div>
                             </div>
-                            @*Booking Number*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Booking No:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.BookingNumber)
-                                        @Html.ValidationMessageFor(model => model.BookingNumber)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                        </div>
+                        @*Booking Number*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Booking/Ref No:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.BookingNumber)
+                                    @Html.ValidationMessageFor(model => model.BookingNumber)
+                                </div>
+                                <div class="col-md-1">
                                 </div>
                             </div>
-                            @*HblType*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">H-B/L Type:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.HblType)"
-                                               name=""
-                                               value="@Html.ValueFor(model => model.HblType)" />
-                                        <script>
+                        </div>
+                        @*HblType*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">H-B/L Type:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.HblType)"
+                                           name="@Html.NameFor(model => model.HblType)"
+                                           value="@Html.ValueFor(model => model.HblType)" />
+                                    <script>
                                 $(document).ready(function () {
                                     $("#@Html.FieldIdFor(model => model.HblType)").kendoComboBox({
                                         filter: "contains",
@@ -72,23 +72,31 @@
                                         dataTextField: "Name",
                                         dataValueField: "Value",
                                         minLength: 1,
-                                        suggest : true,
+                                        suggest: true,
+                                        autoBind: true,
+                                        open: onOpen,
                                         dataSource: {
                                             type: "json",
-                                            serverFiltering: true,
+                                            serverFiltering: false,
                                             transport: {
                                                 read: {
                                                     url: "/api/LookupApi/GetTypeOfBillWithIds",
                                                     dataType: "json",
-                                                    data: filterHblType
+                                                    //data: filterHblType
                                                 }
                                             }
                                         }
                                     });
 
+                                    function onOpen() {
+                                        if ("kendoConsole" in window) {
+                                            kendoConsole.log("event :: open");
+                                        }
+                                        }
+
                                     function filterHblType() {
                                         var data = {
-                                            // name : ""
+                                            //name : ""
                                             name: $("#@Html.FieldIdFor(model => model.HblType)")
                                                 .data("kendoComboBox").input.val()
                                         };
@@ -96,73 +104,77 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(m => m.HblType)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.HblType)', '@LookupTypes.TypeOfBill')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(m => m.HblType)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.HblType)', '@LookupTypes.TypeOfBill')">Add</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                    </div>
+                    <div class="row">
 
-                            @*Forward Agent*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Forward Agent:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconTextAreaFor(m => m.ForwardingAgent)
-                                        @Html.ValidationMessageFor(model => model.ForwardingAgent)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                        @*Forward Agent*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Forward Agent:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconTextAreaFor(m => m.ForwardingAgent)
+                                    @Html.ValidationMessageFor(model => model.ForwardingAgent)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        @*ExRef*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Ex Ref:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="datetime" id="@Html.FieldIdFor(model => model.ExRef)"
+                                           name="@Html.FieldIdFor(model => model.ExRef)"
+                                           value="@Model.ExRef"
+                                           style="width: 100%" />
+                                    <script>
+                                            $(document).ready(function() {
+                                                $("#@Html.FieldIdFor(model => model.ExRef)").kendoDatePicker({
+                                                    culture: "vi-VN",
+                                                    format: "dd/MM/yyyy"
+                                                });
+                                                $("#@Html.FieldIdFor(model => model.ExRef)")
+                                                    .prop("readonly", "readonly");
+                                            });
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.ExRef)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            @*FreightAmount*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">FreightAmount:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.FreightAmount)
+                                    @Html.ValidationMessageFor(model => model.FreightAmount)
+                                </div>
+                                <div class="col-md-1">
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
-                                @*FreightAmount*@
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">FreightAmount:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.FreightAmount)
-                                        @Html.ValidationMessageFor(model => model.FreightAmount)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
-                                </div>
-                                @*ExRef*@
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Ex Ref:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input type="datetime" id="@Html.FieldIdFor(model => model.ExRef)"
-                                               name="@Html.FieldIdFor(model => model.ExRef)"
-                                               value="@Model.ExRef"
-                                               style="width: 100%" />
-                                        <script>
-                                $(document).ready(function() {
-                                    $("#@Html.FieldIdFor(model => model.ExRef)").kendoDatePicker({
-                                        culture: "vi-VN",
-                                        format: "dd/MM/yyyy"
-                                    });
-                                    $("#@Html.FieldIdFor(model => model.ExRef)")
-                                        .prop("readonly", "readonly");
-                                });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.ExRef)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
-                                </div>
-                            </div>
-                            @*Reference No*@
-                            <div class="col-md-4">
+                        </div>
+                        @*Reference No*@
+                        @*<div class="col-md-4">
                                 <div class="form-group form-custom">
                                     <div class="col-md-4">
                                         <label class="control-label">Reference No:</label>
@@ -174,27 +186,28 @@
                                     <div class="col-md-1">
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div>*@
 
                     </div>
+
                 </div>
             </div>
+        </div>
 
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Shipper:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.ShipperId)"
-                                               name="@Html.NameFor(model => model.ShipperId)"
-                                               value="@Html.ValueFor(model => model.ShipperId)" />
-                                        <script>
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Shipper:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.ShipperId)"
+                                           name="@Html.NameFor(model => model.ShipperId)"
+                                           value="@Html.ValueFor(model => model.ShipperId)" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.ShipperId)").kendoComboBox({
                                         filter: "contains",
@@ -225,24 +238,24 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(m => m.ShipperId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openCustomerPopup('@Html.FieldIdFor(m => m.ShipperId)')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(m => m.ShipperId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openCustomerPopup('@Html.FieldIdFor(m => m.ShipperId)')">Add</a>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Consignee:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.ConsigneeId)"
-                                               name="@Html.NameFor(model => model.ConsigneeId)"
-                                               value="@Html.ValueFor(model => model.ConsigneeId)" />
-                                        <script>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Consignee:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.ConsigneeId)"
+                                           name="@Html.NameFor(model => model.ConsigneeId)"
+                                           value="@Html.ValueFor(model => model.ConsigneeId)" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.ConsigneeId)").kendoComboBox({
                                         filter: "contains",
@@ -279,24 +292,24 @@
                                             .value(@Model.ConsigneeId);
                                     };
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(m => m.ConsigneeId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openCustomerPopup('@Html.FieldIdFor(m => m.ConsigneeId)')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(m => m.ConsigneeId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openCustomerPopup('@Html.FieldIdFor(m => m.ConsigneeId)')">Add</a>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Notify party:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.NotifyPartyId)"
-                                               name="@Html.NameFor(model => model.NotifyPartyId)"
-                                               value="" />
-                                        <script>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Notify party:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.NotifyPartyId)"
+                                           name="@Html.NameFor(model => model.NotifyPartyId)"
+                                           value="" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.NotifyPartyId)").kendoComboBox({
                                         filter: "contains",
@@ -327,26 +340,26 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(m => m.NotifyPartyId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openCustomerPopup('@Html.FieldIdFor(m => m.NotifyPartyId)')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(m => m.NotifyPartyId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openCustomerPopup('@Html.FieldIdFor(m => m.NotifyPartyId)')">Add</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
 
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-                            @*Lcl bill types*@
-                            @*<div class="col-md-4">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        @*Lcl bill types*@
+                        @*<div class="col-md-4">
                                 <div class="form-group form-custom">
                                     <div class="col-md-4">
                                         <label class="control-label">LCL EXP ID:</label>
@@ -391,17 +404,17 @@
                                     </div>
                                 </div>
                             </div>*@
-                            @*FinalDestination*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Final Destination:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.FinalDestinationId)"
-                                               name="@Html.NameFor(model => model.FinalDestinationId)"
-                                               value="@Html.ValueFor(model => model.FinalDestinationId)" />
-                                        <script>
+                        @*FinalDestination*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Final Destination:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.FinalDestinationId)"
+                                           name="@Html.NameFor(model => model.FinalDestinationId)"
+                                           value="@Html.ValueFor(model => model.FinalDestinationId)" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.FinalDestinationId)").kendoComboBox({
                                         filter: "contains",
@@ -432,25 +445,25 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.FinalDestinationId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openPortPopup('@Html.FieldIdFor(m => m.FinalDestinationId)')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.FinalDestinationId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openPortPopup('@Html.FieldIdFor(m => m.FinalDestinationId)')">Add</a>
                                 </div>
                             </div>
-                            @*Place Of Delivery*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Place Of Delivery:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.PlaceOfDeliveryId)"
-                                               name="@Html.NameFor(model => model.PlaceOfDeliveryId)"
-                                               value="@Html.ValueFor(model => model.PlaceOfDeliveryId)" />
-                                        <script>
+                        </div>
+                        @*Place Of Delivery*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Place Of Delivery:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.PlaceOfDeliveryId)"
+                                           name="@Html.NameFor(model => model.PlaceOfDeliveryId)"
+                                           value="@Html.ValueFor(model => model.PlaceOfDeliveryId)" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.PlaceOfDeliveryId)").kendoComboBox({
                                         filter: "contains",
@@ -481,29 +494,29 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.PlaceOfDeliveryId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openPortPopup('@Html.FieldIdFor(m => m.PlaceOfDeliveryId)')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.PlaceOfDeliveryId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openPortPopup('@Html.FieldIdFor(m => m.PlaceOfDeliveryId)')">Add</a>
                                 </div>
                             </div>
-
                         </div>
-                        <div class="row">
 
-                            @*FinalDestination*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Country Of Origin:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.CountryOfOriginId)"
-                                               name="@Html.NameFor(model => model.CountryOfOriginId)"
-                                               value="@Html.ValueFor(model => model.CountryOfOriginId)" />
-                                        <script>
+                    </div>
+                    <div class="row">
+
+                        @*FinalDestination*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Country Of Origin:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.CountryOfOriginId)"
+                                           name="@Html.NameFor(model => model.CountryOfOriginId)"
+                                           value="@Html.ValueFor(model => model.CountryOfOriginId)" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.CountryOfOriginId)").kendoComboBox({
                                         filter: "contains",
@@ -534,25 +547,25 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.CountryOfOriginId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.CountryOfOriginId)', '@LookupTypes.NationalityType')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.CountryOfOriginId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.CountryOfOriginId)', '@LookupTypes.NationalityType')">Add</a>
                                 </div>
                             </div>
-                            @*Type Of Move*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Type Of Move:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.TypeOfMoveId)"
-                                               name="@Html.NameFor(model => model.TypeOfMoveId)"
-                                               value="@Html.ValueFor(model => model.TypeOfMoveId)" />
-                                        <script>
+                        </div>
+                        @*Type Of Move*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Type Of Move:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.TypeOfMoveId)"
+                                           name="@Html.NameFor(model => model.TypeOfMoveId)"
+                                           value="@Html.ValueFor(model => model.TypeOfMoveId)" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.TypeOfMoveId)").kendoComboBox({
                                         filter: "contains",
@@ -583,26 +596,26 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.TypeOfMoveId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.TypeOfMoveId)', '@LookupTypes.TypeOfMove')">Add</a>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.TypeOfMoveId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.TypeOfMoveId)', '@LookupTypes.TypeOfMove')">Add</a>
 
-                                    </div>
                                 </div>
                             </div>
-                            @*Closing Date*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Closing date:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input type="datetime" id="@Html.FieldIdFor(model => model.ClosingDate)"
-                                               name="@Html.FieldIdFor(model => model.ClosingDate)" value="@Model.ClosingDate"
-                                               style="width: 100%" />
-                                        <script>
+                        </div>
+                        @*Closing Date*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Closing date:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="datetime" id="@Html.FieldIdFor(model => model.ClosingDate)"
+                                           name="@Html.FieldIdFor(model => model.ClosingDate)" value="@Model.ClosingDate"
+                                           style="width: 100%" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.ClosingDate)").kendoDatePicker({
                                         culture: "vi-VN",
@@ -611,27 +624,27 @@
                                     $("#@Html.FieldIdFor(model => model.ClosingDate)")
                                         .prop("readonly", "readonly");
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.ClosingDate)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.ClosingDate)
+                                </div>
+                                <div class="col-md-1">
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                    </div>
+                    <div class="row">
 
-                            @*FreightPayableAt*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Freight Payable:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.FreightPayableId)"
-                                               name="@Html.NameFor(model => model.FreightPayableId)"
-                                               value="@Html.ValueFor(model => model.FreightPayableId)" />
-                                        <script>
+                        @*FreightPayableAt*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Freight Payable:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.FreightPayableId)"
+                                           name="@Html.NameFor(model => model.FreightPayableId)"
+                                           value="@Html.ValueFor(model => model.FreightPayableId)" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.FreightPayableId)").kendoComboBox({
                                         filter: "contains",
@@ -662,40 +675,40 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.FreightPayableId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.FreightPayableId)', '@LookupTypes.PlaceType')">Add</a>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.FreightPayableId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.FreightPayableId)', '@LookupTypes.PlaceType')">Add</a>
 
-                                    </div>
                                 </div>
                             </div>
-                            @*Number of origin*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Number of origin:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.NumberOfOriginal)
-                                        @Html.ValidationMessageFor(model => model.NumberOfOriginal)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                        </div>
+                        @*Number of origin*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Number of origin:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.NumberOfOriginal)
+                                    @Html.ValidationMessageFor(model => model.NumberOfOriginal)
+                                </div>
+                                <div class="col-md-1">
                                 </div>
                             </div>
-                            @*SellingDate*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Selling Date:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input type="datetime" id="@Html.FieldIdFor(model => model.SellingDate)"
-                                               name="@Html.FieldIdFor(model => model.SellingDate)" value="@Model.SellingDate"
-                                               style="width: 100%" />
-                                        <script>
+                        </div>
+                        @*SellingDate*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Sailing Date:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="datetime" id="@Html.FieldIdFor(model => model.SellingDate)"
+                                           name="@Html.FieldIdFor(model => model.SellingDate)" value="@Model.SellingDate"
+                                           style="width: 100%" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.SellingDate)").kendoDatePicker({
                                         culture: "vi-VN",
@@ -704,37 +717,37 @@
                                     $("#@Html.FieldIdFor(model => model.SellingDate)")
                                         .prop("readonly", "readonly");
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.SellingDate)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.SellingDate)
+                                </div>
+                                <div class="col-md-1">
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
+
+
                 </div>
             </div>
+        </div>
 
 
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
 
-                            @*Local Vessel*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Local Vessel:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.LocalVessel)"
-                                               name="@Html.NameFor(model => model.LocalVessel)"
-                                               value="@Html.ValueFor(model => model.LocalVessel)" />
-                                        <script>
+                        @*Local Vessel*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Local Vessel:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.LocalVessel)"
+                                           name="@Html.NameFor(model => model.LocalVessel)"
+                                           value="@Html.ValueFor(model => model.LocalVessel)" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.LocalVessel)").kendoComboBox({
                                         filter: "contains",
@@ -765,25 +778,25 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.LocalVessel)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.LocalVessel)', '@LookupTypes.VesselType')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.LocalVessel)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.LocalVessel)', '@LookupTypes.VesselType')">Add</a>
                                 </div>
                             </div>
-                            @*Ocean Vessel*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Ocean Vessel:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.OceanVessel)"
-                                               name="@Html.NameFor(model => model.OceanVessel)"
-                                               value="@Html.ValueFor(model => model.OceanVessel)" />
-                                        <script>
+                        </div>
+                        @*Ocean Vessel*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Ocean Vessel:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.OceanVessel)"
+                                           name="@Html.NameFor(model => model.OceanVessel)"
+                                           value="@Html.ValueFor(model => model.OceanVessel)" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.OceanVessel)").kendoComboBox({
                                         filter: "contains",
@@ -814,25 +827,25 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.OceanVessel)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.OceanVessel)', '@LookupTypes.VesselType')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.OceanVessel)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.OceanVessel)', '@LookupTypes.VesselType')">Add</a>
                                 </div>
                             </div>
-                            @*Port of dis*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">PortOfDischarge:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.PortOfDischargeId)"
-                                               name="@Html.NameFor(model => model.PortOfDischargeId)"
-                                               value="@Html.ValueFor(model => model.PortOfDischargeId)" />
-                                        <script>
+                        </div>
+                        @*Port of dis*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">PortOfDischarge:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.PortOfDischargeId)"
+                                           name="@Html.NameFor(model => model.PortOfDischargeId)"
+                                           value="@Html.ValueFor(model => model.PortOfDischargeId)" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.PortOfDischargeId)").kendoComboBox({
                                         filter: "contains",
@@ -863,28 +876,28 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.PortOfDischargeId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openPortPopup('@Html.FieldIdFor(m => m.PortOfDischargeId)')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.PortOfDischargeId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openPortPopup('@Html.FieldIdFor(m => m.PortOfDischargeId)')">Add</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                    </div>
+                    <div class="row">
 
-                            @*PlaceOfReceipt*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Place Of Receipt:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.PlaceOfReceiptId)"
-                                               name="@Html.NameFor(model => model.PlaceOfReceiptId)"
-                                               value="@Html.ValueFor(model => model.PlaceOfReceiptId)" />
-                                        <script>
+                        @*PlaceOfReceipt*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Place Of Receipt:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.PlaceOfReceiptId)"
+                                           name="@Html.NameFor(model => model.PlaceOfReceiptId)"
+                                           value="@Html.ValueFor(model => model.PlaceOfReceiptId)" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.PlaceOfReceiptId)").kendoComboBox({
                                         filter: "contains",
@@ -915,25 +928,25 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.PlaceOfReceiptId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openPortPopup('@Html.FieldIdFor(m => m.PlaceOfReceiptId)')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.PlaceOfReceiptId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openPortPopup('@Html.FieldIdFor(m => m.PlaceOfReceiptId)')">Add</a>
                                 </div>
                             </div>
-                            @*Port Of Loaing*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Port Of Loaing:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.PortOfLoaingId)"
-                                               name="@Html.NameFor(model => model.PortOfLoaingId)"
-                                               value="@Html.ValueFor(model => model.PortOfLoaingId)" />
-                                        <script>
+                        </div>
+                        @*Port Of Loaing*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Port Of Loaing:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.PortOfLoaingId)"
+                                           name="@Html.NameFor(model => model.PortOfLoaingId)"
+                                           value="@Html.ValueFor(model => model.PortOfLoaingId)" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.PortOfLoaingId)").kendoComboBox({
                                         filter: "contains",
@@ -964,25 +977,25 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.PortOfLoaingId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openPortPopup('@Html.FieldIdFor(m => m.PortOfLoaingId)')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.PortOfLoaingId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openPortPopup('@Html.FieldIdFor(m => m.PortOfLoaingId)')">Add</a>
                                 </div>
                             </div>
-                            @*TranshipmentPort*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">TranshipmentPort:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.TranshipmentPortId)"
-                                               name="@Html.NameFor(model => model.TranshipmentPortId)"
-                                               value="@Html.ValueFor(model => model.TranshipmentPortId)" />
-                                        <script>
+                        </div>
+                        @*TranshipmentPort*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">TranshipmentPort:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.TranshipmentPortId)"
+                                           name="@Html.NameFor(model => model.TranshipmentPortId)"
+                                           value="@Html.ValueFor(model => model.TranshipmentPortId)" />
+                                    <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.TranshipmentPortId)").kendoComboBox({
                                         filter: "contains",
@@ -1013,48 +1026,48 @@
                                         return data;
                                     }
                                 });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.TranshipmentPortId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openPortPopup('@Html.FieldIdFor(m => m.TranshipmentPortId)')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.TranshipmentPortId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openPortPopup('@Html.FieldIdFor(m => m.TranshipmentPortId)')">Add</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-                            @*Container*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">ContainerNo/Seal:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconTextAreaFor(m => m.Container)
-                                        @Html.ValidationMessageFor(model => model.Container)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+        </div>
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        @*Container*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">ContainerNo/Seal:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconTextAreaFor(m => m.Container)
+                                    @Html.ValidationMessageFor(model => model.Container)
+                                </div>
+                                <div class="col-md-1">
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="col-md-4">
-                                @*Delivery Of Goods*@
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Delivery Of Goods:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.DeliveryOfGoodsId)"
-                                               name="@Html.NameFor(model => model.DeliveryOfGoodsId)"
-                                               value="@Html.ValueFor(model => model.DeliveryOfGoodsId)" />
-                                        <script>
+                        <div class="col-md-4">
+                            @*Delivery Of Goods*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Delivery Of Goods:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.DeliveryOfGoodsId)"
+                                           name="@Html.NameFor(model => model.DeliveryOfGoodsId)"
+                                           value="@Html.ValueFor(model => model.DeliveryOfGoodsId)" />
+                                    <script>
                     $(document).ready(function() {
                         $("#@Html.FieldIdFor(model => model.DeliveryOfGoodsId)").kendoComboBox({
                             filter: "contains",
@@ -1085,96 +1098,143 @@
                             return data;
                         }
                     });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.DeliveryOfGoodsId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openCustomerPopup('@Html.FieldIdFor(m => m.DeliveryOfGoodsId)')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.DeliveryOfGoodsId)
                                 </div>
-                                @*NumberOfPackage*@
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">NumberOfPackage:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.NumberOfPackage)
-                                        @Html.ValidationMessageFor(model => model.NumberOfPackage)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                                <div class="col-md-1">
+                                    <a onclick="openCustomerPopup('@Html.FieldIdFor(m => m.DeliveryOfGoodsId)')">Add</a>
                                 </div>
                             </div>
-
-                            <div class="col-md-4">
-                                @*QtyOfContainer*@
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">QtyOfContainer:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.QtyOfContainer)
-                                        @Html.ValidationMessageFor(model => model.QtyOfContainer)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                            @*NumberOfPackage*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">NumberOfPackage:</label>
                                 </div>
-                                @*PoNumber*@
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">PoNumber:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.PoNumber)
-                                        @Html.ValidationMessageFor(model => model.PoNumber)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.NumberOfPackage)
+                                    @Html.ValidationMessageFor(model => model.NumberOfPackage)
+                                </div>
+                                <div class="col-md-1">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            @*DescriptionOfGoods*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">DescriptionOfGoods:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconTextAreaFor(m => m.DescriptionOfGoods)
-                                        @Html.ValidationMessageFor(model => model.DescriptionOfGoods)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                        <div class="col-md-4">
+                            @*QtyOfContainer*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">QtyOfContainer:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.QtyOfContainer)"
+                                           name="@Html.NameFor(model => model.QtyOfContainer)"
+                                           value="@Html.ValueFor(model => model.QtyOfContainer)"/>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.QtyOfContainer)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn unit...",
+                                                minLength: 1,
+                                                select: onSelect,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LookupApi/GetUnitTypes",
+                                                            dataType: "json",
+                                                            data: filterUnits
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterUnits() {
+                                                var data = {
+                                                    @*Name: $("#@Html.FieldIdFor(model => model.UnitId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                                    Name: ""
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+
+                                            function onSelect(e) {
+                                                if ("kendoConsole" in window) {
+                                                    if (e.item) {
+                                                        var dataItem = this.dataItem(e.item.index());
+                                                        kendoConsole.log("event :: select (" + dataItem.text + " : " + dataItem.value + ")");
+                                                    } else {
+                                                        kendoConsole.log("event :: select");
+                                                    }
+                                                }
+                                            };
+
+                                        });
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.QtyOfContainer)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                            @*PoNumber*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">PoNumber:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.PoNumber)
+                                    @Html.ValidationMessageFor(model => model.PoNumber)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @*DescriptionOfGoods*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">DescriptionOfGoods:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconTextAreaFor(m => m.DescriptionOfGoods)
+                                    @Html.ValidationMessageFor(model => model.DescriptionOfGoods)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            @*GrossWeight*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">GrossWeight:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.GrossWeight)
+                                    @Html.ValidationMessageFor(model => model.GrossWeight)
+                                </div>
+                                <div class="col-md-1">
                                 </div>
                             </div>
 
-
-                            <div class="col-md-4">
-                                @*GrossWeight*@
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">GrossWeight:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.GrossWeight)
-                                        @Html.ValidationMessageFor(model => model.GrossWeight)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                            @*Unit*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Unit:</label>
                                 </div>
-
-                                @*Unit*@
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Unit:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.UnitId)"
-                                               name="@Html.NameFor(model => model.UnitId)"
-                                               value="@Html.ValueFor(model => model.UnitId)" />
-                                        <script>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.UnitId)"
+                                           name="@Html.NameFor(model => model.UnitId)"
+                                           value="@Html.ValueFor(model => model.UnitId)" />
+                                    <script>
                     $(document).ready(function() {
                         $("#@Html.FieldIdFor(model => model.UnitId)").kendoComboBox({
                             filter: "contains",
@@ -1205,54 +1265,54 @@
                             return data;
                         }
                     });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.UnitId)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.UnitId)
                                 </div>
-
-                                @*Measurement*@
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Measurement:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.Measurement)
-                                        @Html.ValidationMessageFor(model => model.Measurement)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                                <div class="col-md-1">
                                 </div>
                             </div>
-                            @*OnBoardStatus*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">OnBoardStatus:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconTextAreaFor(m => m.OnBoardStatus)
-                                        @Html.ValidationMessageFor(model => model.OnBoardStatus)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+
+                            @*Measurement*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Measurement:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.Measurement)
+                                    @Html.ValidationMessageFor(model => model.Measurement)
+                                </div>
+                                <div class="col-md-1">
                                 </div>
                             </div>
                         </div>
+                        @*OnBoardStatus*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">OnBoardStatus:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconTextAreaFor(m => m.OnBoardStatus)
+                                    @Html.ValidationMessageFor(model => model.OnBoardStatus)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="row">
-                            @*Commodity*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Commodity:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.CommodityId)"
-                                               name="@Html.NameFor(model => model.CommodityId)"
-                                               value="@Html.ValueFor(model => model.CommodityId)" />
-                                        <script>
+                    <div class="row">
+                        @*Commodity*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Commodity:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.CommodityId)"
+                                           name="@Html.NameFor(model => model.CommodityId)"
+                                           value="@Html.ValueFor(model => model.CommodityId)" />
+                                    <script>
                     $(document).ready(function() {
                         $("#@Html.FieldIdFor(model => model.CommodityId)").kendoComboBox({
                             filter: "contains",
@@ -1283,27 +1343,27 @@
                             return data;
                         }
                     });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.CommodityId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.CommodityId)', '@LookupTypes.CommoditiesType')">Add</a>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.CommodityId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.CommodityId)', '@LookupTypes.CommoditiesType')">Add</a>
 
-                                    </div>
                                 </div>
                             </div>
+                        </div>
 
-                            @*PlaceOfIssue*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">PlaceOfIssue:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.PlaceOfIssueId)"
-                                               name="@Html.NameFor(model => model.PlaceOfIssueId)"
-                                               value="@Html.ValueFor(model => model.PlaceOfIssueId)" />
-                                        <script>
+                        @*PlaceOfIssue*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">PlaceOfIssue:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.PlaceOfIssueId)"
+                                           name="@Html.NameFor(model => model.PlaceOfIssueId)"
+                                           value="@Html.ValueFor(model => model.PlaceOfIssueId)" />
+                                    <script>
                     $(document).ready(function() {
                         $("#@Html.FieldIdFor(model => model.PlaceOfIssueId)").kendoComboBox({
                             filter: "contains",
@@ -1334,27 +1394,27 @@
                             return data;
                         }
                     });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.PlaceOfIssueId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.PlaceOfIssueId)', '@LookupTypes.PlaceType')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.PlaceOfIssueId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.PlaceOfIssueId)', '@LookupTypes.PlaceType')">Add</a>
                                 </div>
                             </div>
+                        </div>
 
-                            @*Date of issue*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">IssueDate:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input type="datetime" id="@Html.FieldIdFor(model => model.IssueDate)"
-                                               name="@Html.FieldIdFor(model => model.IssueDate)"
-                                               value="@Model.IssueDate"
-                                               style="width: 100%" />
-                                        <script>
+                        @*Date of issue*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">IssueDate:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="datetime" id="@Html.FieldIdFor(model => model.IssueDate)"
+                                           name="@Html.FieldIdFor(model => model.IssueDate)"
+                                           value="@Model.IssueDate"
+                                           style="width: 100%" />
+                                    <script>
                     $(document).ready(function() {
                         $("#@Html.FieldIdFor(model => model.IssueDate)").kendoDatePicker({
                             culture: "vi-VN",
@@ -1363,34 +1423,34 @@
                         $("#@Html.FieldIdFor(model => model.IssueDate)")
                             .prop("readonly", "readonly");
                     });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.IssueDate)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.IssueDate)
+                                </div>
+                                <div class="col-md-1">
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
-            @*modal*@
-            <div id="myModal" class="modal  fade " data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div id="myModalContent"></div>
-                    </div>
+        </div>
+        @*modal*@
+        <div id="myModal" class="modal  fade " data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div id="myModalContent"></div>
                 </div>
             </div>
-
-            <input type="submit" id="btnRefreshCustomerItems" style="display: none" />
-            <input type="submit" id="btnRefreshPortItems" style="display: none" />
-            <input type="submit" id="btnRefreshLookupItems" style="display: none" />
-
         </div>
 
-        <script>
+        <input type="submit" id="btnRefreshCustomerItems" style="display: none" />
+        <input type="submit" id="btnRefreshPortItems" style="display: none" />
+        <input type="submit" id="btnRefreshLookupItems" style="display: none" />
+
+    </div>
+
+    <script>
 
     function openCustomerPopup(viewId) {
 
@@ -1459,7 +1519,7 @@
                 return false;
             });
     });
-        </script>
-        <script type="text/javascript" src="/Areas/Admin/Content/js/hbllclexp_addedit.js"></script>
+    </script>
+    <script type="text/javascript" src="/Areas/Admin/Content/js/hbllclexp_addedit.js"></script>
 
-    </div>
+</div>

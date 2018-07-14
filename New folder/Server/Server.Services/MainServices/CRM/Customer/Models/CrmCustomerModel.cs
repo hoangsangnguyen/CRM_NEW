@@ -36,7 +36,7 @@ namespace Vino.Server.Services.MainServices.CRM.Customer.Models
         /**
         * Full Viet Nam Name
         */
-        [Required(ErrorMessage = "Vui lòng nhập Full English Name")]
+        [Required(ErrorMessage = "Vui lòng nhập Full VietNam Name")]
         public string FullVietNamName { get; set; }
 
         /**

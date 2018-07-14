@@ -86,6 +86,7 @@
         TypeOfMove = 61,
         PlaceType = 62,
         TopicType = 63,
+        Container = 64,
 
     }
 }

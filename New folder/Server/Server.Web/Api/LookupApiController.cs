@@ -170,7 +170,7 @@ namespace Vino.Server.Web.Api
             return items;
         }
 
-        public List<NameValueModel> GetTypeOfBillWithIds(string name, bool withAll = false)
+        public List<NameValueModel> GetTypeOfBillWithIds(string name = "", bool withAll = false)
         {
             var typeOfBills = _lookupService.GetLookupByLookupType(LookupTypes.TypeOfBill)
                 .Select(d => new NameValueModel()

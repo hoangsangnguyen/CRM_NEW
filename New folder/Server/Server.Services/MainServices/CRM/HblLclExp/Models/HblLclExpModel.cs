@@ -94,7 +94,7 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
 
         public int NumberOfPackage { get; set; }
 
-        public int QtyOfContainer { get; set; }
+        public string QtyOfContainer { get; set; }
 
         public string PoNumber { get; set; }
 
