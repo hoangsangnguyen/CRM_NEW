@@ -58,9 +58,13 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return Json(gridModel);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(string topicType)
         {
-            var model = new TopicModel();
+            var model = new TopicModel()
+            {
+                Type = topicType
+            };
+
             return View(model);
         }
 
@@ -83,16 +87,28 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 SuccessNotification("Tạo mới thành công!");
             }
 
-            return RedirectToAction("Edit", new { id });
+            return RedirectToAction("Edit", new { topicType = dto.Type });
         }
 
-        public async Task<ActionResult> Edit(int id = 0)
+        //public async Task<ActionResult> Edit(int id = 0)
+        //{
+        //    var model = await _service.GetSingleAsync(id);
+
+        //    if (model == null)
+        //    {
+        //        return RedirectToAction("List");
+        //    }
+
+        //    return View(model);
+        //}
+
+        public async Task<ActionResult> Edit(string topicType)
         {
-            var model = await _service.GetSingleAsync(id);
+            var model = await _service.GetTopicByTopicType(topicType);
 
             if (model == null)
             {
-                return RedirectToAction("List");
+                return RedirectToAction("Create", new { topicType = topicType});
             }
 
             return View(model);
@@ -111,7 +127,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             await _service.EditAsync(dto.Id, dto);
 
             SuccessNotification("Chỉnh sửa thành công!");
-            return RedirectToAction("Edit", new { id = dto.Id });
+            return RedirectToAction("Edit", new { topicType = dto.Type });
         }
 
         [HttpPost]

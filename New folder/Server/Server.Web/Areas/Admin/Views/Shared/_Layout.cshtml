@@ -1,5 +1,6 @@
 ﻿@using Falcon.Web.Mvc.HtmlExtensions
 @using Vino.Server.Web.Helper
+@using Vino.Shared.Constants.Common
 <!DOCTYPE html>
 <html>
 <head>
@@ -142,8 +143,8 @@
                         </a>
                     </li>
                     
-                    <li class="@Html.IsActive("Topic","Index")">
-                        <a href="@Url.Action("Index", "Topic")">
+                    <li class="@Html.IsActive("Topic","Edit")">
+                        <a href="@Url.Action("Edit", "Topic", new {topicType = TopicType.Company})">
                             <i class="fa fa-industry" style="margin-left: 5px"></i>
                             <span style="color: #0173b7">Giới thiệu công ty</span>
                         </a>

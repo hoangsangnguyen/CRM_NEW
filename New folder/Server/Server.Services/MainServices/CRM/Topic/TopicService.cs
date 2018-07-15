@@ -24,5 +24,6 @@ namespace Vino.Server.Services.MainServices.CRM.Topic
             var result = topic.MapTo<TopicModel>();
             return result;
         }
+
     }
 }

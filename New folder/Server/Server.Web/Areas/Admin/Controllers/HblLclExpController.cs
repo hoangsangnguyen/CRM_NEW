@@ -83,7 +83,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             var topic = await _topicService.GetTopicByTopicType(TopicType.Company);
 
-
             var model = new HblLclExpModel()
             {
                 ClosingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
@@ -92,22 +91,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 LclExpId = id ?? 0,
                 ForwardingAgent = topic?.Name + "-" + topic?.Address + "-" + topic?.Phone
             };
-
-            var now = DateTimeOffset.Now;
-            // init code for BlNumber
-            //if (id != null && id > 0)
-            //{
-            //    var lclExp = await _lclExpService.GetSingleAsync(id.Value);
-            //    if (lclExp != null)
-            //    {
-            //        var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.HblLclExp, now.LocalDateTime.Date);
-            //        if (orderGenCode != null)
-            //        {
-            //            model.BlNumber = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{(orderGenCode.CurrentNumber + 1):D3}";
-            //        }
-            //    }
-            //}
-
 
             return View(model);
         }
