@@ -96,7 +96,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             orderGenCode.CurrentNumber += 1;
             _genCodeService.UpdateOrderGenCode(orderGenCode);
 
-            dto.JobId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{(orderGenCode.CurrentNumber + 1):D4}";
+            dto.JobId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{orderGenCode.CurrentNumber:D4}";
 
             var id = await _service.CreateAsync(dto);
             if (id == 0)

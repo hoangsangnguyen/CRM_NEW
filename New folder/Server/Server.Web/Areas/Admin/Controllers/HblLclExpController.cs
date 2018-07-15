@@ -89,24 +89,24 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 ClosingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 SellingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 IssueDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
-                LclExpId = id,
+                LclExpId = id ?? 0,
                 ForwardingAgent = topic?.Name + "-" + topic?.Address + "-" + topic?.Phone
             };
 
             var now = DateTimeOffset.Now;
             // init code for BlNumber
-            if (id != null && id > 0)
-            {
-                var lclExp = await _lclExpService.GetSingleAsync(id.Value);
-                if (lclExp != null)
-                {
-                    var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.HblLclExp, now.LocalDateTime.Date);
-                    if (orderGenCode != null)
-                    {
-                        model.BlNumber = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{(orderGenCode.CurrentNumber + 1):D3}";
-                    }
-                }
-            }
+            //if (id != null && id > 0)
+            //{
+            //    var lclExp = await _lclExpService.GetSingleAsync(id.Value);
+            //    if (lclExp != null)
+            //    {
+            //        var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.HblLclExp, now.LocalDateTime.Date);
+            //        if (orderGenCode != null)
+            //        {
+            //            model.BlNumber = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{(orderGenCode.CurrentNumber + 1):D3}";
+            //        }
+            //    }
+            //}
 
 
             return View(model);
@@ -120,6 +120,28 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             {
                 return View(dto);
             }
+
+            var now = DateTimeOffset.Now;
+
+            var lclExpId = dto.LclExpId;
+            var lclExp = await _lclExpService.GetSingleAsync(lclExpId);
+            if (lclExp == null)
+                ErrorNotification("Tạo mới thất bại!");
+
+            var port = await _portService.GetSingleAsync(dto.Port.GetValueOrDefault());
+            if (port == null)
+            {
+                ErrorNotification("Tạo mới thất bại!");
+                return View(dto);
+            }
+
+            // init code
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.HblLclExp + port.PortCode, now.LocalDateTime.Date);
+            orderGenCode.CurrentNumber += 1;
+            _genCodeService.UpdateOrderGenCode(orderGenCode);
+
+            dto.BlNumber = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{orderGenCode.CurrentNumber:D4}";
+
             var id = await _service.CreateAsync(dto);
             if (id == 0)
             {
@@ -271,6 +293,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return Json(new
             {
                 viewResultId,
+                portId = port.Id,
                 formId,
                 blNumber
             });

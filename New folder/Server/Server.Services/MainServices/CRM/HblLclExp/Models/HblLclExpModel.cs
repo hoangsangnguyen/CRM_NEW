@@ -14,10 +14,13 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
     public class HblLclExpModel : BaseDto
     {
         [Required(ErrorMessage = "Vui lòng chọn LclExp")]
-        public int? LclExpId { get; set; }
+        public int LclExpId { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập BL Number")]
         public string BlNumber { get; set; }
+
+        public int? Port { get; set; }
+
         [Required(ErrorMessage = "Vui lòng nhập Booking number")]
         public string BookingNumber { get; set; }
 
@@ -46,6 +49,7 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
         /*
          * Notify party and name
          */
+        [Required(ErrorMessage = "Vui lòng chọn notify Party hoặc tạo mới")]
         public int? NotifyPartyId { get; set; }
         public string NotifyPartyName { get; set; }
 
@@ -94,8 +98,8 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
 
         public int NumberOfPackage { get; set; }
 
+        [Required(ErrorMessage = "Vui lòng nhập quantity")]
         public string QtyOfContainer { get; set; }
-
         public string PoNumber { get; set; }
 
         public string DescriptionOfGoods { get; set; }

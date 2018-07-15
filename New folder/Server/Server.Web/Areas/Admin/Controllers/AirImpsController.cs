@@ -75,7 +75,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.AirImp, now.LocalDateTime.Date);
             if (orderGenCode != null)
             {
-                model.JobId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{(orderGenCode.CurrentNumber + 1):D4}";
+                model.JobId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{orderGenCode.CurrentNumber:D4}";
             }
 
             return View(model);
