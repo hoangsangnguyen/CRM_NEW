@@ -17,59 +17,13 @@
                 <div class="container-fluid">
                     <form id="form_new" action="">
                         <div class="row">
-                            <div class="col-md-6">
+                          
+                            <div class="col-md-12">
                                 <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Lcl Exp:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input id="@Html.FieldIdFor(model => model.LclExpId)"
-                                               name="@Html.NameFor(model => model.LclExpId)"
-                                               value="@Html.ValueFor(model => model.LclExpId)" />
-                                        <script>
-                                            $(document).ready(function() {
-                                                $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
-                                                    filter: "contains",
-                                                    dataTextField: "Name",
-                                                    dataValueField: "Value",
-                                                    placeholder: "Chọn lcl exp...",
-                                                    minLength: 1,
-                                                    dataSource: {
-                                                        type: "json",
-                                                        serverFiltering: true,
-                                                        transport: {
-                                                            read: {
-                                                                url: "/api/LclExpApi/GetAll",
-                                                                dataType: "json",
-                                                                data: filterLclExp
-                                                            }
-                                                        }
-                                                    }
-                                                });
-
-                                                function filterLclExp() {
-                                                    var data = {
-                                                        @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                                                .data("kendoComboBox").input.val()*@
-                                                        Name : ""
-                                                    };
-                                                    addAntiForgeryToken(data);
-                                                    return data;
-                                                }
-                                            });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.LclExpId)
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label class="control-label">Port:</label>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-9">
                                         <input id="@Html.FieldIdFor(model => model.PortId)"
                                                name="@Html.NameFor(model => model.PortId)"
                                                value="@Html.ValueFor(model => model.PortId)" />
@@ -140,9 +94,9 @@
                 async: true,
                 success: function (dataJs) {
                     $("#BlNumber").val(dataJs.blNumber);
+                    $("#Port").val(dataJs.portId);
 
                     $('#myModal').modal('hide');
-
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     console.log('Error saving contacts in ajax ' + xhr.error + thrownError.error);
@@ -152,7 +106,6 @@
 
         function GetDataRequest() {
             return {
-                LclExpId: $('#@Html.FieldIdFor(m => m.LclExpId)').val(),
                 PortId: $('#@Html.FieldIdFor(m => m.PortId)').val()
             };
         }

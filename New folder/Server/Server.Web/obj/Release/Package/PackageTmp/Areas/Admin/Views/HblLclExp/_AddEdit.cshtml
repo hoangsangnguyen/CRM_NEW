@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
 @using Falcon.Web.Mvc.HtmlExtensions
+@using Vino.Server.Services.Helper
 @using Vino.Shared.Constants.Common
 @model Vino.Server.Services.MainServices.CRM.HblLclExp.Models.HblLclExpModel
 
@@ -12,6 +13,8 @@
 }
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.Port)
+
 
 @{
     Layout = null;
@@ -40,6 +43,59 @@
                                 </div>
                             </div>
                         </div>
+
+                        <input id="@Html.FieldIdFor(m => m.Port)" name="@Html.NameFor(m => m.Port)" style="display: none" />
+
+                        @*Lcl Exp*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Lcl Exp:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.LclExpId)"
+                                           name="@Html.NameFor(model => model.LclExpId)"
+                                           value="@(Model.LclExpId > 0 ? Html.ValueFor(model => model.LclExpId) : null)" />
+                                    <script>
+                                            $(document).ready(function() {
+                                                $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
+                                                    filter: "contains",
+                                                    dataTextField: "Name",
+                                                    dataValueField: "Value",
+                                                    placeholder: "Chọn lcl exp...",
+                                                    minLength: 1,
+                                                    dataSource: {
+                                                        type: "json",
+                                                        serverFiltering: true,
+                                                        transport: {
+                                                            read: {
+                                                                url: "/api/LclExpApi/GetAll",
+                                                                dataType: "json",
+                                                                data: filterLclExp
+                                                            }
+                                                        }
+                                                    }
+                                                });
+
+                                                function filterLclExp() {
+                                                    var data = {
+                                                        @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                                                .data("kendoComboBox").input.val()*@
+                                                        Name: ""
+                                                    };
+                                                    addAntiForgeryToken(data);
+                                                    return data;
+                                                }
+                                            });
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.LclExpId)
+
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
                         @*Booking Number*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -51,64 +107,6 @@
                                     @Html.ValidationMessageFor(model => model.BookingNumber)
                                 </div>
                                 <div class="col-md-1">
-                                </div>
-                            </div>
-                        </div>
-                        @*HblType*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">H-B/L Type:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.HblType)"
-                                           name="@Html.NameFor(model => model.HblType)"
-                                           value="@Html.ValueFor(model => model.HblType)" />
-                                    <script>
-                                $(document).ready(function () {
-                                    $("#@Html.FieldIdFor(model => model.HblType)").kendoComboBox({
-                                        filter: "contains",
-                                        placeholder: "Chọn Hbl type...",
-                                        dataTextField: "Name",
-                                        dataValueField: "Value",
-                                        minLength: 1,
-                                        suggest: true,
-                                        autoBind: true,
-                                        open: onOpen,
-                                        dataSource: {
-                                            type: "json",
-                                            serverFiltering: false,
-                                            transport: {
-                                                read: {
-                                                    url: "/api/LookupApi/GetTypeOfBillWithIds",
-                                                    dataType: "json",
-                                                    //data: filterHblType
-                                                }
-                                            }
-                                        }
-                                    });
-
-                                    function onOpen() {
-                                        if ("kendoConsole" in window) {
-                                            kendoConsole.log("event :: open");
-                                        }
-                                        }
-
-                                    function filterHblType() {
-                                        var data = {
-                                            //name : ""
-                                            name: $("#@Html.FieldIdFor(model => model.HblType)")
-                                                .data("kendoComboBox").input.val()
-                                        };
-                                        addAntiForgeryToken(data);
-                                        return data;
-                                    }
-                                });
-                                    </script>
-                                    @Html.ValidationMessageFor(m => m.HblType)
-                                </div>
-                                <div class="col-md-1">
-                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.HblType)', '@LookupTypes.TypeOfBill')">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -124,6 +122,79 @@
                                 <div class="col-md-7">
                                     @Html.FalconTextAreaFor(m => m.ForwardingAgent)
                                     @Html.ValidationMessageFor(model => model.ForwardingAgent)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            @*HblType*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">H-B/L Type:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.HblType)"
+                                           name="@Html.NameFor(model => model.HblType)"
+                                           value="@Html.ValueFor(model => model.HblType)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.HblType)").kendoComboBox({
+                                                filter: "contains",
+                                                placeholder: "Chọn Hbl type...",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                minLength: 1,
+                                                suggest: true,
+                                                autoBind: true,
+                                                open: onOpen,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: false,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LookupApi/GetTypeOfBillWithIds",
+                                                            dataType: "json",
+                                                            //data: filterHblType
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function onOpen() {
+                                                if ("kendoConsole" in window) {
+                                                    kendoConsole.log("event :: open");
+                                                }
+                                            }
+
+                                            function filterHblType() {
+                                                var data = {
+                                                    //name : ""
+                                                    name: $("#@Html.FieldIdFor(model => model.HblType)")
+                                                        .data("kendoComboBox").input.val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
+                                    @Html.ValidationMessageFor(m => m.HblType)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.HblType)', '@LookupTypes.TypeOfBill')">Add</a>
+                                </div>
+                            </div>
+
+                            @*FreightAmount*@
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">FreightAmount:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.FreightAmount)
+                                    @Html.ValidationMessageFor(model => model.FreightAmount)
                                 </div>
                                 <div class="col-md-1">
                                 </div>
@@ -157,36 +228,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-4">
-                            @*FreightAmount*@
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">FreightAmount:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.FreightAmount)
-                                    @Html.ValidationMessageFor(model => model.FreightAmount)
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                            </div>
-
-                        </div>
-                        @*Reference No*@
-                        @*<div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Reference No:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.ReferenceNumber)
-                                        @Html.ValidationMessageFor(m => m.ReferenceNumber)
-                                    </div>
-                                    <div class="col-md-1">
-                                    </div>
-                                </div>
-                            </div>*@
 
                     </div>
 
@@ -308,7 +349,7 @@
                                 <div class="col-md-7">
                                     <input id="@Html.FieldIdFor(model => model.NotifyPartyId)"
                                            name="@Html.NameFor(model => model.NotifyPartyId)"
-                                           value="" />
+                                           value="@Html.ValueFor(model => model.NotifyPartyId)" />
                                     <script>
                                 $(document).ready(function() {
                                     $("#@Html.FieldIdFor(model => model.NotifyPartyId)").kendoComboBox({
@@ -1128,7 +1169,7 @@
                                 <div class="col-md-7">
                                     <input id="@Html.FieldIdFor(model => model.QtyOfContainer)"
                                            name="@Html.NameFor(model => model.QtyOfContainer)"
-                                           value="@Html.ValueFor(model => model.QtyOfContainer)"/>
+                                           value="@Html.ValueFor(model => model.QtyOfContainer)" />
                                     <script>
                                         $(document).ready(function() {
                                             $("#@Html.FieldIdFor(model => model.QtyOfContainer)").kendoComboBox({
@@ -1477,8 +1518,9 @@
     }
 
     $(document).ready(function() {
+        console.log(@Model.Id);
 
-        if (@Model.Id === 0) {
+        if (@Model.Id === 0 &&  '@Model.BlNumber.IsNullOrEmpty()'.toLowerCase() === 'true') {
             OpenModalFirstCreation('@Html.FieldIdFor(m => m.BlNumber)', 'hblLclExp-edit-form');
         }
 
