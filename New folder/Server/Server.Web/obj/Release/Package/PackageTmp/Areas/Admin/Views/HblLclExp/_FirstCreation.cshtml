@@ -74,11 +74,15 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+        <button type="button" id="btn-close-first-create" onclick="Close()" class="btn btn-default">Đóng</button>
         <button type="button" id="btn-save-contact" onclick="Save()" class="btn btn-primary">Lưu</button>
     </div>
 </div>
 <script type="text/javascript">
+    function Close() {
+        $('#myModal').modal('hide');
+        location.href = '/Admin/HblLclExp/HblList';
+    }
 
     function Save () {
             var model = JSON.stringify(GetDataRequest());

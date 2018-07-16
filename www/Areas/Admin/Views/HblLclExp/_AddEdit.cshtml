@@ -120,7 +120,9 @@
                                     <label class="control-label">Forward Agent:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    @Html.FalconTextAreaFor(m => m.ForwardingAgent)
+                                    <textarea readonly="readonly" type="text" style="height:150px;"
+                                              class="form-control" id="@Html.FieldIdFor(model => model.ForwardingAgent)"
+                                              name="@Html.FieldIdFor(model => model.ForwardingAgent)" value="@Model.ForwardingAgent">@Model.ForwardingAgent</textarea>
                                     @Html.ValidationMessageFor(model => model.ForwardingAgent)
                                 </div>
                                 <div class="col-md-1">
@@ -249,36 +251,65 @@
                                            name="@Html.NameFor(model => model.ShipperId)"
                                            value="@Html.ValueFor(model => model.ShipperId)" />
                                     <script>
-                                $(document).ready(function() {
-                                    $("#@Html.FieldIdFor(model => model.ShipperId)").kendoComboBox({
-                                        filter: "contains",
-                                        dataTextField: "Name",
-                                        dataValueField: "Value",
-                                        placeholder: "Chọn shipper...",
-                                        minLength: 1,
-                                        dataSource: {
-                                            type: "json",
-                                            serverFiltering: true,
-                                            transport: {
-                                                read: {
-                                                    url: "/api/CustomerApi/GetAllCustomers",
-                                                    dataType: "json",
-                                                    data: filterShipper
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.ShipperId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn shipper...",
+                                                minLength: 1,
+                                                change: onChange,
+                                                dataBound: onDataBound,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/CustomerApi/GetAllCustomers",
+                                                            dataType: "json",
+                                                            data: filterShipper
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterShipper() {
+                                                var data = {
+                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                                    Name: ""
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+
+                                            function onChange() {
+                                                var combobox = $("#@Html.FieldIdFor(m => m.ShipperId)")
+                                                    .data("kendoComboBox");
+                                                console.log(combobox.select());
+                                                if (combobox.select() < 0) {
+                                                    $('#shipper-content').hide();
+                                                } else {
+                                                    GetCustomerInfo("@Html.FieldIdFor(m => m.ShipperId)",
+                                                        "@Html.FieldIdFor(m => m.ShipperName)");
+                                                    $('#shipper-content').show();
                                                 }
                                             }
-                                        }
-                                    });
 
-                                    function filterShipper() {
-                                        var data = {
-                                            @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                            Name: ""
-                                        };
-                                        addAntiForgeryToken(data);
-                                        return data;
-                                    }
-                                });
+                                            function onDataBound(e) {
+                                                var combobox = $("#@Html.FieldIdFor(m => m.ShipperId)")
+                                                    .data("kendoComboBox");
+                                                console.log(combobox.select());
+                                                if (combobox.select() < 0) {
+                                                    $('#shipper-content').hide();
+                                                } else {
+                                                    GetCustomerInfo("@Html.FieldIdFor(m => m.ShipperId)",
+                                                        "@Html.FieldIdFor(m => m.ShipperName)");
+                                                    $('#shipper-content').show();
+                                                }
+                                            };
+
+                                        });
                                     </script>
                                     @Html.ValidationMessageFor(m => m.ShipperId)
                                 </div>
@@ -287,6 +318,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-4">
                             <div class="form-group form-custom">
                                 <div class="col-md-4">
@@ -297,42 +329,64 @@
                                            name="@Html.NameFor(model => model.ConsigneeId)"
                                            value="@Html.ValueFor(model => model.ConsigneeId)" />
                                     <script>
-                                $(document).ready(function() {
-                                    $("#@Html.FieldIdFor(model => model.ConsigneeId)").kendoComboBox({
-                                        filter: "contains",
-                                        dataTextField: "Name",
-                                        dataValueField: "Value",
-                                        placeholder: "Chọn consignee...",
-                                        minLength: 1,
-                                        dataSource: {
-                                            type: "json",
-                                            serverFiltering: true,
-                                            transport: {
-                                                read: {
-                                                    url: "/api/CustomerApi/GetAllCustomers",
-                                                    dataType: "json",
-                                                    data: filterConsignee
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.ConsigneeId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn consignee...",
+                                                minLength: 1,
+                                                change : onChange,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/CustomerApi/GetAllCustomers",
+                                                            dataType: "json",
+                                                            data: filterConsignee
+                                                        }
+                                                    }
+                                                },
+                                                dataBound: onDataBound
+                                            });
+
+                                            function filterConsignee() {
+                                                var data = {
+                                                    @*Name: $("#@Html.FieldIdFor(model => model.ConsigneeId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                                    Name: ""
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+
+                                            function onDataBound(e) {
+                                                var combobox = $("#@Html.FieldIdFor(m => m.ConsigneeId)")
+                                                    .data("kendoComboBox");
+                                                console.log(combobox.select());
+                                                if (combobox.select() < 0) {
+                                                    $('#consignee-content').hide();
+                                                } else {
+                                                    GetCustomerInfo("@Html.FieldIdFor(m => m.ConsigneeId)",
+                                                        "@Html.FieldIdFor(m => m.ConsigneeName)");
+                                                    $('#consignee-content').show();
+                                                }
+                                            };
+
+                                            function onChange() {
+                                                var combobox = $("#@Html.FieldIdFor(m => m.ConsigneeId)")
+                                                    .data("kendoComboBox");
+                                                console.log(combobox.select());
+                                                if (combobox.select() < 0) {
+                                                    $('#consignee-content').hide();
+                                                } else {
+                                                    GetCustomerInfo("@Html.FieldIdFor(m => m.ConsigneeId)",
+                                                        "@Html.FieldIdFor(m => m.ConsigneeName)");
+                                                    $('#consignee-content').show();
                                                 }
                                             }
-                                        },
-                                        dataBound: onDataBound
-                                    });
-
-                                    function filterConsignee() {
-                                        var data = {
-                                            @*Name: $("#@Html.FieldIdFor(model => model.ConsigneeId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                            Name: ""
-                                        };
-                                        addAntiForgeryToken(data);
-                                        return data;
-                                    }
-
-                                    function onDataBound(e) {
-                                        $("#@Html.FieldIdFor(model => model.ConsigneeId)").data("kendoComboBox")
-                                            .value(@Model.ConsigneeId);
-                                    };
-                                });
+                                        });
                                     </script>
                                     @Html.ValidationMessageFor(m => m.ConsigneeId)
                                 </div>
@@ -351,41 +405,122 @@
                                            name="@Html.NameFor(model => model.NotifyPartyId)"
                                            value="@Html.ValueFor(model => model.NotifyPartyId)" />
                                     <script>
-                                $(document).ready(function() {
-                                    $("#@Html.FieldIdFor(model => model.NotifyPartyId)").kendoComboBox({
-                                        filter: "contains",
-                                        dataTextField: "Name",
-                                        dataValueField: "Value",
-                                        placeholder: "Chọn consignee...",
-                                        minLength: 1,
-                                        dataSource: {
-                                            type: "json",
-                                            serverFiltering: true,
-                                            transport: {
-                                                read: {
-                                                    url: "/api/CustomerApi/GetAllCustomers",
-                                                    dataType: "json",
-                                                    data: filterNotifyParty
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.NotifyPartyId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn consignee...",
+                                                minLength: 1,
+                                                change: onChange,
+                                                dataBound: onDataBound,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/CustomerApi/GetAllCustomers",
+                                                            dataType: "json",
+                                                            data: filterNotifyParty
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterNotifyParty() {
+                                                var data = {
+                                                    @*Name: $("#@Html.FieldIdFor(model => model.NotifyPartyId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                                    Name: ""
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+
+                                            function onChange() {
+                                                var combobox = $("#@Html.FieldIdFor(m => m.NotifyPartyId)")
+                                                    .data("kendoComboBox");
+                                                console.log(combobox.select());
+                                                if (combobox.select() < 0) {
+                                                    $('#notify-party-content').hide();
+                                                } else {
+                                                    GetCustomerInfo("@Html.FieldIdFor(m => m.NotifyPartyId)",
+                                                        "@Html.FieldIdFor(m => m.NotifyPartyName)");
+                                                    $('#notify-party-content').show();
                                                 }
                                             }
-                                        }
-                                    });
+                                              function onDataBound(e) {
+                                                  var combobox = $("#@Html.FieldIdFor(m => m.NotifyPartyId)")
+                                                      .data("kendoComboBox");
+                                                  console.log(combobox.select());
+                                                  if (combobox.select() < 0) {
+                                                      $('#notify-party-content').hide();
+                                                  } else {
+                                                      GetCustomerInfo("@Html.FieldIdFor(m => m.NotifyPartyId)",
+                                                          "@Html.FieldIdFor(m => m.NotifyPartyName)");
+                                                      $('#notify-party-content').show();
+                                                  }
+                                            };
 
-                                    function filterNotifyParty() {
-                                        var data = {
-                                            @*Name: $("#@Html.FieldIdFor(model => model.NotifyPartyId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                            Name: ""
-                                        };
-                                        addAntiForgeryToken(data);
-                                        return data;
-                                    }
-                                });
+                                        });
                                     </script>
                                     @Html.ValidationMessageFor(m => m.NotifyPartyId)
                                 </div>
                                 <div class="col-md-1">
                                     <a onclick="openCustomerPopup('@Html.FieldIdFor(m => m.NotifyPartyId)')">Add</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @*Shipper*@
+                        <div class="col-md-4" id="shipper-content" style="display: none">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label"></label>
+                                </div>
+                                <div class="col-md-7">
+                                    <textarea readonly="readonly" type="text" style="height:150px;"
+                                              class="form-control" id="@Html.FieldIdFor(model => model.ShipperName)"
+                                              name="@Html.FieldIdFor(model => model.ShipperName)" value="@Model.ShipperName">@Model.ShipperName</textarea>
+                                    @Html.ValidationMessageFor(model => model.ShipperName)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Consignee*@
+                        <div class="col-md-4" id="consignee-content" style="display: none">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label"></label>
+                                </div>
+                                <div class="col-md-7">
+                                    <textarea readonly="readonly" type="text" style="height:150px;"
+                                              class="form-control" id="@Html.FieldIdFor(model => model.ConsigneeName)"
+                                              name="@Html.FieldIdFor(model => model.ConsigneeName)" value="@Model.ConsigneeName">@Model.ConsigneeName</textarea>
+                                    @Html.ValidationMessageFor(model => model.ConsigneeName)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Notify Party*@
+                        <div class="col-md-4" id="notify-party-content" style="display: none">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label"></label>
+                                </div>
+                                <div class="col-md-7">
+                                    <textarea readonly="readonly" type="text" style="height:150px;"
+                                              class="form-control" id="@Html.FieldIdFor(model => model.NotifyPartyName)"
+                                              name="@Html.FieldIdFor(model => model.NotifyPartyName)" value="@Model.NotifyPartyName">@Model.NotifyPartyName</textarea>
+                                    @Html.ValidationMessageFor(model => model.NotifyPartyName)
+                                </div>
+                                <div class="col-md-1">
                                 </div>
                             </div>
                         </div>
@@ -399,52 +534,6 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
-                        @*Lcl bill types*@
-                        @*<div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">LCL EXP ID:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.LclExpId)"
-                                               name="@Html.NameFor(model => model.LclExpId)"
-                                               value="@Html.ValueFor(model => model.LclExpId)" />
-                                        <script>
-                                            $(document).ready(function() {
-                                                $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
-                                                    filter: "contains",
-                                                    dataTextField: "Name",
-                                                    dataValueField: "Value",
-                                                    placeholder: "Chọn mã phiếu...",
-                                                    minLength: 1,
-                                                    dataSource: {
-                                                        type: "json",
-                                                        serverFiltering: true,
-                                                        transport: {
-                                                            read: {
-                                                                url: "/api/LclExpApi/GetAll",
-                                                                dataType: "json",
-                                                                data: filterLclExp
-                                                            }
-                                                        }
-                                                    }
-                                                });
-
-                                                function filterLclExp() {
-                                                    var data = {
-                                                        Name: $("#@Html.FieldIdFor(model => model.LclExpId)")
-                                                            .data("kendoComboBox").input.val()
-                                                    };
-                                                    addAntiForgeryToken(data);
-                                                    return data;
-                                                }
-                                            });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.LclExpId)
-                                        <div class="col-md-1"></div>
-                                    </div>
-                                </div>
-                            </div>*@
                         @*FinalDestination*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
