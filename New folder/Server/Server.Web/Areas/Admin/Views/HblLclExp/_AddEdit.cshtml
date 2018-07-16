@@ -258,7 +258,8 @@
                                                 dataValueField: "Value",
                                                 placeholder: "Chọn shipper...",
                                                 minLength: 1,
-                                                change : onChange,
+                                                change: onChange,
+                                                dataBound: onDataBound,
                                                 dataSource: {
                                                     type: "json",
                                                     serverFiltering: true,
@@ -289,9 +290,24 @@
                                                 if (combobox.select() < 0) {
                                                     $('#shipper-content').hide();
                                                 } else {
+                                                    GetCustomerInfo("@Html.FieldIdFor(m => m.ShipperId)",
+                                                        "@Html.FieldIdFor(m => m.ShipperName)");
                                                     $('#shipper-content').show();
                                                 }
                                             }
+
+                                            function onDataBound(e) {
+                                                var combobox = $("#@Html.FieldIdFor(m => m.ShipperId)")
+                                                    .data("kendoComboBox");
+                                                console.log(combobox.select());
+                                                if (combobox.select() < 0) {
+                                                    $('#shipper-content').hide();
+                                                } else {
+                                                    GetCustomerInfo("@Html.FieldIdFor(m => m.ShipperId)",
+                                                        "@Html.FieldIdFor(m => m.ShipperName)");
+                                                    $('#shipper-content').show();
+                                                }
+                                            };
 
                                         });
                                     </script>
@@ -346,8 +362,16 @@
                                             }
 
                                             function onDataBound(e) {
-                                                $("#@Html.FieldIdFor(model => model.ConsigneeId)").data("kendoComboBox")
-                                                    .value(@Model.ConsigneeId);
+                                                var combobox = $("#@Html.FieldIdFor(m => m.ConsigneeId)")
+                                                    .data("kendoComboBox");
+                                                console.log(combobox.select());
+                                                if (combobox.select() < 0) {
+                                                    $('#consignee-content').hide();
+                                                } else {
+                                                    GetCustomerInfo("@Html.FieldIdFor(m => m.ConsigneeId)",
+                                                        "@Html.FieldIdFor(m => m.ConsigneeName)");
+                                                    $('#consignee-content').show();
+                                                }
                                             };
 
                                             function onChange() {
@@ -357,6 +381,8 @@
                                                 if (combobox.select() < 0) {
                                                     $('#consignee-content').hide();
                                                 } else {
+                                                    GetCustomerInfo("@Html.FieldIdFor(m => m.ConsigneeId)",
+                                                        "@Html.FieldIdFor(m => m.ConsigneeName)");
                                                     $('#consignee-content').show();
                                                 }
                                             }
@@ -386,7 +412,8 @@
                                                 dataValueField: "Value",
                                                 placeholder: "Chọn consignee...",
                                                 minLength: 1,
-                                                change : onChange,
+                                                change: onChange,
+                                                dataBound: onDataBound,
                                                 dataSource: {
                                                     type: "json",
                                                     serverFiltering: true,
@@ -417,9 +444,24 @@
                                                 if (combobox.select() < 0) {
                                                     $('#notify-party-content').hide();
                                                 } else {
+                                                    GetCustomerInfo("@Html.FieldIdFor(m => m.NotifyPartyId)",
+                                                        "@Html.FieldIdFor(m => m.NotifyPartyName)");
                                                     $('#notify-party-content').show();
                                                 }
                                             }
+                                              function onDataBound(e) {
+                                                  var combobox = $("#@Html.FieldIdFor(m => m.NotifyPartyId)")
+                                                      .data("kendoComboBox");
+                                                  console.log(combobox.select());
+                                                  if (combobox.select() < 0) {
+                                                      $('#notify-party-content').hide();
+                                                  } else {
+                                                      GetCustomerInfo("@Html.FieldIdFor(m => m.NotifyPartyId)",
+                                                          "@Html.FieldIdFor(m => m.NotifyPartyName)");
+                                                      $('#notify-party-content').show();
+                                                  }
+                                            };
+
                                         });
                                     </script>
                                     @Html.ValidationMessageFor(m => m.NotifyPartyId)
@@ -433,7 +475,7 @@
 
                     <div class="row">
                         @*Shipper*@
-                        <div class="col-md-4" id="shipper-content" style="display: none" >
+                        <div class="col-md-4" id="shipper-content" style="display: none">
                             <div class="form-group form-custom">
                                 <div class="col-md-4">
                                     <label class="control-label"></label>
@@ -441,7 +483,7 @@
                                 <div class="col-md-7">
                                     <textarea readonly="readonly" type="text" style="height:150px;"
                                               class="form-control" id="@Html.FieldIdFor(model => model.ShipperName)"
-                                              name="@Html.FieldIdFor(model => model.ShipperName)" value="@Model.ForwardingAgent">@Model.ShipperName</textarea>
+                                              name="@Html.FieldIdFor(model => model.ShipperName)" value="@Model.ShipperName">@Model.ShipperName</textarea>
                                     @Html.ValidationMessageFor(model => model.ShipperName)
                                 </div>
                                 <div class="col-md-1">
@@ -458,7 +500,7 @@
                                 <div class="col-md-7">
                                     <textarea readonly="readonly" type="text" style="height:150px;"
                                               class="form-control" id="@Html.FieldIdFor(model => model.ConsigneeName)"
-                                              name="@Html.FieldIdFor(model => model.ConsigneeName)" value="@Model.ForwardingAgent">@Model.ConsigneeName</textarea>
+                                              name="@Html.FieldIdFor(model => model.ConsigneeName)" value="@Model.ConsigneeName">@Model.ConsigneeName</textarea>
                                     @Html.ValidationMessageFor(model => model.ConsigneeName)
                                 </div>
                                 <div class="col-md-1">
@@ -474,9 +516,9 @@
                                 </div>
                                 <div class="col-md-7">
                                     <textarea readonly="readonly" type="text" style="height:150px;"
-                                              class="form-control" id="@Html.FieldIdFor(model => model.ConsigneeName)"
-                                              name="@Html.FieldIdFor(model => model.ConsigneeName)" value="@Model.ForwardingAgent">@Model.ConsigneeName</textarea>
-                                    @Html.ValidationMessageFor(model => model.ConsigneeName)
+                                              class="form-control" id="@Html.FieldIdFor(model => model.NotifyPartyName)"
+                                              name="@Html.FieldIdFor(model => model.NotifyPartyName)" value="@Model.NotifyPartyName">@Model.NotifyPartyName</textarea>
+                                    @Html.ValidationMessageFor(model => model.NotifyPartyName)
                                 </div>
                                 <div class="col-md-1">
                                 </div>

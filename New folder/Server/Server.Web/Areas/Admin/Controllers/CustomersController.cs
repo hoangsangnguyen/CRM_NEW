@@ -141,6 +141,17 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        public async Task<ActionResult> GetCustomerInfo(int customerId)
+        {
+            var customer = await _service.GetSingleAsync(customerId);
+            if (customer == null)
+                return null;
+            var info = $"{customer.FullVietNamName} - {customer.Address} - {customer.FaxNo}";
+            return Json(info);
+        }
+
+
+        [HttpPost]
         public async Task<PartialViewResult> OpenModal(string viewId, string[] viewGroupId, CrmCustomerModel model = null)
         {
             var index = await _service.GetNumberEntry();

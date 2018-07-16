@@ -49,6 +49,7 @@ $("#create-TranshipmentPort").click(function () {
     OpenModalCreation(url, "TranshipmentPortId", ["FinalDestinationId", "PlaceOfDeliveryId",
         "PortOfDischargeId", "PlaceOfReceiptId", "PortOfLoaingId", "TranshipmentPortId"]);
 });
+
 function OpenModalFirstCreation(viewResultId, formId) {
     console.log('First creation');
     $.ajax({
@@ -64,6 +65,26 @@ function OpenModalFirstCreation(viewResultId, formId) {
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log("Error saving new data by ajax " + thrownError + " " + xhr.error + thrownError.error);
+        }
+    });
+}
+
+function GetCustomerInfo(comboboxId, viewShowId) {
+    console.log('show customer info');
+    var customerId = $('#' + comboboxId).data("kendoComboBox").value();
+
+    $.ajax({
+        url: '/Admin/Customers/GetCustomerInfo',
+        type: "POST",
+        cache: false,
+        async: true,
+        contentType: 'application/json',
+        data: JSON.stringify({ customerId: customerId}),
+        success: function (dataJs) {
+            $('#' + viewShowId).text(dataJs);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log("Error get data by ajax " + thrownError + " " + xhr.error + thrownError.error);
         }
     });
 }
