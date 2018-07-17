@@ -3,15 +3,20 @@
 @{
     var defaultGridPageSize = 20;
     var gridPageSizes = "10,20,50,100,500";
+    <style>
+        .k-combobox .k-input {
+            height: 27.5px !important
+        }
+    </style>
 }
-<input type="hidden" />
+
 @Html.AntiForgeryToken()
 <div class="content-header clearfix">
     <h1 class="pull-left">
-        Danh sách HBL Lcl Express
+        Danh sách phiếu xuất kho vật tư
     </h1>
     <div class="pull-right">
-        <a href="@Url.Action("Create", new {id = Model.LclExpId})" class="btn bg-blue">
+        <a href="@Url.Action("Create")" class="btn bg-blue">
             <i class="fa fa-plus-square"></i>
             Thêm
         </a>
@@ -26,22 +31,180 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <label class="control-label">Lcl express:</label>
+                            <div class="form-group form-custom">
+                                <div class="col-md-5">
+                                    <label class="control-label">Từ ngày</label>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
+                                    <input type="datetime" id="@Html.FieldIdFor(model => model.FromDt)" value="@Model.FromDt" width="100%" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.FromDt)").kendoDatePicker({
+                                                culture: "vi-VN",
+                                                format: "dd-MM-yyyy"
+                                            });
+                                            $("#@Html.FieldIdFor(model => model.FromDt)")
+                                                .prop("readonly", "readonly");
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-5">
+                                    <label class="control-label">Đến ngày</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="datetime" id="@Html.FieldIdFor(model => model.ToDt)" value="@Model.ToDt" style="width: 100%" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.ToDt)").kendoDatePicker({
+                                                culture: "vi-VN",
+                                                format: "dd-MM-yyyy"
+                                            });
+                                            $("#@Html.FieldIdFor(model => model.ToDt)")
+                                                .prop("readonly", "readonly");
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-3">
+                                    <label class="control-label">BlNumber:</label>
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.FalconEditorFor(m => m.BlNumber)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-5">
+                                    <label class="control-label">Shipper:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.ShipperId)"
+                                           name="@Html.NameFor(model => model.ShipperId)"
+                                           value="@Html.ValueFor(model => model.ShipperId)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.ShipperId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn shipper...",
+                                                minLength: 1,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/CustomerApi/GetAllCustomers",
+                                                            dataType: "json",
+                                                            data: filterCustomer
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterCustomer() {
+                                                var data = {
+                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                                    Name : ""
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-5">
+                                    <label class="control-label">Consignee:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.ConsigneeId)"
+                                           name="@Html.NameFor(model => model.ConsigneeId)"
+                                           value="@Html.ValueFor(model => model.ConsigneeId)" />
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.ConsigneeId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn Consignee...",
+                                                minLength: 1,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/CustomerApi/GetAllCustomers",
+                                                            dataType: "json",
+                                                            data: filterCustomer
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            function filterCustomer() {
+                                                var data = {
+                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                                    Name : ""
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-3">
+                                    <label class="control-label">Booking Number:</label>
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.FalconEditorFor(m => m.BookingNumber)
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-5">
+                                    <label class="control-label">LclExp:</label>
+                                </div>
+                                <div class="col-md-7">
                                     <input id="@Html.FieldIdFor(model => model.LclExpId)"
                                            name="@Html.NameFor(model => model.LclExpId)"
                                            value="@Html.ValueFor(model => model.LclExpId)" />
                                     <script>
-                                        $(document).ready(function () {
+                                        $(document).ready(function() {
                                             $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
                                                 filter: "contains",
                                                 dataTextField: "Name",
                                                 dataValueField: "Value",
-                                                placeholder : "Chọn mã phiếu...",
-                                                minLength: 2,
+                                                placeholder: "Chọn Lcl Exports...",
+                                                minLength: 1,
                                                 dataSource: {
                                                     type: "json",
                                                     serverFiltering: true,
@@ -54,9 +217,12 @@
                                                     }
                                                 }
                                             });
+
                                             function filterLclExp() {
                                                 var data = {
-                                                    Name: $("#@Html.FieldIdFor(model => model.LclExpId)").data("kendoComboBox").input.val()
+                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                                    Name : ""
                                                 };
                                                 addAntiForgeryToken(data);
                                                 return data;
@@ -66,20 +232,83 @@
                                 </div>
                             </div>
                         </div>
-                      
+
                         <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="col-md-12 col-md-offset-5 nopadding">
+                            <div class="form-group form-custom">
+                                <div class="col-md-5">
+                                    <label class="control-label"></label>
+                                </div>
+                                <div class="col-md-7">
                                     <button type="button" id="button-search" class="btn btn-primary">
                                         <i class="fa fa-search"></i>
                                         Tìm kiếm
                                     </button>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            @*<div class="panel panel-default panel-search">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label class="control-label">Lcl express:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input id="@Html.FieldIdFor(model => model.LclExpId)"
+                                               name="@Html.NameFor(model => model.LclExpId)"
+                                               value="@Html.ValueFor(model => model.LclExpId)" />
+                                        <script>
+                                            $(document).ready(function () {
+                                                $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
+                                                    filter: "contains",
+                                                    dataTextField: "Name",
+                                                    dataValueField: "Value",
+                                                    placeholder : "Chọn mã phiếu...",
+                                                    minLength: 2,
+                                                    dataSource: {
+                                                        type: "json",
+                                                        serverFiltering: true,
+                                                        transport: {
+                                                            read: {
+                                                                url: "/api/LclExpApi/GetAll",
+                                                                dataType: "json",
+                                                                data: filterLclExp
+                                                            }
+                                                        }
+                                                    }
+                                                });
+                                                function filterLclExp() {
+                                                    var data = {
+                                                        Name: $("#@Html.FieldIdFor(model => model.LclExpId)").data("kendoComboBox").input.val()
+                                                    };
+                                                    addAntiForgeryToken(data);
+                                                    return data;
+                                                }
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="col-md-12 col-md-offset-5 nopadding">
+                                        <button type="button" id="button-search" class="btn btn-primary">
+                                            <i class="fa fa-search"></i>
+                                            Tìm kiếm
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
 
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -198,6 +427,12 @@
                         function additionalData() {
                             var data = {
                                 LclExpId: $('#@Html.FieldIdFor(model => model.LclExpId)').val(),
+                                FromDt: $('#@Html.FieldIdFor(model => model.FromDt)').val(),
+                                ToDt: $('#@Html.FieldIdFor(model => model.ToDt)').val(),
+                                BlNumber: $('#@Html.FieldIdFor(model => model.BlNumber)').val(),
+                                BookingNumber: $('#@Html.FieldIdFor(model => model.BookingNumber)').val(),
+                                ShipperId: $('#@Html.FieldIdFor(model => model.ShipperId)').val(),
+                                ConsigneeId: $('#@Html.FieldIdFor(model => model.ConsigneeId)').val()
                                 @*ExpiredAt: $('#@Html.FieldIdFor(model => model.ExpiredAt)').val(),
                                 TypeId: $('#@Html.FieldIdFor(model => model.TypeId)').val(),
                                 PublishedId: $('#@Html.FieldIdFor(model => model.PublishedId)').val()*@
