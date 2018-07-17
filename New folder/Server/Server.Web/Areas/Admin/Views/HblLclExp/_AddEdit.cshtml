@@ -835,20 +835,20 @@
                                     <label class="control-label">Sailing Date:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    <input type="datetime" id="@Html.FieldIdFor(model => model.SellingDate)"
-                                           name="@Html.FieldIdFor(model => model.SellingDate)" value="@Model.SellingDate"
+                                    <input type="datetime" id="@Html.FieldIdFor(model => model.SailingDate)"
+                                           name="@Html.FieldIdFor(model => model.SailingDate)" value="@Model.SailingDate"
                                            style="width: 100%" />
                                     <script>
                                 $(document).ready(function() {
-                                    $("#@Html.FieldIdFor(model => model.SellingDate)").kendoDatePicker({
+                                    $("#@Html.FieldIdFor(model => model.SailingDate)").kendoDatePicker({
                                         culture: "vi-VN",
                                         format: "dd/MM/yyyy"
                                     });
-                                    $("#@Html.FieldIdFor(model => model.SellingDate)")
+                                    $("#@Html.FieldIdFor(model => model.SailingDate)")
                                         .prop("readonly", "readonly");
                                 });
                                     </script>
-                                    @Html.ValidationMessageFor(model => model.SellingDate)
+                                    @Html.ValidationMessageFor(model => model.SailingDate)
                                 </div>
                                 <div class="col-md-1">
                                 </div>

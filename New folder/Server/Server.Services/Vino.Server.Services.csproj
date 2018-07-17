@@ -207,6 +207,7 @@
     <Compile Include="MainServices\CRM\AirImp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\FclExp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\FclImp\Models\SearchingRequest.cs" />
+    <Compile Include="MainServices\CRM\HblLclExp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\LclExp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\LclImp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\Topic\ITopicService.cs" />

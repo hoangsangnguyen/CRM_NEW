@@ -3,6 +3,11 @@
 @{
     var defaultGridPageSize = 20;
     var gridPageSizes = "10,20,50,100,500";
+    <style>
+        .k-combobox .k-input {
+            height: 27.5px !important
+        }
+    </style>
 }
 
 @Html.AntiForgeryToken()
@@ -77,7 +82,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-top: 10px">
                         <div class="col-md-4">
                             <div class="form-group form-custom">
                                 <div class="col-md-5">

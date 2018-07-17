@@ -101,7 +101,7 @@ namespace Vino.Server.Data.CRM
         public int NumberOfOriginal { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn ngày Selling")]
-        public DateTimeOffset SellingDate { get; set; }
+        public DateTimeOffset SailingDate { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn Delivery Of Good hoặc thêm mới")]
         public int? DeliveryOfGoodsId { get; set; }
@@ -115,6 +115,11 @@ namespace Vino.Server.Data.CRM
 
         [Required(ErrorMessage = "Vui lòng chọn ngày Issue")]
         public DateTimeOffset IssueDate { get; set; }
+
+        public DateTimeOffset CreatedAt { get; set; }
+
+        public int CreatorId { get; set; }
+
 
     }
 }

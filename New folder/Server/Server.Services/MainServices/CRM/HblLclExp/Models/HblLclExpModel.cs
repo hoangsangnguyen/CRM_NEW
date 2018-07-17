@@ -165,8 +165,8 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
 
         public int NumberOfOriginal { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn ngày Selling")]
-        public string SellingDate { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn ngày Sailing")]
+        public string SailingDate { get; set; }
 
         /*
          * Delivery of goods and name
@@ -192,5 +192,12 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
 
         [Required(ErrorMessage = "Vui lòng chọn ngày Issue")]
         public string IssueDate { get; set; }
+
+        /**
+         * Creator
+         */
+        public string CreatedAt { get; set; }
+
+        public int CreatorId { get; set; }
     }
 }

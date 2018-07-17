@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 using System.Xml;
 using AutoMapper;
 using Falcon.Web.Mvc.Kendoui;
+using Falcon.Web.Mvc.Security;
 using Vino.Server.Data.CRM;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.CRM.Customer;
@@ -16,6 +18,8 @@ using Vino.Server.Services.MainServices.CRM.LclExp;
 using Vino.Server.Services.MainServices.CRM.Pdf.Models;
 using Vino.Server.Services.MainServices.CRM.Port;
 using Vino.Server.Services.MainServices.CRM.Topic;
+using Vino.Server.Services.MainServices.Employees;
+using Vino.Server.Services.MainServices.Users;
 using Vino.Server.Web.Areas.Admin.Models.HblLclExps;
 using Vino.Shared.Constants.Common;
 using Vino.Shared.Constants.Warehouse;
@@ -31,6 +35,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         private readonly OrderGenCodeService _genCodeService;
         private readonly LclExpService _lclExpService;
         private readonly PortService _portService;
+        private readonly UserService _userService;
+        private readonly WebContext _webContext;
 
 
         public HblLclExpController(HblLclExpService service,
@@ -39,7 +45,9 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             TopicService topicService,
             OrderGenCodeService genCodeService,
             LclExpService lclExpService,
-            PortService portService)
+            PortService portService,
+            UserService userService,
+            WebContext webContext)
         {
             _service = service;
             _customerService = customerService;
@@ -48,6 +56,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             _genCodeService = genCodeService;
             _lclExpService = lclExpService;
             _portService = portService;
+            _userService = userService;
+            _webContext = webContext;
         }
 
         #region HblLclExp
@@ -68,7 +78,21 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> HblList(DataSourceRequest common, HblLclExpListModel model)
         {
-            var dtoFromRepo = await _service.GetAllAsync();
+            var dateFrom = string.IsNullOrWhiteSpace(model.FromDt) ? (DateTimeOffset?)null : DateTimeOffset.Parse(model.FromDt, new CultureInfo("vi-VN"));
+            var dateTo = string.IsNullOrWhiteSpace(model.ToDt) ? (DateTimeOffset?)null : DateTimeOffset.Parse(model.ToDt, new CultureInfo("vi-VN"));
+
+            var dtoFromRepo = await _service.SearchModels(new SearchingRequest()
+            {
+                Page = common.Page - 1,
+                PageSize = common.PageSize,
+                FromDt = dateFrom,
+                ToDt = dateTo,
+                LclExpId = model.LclExpId,
+                BlNumber = model.BlNumber,
+                BookingNumber = model.BookingNumber,
+                ShipperId = model.ShipperId,
+                ConsigneeId = model.ConsigneeId
+            });
 
             var gridModel = new DataSourceResult()
             {
@@ -86,7 +110,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             var model = new HblLclExpModel()
             {
                 ClosingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
-                SellingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
+                SailingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 IssueDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 LclExpId = id ?? 0,
                 ForwardingAgent = topic?.Name + "-" + topic?.Address + "-" + topic?.Phone
@@ -124,6 +148,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             _genCodeService.UpdateOrderGenCode(orderGenCode);
 
             dto.BlNumber = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{orderGenCode.CurrentNumber:D4}";
+
+            dto.CreatedAt = now.ToString("dd/MM/yyyy HH:mm:ss");
+            var user = await _userService.GetById(_webContext.UserId);
+            dto.CreatorId = user.Id;
 
             var id = await _service.CreateAsync(dto);
             if (id == 0)

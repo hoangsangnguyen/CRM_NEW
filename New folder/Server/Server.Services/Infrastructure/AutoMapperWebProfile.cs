@@ -295,20 +295,24 @@ namespace Vino.Server.Services.Infrastructure
                     x => x.NotifyParty.Name))
                 .ForMember(d => d.ClosingDate,
                     opt => opt.MapFrom(x => x.ClosingDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
-                .ForMember(d => d.SellingDate,
-                    opt => opt.MapFrom(x => x.SellingDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                .ForMember(d => d.SailingDate,
+                    opt => opt.MapFrom(x => x.SailingDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
                 .ForMember(d => d.ExRef,
                     opt => opt.MapFrom(x =>
                         x.ExRef.HasValue ? x.ExRef.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : ""))
                 .ForMember(d => d.IssueDate,
-                    opt => opt.MapFrom(x => x.IssueDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)));
+                    opt => opt.MapFrom(x => x.IssueDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x => x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)));
             CreateMap<HblLclExpModel, HblLclExp>()
                 .ForMember(d => d.ClosingDate,
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.ClosingDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
-                .ForMember(d => d.SellingDate,
-                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.SellingDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.SailingDate,
+                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.SailingDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
                 .ForMember(d => d.IssueDate,
-                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.IssueDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
+                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.IssueDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.CreatedAt,
+                opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))));
 
             // Topic
             CreateMap<Topic, TopicModel>()
