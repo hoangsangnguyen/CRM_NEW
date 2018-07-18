@@ -384,6 +384,7 @@
                                                     GetCustomerInfo("@Html.FieldIdFor(m => m.ConsigneeId)",
                                                         "@Html.FieldIdFor(m => m.ConsigneeName)");
                                                     $('#consignee-content').show();
+
                                                 }
                                             }
                                         });
@@ -424,11 +425,13 @@
                                                             data: filterNotifyParty
                                                         }
                                                     }
-                                                }
+                                                },
+                                                cascadeFrom: "@Html.FieldIdFor(m => m.ConsigneeId)"
                                             });
 
                                             function filterNotifyParty() {
                                                 var data = {
+                                                    sameAsConsignee : true,
                                                     @*Name: $("#@Html.FieldIdFor(model => model.NotifyPartyId)")
                                                         .data("kendoComboBox").input.val()*@
                                                     Name: ""
@@ -444,19 +447,32 @@
                                                 if (combobox.select() < 0) {
                                                     $('#notify-party-content').hide();
                                                 } else {
-                                                    GetCustomerInfo("@Html.FieldIdFor(m => m.NotifyPartyId)",
+                                                    var viewId = combobox.select() === 0
+                                                        ? "@Html.FieldIdFor(m => m.ConsigneeId)"
+                                                        : "@Html.FieldIdFor(m => m.NotifyPartyId)";
+
+                                                    GetCustomerInfo(viewId,
                                                         "@Html.FieldIdFor(m => m.NotifyPartyName)");
                                                     $('#notify-party-content').show();
                                                 }
                                             }
-                                              function onDataBound(e) {
+                                            function onDataBound(e) {
                                                   var combobox = $("#@Html.FieldIdFor(m => m.NotifyPartyId)")
-                                                      .data("kendoComboBox");
+                                                    .data("kendoComboBox");
+
+                                                  if (@Model.NotifyPartyId === null ||
+                                                      @Model.NotifyPartyId === @Model.ConsigneeId) {
+                                                      combobox.select(0);
+
+                                                  }
                                                   console.log(combobox.select());
                                                   if (combobox.select() < 0) {
                                                       $('#notify-party-content').hide();
                                                   } else {
-                                                      GetCustomerInfo("@Html.FieldIdFor(m => m.NotifyPartyId)",
+                                                      var viewId = combobox.select() === 0
+                                                          ? "@Html.FieldIdFor(m => m.ConsigneeId)"
+                                                          : "@Html.FieldIdFor(m => m.NotifyPartyId)";
+                                                      GetCustomerInfo(viewId,
                                                           "@Html.FieldIdFor(m => m.NotifyPartyName)");
                                                       $('#notify-party-content').show();
                                                   }
