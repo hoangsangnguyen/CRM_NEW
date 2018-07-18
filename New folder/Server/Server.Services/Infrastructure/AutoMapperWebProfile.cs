@@ -312,7 +312,9 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.IssueDate,
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.IssueDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
                 .ForMember(d => d.CreatedAt,
-                opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))));
+                opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.ExRef,
+                opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.ExRef, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
 
             // Topic
             CreateMap<Topic, TopicModel>()

@@ -113,7 +113,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 SailingDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 IssueDate = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
                 LclExpId = id ?? 0,
-                ForwardingAgent = topic?.Name + "-" + topic?.Address + "-" + topic?.Phone
+                ForwardingAgent = topic?.Name + "-" + topic?.Address + "-" + topic?.Phone,
+                QtyOfContainer = "PART OF CONTAINER"
             };
 
             return View(model);

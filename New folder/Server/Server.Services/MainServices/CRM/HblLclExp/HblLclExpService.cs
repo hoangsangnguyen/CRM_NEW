@@ -8,21 +8,25 @@ using Falcon.Web.Core.Helpers;
 using Falcon.Web.Mvc.PageList;
 using Vino.Server.Services.Database;
 using Vino.Server.Services.MainServices.BaseService;
+using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.CRM.AirExp.Models;
 using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
 using Vino.Server.Services.MainServices.CRM.LclImp;
 using Vino.Server.Services.MainServices.CRM.LclImp.Models;
+using Vino.Shared.Constants.Common;
 using SearchingRequest = Vino.Server.Services.MainServices.CRM.HblLclExp.Models.SearchingRequest;
 
 namespace Vino.Server.Services.MainServices.CRM.HblLclExp
 {
     public class HblLclExpService : GenericRepository<Data.CRM.HblLclExp, HblLclExpModel, HblLclExpModel>, IHblLclExpService
     {
-        private DataContext _context;
+        private readonly DataContext _context;
+        private readonly LookupService _lookupService;
 
-        public HblLclExpService(DataContext context) : base(context)
+        public HblLclExpService(DataContext context, LookupService lookupService) : base(context)
         {
             _context = context;
+            _lookupService = lookupService;
         }
 
         public async Task<IPageList<HblLclExpModel>> SearchModels(SearchingRequest request)
@@ -64,7 +68,10 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp
             query = query.OrderByDescending(d => d.CreatedAt);
             var receives = await query.Skip(request.Page * request.PageSize)
                 .Take(request.PageSize).ToListAsync();
+            var unitLookups = _lookupService.GetLookupByLookupType(LookupTypes.UnitType);
             var models = receives.MapTo<HblLclExpModel>();
+            models.ForEach(m => m.UnitName = unitLookups.FirstOrDefault(x => x.Id == m.UnitId)?.Title);
+
             return new PageList<HblLclExpModel>(models, request.Page, request.PageSize, query.Count());
         }
 

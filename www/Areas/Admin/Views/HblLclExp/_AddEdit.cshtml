@@ -1256,55 +1256,9 @@
                                     <label class="control-label">QtyOfContainer:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.QtyOfContainer)"
-                                           name="@Html.NameFor(model => model.QtyOfContainer)"
-                                           value="@Html.ValueFor(model => model.QtyOfContainer)" />
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.QtyOfContainer)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn unit...",
-                                                minLength: 1,
-                                                select: onSelect,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LookupApi/GetUnitTypes",
-                                                            dataType: "json",
-                                                            data: filterUnits
-                                                        }
-                                                    }
-                                                }
-                                            });
-
-                                            function filterUnits() {
-                                                var data = {
-                                                    @*Name: $("#@Html.FieldIdFor(model => model.UnitId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                                    Name: ""
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-
-                                            function onSelect(e) {
-                                                if ("kendoConsole" in window) {
-                                                    if (e.item) {
-                                                        var dataItem = this.dataItem(e.item.index());
-                                                        kendoConsole.log("event :: select (" + dataItem.text + " : " + dataItem.value + ")");
-                                                    } else {
-                                                        kendoConsole.log("event :: select");
-                                                    }
-                                                }
-                                            };
-
-                                        });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.QtyOfContainer)
+                                    <input readonly="readonly" type="text"
+                                           class="form-control" id="@Html.FieldIdFor(model => model.QtyOfContainer)"
+                                           name="@Html.FieldIdFor(model => model.QtyOfContainer)" value="@Model.QtyOfContainer" />
                                 </div>
                                 <div class="col-md-1">
                                 </div>
