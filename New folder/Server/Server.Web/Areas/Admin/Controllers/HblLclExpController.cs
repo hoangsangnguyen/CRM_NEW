@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -9,6 +10,9 @@ using System.Xml;
 using AutoMapper;
 using Falcon.Web.Mvc.Kendoui;
 using Falcon.Web.Mvc.Security;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
 using Vino.Server.Data.CRM;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.CRM.Customer;
@@ -154,6 +158,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             var user = await _userService.GetById(_webContext.UserId);
             dto.CreatorId = user.Id;
 
+            // same as consignee
+            if (dto.NotifyPartyId == 0)
+                dto.NotifyPartyId = dto.ConsigneeId;
+
             var id = await _service.CreateAsync(dto);
             if (id == 0)
             {
@@ -188,6 +196,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return View(dto);
             }
 
+            // same as consignee
+            if (dto.NotifyPartyId == 0)
+                dto.NotifyPartyId = dto.ConsigneeId;
+
             Console.WriteLine(dto);
             await _service.EditAsync(dto.Id, dto);
 
@@ -214,6 +226,22 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         #endregion
 
         #region PDF Export
+        [HttpPost]
+        [ValidateInput(false)]
+        public FileResult Export(string gridHtml)
+        {
+            using (var stream = new System.IO.MemoryStream())
+            {
+                var sr = new StringReader(gridHtml);
+                var pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
+                var writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", "Grid.pdf");
+            }
+        }
+
         public async Task<ActionResult> CreateAndDownload(int id)
         {
             var itemExpt = this.GetConfigMapping();

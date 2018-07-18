@@ -95,3 +95,6 @@ D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\obj\Debug\Vin
 D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\obj\Debug\Server.Web.csproj.CoreCompileInputs.cache
 D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\obj\Debug\Vino.Server.Web.dll
 D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\obj\Debug\Vino.Server.Web.pdb
+D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\bin\itextsharp.dll
+D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\bin\itextsharp.xmlworker.dll
+D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\bin\itextsharp.xml

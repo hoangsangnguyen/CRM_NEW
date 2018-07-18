@@ -22,15 +22,20 @@ namespace Vino.Server.Web.Api
         }
 
         public async Task<List<NameValueModel>> GetAllCustomers(string name = "",
-            bool withAll = false)
+            bool withAll = false, bool sameAsConsignee = false)
         {
             var models = (await _service.GetAllAsync()).Select(d => new NameValueModel()
             {
                 Name = d.FullVietNamName,
                 Value = d.Id.ToString()
             }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name)).ToList();
+            
             if (withAll)
                 models.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+            else if (sameAsConsignee)
+            {
+                models.Insert(0, new NameValueModel() { Name = "SAME AS CONSIGNEE", Value = "0" });
+            }
             return models;
         }
 
