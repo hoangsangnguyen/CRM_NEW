@@ -19,10 +19,11 @@
                 <i class="fa fa-floppy-o"></i>
                 Lưu
             </button>
-            <a class="btn bg-blue" id="button-export">
-                <i class="fa fa-print"></i>
-                In phiếu
-            </a>
+            <button type="submit" name="Preview" value="true" class="btn bg-green">
+                <i class="fa fa-floppy-o"></i>
+                Xem phiếu
+            </button>
+
             <span id="button-delete" class="btn bg-red">
                 <i class="fa fa-trash-o"></i>
                 Xóa
@@ -61,12 +62,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Xác nhận</h4>
             </div>
-            @using (Html.BeginForm("Export", "HblLclExp", FormMethod.Post))
+            @using (Html.BeginForm("Preview", "HblLclExp", new {id = Model.Id}))
             {
                 <div class="modal-body">
                     <p>Bạn có chắc chắn muốn in phiếu?</p>
                 </div>
-
 
                 <div class="modal-footer">
                     <input type="hidden" name="GridHtml" />
@@ -78,7 +78,7 @@
                     $(function () {
                         $("#btnSubmitExport").click(function () {
                             $("input[name='GridHtml']").val($("#Grid").html());
-
+                            $("#export-modal").modal("hide");
                         });
                     });
                 </script>
@@ -87,23 +87,9 @@
     </div>
 </div>
 
-<div id="Grid">
-    <table style="border: 1px solid #ccc;font-size: 9pt;border-collapse:collapse">
-        <tr>
-            <th style="background-color: #B8DBFD;border: 1px solid #ccc">CustomerID</th>
-            <th style="background-color: #B8DBFD;border: 1px solid #ccc">ContactName</th>
-            <th style="background-color: #B8DBFD;border: 1px solid #ccc">City</th>
-            <th style="background-color: #B8DBFD;border: 1px solid #ccc">Country</th>
-        </tr>
-        <tr>
-            <td style="width:120px;border: 1px solid #ccc">@Model.Id</td>
-            <td style="width:120px;border: 1px solid #ccc">@Model.BlNumber</td>
-            <td style="width:120px;border: 1px solid #ccc">@Model.ConsigneeName</td>
-            <td style="width:120px;border: 1px solid #ccc">@Model.ShipperName</td>
-        </tr>
-    </table>
+<div id="Grid" style="display: none">
+    @Html.Partial("_form")
 </div>
-
 
 <script>
     $("#button-delete").click(function () {

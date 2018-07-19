@@ -262,7 +262,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2018 06:39:18</publishTime>
     </File>
     <File Include="Areas/Admin/Views/HblLclExp/Edit.cshtml">
-      <publishTime>07/19/2018 05:54:48</publishTime>
+      <publishTime>07/20/2018 06:11:45</publishTime>
     </File>
     <File Include="Areas/Admin/Views/HblLclExp/HblList.cshtml">
       <publishTime>07/18/2018 21:15:46</publishTime>
@@ -270,11 +270,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Admin/Views/HblLclExp/List.cshtml">
       <publishTime>06/30/2018 16:33:01</publishTime>
     </File>
+    <File Include="Areas/Admin/Views/HblLclExp/Preview.cshtml">
+      <publishTime>07/20/2018 06:37:08</publishTime>
+    </File>
     <File Include="Areas/Admin/Views/HblLclExp/_AddEdit.cshtml">
       <publishTime>07/19/2018 07:02:56</publishTime>
     </File>
     <File Include="Areas/Admin/Views/HblLclExp/_FirstCreation.cshtml">
       <publishTime>07/18/2018 20:59:56</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/HblLclExp/_form.cshtml">
+      <publishTime>07/20/2018 06:44:52</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Jbimages/Upload.cshtml">
       <publishTime>05/21/2018 08:22:14</publishTime>
@@ -463,7 +469,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/17/2018 08:15:01</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Shared/_Layout.cshtml">
-      <publishTime>07/15/2018 13:16:00</publishTime>
+      <publishTime>07/19/2018 23:28:10</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Shared/_PopupLayout.cshtml">
       <publishTime>05/21/2018 08:22:22</publishTime>
@@ -790,31 +796,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/21/2018 08:22:46</publishTime>
     </File>
     <File Include="bin/Vino.Server.Data.dll">
-      <publishTime>07/18/2018 06:50:27</publishTime>
+      <publishTime>07/20/2018 06:47:00</publishTime>
     </File>
     <File Include="bin/Vino.Server.Data.pdb">
-      <publishTime>07/18/2018 06:50:27</publishTime>
+      <publishTime>07/20/2018 06:47:00</publishTime>
     </File>
     <File Include="bin/Vino.Server.Services.dll">
-      <publishTime>07/18/2018 21:55:25</publishTime>
+      <publishTime>07/20/2018 06:47:02</publishTime>
     </File>
     <File Include="bin/Vino.Server.Services.dll.config">
       <publishTime>05/21/2018 08:22:40</publishTime>
     </File>
     <File Include="bin/Vino.Server.Services.pdb">
-      <publishTime>07/18/2018 21:55:25</publishTime>
+      <publishTime>07/20/2018 06:47:02</publishTime>
     </File>
     <File Include="bin/Vino.Server.Web.dll">
-      <publishTime>07/19/2018 06:47:02</publishTime>
+      <publishTime>07/20/2018 06:47:11</publishTime>
     </File>
     <File Include="bin/Vino.Server.Web.pdb">
-      <publishTime>07/19/2018 06:47:02</publishTime>
+      <publishTime>07/20/2018 06:47:11</publishTime>
     </File>
     <File Include="bin/Vino.Shared.dll">
-      <publishTime>07/16/2018 22:49:23</publishTime>
+      <publishTime>07/20/2018 06:46:59</publishTime>
     </File>
     <File Include="bin/Vino.Shared.pdb">
-      <publishTime>07/16/2018 22:49:23</publishTime>
+      <publishTime>07/20/2018 06:46:59</publishTime>
     </File>
     <File Include="Content/AdminLte24/css/AdminLTE.css">
       <publishTime>06/02/2018 18:28:59</publishTime>
@@ -1111,7 +1117,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/21/2018 08:22:26</publishTime>
     </File>
     <File Include="Content/css/style.css">
-      <publishTime>05/21/2018 08:22:26</publishTime>
+      <publishTime>07/20/2018 05:53:29</publishTime>
     </File>
     <File Include="Content/css/style_order.css">
       <publishTime>05/21/2018 08:22:28</publishTime>
@@ -1286,6 +1292,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/images/common/Free_Shipping_Banner_Mobile.svg">
       <publishTime>05/21/2018 08:22:40</publishTime>
+    </File>
+    <File Include="Content/images/logo-cty.png">
+      <publishTime>07/18/2018 23:11:09</publishTime>
     </File>
     <File Include="Content/images/logo-green.png">
       <publishTime>05/21/2018 08:22:38</publishTime>
@@ -3271,7 +3280,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/21/2018 08:22:30</publishTime>
     </File>
     <File Include="Content/style.css">
-      <publishTime>05/21/2018 08:22:26</publishTime>
+      <publishTime>07/19/2018 23:02:30</publishTime>
     </File>
     <File Include="Content/tinymce/langs/ar.js">
       <publishTime>05/21/2018 08:22:38</publishTime>
@@ -5481,6 +5490,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/css/iconmoon.css">
       <publishTime>05/22/2018 21:40:41</publishTime>
     </File>
+    <File Include="wwwroot/css/pdf-form.css">
+      <publishTime>07/19/2018 23:09:44</publishTime>
+    </File>
     <File Include="wwwroot/css/print.css">
       <publishTime>05/22/2018 21:40:41</publishTime>
     </File>
@@ -5494,7 +5506,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/22/2018 21:40:41</publishTime>
     </File>
     <File Include="wwwroot/css/style-ll.css">
-      <publishTime>05/23/2018 01:56:15</publishTime>
+      <publishTime>07/19/2018 21:48:51</publishTime>
     </File>
     <File Include="wwwroot/favicon.ico">
       <publishTime>05/22/2018 21:40:48</publishTime>
