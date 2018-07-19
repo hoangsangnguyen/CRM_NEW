@@ -383,6 +383,7 @@
     <Content Include="Content\images\about\user_zavinaaa.jpg" />
     <Content Include="Content\images\common\Free_Shipping_Banner_Desktop.svg" />
     <Content Include="Content\images\common\Free_Shipping_Banner_Mobile.svg" />
+    <Content Include="Content\images\logo-cty.png" />
     <Content Include="Content\images\logo-mini-s.png" />
     <Content Include="Content\images\logo-s.png" />
     <Content Include="Content\images\logo-sgs.png" />
@@ -1242,6 +1243,7 @@
     <Content Include="wwwroot\css\dataTables\responsive.bootstrap4.css" />
     <Content Include="wwwroot\css\dataTables\responsive.dataTables.min.css" />
     <Content Include="wwwroot\css\iconmoon.css" />
+    <Content Include="wwwroot\css\pdf-form.css" />
     <Content Include="wwwroot\css\print.css" />
     <Content Include="wwwroot\css\rwd.css" />
     <Content Include="wwwroot\css\site.css" />
@@ -2665,6 +2667,8 @@
     <Content Include="Areas\Admin\Views\Carrier\_CreateCarrier.cshtml" />
     <Content Include="Areas\Admin\Views\Carrier\CarrierAddPopup.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\_FirstCreation.cshtml" />
+    <Content Include="Areas\Admin\Views\HblLclExp\_form.cshtml" />
+    <Content Include="Areas\Admin\Views\HblLclExp\Test.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />

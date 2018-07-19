@@ -78,7 +78,6 @@
                     $(function () {
                         $("#btnSubmitExport").click(function () {
                             $("input[name='GridHtml']").val($("#Grid").html());
-
                         });
                     });
                 </script>
@@ -88,7 +87,7 @@
 </div>
 
 <div id="Grid">
-    <table style="border: 1px solid #ccc;font-size: 9pt;border-collapse:collapse">
+    @*<table style="border: 1px solid #ccc;font-size: 9pt;border-collapse:collapse">
         <tr>
             <th style="background-color: #B8DBFD;border: 1px solid #ccc">CustomerID</th>
             <th style="background-color: #B8DBFD;border: 1px solid #ccc">ContactName</th>
@@ -101,7 +100,9 @@
             <td style="width:120px;border: 1px solid #ccc">@Model.ConsigneeName</td>
             <td style="width:120px;border: 1px solid #ccc">@Model.ShipperName</td>
         </tr>
-    </table>
+    </table>*@
+    @Html.Partial("_form")
+
 </div>
 
 

@@ -207,6 +207,11 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return RedirectToAction("Edit", new { id = dto.Id });
         }
 
+        public ActionResult Test()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<ActionResult> Delete(int id)
         {
