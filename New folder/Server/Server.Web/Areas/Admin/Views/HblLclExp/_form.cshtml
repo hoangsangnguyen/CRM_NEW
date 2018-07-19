@@ -1,181 +1,171 @@
-﻿
-        <div class="out-content-mid no-mb no-minheight">
-            <div class="out-box-show-content-pdf">
-                <h2 class="tt">BILL OF LADING</h2>
-                <div class="out-block-all">
+﻿@model Vino.Server.Services.MainServices.CRM.HblLclExp.Models.HblLclExpModel
+
+<div class="out-content-mid no-mb no-minheight">
+    <div class="out-box-show-content-pdf">
+        <h2 class="tt">BILL OF LADING</h2>
+        <div class="out-block-all">
+            <div class="wr-line-bt">
+                <div class="wr-box-two-pdf" style="min-height: 150px">
+                    <div class="wr-content-pdf">
+                        <p class="tt-top">Shipper/Export</p>
+                        @*<p class="tt-uper">@Html.Raw(Model.ShipperInfo.Replace("\r\n", "<br />"))</p>*@
+                        <p class="tt-uper">@Html.Raw(Model.ShipperInfo)</p>
+
+                    </div>
+                </div>
+                <div class="wr-box-two-pdf dot" style="min-height: 150px">
                     <div class="wr-line-bt">
+                        <div class="wr-box-two-pdf" style="min-height: 60px">
+                            <div class="wr-content-pdf">
+                                <p class="tt-top">Booking No.</p>
+                                <p class="tt-uper">@Html.Raw(Model.BookingNumber)</p>
+                            </div>
+                        </div>
+                        <div class="wr-box-two-pdf dot" style="min-height: 60px">
+                            <div class="wr-content-pdf">
+                                <p class="tt-top">Number of Original Bs/L</p>
+                                <p class="tt-uper">ZERO (0)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wr-content-pdf">
+                        <p class="tt-top">B/L No.</p>
+                        <p class="tt-bold">@Html.Raw(Model.BlNumber)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="wr-line-bt">
+                <div class="wr-box-two-pdf" style="min-height: 550px">
+                    <div class="wr-line-bt" style="min-height: 200px">
+                        <div class="wr-content-pdf">
+                            <p class="tt-top">Consignee or Order</p>
+                            @*<p class="tt-uper">@Html.Raw(Model.ConsigneeInfo.Replace("\r\n", "<br />"))</p>*@
+                            <p class="tt-uper">@Html.Raw(Model.ConsigneeInfo)</p>
+
+                        </div>
+                    </div>
+                    <div class="wr-line-bt" style="min-height: 200px">
+                        <div class="wr-content-pdf">
+                            <p class="tt-top">Notify Party (No claim shall attach for failure to notify)</p>
+                            @*<p class="tt-uper">@Html.Raw(Model.NotifyPartyInfo.Replace("\r\n", "<br />"))</p>*@
+                            <p class="tt-uper">@Html.Raw(Model.NotifyPartyInfo)</p>
+
+                        </div>
+                    </div>
+                    <div class="wr-line-bt no-bot-border" style="min-height: 150px">
                         <div class="wr-box-two-pdf" style="min-height: 150px">
                             <div class="wr-content-pdf">
-                                <p class="tt-top">Shipper/Export</p>
-                                <p class="tt-uper">CARGO LINKS CO., LTD </p>
-                                <p class="tt-uper">NO 5. DONG DA STREET, WARD 02, TAN BINH DISTRICT, HCMC</p>
-                                <p>Tel: +84-28-3547 0474 Fax: +84-28-3848 9712</p>
+                                <p class="tt-top">Place of receipt</p>
+                                <p class="tt-uper">@Html.Raw(Model.PlaceOfReceiptName)</p>
                             </div>
                         </div>
                         <div class="wr-box-two-pdf dot" style="min-height: 150px">
-                            <div class="wr-line-bt">
-                                <div class="wr-box-two-pdf" style="min-height: 60px">
-                                    <div class="wr-content-pdf">
-                                        <p class="tt-top">Booking No.</p>
-                                        <p class="tt-uper">VN00384410</p>
-                                    </div>
-                                </div>
-                                <div class="wr-box-two-pdf dot" style="min-height: 60px">
-                                    <div class="wr-content-pdf">
-                                        <p class="tt-top">Number of Original Bs/L</p>
-                                        <p class="tt-uper">ZERO (0)</p>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="wr-content-pdf">
-                                <p class="tt-top">B/L No.</p>
-                                <p class="tt-bold">WLCINC18070088B</p>
+                                <p class="tt-top">Port of Loading</p>
+                                <p class="tt-uper">@Html.Raw(Model.PortOfLoaingName)</p>
                             </div>
                         </div>
                     </div>
-                    <div class="wr-line-bt">
-                        <div class="wr-box-two-pdf" style="min-height: 550px">
-                            <div class="wr-line-bt" style="min-height: 200px">
-                                <div class="wr-content-pdf">
-                                    <p class="tt-top">Consignee or Order</p>
-                                    <p class="tt-uper">SMART LOGISTICS CO., LTD</p>
-                                    <p class="tt-uper">
-                                        2F, 25, 40GIL, HANGANGDAERO, YONGSAN-GU,
-                                        SEOUL, KOREA ( 04382 )
-                                    </p>
-                                    <p>TEL: 82-70-4900-6444</p>
-                                    <p>FAX: 82-51-464-2364</p>
-                                </div>
-                            </div>
-                            <div class="wr-line-bt" style="min-height: 200px">
-                                <div class="wr-content-pdf">
-                                    <p class="tt-top">Notify Party (No claim shall attach for failure to notify)</p>
-                                    <p class="tt-uper">SAME AS CONSIGNEE</p>
-                                </div>
-                            </div>
-                            <div class="wr-line-bt no-bot-border" style="min-height: 150px">
-                                <div class="wr-box-two-pdf" style="min-height: 150px">
-                                    <div class="wr-content-pdf">
-                                        <p class="tt-top">Place of receipt</p>
-                                        <p class="tt-uper">HO CHI MINH CITY, VIET NAM</p>
-                                    </div>
-                                </div>
-                                <div class="wr-box-two-pdf dot" style="min-height: 150px">
-                                    <div class="wr-content-pdf">
-                                        <p class="tt-top">Port of Loading</p>
-                                        <p class="tt-uper">HO CHI MINH CITY, VIET NAM</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
 
-                        <div class="wr-box-two-pdf dot" style="min-height: 550px">
-                            <div class="wr-line-bt" style="min-height: 350px">
-                                <div class="wr-content-pdf">
-                                    <div class="wr-logo-pdf-img">
-                                        @*<img src="images/logo-cty.png"  alt="Lee Ken 2018" id="imgs" runat="server">*@</ img>
-                                        <img src="~/Content/images/logo-cty.png" alt="Lee Ken 2018" />
-                                    </div>
-                                </div>
-                                <div class="wr-box-two-pdf">
-                                    <div class="wr-content-pdf">
-                                        <p class="tt-center tt-b">www.wlink.biz</p>
-                                    </div>
-                                </div>
-                                <div class="wr-box-two-pdf">
-                                    <div class="wr-content-pdf">
-                                        <p class="tt-center tt-b">wlink@wlink.biz</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="wr-line-bt no-bot-border" style="min-height: 200px">
-                                <div class="wr-content-pdf">
-                                    <p class="tt-top">For delivery of goods apply to</p>
-                                    <p class="tt-uper">NAURI LOGISTICS CO., LTD.</p>
-                                    <p class="tt-uper">
-                                        #1001, INNOPLEX B/D, 57-5, YANGSAN-RO,
-                                        YEONGDEUNGPO-GU, SEOUL, KOREA
-                                    </p>
-                                    <p>TEL: 82 2 737 9090 FAX: 82 2 738 1020</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="wr-line-bt" style="min-height: 80px">
-                        <div class="wr-box-two-pdf" style="min-height: 80px">
-                            <div class="wr-box-two-pdf" style="min-height: 80px">
-                                <div class="wr-content-pdf">
-                                    <p class="tt-top">Vessel and Voy No.</p>
-                                    <p class="tt-uper">
-                                        GUANGZHOU TRADER /
-                                        1005N
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="wr-box-two-pdf dot" style="min-height: 80px">
-                                <div class="wr-content-pdf">
-                                    <p class="tt-top">Port of Discharge</p>
-                                    <p class="tt-uper">INCHEON, KOREA</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="wr-box-two-pdf dot" style="min-height: 80px">
-                            <div class="wr-box-two-pdf" style="min-height: 80px">
-                                <div class="wr-content-pdf">
-                                    <p class="tt-top">Place of Delivery</p>
-                                    <p class="tt-uper">INCHEON, KOREA</p>
-                                </div>
-                            </div>
-                            <div class="wr-box-two-pdf dot" style="min-height: 80px">
-                                <div class="wr-content-pdf">
-                                    <p class="tt-top">Freight payable at</p>
-                                    <p class="tt-uper">
-                                        HO CHI MINH CITY, VIET
-                                        NAM
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="wr-line-bt" style="min-height: 80px">
-                        <div class="wr-box-per-pdf" style="min-height: 80px">
-                            <div class="wr-content-pdf">
-                                <p class="tt-top tt-center">Container No. and Seal No.</p>
-                                <p class="tt-uper tt-center">Marks and Numbers</p>
-                            </div>
-                        </div>
-                        <div class="wr-box-half-pdf" style="min-height: 80px">
-                            <div class="wr-content-pdf">
-                                <p class="tt-center" style="padding-top: 15px;">No. and kind of container or parkage; description of goods</p>
-
-                            </div>
-                        </div>
-                        <div class="wr-box-per-pdf dot" style="min-height: 80px">
-                            <div class="wr-content-pdf">
-                                <p class="tt-top tt-center">Gross weight</p>
-                                <p class="tt-uper tt-center">(KGS)</p>
-                            </div>
-                        </div>
-                        <div class="wr-box-per-pdf dot" style="min-height: 80px">
-                            <div class="wr-content-pdf">
-                                <p class="tt-top tt-center">Measurement</p>
-                                <p class="tt-uper tt-center">(CBM)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="wr-line-bt" style="min-height: 500px">AA</div>
-                    <div class="wr-line-bt" style="min-height: 40px">
+                <div class="wr-box-two-pdf dot" style="min-height: 550px">
+                    <div class="wr-line-bt" style="min-height: 350px">
                         <div class="wr-content-pdf">
-                            <p class="">At shipper's load, count, stowage, seal - result of which shipper fully liable</p>
+                            <div class="wr-logo-pdf-img">
+                                @* <img src="~/Content/images/logo-cty.png" alt="Lee Ken 2018" />*@
+                            </div>
+                        </div>
+                        <div class="wr-box-two-pdf">
+                            <div class="wr-content-pdf">
+                                <p class="tt-center tt-b">www.wlink.biz</p>
+                            </div>
+                        </div>
+                        <div class="wr-box-two-pdf">
+                            <div class="wr-content-pdf">
+                                <p class="tt-center tt-b">wlink@wlink.biz</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="wr-line-bt no-bot-border" style="min-height: 200px">
+                        <div class="wr-content-pdf">
+                            <p class="tt-top">For delivery of goods apply to</p>
+                           @* <p class="tt-uper">@Html.Raw(Model.DeliveryOfGoodsName.Replace("\r\n", "<br />"))</p>*@
+                            <p class="tt-uper">@Html.Raw(Model.DeliveryOfGoodsName)</p>
 
                         </div>
                     </div>
-                    <div class="wr-line-bt" style="min-height: 120px">
-
-                    </div>
-
                 </div>
             </div>
-        </div>
+            <div class="wr-line-bt" style="min-height: 80px">
+                <div class="wr-box-two-pdf" style="min-height: 80px">
+                    <div class="wr-box-two-pdf" style="min-height: 80px">
+                        <div class="wr-content-pdf">
+                            <p class="tt-top">Vessel and Voy No.</p>
+                            <p class="tt-uper">
+                                @Html.Raw(Model.OceanVesselName)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="wr-box-two-pdf dot" style="min-height: 80px">
+                        <div class="wr-content-pdf">
+                            <p class="tt-top">Port of Discharge</p>
+                            <p class="tt-uper">@Html.Raw(Model.PortOfDischargeName)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wr-box-two-pdf dot" style="min-height: 80px">
+                    <div class="wr-box-two-pdf" style="min-height: 80px">
+                        <div class="wr-content-pdf">
+                            <p class="tt-top">Place of Delivery</p>
+                            <p class="tt-uper">@Html.Raw(Model.PlaceOfDeliveryName)</p>
+                        </div>
+                    </div>
+                    <div class="wr-box-two-pdf dot" style="min-height: 80px">
+                        <div class="wr-content-pdf">
+                            <p class="tt-top">Freight payable at</p>
+                            <p class="tt-uper">
+                                @Html.Raw(Model.FreightPayableName)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wr-line-bt" style="min-height: 80px">
+                <div class="wr-box-per-pdf" style="min-height: 80px">
+                    <div class="wr-content-pdf">
+                        <p class="tt-top tt-center">Container No. and Seal No.</p>
+                        <p class="tt-uper tt-center">@Html.Raw(Model.Container)</p>
+                    </div>
+                </div>
+                <div class="wr-box-half-pdf" style="min-height: 80px">
+                    <div class="wr-content-pdf">
+                        <p class="tt-center" style="padding-top: 15px;">No. and kind of container or parkage; description of goods</p>
+                    </div>
+                </div>
+                <div class="wr-box-per-pdf dot" style="min-height: 80px">
+                    <div class="wr-content-pdf">
+                        <p class="tt-top tt-center">Gross weight</p>
+                        <p class="tt-uper tt-center">(KGS)</p>
+                    </div>
+                </div>
+                <div class="wr-box-per-pdf dot" style="min-height: 80px">
+                    <div class="wr-content-pdf">
+                        <p class="tt-top tt-center">Measurement</p>
+                        <p class="tt-uper tt-center">(CBM)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="wr-line-bt" style="min-height: 500px">AA</div>
+            <div class="wr-line-bt" style="min-height: 40px">
+                <div class="wr-content-pdf">
+                    <p class="">At shipper's load, count, stowage, seal - result of which shipper fully liable</p>
+                </div>
+            </div>
+            <div class="wr-line-bt" style="min-height: 120px">
 
+            </div>
+
+        </div>
+    </div>
+</div>

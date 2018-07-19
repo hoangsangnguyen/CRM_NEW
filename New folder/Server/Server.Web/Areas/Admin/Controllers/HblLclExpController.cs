@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml;
 using AutoMapper;
+using Falcon.Web.Core.Helpers;
 using Falcon.Web.Mvc.Kendoui;
 using Falcon.Web.Mvc.Security;
 using iTextSharp.text;
@@ -41,6 +42,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         private readonly PortService _portService;
         private readonly UserService _userService;
         private readonly WebContext _webContext;
+        private readonly LookupService _lookupService;
+
 
 
         public HblLclExpController(HblLclExpService service,
@@ -51,7 +54,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             LclExpService lclExpService,
             PortService portService,
             UserService userService,
-            WebContext webContext)
+            WebContext webContext,
+            LookupService lookupService)
         {
             _service = service;
             _customerService = customerService;
@@ -62,6 +66,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             _portService = portService;
             _userService = userService;
             _webContext = webContext;
+            _lookupService = lookupService;
         }
 
         #region HblLclExp
@@ -200,16 +205,33 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             if (dto.NotifyPartyId == 0)
                 dto.NotifyPartyId = dto.ConsigneeId;
 
-            Console.WriteLine(dto);
             await _service.EditAsync(dto.Id, dto);
+
+            if (dto.Preview)
+                return RedirectToAction("Preview", new {id = dto.Id});
 
             SuccessNotification("Chỉnh sửa thành công!");
             return RedirectToAction("Edit", new { id = dto.Id });
         }
 
-        public ActionResult Test()
+        public async Task<ActionResult> Preview(int id)
         {
-            return View();
+            var entity = await _service.GetSingleAsync(id);
+            if (entity == null)
+            {
+                ErrorNotification("Không tìm thấy phiếu");
+                return RedirectToAction("Edit", id);
+            }
+
+            var model = entity.MapTo<HblLclExpModel>();
+            if (model.NotifyPartyId == model.ConsigneeId)
+                model.NotifyPartyName = "SAME AS CONSIGNEE";
+
+            var vesselLookups = _lookupService.GetLookupByLookupType(LookupTypes.VesselType);
+            model.OceanVesselName = vesselLookups.FirstOrDefault(x => x.Id == model.OceanVessel)?.Title;
+            model.LocalVesselName = vesselLookups.FirstOrDefault(x => x.Id == model.LocalVessel)?.Title;
+
+            return View(model);
         }
 
         [HttpPost]

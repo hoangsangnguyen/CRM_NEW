@@ -38,6 +38,7 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
         [Required(ErrorMessage = "Vui lòng chọn Shipper hoặc tạo mới")]
         public int? ShipperId { get; set; }
         public string ShipperName { get; set; }
+        public string ShipperInfo { get; set; }
 
         /*
          * Consignee and name
@@ -45,6 +46,7 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
         [Required(ErrorMessage = "Vui lòng chọn Consignee hoặc tạo mới")]
         public int? ConsigneeId { get; set; }
         public string ConsigneeName { get; set; }
+        public string ConsigneeInfo { get; set; }
 
         /*
          * Notify party and name
@@ -52,6 +54,7 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
         [Required(ErrorMessage = "Vui lòng chọn notify Party hoặc tạo mới")]
         public int? NotifyPartyId { get; set; }
         public string NotifyPartyName { get; set; }
+        public string NotifyPartyInfo { get; set; }
 
         /*
          * Local vessel and name
@@ -199,5 +202,7 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
         public string CreatedAt { get; set; }
 
         public int CreatorId { get; set; }
+
+        public bool Preview { get; set; }   
     }
 }

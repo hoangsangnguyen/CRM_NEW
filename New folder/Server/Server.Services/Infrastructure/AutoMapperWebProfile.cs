@@ -272,9 +272,15 @@ namespace Vino.Server.Services.Infrastructure
             // HblLclExp
             CreateMap<HblLclExp, HblLclExpModel>()
                 .ForMember(d => d.ShipperName, opt => opt.MapFrom(
-                    x => x.Shipper.Name))
+                    x => x.NotifyParty.Name))
+                .ForMember(d => d.ShipperInfo, opt => opt.MapFrom(
+                    x => $"{x.Shipper.Name}{Environment.NewLine}{x.Shipper.Address}{Environment.NewLine}Tel: {x.Shipper.FaxNo}" ))
                 .ForMember(d => d.ConsigneeName, opt => opt.MapFrom(
-                    x => x.Consignee.Name))
+                    x => x.NotifyParty.Name))
+                .ForMember(d => d.ConsigneeInfo, opt => opt.MapFrom(
+                    x => $"{x.Consignee.Name}{Environment.NewLine}{x.Consignee.Address}{Environment.NewLine}Tel: {x.Consignee.FaxNo}"))
+                .ForMember(d => d.NotifyPartyInfo, opt => opt.MapFrom(
+                    x => $"{x.NotifyParty.Name}{Environment.NewLine}{x.NotifyParty.Address}{Environment.NewLine}Tel: {x.NotifyParty.FaxNo}"))
                 .ForMember(d => d.NotifyPartyName, opt => opt.MapFrom(
                     x => x.NotifyParty.Name))
                 .ForMember(d => d.PlaceOfReceiptName, opt => opt.MapFrom(
@@ -290,9 +296,7 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.PlaceOfDeliveryName, opt => opt.MapFrom(
                     x => x.PlaceOfDelivery.PortName))
                 .ForMember(d => d.DeliveryOfGoodsName, opt => opt.MapFrom(
-                    x => x.DeliveryOfGoods.Name))
-                .ForMember(d => d.NotifyPartyName, opt => opt.MapFrom(
-                    x => x.NotifyParty.Name))
+                    x => $"{x.DeliveryOfGoods.Name}{Environment.NewLine}{x.DeliveryOfGoods.Address}{Environment.NewLine}Tel: {x.DeliveryOfGoods.FaxNo}"))
                 .ForMember(d => d.ClosingDate,
                     opt => opt.MapFrom(x => x.ClosingDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
                 .ForMember(d => d.SailingDate,

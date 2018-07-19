@@ -2668,7 +2668,7 @@
     <Content Include="Areas\Admin\Views\Carrier\CarrierAddPopup.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\_FirstCreation.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\_form.cshtml" />
-    <Content Include="Areas\Admin\Views\HblLclExp\Test.cshtml" />
+    <Content Include="Areas\Admin\Views\HblLclExp\Preview.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
