@@ -348,7 +348,8 @@
                                                         }
                                                     }
                                                 },
-                                                dataBound: onDataBound
+                                                dataBound: onDataBound,
+                                                cascadeFrom: "@Html.FieldIdFor(m => m.ShipperId)"
                                             });
 
                                             function filterConsignee() {
@@ -411,7 +412,7 @@
                                                 filter: "contains",
                                                 dataTextField: "Name",
                                                 dataValueField: "Value",
-                                                placeholder: "Chọn consignee...",
+                                                placeholder: "Chọn notify party...",
                                                 minLength: 1,
                                                 change: onChange,
                                                 dataBound: onDataBound,
@@ -460,11 +461,11 @@
                                                   var combobox = $("#@Html.FieldIdFor(m => m.NotifyPartyId)")
                                                     .data("kendoComboBox");
 
-                                                  if (@Model.NotifyPartyId === null ||
-                                                      @Model.NotifyPartyId === @Model.ConsigneeId) {
+                                                  if ('@Model.NotifyPartyId' === 'null' ||
+                                                      '@Model.NotifyPartyId' === '@Model.ConsigneeId') {
                                                       combobox.select(0);
-
                                                   }
+
                                                   console.log(combobox.select());
                                                   if (combobox.select() < 0) {
                                                       $('#notify-party-content').hide();
