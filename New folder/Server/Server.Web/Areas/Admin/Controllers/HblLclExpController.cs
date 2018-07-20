@@ -14,6 +14,13 @@ using Falcon.Web.Mvc.Security;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
+using iTextSharp.tool.xml.css;
+using iTextSharp.tool.xml.html;
+using iTextSharp.tool.xml.html.table;
+using iTextSharp.tool.xml.parser;
+using iTextSharp.tool.xml.pipeline.css;
+using iTextSharp.tool.xml.pipeline.end;
+using iTextSharp.tool.xml.pipeline.html;
 using Vino.Server.Data.CRM;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.CRM.Customer;
@@ -28,6 +35,7 @@ using Vino.Server.Services.MainServices.Users;
 using Vino.Server.Web.Areas.Admin.Models.HblLclExps;
 using Vino.Shared.Constants.Common;
 using Vino.Shared.Constants.Warehouse;
+
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
 {
@@ -253,19 +261,30 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         #endregion
 
         #region PDF Export
+
         [HttpPost]
         [ValidateInput(false)]
         public FileResult Export(string gridHtml)
         {
-            using (var stream = new System.IO.MemoryStream())
+            var cssText = System.IO.File.ReadAllText(@"D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\wwwroot\css\pdf-form.css");
+            using (var memoryStream = new MemoryStream())
             {
-                var sr = new StringReader(gridHtml);
-                var pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
-                var writer = PdfWriter.GetInstance(pdfDoc, stream);
+                var pdfDoc = new Document(PageSize.A4, 50, 50, 60, 60);
+                var writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
                 pdfDoc.Open();
-                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+
+                using (var cssMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(cssText)))
+                {
+                    using (var htmlMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(gridHtml)))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, htmlMemoryStream, cssMemoryStream);
+                    }
+                }
+
                 pdfDoc.Close();
-                return File(stream.ToArray(), "application/pdf", "Grid.pdf");
+
+                return File(memoryStream.ToArray(), "application/pdf", "Grid.pdf");
+
             }
         }
 
