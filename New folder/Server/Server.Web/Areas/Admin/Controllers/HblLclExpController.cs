@@ -33,6 +33,7 @@ using Vino.Server.Services.MainServices.CRM.Topic;
 using Vino.Server.Services.MainServices.Employees;
 using Vino.Server.Services.MainServices.Users;
 using Vino.Server.Web.Areas.Admin.Models.HblLclExps;
+using Vino.Server.Web.Helper;
 using Vino.Shared.Constants.Common;
 using Vino.Shared.Constants.Warehouse;
 
@@ -51,7 +52,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         private readonly UserService _userService;
         private readonly WebContext _webContext;
         private readonly LookupService _lookupService;
-
+        private readonly HtmlViewRenderer _htmlViewRenderer;
+        private readonly StandardPdfRenderer _standardPdfRenderer;
 
 
         public HblLclExpController(HblLclExpService service,
@@ -63,7 +65,9 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             PortService portService,
             UserService userService,
             WebContext webContext,
-            LookupService lookupService)
+            LookupService lookupService,
+            HtmlViewRenderer htmlViewRenderer,
+            StandardPdfRenderer standardPdfRenderer)
         {
             _service = service;
             _customerService = customerService;
@@ -75,6 +79,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             _userService = userService;
             _webContext = webContext;
             _lookupService = lookupService;
+            _htmlViewRenderer = htmlViewRenderer;
+            _standardPdfRenderer = standardPdfRenderer;
         }
 
         #region HblLclExp
@@ -242,6 +248,19 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        private async Task<HblLclExpModel> GetModel(int id)
+        {
+            var entity = await _service.GetSingleAsync(id);
+            var model = entity.MapTo<HblLclExpModel>();
+            if (model.NotifyPartyId == model.ConsigneeId)
+                model.NotifyPartyName = "SAME AS CONSIGNEE";
+
+            var vesselLookups = _lookupService.GetLookupByLookupType(LookupTypes.VesselType);
+            model.OceanVesselName = vesselLookups.FirstOrDefault(x => x.Id == model.OceanVessel)?.Title;
+            model.LocalVesselName = vesselLookups.FirstOrDefault(x => x.Id == model.LocalVessel)?.Title;
+            return model;
+        }
+
         [HttpPost]
         public async Task<ActionResult> Delete(int id)
         {
@@ -264,28 +283,39 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public FileResult Export(string gridHtml)
+        public async Task<ActionResult> Export()
         {
-            var cssText = System.IO.File.ReadAllText(@"D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\wwwroot\css\pdf-form.css");
-            using (var memoryStream = new MemoryStream())
-            {
-                var pdfDoc = new Document(PageSize.A4, 50, 50, 60, 60);
-                var writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
-                pdfDoc.Open();
+            var model = await GetModel(1);
+            string htmlText = this._htmlViewRenderer.RenderViewToString(this, "~/Areas/Admin/Views/HblLclExp/Preview.cshtml", model);
 
-                using (var cssMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(cssText)))
-                {
-                    using (var htmlMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(gridHtml)))
-                    {
-                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, htmlMemoryStream, cssMemoryStream);
-                    }
-                }
+            // Let the html be rendered into a PDF document through iTextSharp.
+            byte[] buffer = _standardPdfRenderer.Render(htmlText, "Report");
 
-                pdfDoc.Close();
+            // Return the PDF as a binary stream to the client.
+            return new BinaryContentResult(buffer, "application/pdf");
+            //var cssText = System.IO.File.ReadAllText(@"D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\wwwroot\css\pdf-form.css");
+            //using (var memoryStream = new MemoryStream())
+            //{
+            //    StringReader sr = new StringReader(gridHtml);
+            //    var pdfDoc = new Document(PageSize.A4, 50, 50, 60, 60);
+            //    var writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
+            //    pdfDoc.Open();
 
-                return File(memoryStream.ToArray(), "application/pdf", "Grid.pdf");
+            //    XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+            //    // using (var cssMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(cssText)))
+            //    // {
+            //    //using (var htmlMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(gridHtml)))
+            //    //    {
+            //    //        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, htmlMemoryStream);
+            //    //    XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, htmlMemoryStream);
+            //    //    }
+            //   // }
 
-            }
+            //    pdfDoc.Close();
+
+            //    return File(memoryStream.ToArray(), "application/pdf", "Grid.pdf");
+
+            //}
         }
 
         public async Task<ActionResult> CreateAndDownload(int id)

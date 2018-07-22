@@ -3424,9 +3424,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\BinaryContentResult.cs" />
+    <Compile Include="Helper\FakeView.cs" />
+    <Compile Include="Helper\HtmlViewRenderer.cs" />
     <Compile Include="Helper\ImageByte.cs" />
     <Compile Include="Helper\ModelStateExtensions.cs" />
     <Compile Include="Helper\NullJsonResult.cs" />
+    <Compile Include="Helper\PrintHeaderFooter.cs" />
     <Compile Include="Helper\RenderMenu.cs" />
     <Compile Include="Areas\Admin\Models\Common\ImageByteModel.cs" />
     <Compile Include="Areas\Admin\Models\FaclonUser\CustomerListModel.cs" />
@@ -3439,6 +3443,7 @@
     <Compile Include="Areas\Admin\Models\ExaminationProcedure\ArticleModel.cs" />
     <Compile Include="Areas\Admin\Models\ExaminationProcedure\ExaminationProcedureContentModel.cs" />
     <Compile Include="Areas\Admin\Models\ExaminationProcedure\ExaminationProcedureListModel.cs" />
+    <Compile Include="Helper\StandardPdfRenderer.cs" />
     <Compile Include="Models\Calendar\CalendarModelRequest.cs" />
     <Compile Include="Models\Home\HomeModel.cs" />
     <Compile Include="Models\User\LoginModel.cs" />
