@@ -74,7 +74,7 @@
                                                                 data: filterLclExp
                                                             }
                                                         }
-                                                    }
+                                                    },
                                                 });
 
                                                 function filterLclExp() {
@@ -86,6 +86,9 @@
                                                     addAntiForgeryToken(data);
                                                     return data;
                                                 }
+
+
+
                                             });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.LclExpId)
@@ -151,7 +154,7 @@
                                                 minLength: 1,
                                                 suggest: true,
                                                 autoBind: true,
-                                                open: onOpen,
+
                                                 dataSource: {
                                                     type: "json",
                                                     serverFiltering: false,
@@ -164,12 +167,6 @@
                                                     }
                                                 }
                                             });
-
-                                            function onOpen() {
-                                                if ("kendoConsole" in window) {
-                                                    kendoConsole.log("event :: open");
-                                                }
-                                            }
 
                                             function filterHblType() {
                                                 var data = {
@@ -252,7 +249,7 @@
                                            value="@Html.ValueFor(model => model.ShipperId)" />
                                     <script>
                                         $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.ShipperId)").kendoComboBox({
+                                            var ddl = $("#@Html.FieldIdFor(model => model.ShipperId)").kendoComboBox({
                                                 filter: "contains",
                                                 dataTextField: "Name",
                                                 dataValueField: "Value",
@@ -270,8 +267,10 @@
                                                             data: filterShipper
                                                         }
                                                     }
-                                                }
+                                                },
                                             });
+
+                                          
 
                                             function filterShipper() {
                                                 var data = {
@@ -1577,8 +1576,61 @@
         OpenWindow(url, 800, 800, true);
     }
 
-    $(document).ready(function() {
-        console.log(@Model.Id);
+        $(document).ready(function () {
+
+            $("#@Html.FieldIdFor(m => m.ShipperId)").data("kendoComboBox").ul.kendoTooltip({
+                filter: 'li.k-item',
+                position: 'right',
+                content: function (e) {
+                    var target = e.target; // element for which the tooltip is shown
+                    var result = '<h3>' + $(target).text()  + '</h3>' +
+                        '<h4>' + $(target).text() + '</h4>' +
+                        'Address: <hr />' +
+                        '<p>Street: ' + $(target).text()  + '</p>' +
+                        '<p>Suite: ' + $(target).text()  + '</p>' +
+                        '<p>ZIP Code: ' + $(target).text()  + '</p>';
+
+                    return result ;
+                },
+                width: 220,
+                height: 280
+            });
+
+            $("#@Html.FieldIdFor(m => m.ConsigneeId)").data("kendoComboBox").ul.kendoTooltip({
+                filter: 'li.k-item',
+                position: 'right',
+                content: function (e) {
+                    var target = e.target; // element for which the tooltip is shown
+                    var result = '<h3>' + $(target).text()  + '</h3>' +
+                        '<h4>' + $(target).text() + '</h4>' +
+                        'Address: <hr />' +
+                        '<p>Street: ' + $(target).text()  + '</p>' +
+                        '<p>Suite: ' + $(target).text()  + '</p>' +
+                        '<p>ZIP Code: ' + $(target).text()  + '</p>';
+
+                    return result ;
+                },
+                width: 220,
+                height: 280
+            });
+
+            $("#@Html.FieldIdFor(m => m.NotifyPartyId)").data("kendoComboBox").ul.kendoTooltip({
+                filter: 'li.k-item',
+                position: 'right',
+                content: function (e) {
+                    var target = e.target; // element for which the tooltip is shown
+                    var result = '<h3>' + $(target).text()  + '</h3>' +
+                        '<h4>' + $(target).text() + '</h4>' +
+                        'Address: <hr />' +
+                        '<p>Street: ' + $(target).text()  + '</p>' +
+                        '<p>Suite: ' + $(target).text()  + '</p>' +
+                        '<p>ZIP Code: ' + $(target).text()  + '</p>';
+
+                    return result ;
+                },
+                width: 220,
+                height: 280
+            });
 
         if (@Model.Id === 0 &&  '@Model.BlNumber.IsNullOrEmpty()'.toLowerCase() === 'true') {
             OpenModalFirstCreation('@Html.FieldIdFor(m => m.BlNumber)', 'hblLclExp-edit-form');

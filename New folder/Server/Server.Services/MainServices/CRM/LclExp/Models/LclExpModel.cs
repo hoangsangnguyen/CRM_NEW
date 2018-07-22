@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Vino.Server.Services.MainServices.BaseService;
 using Vino.Server.Services.MainServices.CRM.Carrier.Model;
+using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
 using Vino.Server.Services.MainServices.CRM.Port.Model;
 
 namespace Vino.Server.Services.MainServices.CRM.LclExp.Models
@@ -16,6 +17,7 @@ namespace Vino.Server.Services.MainServices.CRM.LclExp.Models
     {
         public LclExpModel()
         {
+            Items = new List<HblLclExpModel>();
         }
 
         [Required]
@@ -91,5 +93,6 @@ namespace Vino.Server.Services.MainServices.CRM.LclExp.Models
 
         public string Notes { get; set; }
 
+        public List<HblLclExpModel> Items { get; set; }
     }
 }

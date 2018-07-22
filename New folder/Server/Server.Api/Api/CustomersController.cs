@@ -12,12 +12,10 @@ namespace Vino.Server.Api.Api
 	[RoutePrefix("api/Employees")]
 	public class EmployeesController : SecureApiController
 	{
-		private readonly EmployeeService _EmployeeService;
 		private readonly UserAuthService _authService;
-		public EmployeesController(EmployeeService EmployeeService,
+		public EmployeesController(
 			UserAuthService authService)
 		{
-			_EmployeeService = EmployeeService;
 			_authService = authService;
 		}
 	

@@ -203,6 +203,8 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
 
         public int CreatorId { get; set; }
 
-        public bool Preview { get; set; }   
+        public bool Preview { get; set; }
+
+        public int Index { get; set; }
     }
 }
