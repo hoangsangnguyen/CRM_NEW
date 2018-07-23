@@ -15,7 +15,7 @@ namespace Vino.Server.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return Redirect("~/admin/airexps");
+            return Redirect("~/admin/home");
         }
 
     }

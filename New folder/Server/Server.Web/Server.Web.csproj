@@ -2669,6 +2669,7 @@
     <Content Include="Areas\Admin\Views\HblLclExp\_FirstCreation.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\_form.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\Preview.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Intro.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
@@ -3380,6 +3381,7 @@
     <Compile Include="Areas\Admin\Controllers\FclExpsController.cs" />
     <Compile Include="Areas\Admin\Controllers\FclImpsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HblLclExpController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\JbimagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\LclExpsController.cs" />
     <Compile Include="Areas\Admin\Controllers\LclImpsController.cs" />

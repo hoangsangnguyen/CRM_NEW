@@ -60,11 +60,28 @@ namespace Vino.Server.Services.MainServices.CRM.LclExp
                 !x.Deleted && lclExpIds.Contains(x.LclExpId.Value)).ToListAsync();
             var hblItemModels = hblItems.MapTo<HblLclExpModel>();
             var unitLookups = _lookupService.GetLookupByLookupType(LookupTypes.UnitType);
-            hblItemModels.ForEach(d => d.UnitName = unitLookups.FirstOrDefault(x => x.Id == d.UnitId)?.Title);
 
-            models.ForEach(d => d.Items = 
-                hblItemModels.Where(x => x.LclExpId == d.Id)
-                    .ToList());
+            foreach (var lclExpModel in models)
+            {
+                //var qty = 0;
+                var grossWeight = 0.0;
+                var cbm = 0.0;
+
+                foreach (var hblLclExpModel in hblItemModels)
+                {
+                    grossWeight += hblLclExpModel.GrossWeight;
+                    cbm += hblLclExpModel.Measurement;
+                    hblLclExpModel.UnitName = unitLookups.FirstOrDefault(x => x.Id == hblLclExpModel.UnitId)?.Title;
+                    if (hblLclExpModel.LclExpId == lclExpModel.Id)
+                    {
+                        lclExpModel.Items.Add(hblLclExpModel);
+                    }
+                }
+
+                lclExpModel.Gw = lclExpModel.Gw > grossWeight ? lclExpModel.Gw : grossWeight;
+                lclExpModel.Cbm = lclExpModel.Cbm > cbm ? lclExpModel.Cbm : cbm;
+
+            }
 
             return new PageList<LclExpModel>(models, request.Page, request.PageSize, query.Count());
         }

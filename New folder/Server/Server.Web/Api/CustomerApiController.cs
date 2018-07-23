@@ -31,7 +31,7 @@ namespace Vino.Server.Web.Api
             {
                 Name = d.FullVietNamName,
                 Value = d.Id.ToString(),
-                Optional = d.FullVietNamName + " - " + d.Address + " - " + d.FaxNo
+                Optional = d.FullVietNamName + " - <br/>" + d.Address + " - " + d.FaxNo
             }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name)).ToList();
 
             if (withAll)

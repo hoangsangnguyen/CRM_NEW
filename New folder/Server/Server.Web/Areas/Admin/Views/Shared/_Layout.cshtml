@@ -139,8 +139,8 @@
             <section class="sidebar">
                 <ul class="sidebar-menu tree" data-widget="tree">
                     <li class="header" style="font-size: 17px; color: #0173b7; font-weight: bold">LOGISTICS</li>
-                    <li class="treeview">
-                        <a href="/admin">
+                    <li class="@Html.IsActive("Home","Index")">
+                        <a href="@Url.Action("Index", "Home")">
                             <i class="fa fa-dashboard"></i> <span style="color: #0173b7">Trang chủ</span>
                         </a>
                     </li>

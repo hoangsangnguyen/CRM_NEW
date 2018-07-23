@@ -251,7 +251,7 @@
                                         $(document).ready(function() {
                                             var ddl = $("#@Html.FieldIdFor(model => model.ShipperId)").kendoComboBox({
                                                 filter: "contains",
-                                                dataTextField: "Name",
+                                                dataTextField: "Optional",
                                                 dataValueField: "Value",
                                                 placeholder: "Chọn shipper...",
                                                 minLength: 1,
@@ -267,10 +267,9 @@
                                                             data: filterShipper
                                                         }
                                                     }
-                                                },
+                                                }
                                             });
 
-                                          
 
                                             function filterShipper() {
                                                 var data = {
@@ -1583,12 +1582,13 @@
                 position: 'right',
                 content: function (e) {
                     var target = e.target; // element for which the tooltip is shown
-                    var result = '<h3>' + $(target).text()  + '</h3>' +
-                        '<h4>' + $(target).text() + '</h4>' +
-                        'Address: <hr />' +
-                        '<p>Street: ' + $(target).text()  + '</p>' +
-                        '<p>Suite: ' + $(target).text()  + '</p>' +
-                        '<p>ZIP Code: ' + $(target).text()  + '</p>';
+                    var result = '<h3>' + $(target).text() + '</h3>';
+                        //+
+                        //'<h4>' + $(target).text() + '</h4>' +
+                        //'Address: <hr />' +
+                        //'<p>Street: ' + $(target).text()  + '</p>' +
+                        //'<p>Suite: ' + $(target).text()  + '</p>' +
+                        //'<p>ZIP Code: ' + $(target).text()  + '</p>';
 
                     return result ;
                 },

@@ -66,10 +66,10 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp
             }
 
             query = query.OrderByDescending(d => d.CreatedAt);
-            var receives = await query.Skip(request.Page * request.PageSize)
+            var hclLclExps = await query.Skip(request.Page * request.PageSize)
                 .Take(request.PageSize).ToListAsync();
             var unitLookups = _lookupService.GetLookupByLookupType(LookupTypes.UnitType);
-            var models = receives.MapTo<HblLclExpModel>();
+            var models = hclLclExps.MapTo<HblLclExpModel>();
             models.ForEach(m => m.UnitName = unitLookups.FirstOrDefault(x => x.Id == m.UnitId)?.Title);
 
             return new PageList<HblLclExpModel>(models, request.Page, request.PageSize, query.Count());

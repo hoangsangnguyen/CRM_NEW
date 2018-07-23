@@ -53,7 +53,7 @@ namespace Vino.Server.Web.Controllers
                     {
                         return Redirect(model.ReturnUrl);
                     }
-                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
                 }
                 ModelState.AddModelError("", "Mật khẩu hoặc tài khoản không hợp lệ");
             }
@@ -63,7 +63,7 @@ namespace Vino.Server.Web.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            return RedirectToAction("Index", "Home", new { area = "Admin" });
         }
 
         public ActionResult Register()

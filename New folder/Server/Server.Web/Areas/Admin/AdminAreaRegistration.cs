@@ -17,7 +17,7 @@ namespace Vino.Server.Web.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { controller = "Dashboard",action = "Index", id = UrlParameter.Optional },
+                new { controller = "Home",action = "Index", id = UrlParameter.Optional },
                 new[] { "Vino.Server.Web.Areas.Admin.Controllers" }
             );
         }
