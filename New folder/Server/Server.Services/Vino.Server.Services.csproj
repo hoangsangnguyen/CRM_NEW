@@ -206,6 +206,8 @@
     <Compile Include="MainServices\Common\OrderGenCodeService.cs" />
     <Compile Include="MainServices\CRM\AirExp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\AirImp\Models\SearchingRequest.cs" />
+    <Compile Include="MainServices\CRM\Contact\Models\SearchingRequest.cs" />
+    <Compile Include="MainServices\CRM\Customer\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\FclExp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\FclImp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\HblLclExp\Models\SearchingRequest.cs" />

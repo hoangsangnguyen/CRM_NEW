@@ -6,13 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using Falcon.Web.Mvc.Kendoui;
 using Vino.Server.Services.MainServices.Common;
-using Vino.Server.Services.MainServices.Common.Models;
-using Vino.Server.Services.MainServices.CRM.Contact;
-using Vino.Server.Services.MainServices.CRM.Contact.Models;
 using Vino.Server.Services.MainServices.CRM.Customer;
 using Vino.Server.Services.MainServices.CRM.Customer.Models;
 using Vino.Server.Web.Areas.Admin.Models.Customer;
-using Vino.Shared.Constants.Common;
 using Vino.Shared.Constants.Warehouse;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
@@ -43,8 +39,16 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> List(DataSourceRequest common, CustomerListModel model)
         {
-            var dtoFromRepo = await _service.GetAllAsync();
-          
+            var dtoFromRepo = await _service.SearchModels(new SearchingRequest()
+            {
+                Page = common.Page - 1,
+                PageSize = common.PageSize,
+                Name = model.Name,
+                Address = model.Address,
+                ContactId = model.ContactId,
+                LocationId = model.LocationId
+            });
+
             var gridModel = new DataSourceResult()
             {
                 Data = dtoFromRepo,

@@ -7,8 +7,6 @@ using System.Web.Mvc;
 using Falcon.Web.Mvc.Kendoui;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.Common.Models;
-using Vino.Server.Services.MainServices.CRM.AirExp;
-using Vino.Server.Services.MainServices.CRM.AirExp.Models;
 using Vino.Server.Services.MainServices.CRM.Contact;
 using Vino.Server.Services.MainServices.CRM.Contact.Models;
 using Vino.Server.Web.Areas.Admin.Models.Contact;
@@ -46,7 +44,15 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> List(DataSourceRequest common, ContactListModel model)
         {
-            var dtoFromRepo = await _service.GetAllAsync();
+            var dtoFromRepo = await _service.SearchModels(new SearchingRequest()
+            {
+                Page = common.Page - 1,
+                PageSize = common.PageSize,
+                Name = model.Name,
+                Address = model.Address,
+                PositionId = model.PositionId,
+                DepartmentId = model.DepartmentId
+            });
 
             var positionItems = _lookupService.GetLookupByLookupType(LookupTypes.PositionType);
             var departmentItems = _lookupService.GetLookupByLookupType(LookupTypes.DepartmentType);
