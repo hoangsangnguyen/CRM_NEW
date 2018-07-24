@@ -39,7 +39,16 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> List(DataSourceRequest common, PortsListModel model)
         {
-            var dtoFromRepo = await _service.GetAllAsync();
+            var dtoFromRepo = await _service.SearchModels(new SearchingRequest()
+            {
+                Page = common.Page - 1,
+                PageSize = common.PageSize,
+                PortName = model.PortName,
+                PortCode = model.PortCode,
+                NationalityId = model.NationalityId,
+                ModeId = model.ModeId
+            });
+
             var nationalityItems = _lookupService.GetLookupByLookupType(LookupTypes.NationalityType);
             var zoneItems = _lookupService.GetLookupByLookupType(LookupTypes.ZoneType);
             var modeItems = _lookupService.GetLookupByLookupType(LookupTypes.ModeType);

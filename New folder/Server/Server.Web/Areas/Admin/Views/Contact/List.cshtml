@@ -33,10 +33,10 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label class="control-label">Name:</label>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-8">
                                     @Html.FalconEditorFor(m => m.Name)
                                 </div>
                             </div>
@@ -44,10 +44,10 @@
 
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label class="control-label">Address:</label>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-8">
                                     @Html.FalconEditorFor(m => m.Address)
                                 </div>
                             </div>
@@ -55,10 +55,10 @@
 
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label class="control-label">Position:</label>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-8">
                                     <input id="@Html.FieldIdFor(model => model.PositionId)"
                                            name="@Html.NameFor(model => model.PositionId)"
                                            value="@Html.ValueFor(model => model.PositionId)" />
@@ -102,10 +102,10 @@
                     <div class="row" style="margin-top: 10px">
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label class="control-label">Department: </label>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-8">
                                     <input id="@Html.FieldIdFor(model => model.DepartmentId)"
                                            name="@Html.NameFor(model => model.DepartmentId)"
                                            value="@Html.ValueFor(model => model.DepartmentId)" />
@@ -148,8 +148,8 @@
 
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-9">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-8">
                                     <button type="button" id="button-search" class="btn btn-primary">
                                         <i class="fa fa-search"></i>
                                         Tìm kiếm
@@ -158,11 +158,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div id="main-grid"></div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="main-grid"></div>
 
-                            <script>
+                    <script>
                                 $(document).ready(function() {
                                     $("#main-grid").kendoGrid({
                                         dataSource: {
@@ -238,9 +240,9 @@
                                         ]
                                     });
                                 });
-                            </script>
+                    </script>
 
-                            <script type="text/javascript">
+                    <script type="text/javascript">
                                 $(document).ready(function() {
                                     //search button
                                     $('#button-search').click(function() {
@@ -254,30 +256,30 @@
 
                                 function additionalData() {
                                     var data = {
-                                        @*CreatedAt: $('#@Html.FieldIdFor(model => model.CreatedAt)').val(),
-                                ExpiredAt: $('#@Html.FieldIdFor(model => model.ExpiredAt)').val(),
-                                TypeId: $('#@Html.FieldIdFor(model => model.TypeId)').val(),
-                                PublishedId: $('#@Html.FieldIdFor(model => model.PublishedId)').val()*@
+                                        Name: $('#@Html.FieldIdFor(model => model.Name)').val(),
+                                        Address: $('#@Html.FieldIdFor(model => model.Address)').val(),
+                                        PositionId: $('#@Html.FieldIdFor(model => model.PositionId)').val(),
+                                        DepartmentId: $('#@Html.FieldIdFor(model => model.DepartmentId)').val()
 
                                     };
                                     addAntiForgeryToken(data);
                                     return data;
                                 }
-                                @*$("".concat("#@Html.FieldIdFor(model => model.CreatedAt),",
-                            "#@Html.FieldIdFor(model => model.ExpiredAt),",
-                            "#@Html.FieldIdFor(model => model.TypeId)"
-                        )).keydown(function (event) {
-                            if (event.keyCode === 13) {
-                                $("#button-search").click();
-                                return false;
-                            }
-                        });*@
-                            </script>
-                        </div>
-                    </div>
+                                $("".concat("#@Html.FieldIdFor(model => model.Name),",
+                                    "#@Html.FieldIdFor(model => model.Address),",
+                                    "#@Html.FieldIdFor(model => model.PositionId)",
+                                    "#@Html.FieldIdFor(model => model.DepartmentId)"
 
+                                )).keydown(function (event) {
+                                    if (event.keyCode === 13) {
+                                        $("#button-search").click();
+                                        return false;
+                                    }
+                                });
+                    </script>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

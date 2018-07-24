@@ -89,9 +89,9 @@
             <!-- Logo -->
             <a href="/admin" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"></span>
+                @*<span class="logo-mini"></span>*@
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"></span>
+              @*  <span class="logo-lg"></span>*@
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -139,43 +139,43 @@
             <section class="sidebar">
                 <ul class="sidebar-menu tree" data-widget="tree">
                     <li class="header" style="font-size: 17px; color: #0173b7; font-weight: bold">LOGISTICS</li>
-                    <li class="treeview">
-                        <a href="/admin">
+                    <li class="@Html.IsActive("Home","Index")">
+                        <a href="@Url.Action("Index", "Home")">
                             <i class="fa fa-dashboard"></i> <span style="color: #0173b7">Trang chủ</span>
                         </a>
                     </li>
                     
                     <li class="@Html.IsActive("Topic","Edit")">
                         <a href="@Url.Action("Edit", "Topic", new {topicType = TopicType.Company})">
-                            <i class="fa fa-industry" style="margin-left: 5px"></i>
+                            <i class="fa fa-industry"></i>
                             <span style="color: #0173b7">Giới thiệu công ty</span>
                         </a>
                     </li>
 
                     <li class="@Html.IsActive("Customers","Index")">
                         <a href="@Url.Action("Index", "Customers")">
-                            <i class="fa fa-industry" style="margin-left: 5px"></i>
+                            <i class="fa fa-industry"></i>
                             <span style="color: #0173b7">Customer</span>
                         </a>
                     </li>
 
                     <li class="@Html.IsActive("Contact","Index")">
                         <a href="@Url.Action("Index", "Contact")">
-                            <i class="fa fa-industry" style="margin-left: 5px"></i>
+                            <i class="fa fa-industry"></i>
                             <span style="color: #0173b7">Contact</span>
                         </a>
                     </li>
 
                     <li class="@Html.IsActive("Port","Index")">
                         <a href="@Url.Action("Index", "Port")">
-                            <i class="fa fa-industry" style="margin-left: 5px"></i>
+                            <i class="fa fa-industry" ></i>
                             <span style="color: #0173b7">Port</span>
                         </a>
                     </li>
 
                     <li class="@Html.IsActive("Carrier","Index")">
                         <a href="@Url.Action("Index", "Carrier")">
-                            <i class="fa fa-industry" style="margin-left: 5px"></i>
+                            <i class="fa fa-industry"></i>
                             <span style="color: #0173b7">Carrier</span>
                         </a>
                     </li>
@@ -280,8 +280,8 @@
 
                     <li class="@Html.IsActive("Lookup","LookupList")">
                         <a href="@Url.Action("LookupList", "Lookup")">
-                            <i class="fa fa-industry" style="margin-left: 5px"></i>
-                            <span style="color: #0173b7">Lookup</span>
+                            <i class="fa fa-industry" ></i>
+                            <span style="color: #0173b7">Danh mục cơ bản</span>
                         </a>
                     </li>
 
@@ -301,7 +301,7 @@
                 @*<b>Version</b> 2.3.8*@
                 &nbsp;
             </div>
-            <strong>Copyright &copy; 2017-2018<a href="http://fsw.vn"> Falcon Solution</a>.</strong>
+            @*<strong>Copyright &copy; 2017-2018<a href="http://fsw.vn"> Falcon Solution</a>.</strong>*@
         </footer>
       
     </div>

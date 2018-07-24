@@ -9,7 +9,6 @@ using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.Common.Models;
 using Vino.Server.Services.MainServices.CRM.Carrier;
 using Vino.Server.Services.MainServices.CRM.Carrier.Model;
-using Vino.Server.Services.MainServices.CRM.Contact.Models;
 using Vino.Server.Web.Areas.Admin.Models.Carriers;
 using Vino.Shared.Constants.Common;
 using Vino.Shared.Constants.Warehouse;
@@ -47,7 +46,16 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> List(DataSourceRequest common, CarriersListModel model)
         {
-            var dtoFromRepo = await _service.GetAllAsync();
+            var dtoFromRepo = await _service.SearchModels(new SearchingRequest()
+            {
+                Page = common.Page - 1,
+                PageSize = common.PageSize,
+                Name = model.Name,
+                Code = model.Code,
+                CountryId = model.CountryId,
+                Cell = model.Cell
+            });
+
             var nationalityItems = _lookupService.GetLookupByLookupType(LookupTypes.NationalityType);
             foreach (var contact in dtoFromRepo)
             {

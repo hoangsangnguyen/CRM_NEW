@@ -206,6 +206,7 @@
     <Compile Include="MainServices\Common\OrderGenCodeService.cs" />
     <Compile Include="MainServices\CRM\AirExp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\AirImp\Models\SearchingRequest.cs" />
+    <Compile Include="MainServices\CRM\Carrier\Model\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\Contact\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\Customer\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\FclExp\Models\SearchingRequest.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="MainServices\CRM\HblLclExp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\LclExp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\LclImp\Models\SearchingRequest.cs" />
+    <Compile Include="MainServices\CRM\Port\Model\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\Topic\ITopicService.cs" />
     <Compile Include="MainServices\CRM\Topic\Model\TopicModel.cs" />
     <Compile Include="MainServices\CRM\Customer\CrmCustomerService.cs" />
