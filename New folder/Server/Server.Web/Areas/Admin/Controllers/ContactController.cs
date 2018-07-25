@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Falcon.Web.Mvc.Kendoui;
+using Falcon.Web.Mvc.Security;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.Common.Models;
 using Vino.Server.Services.MainServices.CRM.Contact;
 using Vino.Server.Services.MainServices.CRM.Contact.Models;
+using Vino.Server.Services.MainServices.Users;
 using Vino.Server.Web.Areas.Admin.Models.Contact;
 using Vino.Shared.Constants.Common;
 using Vino.Shared.Constants.Warehouse;
@@ -20,14 +22,20 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         private readonly ContactService _service;
         private readonly LookupService _lookupService;
         private readonly OrderGenCodeService _genCodeService;
+        private readonly UserService _userService;
+        private readonly WebContext _webContext;
 
         public ContactController(ContactService service,
             LookupService lookupService,
-            OrderGenCodeService genCodeService)
+            OrderGenCodeService genCodeService,
+            UserService userService,
+            WebContext webContext)
         {
             _service = service;
             _lookupService = lookupService;
             _genCodeService = genCodeService;
+            _userService = userService;
+            _webContext = webContext;
         }
 
         #region Contact
@@ -107,6 +115,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             _genCodeService.UpdateOrderGenCode(orderGenCode);
             dto.ContactId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{orderGenCode.CurrentNumber:D3}";
 
+            dto.CreatedAt = now.ToString("dd/MM/yyyy HH:mm:ss");
+            var user = await _userService.GetById(_webContext.UserId);
+            dto.CreatorId = user.Id;
+
             var id = await _service.CreateAsync(dto);
             if (id == 0)
             {
@@ -141,7 +153,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return View(dto);
             }
 
-            Console.WriteLine(dto);
+            var user = await _userService.GetById(_webContext.UserId);
+            dto.UpdateName = user?.UserName ?? "";
+            dto.UpdateAt = DateTimeOffset.Now.ToString("dd/MM/yyyy HH:mm:ss");
+
             await _service.EditAsync(dto.Id, dto);
 
             SuccessNotification("Chỉnh sửa thành công!");

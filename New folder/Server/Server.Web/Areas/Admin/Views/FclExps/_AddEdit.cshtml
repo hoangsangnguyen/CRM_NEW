@@ -12,6 +12,9 @@
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.Id)
 @Html.HiddenFor(model => model.JobId)
+@Html.HiddenFor(model => model.CreatorId)
+@Html.HiddenFor(model => model.CreatedAt)
+
 
 @{
     Layout = null;
@@ -517,7 +520,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         @*Freight*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -567,7 +570,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         @*Service*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -621,7 +624,7 @@
                                 <div class="col-md-1"></div>
                             </div>
                         </div>
-                        
+
                         @*GW*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -636,47 +639,47 @@
                             </div>
                         </div>
 
-                      
-                    </div>
-                <div class="row" style="margin-top: 10px">
-                    @*CMB*@
-                    <div class="col-md-4">
-                        <div class="form-group form-custom">
-                            <div class="col-md-4">
-                                <label class="control-label">CBM :</label>
-                            </div>
-                            <div class="col-md-8">
-                                @Html.FalconEditorFor(m => m.Cbm)
-                                @Html.ValidationMessageFor(model => model.Cbm)
-                            </div>
-                        </div>
-                    </div>
 
-                    @*PO No*@
-                    <div class="col-md-4">
-                        <div class="form-group form-custom">
-                            <div class="col-md-4">
-                                <label class="control-label">PO No :</label>
-                            </div>
-                            <div class="col-md-7">
-                                @Html.FalconEditorFor(m => m.PoNumber)
-                                @Html.ValidationMessageFor(model => model.PoNumber)
-                            </div>
-                            <div class="col-md-1"></div>
-                        </div>
                     </div>
-                    
-                    @*OPIC*@
-                    <div class="col-md-4">
-                        <div class="form-group form-custom">
-                            <div class="col-md-4">
-                                <label class="control-label">O.P IC:</label>
+                    <div class="row" style="margin-top: 10px">
+                        @*CMB*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">CBM :</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.FalconEditorFor(m => m.Cbm)
+                                    @Html.ValidationMessageFor(model => model.Cbm)
+                                </div>
                             </div>
-                            <div class="col-md-7">
-                                <input id="@Html.FieldIdFor(model => model.OpIcId)"
-                                       name="@Html.NameFor(model => model.OpIcId)"
-                                       value="@Html.ValueFor(model => model.OpIcId)" />
-                                <script>
+                        </div>
+
+                        @*PO No*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">PO No :</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.PoNumber)
+                                    @Html.ValidationMessageFor(model => model.PoNumber)
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+
+                        @*OPIC*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">O.P IC:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.OpIcId)"
+                                           name="@Html.NameFor(model => model.OpIcId)"
+                                           value="@Html.ValueFor(model => model.OpIcId)" />
+                                    <script>
                                     $(document).ready(function() {
                                         $("#@Html.FieldIdFor(model => model.OpIcId)").kendoComboBox({
                                             filter: "contains",
@@ -707,20 +710,20 @@
                                             return data;
                                         }
                                     });
-                                </script>
-                                @Html.ValidationMessageFor(model => model.OpIcId)
-                            </div>
-                            <div class="col-md-1">
-                                <a onclick="openContactPopup('@Html.FieldIdFor(m => m.OpIcId)')">Add</a>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.OpIcId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openContactPopup('@Html.FieldIdFor(m => m.OpIcId)')">Add</a>
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
 
-                  
-                </div>
-
                     <div class="row" style="margin-top: 10px">
-                       
+
                         @*Finish*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -750,11 +753,11 @@
                 </div>
             </div>
         </div>
-        
-    <input type="submit" id="btnRefreshContactItems" style="display: none" />
-    <input type="submit" id="btnRefreshCarrierItems" style="display: none" />
-    <input type="submit" id="btnRefreshPortItems" style="display: none" />
-    <input type="submit" id="btnRefreshLookupItems" style="display: none" />
+
+        <input type="submit" id="btnRefreshContactItems" style="display: none" />
+        <input type="submit" id="btnRefreshCarrierItems" style="display: none" />
+        <input type="submit" id="btnRefreshPortItems" style="display: none" />
+        <input type="submit" id="btnRefreshLookupItems" style="display: none" />
 
     </div>
 </div>

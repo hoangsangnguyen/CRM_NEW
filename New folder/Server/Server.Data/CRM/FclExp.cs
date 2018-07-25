@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Falcon.Web.Core.Auth;
 using Falcon.Web.Core.Data;
 
 namespace Vino.Server.Data.CRM
@@ -72,5 +73,14 @@ namespace Vino.Server.Data.CRM
         public double Cbm { get; set; }
 
         public string Notes { get; set; }
+
+        public string UpdateName { get; set; }
+
+        public DateTimeOffset? UpdateAt { get; set; }
+
+        public DateTimeOffset CreatedAt { get; set; }
+
+        public int? CreatorId { get; set; }
+        public virtual User Creator { get; set; }
     }
 }

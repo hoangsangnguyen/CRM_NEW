@@ -25,8 +25,11 @@ namespace Vino.Server.Services.MainServices.CRM.Topic
         {
             var topic = await _context.Topics.FirstOrDefaultAsync(x => !x.Deleted
                                                          && x.Type.ToLower().Equals(type.ToLower()));
+            if (topic == null)
+                return null;
+
             var result = topic.MapTo<TopicModel>();
-            result.ImagePath = _imageService.GetPathById(result.ImageId.GetValueOrDefault());
+            result.ImagePath = _imageService.GetPathById(result.ImageId ?? 0);
             return result;
         }
 

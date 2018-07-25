@@ -12,6 +12,9 @@
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.Id)
 @Html.HiddenFor(model => model.JobId)
+@Html.HiddenFor(model => model.CreatorId)
+@Html.HiddenFor(model => model.CreatedAt)
+
 
 @{
     Layout = null;
@@ -844,10 +847,10 @@
                 </div>
             </div>
         </div>
-    <input type="submit" id="btnRefreshContactItems" style="display: none" />
-    <input type="submit" id="btnRefreshCarrierItems" style="display: none" />
-    <input type="submit" id="btnRefreshPortItems" style="display: none" />
-    <input type="submit" id="btnRefreshLookupItems" style="display: none" />
+        <input type="submit" id="btnRefreshContactItems" style="display: none" />
+        <input type="submit" id="btnRefreshCarrierItems" style="display: none" />
+        <input type="submit" id="btnRefreshPortItems" style="display: none" />
+        <input type="submit" id="btnRefreshLookupItems" style="display: none" />
     </div>
 </div>
 

@@ -11,11 +11,13 @@ using System.Web.Mvc;
 using System.Xml;
 using AutoMapper;
 using Falcon.Web.Mvc.Kendoui;
+using Falcon.Web.Mvc.Security;
 using Vino.Server.Data.CRM;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.CRM.LclExp;
 using Vino.Server.Services.MainServices.CRM.LclExp.Models;
 using Vino.Server.Services.MainServices.CRM.Pdf.Models;
+using Vino.Server.Services.MainServices.Users;
 using Vino.Server.Web.Areas.Admin.Models.LclExps;
 using Vino.Shared.Constants.Warehouse;
 
@@ -26,15 +28,20 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         private readonly LclExpService _service;
         private readonly LclExpPdfExportService _pdfService;
         private readonly OrderGenCodeService _genCodeService;
-
+        private readonly UserService _userService;
+        private readonly WebContext _webContext;
 
         public LclExpsController(LclExpService service,
             LclExpPdfExportService pdfService,
-            OrderGenCodeService genCodeService)
+            OrderGenCodeService genCodeService,
+            UserService userService,
+            WebContext webContext)
         {
             _service = service;
             _pdfService = pdfService;
             _genCodeService = genCodeService;
+            _userService = userService;
+            _webContext = webContext;
         }
 
         #region LclExp CRUD
@@ -114,6 +121,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
             dto.JobId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}" + "/" + $"{orderGenCode.CurrentNumber:D4}";
 
+            dto.CreatedAt = now.ToString("dd/MM/yyyy HH:mm:ss");
+            var user = await _userService.GetById(_webContext.UserId);
+            dto.CreatorId = user.Id;
+
             var id = await _service.CreateAsync(dto);
             if (id == 0)
             {
@@ -147,8 +158,12 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return View(dto);
             }
 
-            Console.WriteLine(dto);
+            var user = await _userService.GetById(_webContext.UserId);
+            dto.UpdateName = user?.UserName ?? "";
+            dto.UpdateAt = DateTimeOffset.Now.ToString("dd/MM/yyyy HH:mm:ss");
+
             await _service.EditAsync(dto.Id, dto);
+
             SuccessNotification("Chỉnh sửa thành công!");
 
             return RedirectToAction("Edit", new {id = dto.Id});

@@ -63,21 +63,23 @@ namespace Vino.Server.Services.MainServices.CRM.LclExp
 
             foreach (var lclExpModel in models)
             {
-                //var qty = 0;
+                var qty = 0;
                 var grossWeight = 0.0;
                 var cbm = 0.0;
 
                 foreach (var hblLclExpModel in hblItemModels)
                 {
-                    grossWeight += hblLclExpModel.GrossWeight;
-                    cbm += hblLclExpModel.Measurement;
-                    hblLclExpModel.UnitName = unitLookups.FirstOrDefault(x => x.Id == hblLclExpModel.UnitId)?.Title;
                     if (hblLclExpModel.LclExpId == lclExpModel.Id)
                     {
+                        qty += hblLclExpModel.NumberOfPackage;
+                        grossWeight += hblLclExpModel.GrossWeight;
+                        cbm += hblLclExpModel.Measurement;
+                        hblLclExpModel.UnitName = unitLookups.FirstOrDefault(x => x.Id == hblLclExpModel.UnitId)?.Title;
                         lclExpModel.Items.Add(hblLclExpModel);
                     }
                 }
 
+                lclExpModel.Packages = lclExpModel.Packages > qty ? lclExpModel.Packages : qty;
                 lclExpModel.Gw = lclExpModel.Gw > grossWeight ? lclExpModel.Gw : grossWeight;
                 lclExpModel.Cbm = lclExpModel.Cbm > cbm ? lclExpModel.Cbm : cbm;
 

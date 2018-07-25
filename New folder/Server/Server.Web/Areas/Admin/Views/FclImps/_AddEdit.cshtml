@@ -12,6 +12,9 @@
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.Id)
 @Html.HiddenFor(model => model.JobId)
+@Html.HiddenFor(model => model.CreatorId)
+@Html.HiddenFor(model => model.CreatedAt)
+
 
 @{
     Layout = null;
@@ -289,7 +292,7 @@
                                 <div class="col-md-1"></div>
                             </div>
                         </div>
-                        
+
                         @*Vessel*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -339,7 +342,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         @*Voyage*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -391,7 +394,7 @@
                             </div>
                         </div>
 
-                      
+
                     </div>
                     <div class="row" style="margin-top: 10px">
                         @*POL*@
@@ -494,7 +497,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         @*Delivery*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -545,34 +548,34 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                     </div>
-                <div class="row" style="margin-top: 10px">
-                    @*Service*@
-                    <div class="col-md-4">
-                        <div class="form-group form-custom">
-                            <div class="col-md-4">
-                                <label class="control-label">Service:</label>
+                    <div class="row" style="margin-top: 10px">
+                        @*Service*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Service:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.Service)
+                                    @Html.ValidationMessageFor(model => model.Service)
+                                </div>
+                                <div class="col-md-1"></div>
                             </div>
-                            <div class="col-md-7">
-                                @Html.FalconEditorFor(m => m.Service)
-                                @Html.ValidationMessageFor(model => model.Service)
-                            </div>
-                            <div class="col-md-1"></div>
                         </div>
-                    </div>
-                    
-                    @*MblType*@
-                    <div class="col-md-4">
-                        <div class="form-group form-custom">
-                            <div class="col-md-4">
-                                <label class="control-label">MblType:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input id="@Html.FieldIdFor(model => model.MblTypeId)"
-                                       name="@Html.NameFor(model => model.MblTypeId)"
-                                       value="@Html.ValueFor(model => model.MblTypeId)" />
-                                <script>
+
+                        @*MblType*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">MblType:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.MblTypeId)"
+                                           name="@Html.NameFor(model => model.MblTypeId)"
+                                           value="@Html.ValueFor(model => model.MblTypeId)" />
+                                    <script>
                                         $(document).ready(function() {
                                             $("#@Html.FieldIdFor(model => model.MblTypeId)").kendoComboBox({
                                                 filter: "contains",
@@ -603,69 +606,69 @@
                                                 return data;
                                             }
                                         });
-                                </script>
-                                @Html.ValidationMessageFor(model => model.MblTypeId)
-                            </div>
-                            <div class="col-md-1">
-                                <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.MblTypeId)', '@LookupTypes.MblType')">Add</a>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.MblTypeId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.MblTypeId)', '@LookupTypes.MblType')">Add</a>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    @*Container*@
-                    <div class="col-md-4">
-                        <div class="form-group form-custom">
-                            <div class="col-md-4">
-                                <label class="control-label">Container:</label>
+
+                        @*Container*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Container:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.Container)
+                                    @Html.ValidationMessageFor(model => model.Container)
+                                </div>
+                                <div class="col-md-1"></div>
                             </div>
-                            <div class="col-md-7">
-                                @Html.FalconEditorFor(m => m.Container)
-                                @Html.ValidationMessageFor(model => model.Container)
-                            </div>
-                            <div class="col-md-1"></div>
                         </div>
+
                     </div>
-                   
-                </div>
-                <div class="row" style="margin-top: 10px">
-                    @*GW*@
-                    <div class="col-md-4">
-                        <div class="form-group form-custom">
-                            <div class="col-md-4">
-                                <label class="control-label">GW :</label>
+                    <div class="row" style="margin-top: 10px">
+                        @*GW*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">GW :</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.Gw)
+                                    @Html.ValidationMessageFor(model => model.Gw)
+                                </div>
+                                <div class="col-md-1"></div>
                             </div>
-                            <div class="col-md-7">
-                                @Html.FalconEditorFor(m => m.Gw)
-                                @Html.ValidationMessageFor(model => model.Gw)
-                            </div>
-                            <div class="col-md-1"></div>
                         </div>
-                    </div>
-                    @*CBM*@
-                    <div class="col-md-4">
-                        <div class="form-group form-custom">
-                            <div class="col-md-4">
-                                <label class="control-label">CBM :</label>
+                        @*CBM*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">CBM :</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.Cbm)
+                                    @Html.ValidationMessageFor(model => model.Cbm)
+                                </div>
+                                <div class="col-md-1"></div>
                             </div>
-                            <div class="col-md-7">
-                                @Html.FalconEditorFor(m => m.Cbm)
-                                @Html.ValidationMessageFor(model => model.Cbm)
-                            </div>
-                            <div class="col-md-1"></div>
                         </div>
-                    </div>
-                    @*SHipment*@
-                    <div class="col-md-4">
-                        <div class="form-group form-custom">
-                            <div class="col-md-4">
-                                <label class="control-label">Shipments:</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input id="@Html.FieldIdFor(model => model.ShipmentId)"
-                                       name="@Html.NameFor(model => model.ShipmentId)"
-                                       value="@Html.ValueFor(model => model.ShipmentId)" />
-                                <script>
+                        @*SHipment*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Shipments:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.ShipmentId)"
+                                           name="@Html.NameFor(model => model.ShipmentId)"
+                                           value="@Html.ValueFor(model => model.ShipmentId)" />
+                                    <script>
                                         $(document).ready(function() {
                                             $("#@Html.FieldIdFor(model => model.ShipmentId)").kendoComboBox({
                                                 filter: "contains",
@@ -696,16 +699,16 @@
                                                 return data;
                                             }
                                         });
-                                </script>
-                                @Html.ValidationMessageFor(model => model.ShipmentId)
-                            </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.ShipmentId)
+                                </div>
 
-                            <div class="col-md-1">
-                                <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.ShipmentId)', '@LookupTypes.ShipmentType')">Add</a>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.ShipmentId)', '@LookupTypes.ShipmentType')">Add</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                     <div class="row" style="margin-top: 10px">
                         @*ETD*@
                         <div class="col-md-4">
@@ -732,7 +735,7 @@
                                 <div class="col-md-1"></div>
                             </div>
                         </div>
-                        
+
                         @*Commodity*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -810,15 +813,15 @@
                             </div>
                         </div>
                     </div>
-                       
-                   
+
+
                 </div>
             </div>
         </div>
-    <input type="submit" id="btnRefreshContactItems" style="display: none" />
-    <input type="submit" id="btnRefreshCarrierItems" style="display: none" />
-    <input type="submit" id="btnRefreshPortItems" style="display: none" />
-    <input type="submit" id="btnRefreshLookupItems" style="display: none" />
+        <input type="submit" id="btnRefreshContactItems" style="display: none" />
+        <input type="submit" id="btnRefreshCarrierItems" style="display: none" />
+        <input type="submit" id="btnRefreshPortItems" style="display: none" />
+        <input type="submit" id="btnRefreshLookupItems" style="display: none" />
     </div>
 </div>
 

@@ -66,5 +66,18 @@ namespace Vino.Server.Services.MainServices.CRM.Contact.Models
 
         public string FieldInterested { get; set; }
 
+        /**
+        * Creator
+        */
+        public string CreatedAt { get; set; }
+
+        public int CreatorId { get; set; }
+
+        /**
+         * Update
+         */
+        public string UpdateName { get; set; }
+
+        public string UpdateAt { get; set; }
     }
 }

@@ -85,6 +85,10 @@ namespace Vino.Server.Services.Infrastructure
                     x.Eta.ToString("dd/MM/yyyy HH:mm:ss")))
                 .ForMember(d => d.FlyDate, opt => opt.MapFrom(x =>
                     x.FlyDate.ToString("dd/MM/yyyy HH:mm:ss")))
+                .ForMember(d => d.CreatedAt, opt => opt.MapFrom(x =>
+                    x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
+                .ForMember(d => d.UpdateAt, opt => opt.MapFrom(x =>
+                    x.UpdateAt.HasValue ? x.UpdateAt.Value.ToString("dd/MM/yyyy HH:mm:ss") : ""))
                 .ForMember(d => d.AgentName, opt => opt.MapFrom(
                     x => x.Agent.FullEnglishName))
                 .ForMember(d => d.CarrierName, opt => opt.MapFrom(
@@ -103,14 +107,24 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.FlyDate,
                     opt => opt.MapFrom(x =>
                         string.IsNullOrEmpty(x.FlyDate) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.FlyDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
-                ;
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.CreatedAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.UpdateAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.UpdateAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.UpdateAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+            ;
 
             // Contacts
             CreateMap<CrmContact, CrmContactModel>()
                 .ForMember(d => d.Birthday, opt => opt.MapFrom(x => x.Birthday.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
                 .ForMember(d => d.SpouseBirthday, opt => opt.MapFrom(x => x.SpouseBirthday.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
                 .ForMember(d => d.FullName, opt => opt.MapFrom(
-                    src => src.FirstName + " " + src.LastName));
+                    src => src.FirstName + " " + src.LastName))
+                .ForMember(d => d.CreatedAt, opt => opt.MapFrom(x =>
+                    x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
+                .ForMember(d => d.UpdateAt, opt => opt.MapFrom(x =>
+                    x.UpdateAt.HasValue ? x.UpdateAt.Value.ToString("dd/MM/yyyy HH:mm:ss") : ""));
 
             CreateMap<CrmContactModel, CrmContact>()
                 .ForMember(d => d.Birthday,
@@ -122,15 +136,41 @@ namespace Vino.Server.Services.Infrastructure
                     opt => opt.MapFrom(x =>
                         string.IsNullOrEmpty(x.SpouseBirthday)
                             ? (DateTimeOffset?) null
-                            : DateTimeOffset.ParseExact(x.SpouseBirthday, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
+                            : DateTimeOffset.ParseExact(x.SpouseBirthday, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.CreatedAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.UpdateAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.UpdateAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.UpdateAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))));
 
             // ports
-            CreateMap<Port, PortModel>();
-            CreateMap<PortModel, Port>();
+            CreateMap<Port, PortModel>()
+                .ForMember(d => d.CreatedAt, opt => opt.MapFrom(x =>
+                    x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
+                .ForMember(d => d.UpdateAt, opt => opt.MapFrom(x =>
+                    x.UpdateAt.HasValue ? x.UpdateAt.Value.ToString("dd/MM/yyyy HH:mm:ss") : ""));
+            CreateMap<PortModel, Port>()
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.CreatedAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.UpdateAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.UpdateAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.UpdateAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))));
 
             // carrier
-            CreateMap<Carrier, CarrierModel>();
-            CreateMap<CarrierModel, Carrier>();
+            CreateMap<Carrier, CarrierModel>()
+                .ForMember(d => d.CreatedAt, opt => opt.MapFrom(x =>
+                    x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
+                .ForMember(d => d.UpdateAt, opt => opt.MapFrom(x =>
+                    x.UpdateAt.HasValue ? x.UpdateAt.Value.ToString("dd/MM/yyyy HH:mm:ss") : ""));
+            CreateMap<CarrierModel, Carrier>()
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.CreatedAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.UpdateAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.UpdateAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.UpdateAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))));
 
             CreateMap<CrmCustomer, CrmCustomerModel>()
                 .ForMember(d => d.LocationName, opt => opt.MapFrom(
@@ -138,8 +178,18 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.ContactName, opt => opt.MapFrom(
                     x => x.Contact.EnglishName))
                 .ForMember(d => d.CategoryName, opt => opt.MapFrom(
-                    x => x.Category.Title));
-            CreateMap<CrmCustomerModel, CrmCustomer>();
+                    x => x.Category.Title))
+                .ForMember(d => d.CreatedAt, opt => opt.MapFrom(x =>
+                    x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
+                .ForMember(d => d.UpdateAt, opt => opt.MapFrom(x =>
+                    x.UpdateAt.HasValue ? x.UpdateAt.Value.ToString("dd/MM/yyyy HH:mm:ss") : ""));
+            CreateMap<CrmCustomerModel, CrmCustomer>()
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.CreatedAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.UpdateAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.UpdateAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.UpdateAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))));
 
 
             // FclExp
@@ -156,14 +206,25 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.AgentName, opt => opt.MapFrom(
                     x => x.Agent.FullEnglishName))
                 .ForMember(d => d.PodName, opt => opt.MapFrom(
-                    x => x.Pod.PortName));
+                    x => x.Pod.PortName))
+                .ForMember(d => d.CreatedAt, opt => opt.MapFrom(x =>
+                    x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
+                .ForMember(d => d.UpdateAt, opt => opt.MapFrom(x =>
+                    x.UpdateAt.HasValue ? x.UpdateAt.Value.ToString("dd/MM/yyyy HH:mm:ss") : ""));
+
             CreateMap<FclExpModel, FclExp>()
                 .ForMember(d => d.Created,
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Created, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
                 .ForMember(d => d.Eta,
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Eta, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
                 .ForMember(d => d.Etd,
-                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Etd, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
+                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Etd, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.CreatedAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.UpdateAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.UpdateAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.UpdateAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))));
 
 
             // LclExp
@@ -179,6 +240,10 @@ namespace Vino.Server.Services.Infrastructure
                     x => x.CoLoader.FullEnglishName))
                 .ForMember(d => d.AgentName, opt => opt.MapFrom(
                     x => x.Agent.FullEnglishName))
+                .ForMember(d => d.CreatedAt, opt => opt.MapFrom(x =>
+                    x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
+                .ForMember(d => d.UpdateAt, opt => opt.MapFrom(x =>
+                    x.UpdateAt.HasValue ? x.UpdateAt.Value.ToString("dd/MM/yyyy HH:mm:ss") : ""))
                 ;
 
             CreateMap<LclExpModel, LclExp>()
@@ -187,7 +252,13 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.Eta,
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Eta, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
                 .ForMember(d => d.Etd,
-                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Etd, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
+                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Etd, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.CreatedAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.UpdateAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.UpdateAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.UpdateAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))));
 
             // AirImp
             CreateMap<AirImp, AirImpModel>()
@@ -205,14 +276,25 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.AgentName, opt => opt.MapFrom(
                     x => x.Agent.FullEnglishName))
                 .ForMember(d => d.AodName, opt => opt.MapFrom(
-                    x => x.Aod.PortName));
+                    x => x.Aod.PortName))
+                .ForMember(d => d.CreatedAt, opt => opt.MapFrom(x =>
+                    x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
+                .ForMember(d => d.UpdateAt, opt => opt.MapFrom(x =>
+                    x.UpdateAt.HasValue ? x.UpdateAt.Value.ToString("dd/MM/yyyy HH:mm:ss") : ""));
+
             CreateMap<AirImpModel, AirImp>()
                 .ForMember(d => d.Created,
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Created, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
                 .ForMember(d => d.Eta,
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Eta, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
                 .ForMember(d => d.FLyDate,
-                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.FLyDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
+                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.FLyDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.CreatedAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.UpdateAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.UpdateAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.UpdateAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))));
 
             // FclImp
             CreateMap<FclImp, FclImpModel>()
@@ -231,14 +313,25 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.AgentName, opt => opt.MapFrom(
                     x => x.Agent.FullEnglishName))
                 .ForMember(d => d.DeliveryName, opt => opt.MapFrom(
-                    x => x.Delivery.PortName));
+                    x => x.Delivery.PortName))
+                .ForMember(d => d.CreatedAt, opt => opt.MapFrom(x =>
+                    x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
+                .ForMember(d => d.UpdateAt, opt => opt.MapFrom(x =>
+                    x.UpdateAt.HasValue ? x.UpdateAt.Value.ToString("dd/MM/yyyy HH:mm:ss") : ""))
+                ;
             CreateMap<FclImpModel, FclImp>()
                 .ForMember(d => d.Created,
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Created, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
                 .ForMember(d => d.Eta,
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Eta, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
                 .ForMember(d => d.Etd,
-                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Etd, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
+                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Etd, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.CreatedAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.UpdateAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.UpdateAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.UpdateAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))));
 
             // LclImp
             CreateMap<LclImp, LclImpModel>()
@@ -259,7 +352,11 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.AgentName, opt => opt.MapFrom(
                     x => x.Agent.FullEnglishName))
                 .ForMember(d => d.DeliveryName, opt => opt.MapFrom(
-                    x => x.Delivery.PortName));
+                    x => x.Delivery.PortName))
+                .ForMember(d => d.CreatedAt, opt => opt.MapFrom(x =>
+                    x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
+                .ForMember(d => d.UpdateAt, opt => opt.MapFrom(x =>
+                    x.UpdateAt.HasValue ? x.UpdateAt.Value.ToString("dd/MM/yyyy HH:mm:ss") : ""));
 
             CreateMap<LclImpModel, LclImp>()
                 .ForMember(d => d.Created,
@@ -267,7 +364,13 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.Eta,
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Eta, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
                 .ForMember(d => d.Etd,
-                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Etd, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
+                    opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.Etd, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.CreatedAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.UpdateAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.UpdateAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.UpdateAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))));
 
             // HblLclExp
             CreateMap<HblLclExp, HblLclExpModel>()
@@ -307,7 +410,12 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.IssueDate,
                     opt => opt.MapFrom(x => x.IssueDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
                 .ForMember(d => d.CreatedAt,
-                    opt => opt.MapFrom(x => x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)));
+                    opt => opt.MapFrom(x => x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)))
+                .ForMember(d => d.CreatedAt, opt => opt.MapFrom(x =>
+                    x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
+                .ForMember(d => d.UpdateAt, opt => opt.MapFrom(x =>
+                    x.UpdateAt.HasValue ? x.UpdateAt.Value.ToString("dd/MM/yyyy HH:mm:ss") : ""));
+
             CreateMap<HblLclExpModel, HblLclExp>()
                 .ForMember(d => d.ClosingDate,
                     opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.ClosingDate, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
@@ -318,7 +426,13 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.CreatedAt,
                 opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
                 .ForMember(d => d.ExRef,
-                opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.ExRef, "dd/MM/yyyy", new CultureInfo("vi-VN"))));
+                opt => opt.MapFrom(x => DateTimeOffset.ParseExact(x.ExRef, "dd/MM/yyyy", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.CreatedAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.UpdateAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.UpdateAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.UpdateAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))));
 
             // Topic
             CreateMap<Topic, TopicModel>()

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Vino.Server.Services.MainServices.CRM.Topic;
+using Vino.Server.Services.MainServices.CRM.Topic.Model;
 using Vino.Shared.Constants.Common;
 
 namespace Vino.Server.Web.Areas.Admin.Controllers
@@ -27,7 +28,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         public async Task<ActionResult> Intro(string topicType)
         {
             var model = await _service.GetTopicByTopicType(topicType);
-            return View(model);
+            return View(model ?? new TopicModel());
         }
     }
 }

@@ -84,5 +84,19 @@ namespace Vino.Server.Services.MainServices.CRM.AirExp.Models
 
         public string Notes { get; set; }
 
+        /**
+        * Creator
+        */
+        public string CreatedAt { get; set; }
+
+        public int CreatorId { get; set; }
+
+        /**
+         * Update
+         */
+        public string UpdateName { get; set; }
+
+        public string UpdateAt { get; set; }
+
     }
 }

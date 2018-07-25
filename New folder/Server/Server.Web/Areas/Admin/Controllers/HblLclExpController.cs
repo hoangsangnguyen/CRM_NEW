@@ -219,6 +219,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             if (dto.NotifyPartyId == 0)
                 dto.NotifyPartyId = dto.ConsigneeId;
 
+            var user = await _userService.GetById(_webContext.UserId);
+            dto.UpdateName = user?.UserName ?? "";
+            dto.UpdateAt = DateTimeOffset.Now.ToString("dd/MM/yyyy HH:mm:ss");
+
             await _service.EditAsync(dto.Id, dto);
 
             if (dto.Preview)

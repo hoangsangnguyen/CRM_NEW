@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Falcon.Web.Mvc.Kendoui;
+using Falcon.Web.Mvc.Security;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.Common.Models;
 using Vino.Server.Services.MainServices.CRM.Port;
 using Vino.Server.Services.MainServices.CRM.Port.Model;
+using Vino.Server.Services.MainServices.Users;
 using Vino.Server.Web.Areas.Admin.Models.Ports;
 using Vino.Shared.Constants.Common;
 
@@ -18,10 +20,17 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
     {
         private readonly PortService _service;
         private readonly LookupService _lookupService;
-        public PortController(PortService service, LookupService lookupService)
+        private readonly UserService _userService;
+        private readonly WebContext _webContext;
+
+        public PortController(PortService service, LookupService lookupService,
+            UserService userService,
+            WebContext webContext)
         {
             _service = service;
             _lookupService = lookupService;
+            _userService = userService;
+            _webContext = webContext;
         }
 
         #region Port
@@ -83,6 +92,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return View(dto);
             }
 
+            dto.CreatedAt = DateTimeOffset.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            var user = await _userService.GetById(_webContext.UserId);
+            dto.CreatorId = user.Id;
+
             var id = await _service.CreateAsync(dto);
             if (id == 0)
             {
@@ -117,7 +130,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return View(dto);
             }
 
-            Console.WriteLine(dto);
+            var user = await _userService.GetById(_webContext.UserId);
+            dto.UpdateName = user?.UserName ?? "";
+            dto.UpdateAt = DateTimeOffset.Now.ToString("dd/MM/yyyy HH:mm:ss");
+
             await _service.EditAsync(dto.Id, dto);
 
             SuccessNotification("Chỉnh sửa thành công!");

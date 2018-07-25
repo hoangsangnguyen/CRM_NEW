@@ -96,7 +96,6 @@ namespace Vino.Server.Services.Database
             #endregion
 
             #region AirImp
-
             modelBuilder.Entity<AirImp>().HasRequired(aa => aa.Aol)
                 .WithMany(m => m.AirAols)
                 .HasForeignKey(m => m.AolId)
@@ -190,9 +189,11 @@ namespace Vino.Server.Services.Database
                 .HasForeignKey(m => m.CategoryId)
                 .WillCascadeOnDelete(false);
 
+           
             #endregion
 
             #region HBL
+
             // port
             modelBuilder.Entity<HblLclExp>().HasRequired(aa => aa.Shipper)
                 .WithMany(m => m.Shippers)

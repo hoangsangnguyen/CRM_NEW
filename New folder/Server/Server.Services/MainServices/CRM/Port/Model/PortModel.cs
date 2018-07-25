@@ -34,5 +34,19 @@ namespace Vino.Server.Services.MainServices.CRM.Port.Model
         public int? ModeId { get; set; }
         public string ModeName { get; set; }
 
+        /**
+        * Creator
+        */
+        public string CreatedAt { get; set; }
+
+        public int CreatorId { get; set; }
+
+        /**
+         * Update
+         */
+        public string UpdateName { get; set; }
+
+        public string UpdateAt { get; set; }
+
     }
 }

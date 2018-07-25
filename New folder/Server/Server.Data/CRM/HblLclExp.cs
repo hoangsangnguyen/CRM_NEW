@@ -4,7 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Falcon.Web.Core.Auth;
 using Falcon.Web.Core.Data;
+using Vino.Server.Data.HR;
 
 namespace Vino.Server.Data.CRM
 {
@@ -116,10 +118,13 @@ namespace Vino.Server.Data.CRM
         [Required(ErrorMessage = "Vui lòng chọn ngày Issue")]
         public DateTimeOffset IssueDate { get; set; }
 
+        public string UpdateName { get; set; }
+
+        public DateTimeOffset? UpdateAt { get; set; }
+
         public DateTimeOffset CreatedAt { get; set; }
 
-        public int CreatorId { get; set; }
-
-
+        public int? CreatorId { get; set; }
+        public virtual User Creator { get; set; }
     }
 }
