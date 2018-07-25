@@ -175,6 +175,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return View(request);
             }
 
+            request.CreatedAt = DateTimeOffset.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            var user = await _userService.GetById(_webContext.UserId);
+            request.CreatorId = user.Id;
+
             var id = await _service.CreateAsync(request);
             if (id == 0)
             {

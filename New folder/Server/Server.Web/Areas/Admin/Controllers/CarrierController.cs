@@ -182,10 +182,15 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             var index = await _service.GetNumberEntry();
 
-            var model = new CarrierModel()
+            var model = new CarrierModel();
+
+            var now = DateTimeOffset.Now;
+            // init code for customer
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.Carrier, now.LocalDateTime.Date);
+            if (orderGenCode != null)
             {
-                Code = "CL" + (index + 1).ToString().PadLeft(4, '0'),
-            };
+                model.Code = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{(orderGenCode.CurrentNumber + 1):D3}";
+            }
 
             return View(model);
         }
@@ -198,8 +203,19 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             {
                 return View(request);
             }
-            var index = await _service.GetNumberEntry();
-            request.Code = "CL" + (index + 1).ToString().PadLeft(4, '0');
+
+            var now = DateTimeOffset.Now;
+            // init code for customer
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.Carrier, now.LocalDateTime.Date);
+            orderGenCode.CurrentNumber += 1;
+            _genCodeService.UpdateOrderGenCode(orderGenCode);
+
+            request.Code = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{orderGenCode.CurrentNumber:D3}";
+
+            request.CreatedAt = DateTimeOffset.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            var user = await _userService.GetById(_webContext.UserId);
+            request.CreatorId = user.Id;
+
             var id = await _service.CreateAsync(request);
             if (id == 0)
             {

@@ -182,11 +182,16 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         #region Popup add Contact
 
-        public async Task<ActionResult> ContactAddPopup(string viewId)
+        public ActionResult ContactAddPopup(string viewId)
         {
             var model = new CrmContactModel();
-            var index = await _service.GetNumberEntry();
-            model.ContactId = "CT" + (index + 1).ToString().PadLeft(3, '0');
+            var now = DateTimeOffset.Now;
+            // init code for customer
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.Contact, now.LocalDateTime.Date);
+            if (orderGenCode != null)
+            {
+                model.ContactId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{(orderGenCode.CurrentNumber + 1):D3}";
+            }
             return View(model);
         }
 
@@ -198,6 +203,17 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             {
                 return View(request);
             }
+
+            var now = DateTimeOffset.Now;
+            // init code for contact
+            var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.Contact, now.LocalDateTime.Date);
+            orderGenCode.CurrentNumber += 1;
+            _genCodeService.UpdateOrderGenCode(orderGenCode);
+            request.ContactId = $"{orderGenCode.OrderPrefix}{now:yy}{now.Month:D2}{now.Day:D2}{orderGenCode.CurrentNumber:D3}";
+
+            request.CreatedAt = now.ToString("dd/MM/yyyy HH:mm:ss");
+            var user = await _userService.GetById(_webContext.UserId);
+            request.CreatorId = user.Id;
 
             var id = await _service.CreateAsync(request);
             if (id == 0)
