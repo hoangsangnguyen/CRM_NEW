@@ -1,0 +1,119 @@
+﻿@model Vino.Server.Web.Areas.Admin.Models.HblLclExps.LclExpAndPodModel
+@using Falcon.Web.Mvc.HtmlExtensions
+
+@{
+    var viewResultId = @ViewBag.viewResultId;
+    var formId = @ViewBag.vieWResultId;
+}
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">Chọn port</h4>
+    </div>
+    <div class="modal-body">
+        <section class="wr-main">
+            <div class="out-content-mid no-mb no-minheight">
+                <div class="container-fluid">
+                    <form id="form_new" action="">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="form-group form-custom">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Port:</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input id="@Html.FieldIdFor(model => model.PortId)"
+                                               name="@Html.NameFor(model => model.PortId)"
+                                               value="@Html.ValueFor(model => model.PortId)" />
+                                        <script>
+                                            $(document).ready(function() {
+                                                $("#@Html.FieldIdFor(model => model.PortId)").kendoComboBox({
+                                                    filter: "contains",
+                                                    dataTextField: "Name",
+                                                    dataValueField: "Value",
+                                                    placeholder: "Chọn portt...",
+                                                    minLength: 1,
+                                                    dataSource: {
+                                                        type: "json",
+                                                        serverFiltering: true,
+                                                        transport: {
+                                                            read: {
+                                                                url: "/api/PortApi/GetAll",
+                                                                dataType: "json",
+                                                                data: filterPort
+                                                            }
+                                                        }
+                                                    }
+                                                });
+
+                                                function filterPort() {
+                                                    var data = {
+                                                        @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                                                .data("kendoComboBox").input.val()*@
+                                                        Name : ""
+                                                    };
+                                                    addAntiForgeryToken(data);
+                                                    return data;
+                                                }
+                                            });
+                                        </script>
+                                        @Html.ValidationMessageFor(model => model.PortId)
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="btn-close-first-create" onclick="Close()" class="btn btn-default">Đóng</button>
+        <button type="button" id="btn-save-contact" onclick="Save()" class="btn btn-primary">Lưu</button>
+    </div>
+</div>
+<script type="text/javascript">
+    function Close() {
+        $('#myModal').modal('hide');
+        location.href = '/Admin/HblFclExp/HblList';
+    }
+
+    function Save () {
+            var model = JSON.stringify(GetDataRequest());
+
+            console.log('Request : ' + model);
+            $.ajax({
+                url: "@Url.Action("CreateFromSubViewAsync", "HblFclExp")",
+                type: "POST",
+                dataType: "json",
+                contentType: 'application/json',
+                data: model,
+                cache: false,
+                async: true,
+                success: function (dataJs) {
+                    $("#BlNumber").val(dataJs.blNumber);
+                    $("#Port").val(dataJs.portId);
+
+                    $('#myModal').modal('hide');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log('Error saving contacts in ajax ' + xhr.error + thrownError.error);
+                }
+            });
+        };
+
+        function GetDataRequest() {
+            return {
+                PortId: $('#@Html.FieldIdFor(m => m.PortId)').val()
+            };
+        }
+</script>
+
+
+
+

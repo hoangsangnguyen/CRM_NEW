@@ -189,6 +189,7 @@
                                     mode: "inline"
                                 },
                                 scrollable: false,
+                                detailInit: detailInit,
                                 columns: [
                                     {
                                         field: "JobId",
@@ -242,6 +243,8 @@
                     </script>
 
                     <script type="text/javascript">
+                        var record = 0;
+
                         $(document).ready(function() {
                             //search button
                             $('#button-search').click(function() {
@@ -274,6 +277,82 @@
                                 return false;
                             }
                         });
+
+                        function detailInit(e) {
+                            record = 0;
+                            var data = e.data.Items;
+                            if (data.length === 0) {
+                                $('<b><i>Không có nội dung</i></b>').appendTo(e.detailCell);
+                                return;
+                            }
+
+                            $("<div/>").appendTo(e.detailCell).kendoGrid({
+                                dataSource: {
+                                    batch: true,
+                                    data: data
+                                },
+                                scrollable: false,
+                                columns: [
+                                    {
+                                        template: "#= ++record #",
+                                        title: "#",
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" },
+                                        width: 30
+                                    },
+                                    {
+                                        field: "BookingNumber",
+                                        title: "Booking No",
+                                        headerAttributes: { style: "text-align:left" }
+                                    }, {
+                                        field: "ShipperName",
+                                        title: "Shipper",
+                                        headerAttributes: { style: "text-align:left" }
+                                    }, {
+                                        field: "BlNumber",
+                                        title: "H-B/L",
+                                        headerAttributes: { style: "text-align:left" },
+                                        attributes: { style: "text-align:left" }
+                                    }, {
+                                        field: "NumberOfPackage",
+                                        title: "Qty",
+                                        headerAttributes: { style: "text-align:left" }
+                                    }, {
+                                        field: "UnitName",
+                                        title: "Unit",
+                                        headerAttributes: { style: "text-align:left" }
+                                    }, {
+                                        field: "GrossWeight",
+                                        title: "G.W",
+                                        headerAttributes: { style: "text-align:left" }
+                                    }, {
+                                        field: "Measurement",
+                                        title: "CBM",
+                                        headerAttributes: { style: "text-align:left" }
+                                    }, {
+                                        field: "PlaceOfDeliveryName",
+                                        title: "Destination",
+                                        headerAttributes: { style: "text-align:left" }
+                                    }, {
+                                        field: "ConsigneeName",
+                                        title: "Salesman",
+                                        headerAttributes: { style: "text-align:left" }
+                                    }, {
+                                        field: "NotifyPartyName",
+                                        title: "Nomination Party",
+                                        headerAttributes: { style: "text-align:left" }
+                                    }
+                                    , {
+                                        field: "Id",
+                                        title: " ",
+                                        width: 100,
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" },
+                                        template: '<a class="btn btn-default" href="/admin/HblFclExp/Edit/#=Id#"><i class="fa fa-pencil"></i>Chi tiết</a>'
+                                    }
+                                ]
+                            });
+                        }
                     </script>
                 </div>
             </div>

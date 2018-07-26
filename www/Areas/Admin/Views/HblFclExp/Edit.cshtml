@@ -1,0 +1,109 @@
+﻿@using System.Web.Mvc
+@using System.Web.Mvc
+@model Vino.Server.Services.MainServices.CRM.HblFclExp.Models.HblFclExpModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", id = "hblFclExp-edit-form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Chỉnh sửa HBL Fcl export @Model.HblTypeName
+        </h1>
+        <div class="pull-right">
+            <a class="btn bg-blue" href="@Html.Raw(Url.Action("HblList"))"><i class="fa fa-chevron-left" aria-hidden="true"></i> Quay Lại</a>
+
+            <button type="submit" name="ContinueEditing" value="true" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                Lưu
+            </button>
+            <button type="submit" name="Preview" value="true" class="btn bg-green">
+                <i class="fa fa-floppy-o"></i>
+                Xem phiếu
+            </button>
+
+            <span id="button-delete" class="btn bg-red">
+                <i class="fa fa-trash-o"></i>
+                Xóa
+            </span>
+        </div>
+    </div>
+
+    @Html.Partial("_AddEdit", Model)
+}
+
+<div id="delete-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Xác nhận</h4>
+            </div>
+            @using (Html.BeginForm("Delete", "HblFclExp", new { id = Model.Id }))
+            {
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Không! cảm ơn.</button>
+                    <button type="submit" class="btn btn-primary">Đồng ý</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div id="export-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Xác nhận</h4>
+            </div>
+            @using (Html.BeginForm("Preview", "HblFclExp", new { id = Model.Id }))
+            {
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn in phiếu?</p>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="hidden" name="GridHtml" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Không! cảm ơn.</button>
+                    <button type="submit" id="btnSubmitExport" class="btn btn-primary">Đồng ý</button>
+                </div>
+
+                <script type="text/javascript">
+                    $(function () {
+                        $("#btnSubmitExport").click(function () {
+                            $("input[name='GridHtml']").val($("#Grid").html());
+                            $("#export-modal").modal("hide");
+                        });
+                    });
+                </script>
+            }
+        </div>
+    </div>
+</div>
+
+<div id="Grid" style="display: none">
+    @Html.Partial("_form")
+</div>
+
+<script>
+    $("#button-delete").click(function () {
+        console.log("Delete button click");
+        $("#delete-modal").modal("show");
+    });
+
+    $("#button-export").click(function () {
+        console.log("Export button click");
+        $("#export-modal").modal("show");
+    });
+</script>
+
+
+
+
+

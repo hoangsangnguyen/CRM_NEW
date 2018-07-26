@@ -12,6 +12,8 @@
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.Id)
 @Html.HiddenFor(model => model.JobId)
+@Html.HiddenFor(model => model.CreatorId)
+@Html.HiddenFor(model => model.CreatedAt)
 
 @{
     Layout = null;
@@ -434,8 +436,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <input id="@Html.FieldIdFor(model => model.PolId)"
-                                           name="@Html.NameFor(model => model.PolId)"
-                                            />
+                                           name="@Html.NameFor(model => model.PolId)" />
                                     <script>
                                         $(document).ready(function() {
                                             $("#@Html.FieldIdFor(model => model.PolId)").kendoComboBox({

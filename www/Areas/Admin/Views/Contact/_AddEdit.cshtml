@@ -12,82 +12,85 @@
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.Id)
 @Html.HiddenFor(model => model.ContactId)
+@Html.HiddenFor(model => model.CreatorId)
+@Html.HiddenFor(model => model.CreatedAt)
+
 
 @{
     Layout = null;
 }
-    <div class="content">
-        <div class="form-horizontal">
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-                            @*Contact ID*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Contact ID:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input readonly="readonly" type="text"
-                                               class="form-control" id="@Html.FieldIdFor(model => model.ContactId)"
-                                               name="@Html.FieldIdFor(model => model.ContactId)" value="@Model.ContactId" />
-                                    </div>
-                                    <div class="col-md-1"></div>
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        @*Contact ID*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Contact ID:</label>
                                 </div>
-                            </div>
-                            @*First Name*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">First Name:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.FirstName)
-                                        @Html.ValidationMessageFor(m => m.FirstName)
-                                    </div>
-                                    <div class="col-md-1"></div>
+                                <div class="col-md-7">
+                                    <input readonly="readonly" type="text"
+                                           class="form-control" id="@Html.FieldIdFor(model => model.ContactId)"
+                                           name="@Html.FieldIdFor(model => model.ContactId)" value="@Model.ContactId" />
                                 </div>
-                            </div>
-                            @*Last Name*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Last Name:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.LastName)
-                                        @Html.ValidationMessageFor(m => m.LastName)
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                </div>
+                                <div class="col-md-1"></div>
                             </div>
                         </div>
-                        <div class="row" style="margin-top: 10px">
-                            @*English Name*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">English Name:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.EnglishName)
-                                        @Html.ValidationMessageFor(m => m.EnglishName)
-                                    </div>
-                                    <div class="col-md-1"></div>
+                        @*First Name*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">First Name:</label>
                                 </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.FirstName)
+                                    @Html.ValidationMessageFor(m => m.FirstName)
+                                </div>
+                                <div class="col-md-1"></div>
                             </div>
-                            @*Position*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Position:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.PositionId)"
-                                               name="@Html.NameFor(model => model.PositionId)"
-                                               value="@Html.ValueFor(model => model.PositionId)" />
-                                        <script>
+                        </div>
+                        @*Last Name*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Last Name:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.LastName)
+                                    @Html.ValidationMessageFor(m => m.LastName)
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        @*English Name*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">English Name:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.EnglishName)
+                                    @Html.ValidationMessageFor(m => m.EnglishName)
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                        @*Position*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Position:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.PositionId)"
+                                           name="@Html.NameFor(model => model.PositionId)"
+                                           value="@Html.ValueFor(model => model.PositionId)" />
+                                    <script>
                                             $(document).ready(function() {
                                                 $("#@Html.FieldIdFor(model => model.PositionId)").kendoComboBox({
                                                     filter: "contains",
@@ -118,107 +121,107 @@
                                                     return data;
                                                 }
                                             });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.PositionId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.PositionId)', '@LookupTypes.PositionType')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.PositionId)
                                 </div>
-                            </div>
-                            @*Home Address*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Home Address:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.HomeAddress)
-                                        @Html.ValidationMessageFor(m => m.HomeAddress)
-                                    </div>
-                                    <div class="col-md-1"></div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.PositionId)', '@LookupTypes.PositionType')">Add</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="margin-top: 10px">
-                            @*Cell Phone*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Cell Phone:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.CellPhone)
-                                        @Html.ValidationMessageFor(m => m.CellPhone)
-                                    </div>
-                                    <div class="col-md-1"></div>
+                        @*Home Address*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Home Address:</label>
                                 </div>
-                            </div>
-                            @*Home Phone*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Home Phone:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.HomePhone)
-                                        @Html.ValidationMessageFor(m => m.HomePhone)
-                                    </div>
-                                    <div class="col-md-1"></div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.HomeAddress)
+                                    @Html.ValidationMessageFor(m => m.HomeAddress)
                                 </div>
-                            </div>
-                            @*Email Address*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Email Address:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.Email)
-                                        @Html.ValidationMessageFor(m => m.Email)
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                </div>
+                                <div class="col-md-1"></div>
                             </div>
                         </div>
-                        <div class="row" style="margin-top: 10px">
-                            @*Company Ext*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Company Ext:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.CompanyExt)
-                                        @Html.ValidationMessageFor(m => m.CompanyExt)
-                                    </div>
-                                    <div class="col-md-1"></div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        @*Cell Phone*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Cell Phone:</label>
                                 </div>
-                            </div>
-                            @*Signature*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Signature:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.FalconEditorFor(m => m.Signature)
-                                        @Html.ValidationMessageFor(m => m.Signature)
-                                    </div>
-                                    <div class="col-md-1"></div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.CellPhone)
+                                    @Html.ValidationMessageFor(m => m.CellPhone)
                                 </div>
+                                <div class="col-md-1"></div>
                             </div>
-                            @*Department*@
-                            <div class="col-md-4">
-                                <div class="form-group form-custom">
-                                    <div class="col-md-4">
-                                        <label class="control-label">Department:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input id="@Html.FieldIdFor(model => model.DepartmentId)"
-                                               name="@Html.NameFor(model => model.DepartmentId)"
-                                               value="@Html.ValueFor(model => model.DepartmentId)" />
-                                        <script>
+                        </div>
+                        @*Home Phone*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Home Phone:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.HomePhone)
+                                    @Html.ValidationMessageFor(m => m.HomePhone)
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                        @*Email Address*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Email Address:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.Email)
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        @*Company Ext*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Company Ext:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.CompanyExt)
+                                    @Html.ValidationMessageFor(m => m.CompanyExt)
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                        @*Signature*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Signature:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.FalconEditorFor(m => m.Signature)
+                                    @Html.ValidationMessageFor(m => m.Signature)
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                        @*Department*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-4">
+                                    <label class="control-label">Department:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input id="@Html.FieldIdFor(model => model.DepartmentId)"
+                                           name="@Html.NameFor(model => model.DepartmentId)"
+                                           value="@Html.ValueFor(model => model.DepartmentId)" />
+                                    <script>
                                             $(document).ready(function() {
                                                 $("#@Html.FieldIdFor(model => model.DepartmentId)").kendoComboBox({
                                                     filter: "contains",
@@ -249,12 +252,11 @@
                                                     return data;
                                                 }
                                             });
-                                        </script>
-                                        @Html.ValidationMessageFor(model => model.DepartmentId)
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.DepartmentId)', '@LookupTypes.DepartmentType')">Add</a>
-                                    </div>
+                                    </script>
+                                    @Html.ValidationMessageFor(model => model.DepartmentId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.DepartmentId)', '@LookupTypes.DepartmentType')">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -262,28 +264,29 @@
                 </div>
             </div>
         </div>
-        <input type="submit" id="btnRefreshLookupItems" style="display: none" />
     </div>
+    <input type="submit" id="btnRefreshLookupItems" style="display: none" />
+</div>
 
 <script>
-        function openLookupPopup(viewId, type) {
+    function openLookupPopup(viewId, type) {
 
-            var url = '/Admin/Lookup/LookupAddPopup?viewId=' +
-                viewId + "&type=" + type +
-                '&btnId=btnRefreshLookupItems&formId=contact-edit-form';
-            OpenWindow(url, 800, 800, true);
-        }
+        var url = '/Admin/Lookup/LookupAddPopup?viewId=' +
+            viewId + "&type=" + type +
+            '&btnId=btnRefreshLookupItems&formId=contact-edit-form';
+        OpenWindow(url, 800, 800, true);
+    }
 
-        $(document).ready(function() {
-            $('#btnRefreshLookupItems')[0].addEventListener("lookup",
-                function(event) {
-                    //refresh combobox
-                    $("#" + event.detail.viewId).data("kendoComboBox").dataSource.read();
-                    $("#" + event.detail.viewId).data("kendoComboBox").value(event.detail.valueId);
+    $(document).ready(function () {
+        $('#btnRefreshLookupItems')[0].addEventListener("lookup",
+            function (event) {
+                //refresh combobox
+                $("#" + event.detail.viewId).data("kendoComboBox").dataSource.read();
+                $("#" + event.detail.viewId).data("kendoComboBox").value(event.detail.valueId);
 
-                    return false;
-                });
-        });
+                return false;
+            });
+    });
 </script>
 
 

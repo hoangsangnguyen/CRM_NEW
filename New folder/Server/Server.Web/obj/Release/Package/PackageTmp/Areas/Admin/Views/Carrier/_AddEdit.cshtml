@@ -12,6 +12,8 @@
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.Id)
 @Html.HiddenFor(model => model.Code)
+@Html.HiddenFor(model => model.CreatorId)
+@Html.HiddenFor(model => model.CreatedAt)
 
 @{
     Layout = null;
