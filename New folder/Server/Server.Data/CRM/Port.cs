@@ -84,5 +84,16 @@ namespace Vino.Server.Data.CRM
 
 
         #endregion
+
+        #region Map to Hbl Fcl
+        public ICollection<HblFclExp> FclPlaceOfReceipts { get; set; }
+        public ICollection<HblFclExp> FclPortOfLoaings { get; set; }
+        public ICollection<HblFclExp> FclPortOfDischarges { get; set; }
+        public ICollection<HblFclExp> FclTranshipmentPorts { get; set; }
+        public ICollection<HblFclExp> FclFinalDestinations { get; set; }
+        public ICollection<HblFclExp> FclPlaceOfDeliveries { get; set; }
+
+
+        #endregion
     }
 }

@@ -103,5 +103,14 @@ namespace Vino.Server.Data.CRM
         public ICollection<HblLclExp> DeliveryOfGoods { get; set; }
 
         #endregion
+
+        #region Map to Hbl Fcl
+
+        public ICollection<HblFclExp> FclConsignees { get; set; }
+        public ICollection<HblFclExp> FclShippers { get; set; }
+        public ICollection<HblFclExp> FclNotifyParties { get; set; }
+        public ICollection<HblFclExp> FclDeliveryOfGoods { get; set; }
+
+        #endregion
     }
 }

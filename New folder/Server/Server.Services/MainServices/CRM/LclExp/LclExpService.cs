@@ -50,9 +50,9 @@ namespace Vino.Server.Services.MainServices.CRM.LclExp
                 query = query.Where(w => w.OpIcId == request.OpIcId);
             }
             query = query.OrderByDescending(d => d.Created);
-            var receives = await query.Skip(request.Page * request.PageSize)
+            var details = await query.Skip(request.Page * request.PageSize)
                 .Take(request.PageSize).ToListAsync();
-            var models = receives.MapTo<LclExpModel>();
+            var models = details.MapTo<LclExpModel>();
 
             var lclExpIds = models.Select(x => x.Id).ToList();
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Vino.Server.Services.MainServices.BaseService;
+using Vino.Server.Services.MainServices.CRM.HblFclExp.Models;
 
 namespace Vino.Server.Services.MainServices.CRM.FclExp.Models
 {
@@ -10,6 +11,7 @@ namespace Vino.Server.Services.MainServices.CRM.FclExp.Models
     {
         public FclExpModel()
         {
+            Items = new List<HblFclExpModel>();
         }
 
         [Required]
@@ -77,6 +79,8 @@ namespace Vino.Server.Services.MainServices.CRM.FclExp.Models
         public string UpdateName { get; set; }
 
         public string UpdateAt { get; set; }
+
+        public List<HblFclExpModel> Items { get; set; }
 
     }
 }

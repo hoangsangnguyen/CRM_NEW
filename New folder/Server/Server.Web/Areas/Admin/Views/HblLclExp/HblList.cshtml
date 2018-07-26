@@ -194,12 +194,12 @@
                                     <label class="control-label">LclExp:</label>
                                 </div>
                                 <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.LclExpId)"
-                                           name="@Html.NameFor(model => model.LclExpId)"
-                                           value="@Html.ValueFor(model => model.LclExpId)" />
+                                    <input id="@Html.FieldIdFor(model => model.ExpId)"
+                                           name="@Html.NameFor(model => model.ExpId)"
+                                           value="@Html.ValueFor(model => model.ExpId)" />
                                     <script>
                                         $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
+                                            $("#@Html.FieldIdFor(model => model.ExpId)").kendoComboBox({
                                                 filter: "contains",
                                                 dataTextField: "Name",
                                                 dataValueField: "Value",
@@ -367,7 +367,7 @@
 
                         function additionalData() {
                             var data = {
-                                LclExpId: $('#@Html.FieldIdFor(model => model.LclExpId)').val(),
+                                ExpId: $('#@Html.FieldIdFor(model => model.ExpId)').val(),
                                 FromDt: $('#@Html.FieldIdFor(model => model.FromDt)').val(),
                                 ToDt: $('#@Html.FieldIdFor(model => model.ToDt)').val(),
                                 BlNumber: $('#@Html.FieldIdFor(model => model.BlNumber)').val(),

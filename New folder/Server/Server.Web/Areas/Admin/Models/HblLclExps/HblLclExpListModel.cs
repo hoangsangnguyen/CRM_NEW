@@ -10,7 +10,7 @@ namespace Vino.Server.Web.Areas.Admin.Models.HblLclExps
 
         public string FromDt { get; set; }
         public string ToDt { get; set; }
-        public int? LclExpId { get; set; }
+        public int? ExpId { get; set; }
 
         public string BlNumber { get; set; }
         public string BookingNumber { get; set; }

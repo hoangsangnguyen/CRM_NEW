@@ -94,7 +94,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             return View(new HblLclExpListModel()
             {
-                LclExpId = id
+                ExpId = id
             });
         }
 
@@ -110,7 +110,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 PageSize = common.PageSize,
                 FromDt = dateFrom,
                 ToDt = dateTo,
-                LclExpId = model.LclExpId,
+                LclExpId = model.ExpId,
                 BlNumber = model.BlNumber,
                 BookingNumber = model.BookingNumber,
                 ShipperId = model.ShipperId,

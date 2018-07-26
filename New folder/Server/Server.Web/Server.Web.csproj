@@ -233,6 +233,7 @@
     <Content Include="Areas\Admin\Content\js\fclexp_list.js" />
     <Content Include="Areas\Admin\Content\js\fclimps_addedit.js" />
     <Content Include="Areas\Admin\Content\js\fclimps_list.js" />
+    <Content Include="Areas\Admin\Content\js\hblfclexp_addedit.js" />
     <Content Include="Areas\Admin\Content\js\hbllclexp_addedit.js" />
     <Content Include="Areas\Admin\Content\js\lclexps_addedit.js" />
     <Content Include="Areas\Admin\Content\js\lclexps_list.js" />
@@ -2670,6 +2671,14 @@
     <Content Include="Areas\Admin\Views\HblLclExp\_form.cshtml" />
     <Content Include="Areas\Admin\Views\HblLclExp\Preview.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Intro.cshtml" />
+    <Content Include="Areas\Admin\Views\HblFclExp\HblList.cshtml" />
+    <Content Include="Areas\Admin\Views\HblFclExp\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\HblFclExp\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\HblFclExp\_AddEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\HblFclExp\Preview.cshtml" />
+    <Content Include="Areas\Admin\Views\HblFclExp\_form.cshtml" />
+    <Content Include="Areas\Admin\Views\HblFclExp\CustomerAddPopup.cshtml" />
+    <Content Include="Areas\Admin\Views\HblFclExp\_FirstCreation.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
@@ -3362,6 +3371,7 @@
     <Compile Include="Api\CrmContactApiController.cs" />
     <Compile Include="Api\CustomerApiController.cs" />
     <Compile Include="Api\EmployeeeApiController.cs" />
+    <Compile Include="Api\FclExpApiController.cs" />
     <Compile Include="Api\LclExpApiController.cs" />
     <Compile Include="Api\LookupApiController.cs" />
     <Compile Include="Api\PortApiController.cs" />
@@ -3380,6 +3390,7 @@
     <Compile Include="Areas\Admin\Controllers\FalconUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\FclExpsController.cs" />
     <Compile Include="Areas\Admin\Controllers\FclImpsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HblFclExpController.cs" />
     <Compile Include="Areas\Admin\Controllers\HblLclExpController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\JbimagesController.cs" />
@@ -3403,6 +3414,8 @@
     <Compile Include="Areas\Admin\Models\FaclonUser\UserHospitalListModel.cs" />
     <Compile Include="Areas\Admin\Models\FclExps\FclExpsListModel.cs" />
     <Compile Include="Areas\Admin\Models\FclImps\FclImpsListModel.cs" />
+    <Compile Include="Areas\Admin\Models\HblFclExps\FclExpAndPodModel.cs" />
+    <Compile Include="Areas\Admin\Models\HblFclExps\HblFclExpListModel.cs" />
     <Compile Include="Areas\Admin\Models\HblLclExps\HblLclExpListModel.cs" />
     <Compile Include="Areas\Admin\Models\HblLclExps\LclExpAndPodModel.cs" />
     <Compile Include="Areas\Admin\Models\LclExps\LclExpsListModel.cs" />
