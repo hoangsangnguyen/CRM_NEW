@@ -208,6 +208,7 @@
     <Compile Include="MainServices\CRM\AirImp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\Carrier\Model\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\Contact\Models\SearchingRequest.cs" />
+    <Compile Include="MainServices\CRM\Container\Models\ContainerModel.cs" />
     <Compile Include="MainServices\CRM\Customer\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\FclExp\Models\SearchingRequest.cs" />
     <Compile Include="MainServices\CRM\FclImp\Models\SearchingRequest.cs" />

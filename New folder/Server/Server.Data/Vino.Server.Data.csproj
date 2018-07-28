@@ -58,7 +58,9 @@
     <Compile Include="CRM\AirExp.cs" />
     <Compile Include="CRM\AirImp.cs" />
     <Compile Include="CRM\Carrier.cs" />
+    <Compile Include="CRM\Container.cs" />
     <Compile Include="CRM\HblFclExp.cs" />
+    <Compile Include="CRM\SIFclExp.cs" />
     <Compile Include="CRM\Topic.cs" />
     <Compile Include="CRM\CrmContact.cs" />
     <Compile Include="CRM\CrmCustomer.cs" />

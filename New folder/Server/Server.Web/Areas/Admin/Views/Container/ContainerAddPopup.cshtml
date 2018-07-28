@@ -1,0 +1,187 @@
+﻿@using Falcon.Web.Mvc.HtmlExtensions
+@model Vino.Server.Web.Areas.Admin.Models.Container.ContainerListModel
+@{
+    var defaultGridPageSize = 20;
+    var gridPageSizes = "10,20,50,100,500";
+    Layout = "~/Areas/Admin/Views/Shared/_PopupLayout.cshtml";
+    ViewBag.Title = "Thêm container";
+    <style>
+        .k-combobox .k-input {
+            height: 27.5px !important
+        }
+    </style>
+}
+@if (ViewBag.RefreshPage == true)
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            try {
+                var event = new CustomEvent("container", { detail: { viewId: '@ViewBag.viewId'}});
+                window.opener.document.forms['@(ViewBag.formId)'].@(ViewBag.btnId).dispatchEvent(event);
+            } catch
+            (e) {
+            }
+            window.close();
+        })
+    </script>
+}
+@Html.AntiForgeryToken()
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        Danh sách container
+    </h1>
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="main-grid"></div>
+                    <script>
+                                $(document).ready(function() {
+                                    $("#main-grid").kendoGrid({
+                                        dataSource: {
+                                            type: "json",
+                                            autoSync: true,
+                                            transport: {
+                                                read: {
+                                                    url: "@Html.Raw(Url.Action("List", "Container"))",
+                                                    type: "POST",
+                                                    dataType: "json",
+                                                    data: additionalData
+                                                }
+                                            },
+                                            schema: {
+                                                model: {
+                                                    id: "Id",
+                                                    fields: {
+                                                        Type: { editable: true, nullable: false },
+                                                        ContainerNo: { validation: { required: true } },
+                                                        SealNo: { validation: { required: true } },
+                                                        Quantity: { validation: { required: true } },
+                                                        UnitId: { validation: { required: true } },
+                                                        Nw: { validation: { required: false } },
+                                                        Gw: { validation: { required: false } },
+                                                        Cbm: { validation: { required: false } }
+                                                    }
+                                                }
+                                            },
+                                            error: function(e) {
+                                                display_kendoui_grid_error(e);
+                                                // Cancel the changes
+                                                this.cancelChanges();
+                                            },
+                                            pageSize: @(defaultGridPageSize),
+                                            serverPaging: true,
+                                            serverFiltering: true,
+                                            serverSorting: true
+                                        },
+                                        pageable: {
+                                            refresh: true,
+                                            pageSizes: [@(gridPageSizes)],
+                                            messages: {
+                                                itemsPerPage: "Số hàng trên trang",
+                                                empty: "Không có container",
+                                                display: "{0} - {1} của {2} container",
+                                            }
+                                        },
+                                        toolbar: ["create"],
+                                        editable: {
+                                            createAt: "bottom"
+                                            //confirmation: "Delete",
+                                            //mode: "inline"
+                                        },
+                                        scrollable: false,
+                                        columns: [
+                                            {
+                                                field: "Type",
+                                                title: "Type",
+                                                headerAttributes: { style: "text-align:left" },
+                                            }, {
+                                                field: "ContainerNo",
+                                                title: "ContainerNo",
+                                                headerAttributes: { style: "text-align:left" },
+                                            }, {
+                                                field: "SealNo",
+                                                title: "SealNo",
+                                                headerAttributes: { style: "text-align:left" },
+                                                attributes: { style: "text-align:left" }
+                                            }, {
+                                                field: "Quantity",
+                                                title: "Quantity",
+                                                headerAttributes: { style: "text-align:left" },
+                                            }, {
+                                                field: "UnitId",
+                                                title: "Unit",
+                                                headerAttributes: { style: "text-align:left" },
+                                                editor: unitDropDownEditor,
+                                                template: "#=UnitName#"
+
+                                            }, {
+                                                field: "Nw",
+                                                title: "N.W",
+                                                headerAttributes: { style: "text-align:left" }
+                                            }, {
+                                                field: "Gw",
+                                                title: "G.W",
+                                                headerAttributes: { style: "text-align:left" },
+                                            }, {
+                                                field: "Cbm",
+                                                title: "CBM",
+                                                headerAttributes: { style: "text-align:left" }
+                                            },
+                                            {
+                                                command: "destroy", title: " ", width: "150px"
+                                            }
+                                        ]
+                                    });
+                        });
+
+                                function unitDropDownEditor(container, options) {
+                                    $('<input required name="' + options.field + '"/>')
+                                        .appendTo(container)
+                                        .kendoDropDownList({
+                                            autoBind: false,
+                                            dataTextField: "Name",
+                                            dataValueField: "Value",
+                                            dataSource: {
+                                                type: "json",
+                                                transport: {
+                                                    read: {
+                                                        url: "/api/LookupApi/GetUnitTypes",
+                                                        dataType: "json",
+                                                        data: {name : ""}
+                                                    }
+                                                }
+                                            }
+                                        });
+                                }
+                    </script>
+
+                    <script type="text/javascript">
+                                $(document).ready(function() {
+                                    //search button
+                                    $('#button-search').click(function() {
+                                        //search
+                                        var grid = $('#main-grid').data('kendoGrid');
+                                        grid.dataSource.page(1); //new search. Set page size to 1
+                                        //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                        return false;
+                                    });
+                                });
+
+                                function additionalData() {
+                                    var data = {
+                                        FclId: '@Model.FclId'
+                                    };
+                                    addAntiForgeryToken(data);
+                                    return data;
+                                }
+                    </script>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

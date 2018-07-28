@@ -56,8 +56,13 @@ namespace Vino.Server.Data.CRM
 
         [ForeignKey("AgentId")]
         public virtual Carrier Agent { get; set; }
+
         [Required]
         public int AgentId { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng chọn container")]
+        public string Container { get; set; }
+
         [Required]
         public int CommodityId { get; set; }
 
@@ -65,8 +70,10 @@ namespace Vino.Server.Data.CRM
         public virtual Port Pod { get; set; }
         [Required]
         public int PodId { get; set; }
+
         [Required]
         public string Service { get; set; }
+
         [Required]
         public double Gw { get; set; }
         [Required]

@@ -67,10 +67,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 OpIcId = model.OpIcId,
                 Mbl = model.Mbl
             });
-            foreach (var item in dtoFromRepo)
-            {
-                item.ContainerId = 1;
-            }
 
             var gridModel = new DataSourceResult()
             {

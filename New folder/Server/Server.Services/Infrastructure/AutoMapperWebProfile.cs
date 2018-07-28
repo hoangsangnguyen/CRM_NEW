@@ -17,6 +17,7 @@ using Vino.Server.Services.MainServices.CRM.AirExp.Models;
 using Vino.Server.Services.MainServices.CRM.AirImp.Models;
 using Vino.Server.Services.MainServices.CRM.Carrier.Model;
 using Vino.Server.Services.MainServices.CRM.Contact.Models;
+using Vino.Server.Services.MainServices.CRM.Container.Models;
 using Vino.Server.Services.MainServices.CRM.Customer.Models;
 using Vino.Server.Services.MainServices.CRM.FclExp.Models;
 using Vino.Server.Services.MainServices.CRM.FclImp.Models;
@@ -503,6 +504,8 @@ namespace Vino.Server.Services.Infrastructure
                     x => x.Image.RelativePath));
             CreateMap<TopicModel, Topic>();
 
+            // container
+            CreateMap<Container, ContainerModel>().ReverseMap();
         }
     }
 }

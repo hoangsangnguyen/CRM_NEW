@@ -329,6 +329,7 @@ namespace Vino.Server.Services.Database
         public DbSet<HblFclExp> HblFclExps { get; set; }
 
         public DbSet<Topic> Topics{ get; set; }
+        public DbSet<Container> Containers { get; set; }
 
 
         #endregion

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -287,33 +288,79 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public async Task<ActionResult> Export()
+        public ActionResult Export(string gridHtml)
         {
-            var model = await GetModel(1);
-            string htmlText = this._htmlViewRenderer.RenderViewToString(this, "~/Areas/Admin/Views/HblLclExp/Preview.cshtml", model);
+            string css = @"D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\wwwroot\css\pdf-form.css";
+            Document document = new Document(PageSize.A4);
+            byte[] result;
+            List<string> cssFiles = new List<string>();
+            cssFiles.Add(@"/wwwroot/css/pdf-form.css");
 
-            // Let the html be rendered into a PDF document through iTextSharp.
-            byte[] buffer = _standardPdfRenderer.Render(htmlText, "Report");
+            using (var ms = new MemoryStream())
+            {
+                PdfWriter writer = PdfWriter.GetInstance(document, ms);
+                writer.CloseStream = true;
+                document.Open();
 
-            // Return the PDF as a binary stream to the client.
-            return new BinaryContentResult(buffer, "application/pdf");
+                HtmlPipelineContext htmlContext = new HtmlPipelineContext(null);
+
+                htmlContext.SetTagFactory(Tags.GetHtmlTagProcessorFactory());
+
+                ICSSResolver cssResolver = XMLWorkerHelper.GetInstance().GetDefaultCssResolver(false);
+                cssFiles.ForEach(i => cssResolver.AddCssFile(System.Web.HttpContext.Current.Server.MapPath(i), true));
+
+                IPipeline pipeline = new CssResolverPipeline(cssResolver,
+                    new HtmlPipeline(htmlContext, new PdfWriterPipeline(document, writer)));
+
+                XMLWorker worker = new XMLWorker(pipeline, true);
+                XMLParser xmlParser = new XMLParser(worker);
+                xmlParser.Parse(new MemoryStream(Encoding.UTF8.GetBytes(gridHtml)));
+
+                document.Close();
+                return File(ms.ToArray(), "application/pdf", "Grid.pdf");
+            }
+
+
+            // var htmlText = System.IO.File.ReadAllText(@"D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\Areas\Admin\Views\HblLclExp\_form.cshtml");
+            //using (var stream = new System.IO.MemoryStream())
+            //{
+            //    var sr = new StringReader(gridHtml);
+            //    var pdfDoc = new Document(PageSize.A4, 50, 50, 60, 60);
+            //    var writer = PdfWriter.GetInstance(pdfDoc, stream);
+
+            //    pdfDoc.Open();
+            //    XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+            //    pdfDoc.Close();
+            //    return File(stream.ToArray(), "application/pdf", "Grid.pdf");
+            //}
+
+
+            //var model = await GetModel(1);
+            //string htmlText = this._htmlViewRenderer.RenderViewToString(this, "~/Areas/Admin/Views/HblLclExp/Preview.cshtml", model);
+
+            //// Let the html be rendered into a PDF document through iTextSharp.
+            //byte[] buffer = _standardPdfRenderer.Render(htmlText, "Report");
+
+            //// Return the PDF as a binary stream to the client.
+            //return new BinaryContentResult(buffer, "application/pdf");
+
+
             //var cssText = System.IO.File.ReadAllText(@"D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\wwwroot\css\pdf-form.css");
             //using (var memoryStream = new MemoryStream())
             //{
-            //    StringReader sr = new StringReader(gridHtml);
+            //    var sr = new StringReader(gridHtml);
             //    var pdfDoc = new Document(PageSize.A4, 50, 50, 60, 60);
             //    var writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
             //    pdfDoc.Open();
 
-            //    XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-            //    // using (var cssMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(cssText)))
-            //    // {
-            //    //using (var htmlMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(gridHtml)))
-            //    //    {
-            //    //        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, htmlMemoryStream);
-            //    //    XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, htmlMemoryStream);
-            //    //    }
-            //   // }
+            //    //XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+            //    //using (var cssMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(cssText)))
+            //    //{
+            //        using (var htmlMemoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(gridHtml)))
+            //        {
+            //            XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, htmlMemoryStream);
+            //        }
+            //    //}
 
             //    pdfDoc.Close();
 
@@ -322,50 +369,50 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             //}
         }
 
-        public async Task<ActionResult> CreateAndDownload(int id)
-        {
-            var itemExpt = this.GetConfigMapping();
-            var model = await _service.GetSingleAsync(id);
-            if (model.Id <= 0)
-            {
-                return RedirectToAction("Edit", new { id = id });
-            }
+        //public async Task<ActionResult> CreateAndDownload(int id)
+        //{
+        //    var itemExpt = this.GetConfigMapping();
+        //    var model = await _service.GetSingleAsync(id);
+        //    if (model.Id <= 0)
+        //    {
+        //        return RedirectToAction("Edit", new { id = id });
+        //    }
 
-            var pdfContent = _pdfService.GetLclImpPdfContent(itemExpt, model);
-            if (pdfContent.Length > 0)
-            {
-                Response.Clear();
-                Response.ClearContent();
-                Response.ClearHeaders();
-                Response.BufferOutput = true;
-                Response.ContentType = "application/pdf";
-                Response.AppendHeader("Content-Disposition", "attachment; filename=\"" + model.GetType().Name +
-                                                             +'_' + model.Id + ".pdf" + "\"");
-                Response.BinaryWrite(pdfContent);
-                Response.End();
-            }
+        //    var pdfContent = _pdfService.GetLclImpPdfContent(itemExpt, model);
+        //    if (pdfContent.Length > 0)
+        //    {
+        //        Response.Clear();
+        //        Response.ClearContent();
+        //        Response.ClearHeaders();
+        //        Response.BufferOutput = true;
+        //        Response.ContentType = "application/pdf";
+        //        Response.AppendHeader("Content-Disposition", "attachment; filename=\"" + model.GetType().Name +
+        //                                                     +'_' + model.Id + ".pdf" + "\"");
+        //        Response.BinaryWrite(pdfContent);
+        //        Response.End();
+        //    }
 
-            return Json(null);
-        }
-        private PdfMappingConfig GetConfigMapping()
-        {
-            XmlDocument xmlConfig = null;
-            var configMappingPath = System.Web.HttpContext.Current.Server.MapPath("~/App_Data/PdfMapping/PdfMappingConfig.xml");
-            xmlConfig = new XmlDocument();
-            xmlConfig.Load(configMappingPath);
-            XmlNodeList fileNode = null;
-            var nodePath = "PdfMapping/Template";
-            fileNode = xmlConfig.SelectSingleNode(nodePath)?.SelectNodes("File");
-            foreach (XmlNode node in fileNode)
-            {
-                return new PdfMappingConfig()
-                {
-                    PdfTemplatePath = System.Web.HttpContext.Current.Server.MapPath(node.Attributes["pdffile"].Value),
-                    XmlMappingPath = System.Web.HttpContext.Current.Server.MapPath(node.Attributes["xmlfile"].Value)
-                };
-            }
-            return null;
-        }
+        //    return Json(null);
+        //}
+        //private PdfMappingConfig GetConfigMapping()
+        //{
+        //    XmlDocument xmlConfig = null;
+        //    var configMappingPath = System.Web.HttpContext.Current.Server.MapPath("~/App_Data/PdfMapping/PdfMappingConfig.xml");
+        //    xmlConfig = new XmlDocument();
+        //    xmlConfig.Load(configMappingPath);
+        //    XmlNodeList fileNode = null;
+        //    var nodePath = "PdfMapping/Template";
+        //    fileNode = xmlConfig.SelectSingleNode(nodePath)?.SelectNodes("File");
+        //    foreach (XmlNode node in fileNode)
+        //    {
+        //        return new PdfMappingConfig()
+        //        {
+        //            PdfTemplatePath = System.Web.HttpContext.Current.Server.MapPath(node.Attributes["pdffile"].Value),
+        //            XmlMappingPath = System.Web.HttpContext.Current.Server.MapPath(node.Attributes["xmlfile"].Value)
+        //        };
+        //    }
+        //    return null;
+        //}
 
         #endregion
 
