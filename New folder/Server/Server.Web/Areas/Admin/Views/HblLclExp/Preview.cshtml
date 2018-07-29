@@ -8,10 +8,10 @@
             <div class="pull-right">
                 <a class="btn bg-blue" href="@Html.Raw(Url.Action("Edit", new {id = Model.Id}))"><i class="fa fa-chevron-left" aria-hidden="true"></i> Quay Lại</a>
 
-                <button type="submit" class="btn bg-green" id="btnSubmitExport">
+                <a href="@Html.Raw(Url.Action("HblLclExpReport", "CallReport", new {hblLclExpId = Model.Id}))" class="btn bg-green" id="btnSubmitExport">
                     <i class="fa fa-print"></i>
                     In phiếu
-                </button>
+                </a>
 
             </div>
         </div>

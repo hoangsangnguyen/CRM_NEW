@@ -2683,6 +2683,7 @@
     <Content Include="Areas\Admin\Views\Container\List.cshtml" />
     <Content Include="Areas\Admin\Views\Container\ContainerAddPopup.cshtml" />
     <Content Include="Areas\Admin\Views\Container\_AddPopup.cshtml" />
+    <Content Include="Areas\Admin\Views\CallReport\HblLclExpReport.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
@@ -3387,6 +3388,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminAuthorizeAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\AirExpsController.cs" />
     <Compile Include="Areas\Admin\Controllers\AirImpsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CallReportController.cs" />
     <Compile Include="Areas\Admin\Controllers\CarrierController.cs" />
     <Compile Include="Areas\Admin\Controllers\ContactController.cs" />
     <Compile Include="Areas\Admin\Controllers\ContainerController.cs" />
@@ -3490,6 +3492,12 @@
     </Compile>
     <Compile Include="Reports\FieldProfileReport.Designer.cs">
       <DependentUpon>FieldProfileReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\HblLclExpReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\HblLclExpReport.Designer.cs">
+      <DependentUpon>HblLclExpReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\PhanBonReport.cs">
       <SubType>Component</SubType>
@@ -3705,6 +3713,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\FieldProfileReport.resx">
       <DependentUpon>FieldProfileReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\HblLclExpReport.resx">
+      <DependentUpon>HblLclExpReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\PhanBonReport.resx">
       <DependentUpon>PhanBonReport.cs</DependentUpon>
