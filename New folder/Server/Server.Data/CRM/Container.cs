@@ -13,7 +13,7 @@ namespace Vino.Server.Data.CRM
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn loại container")]
-        public int? Type { get; set; }
+        public string Type { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn mã container")]
         public string ContainerNo { get; set; }

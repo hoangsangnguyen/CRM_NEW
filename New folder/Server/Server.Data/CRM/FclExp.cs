@@ -60,7 +60,6 @@ namespace Vino.Server.Data.CRM
         [Required]
         public int AgentId { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn container")]
         public string Container { get; set; }
 
         [Required]
@@ -73,10 +72,8 @@ namespace Vino.Server.Data.CRM
 
         [Required]
         public string Service { get; set; }
-
-        [Required]
+        public double Qty { get; set; }
         public double Gw { get; set; }
-        [Required]
         public double Cbm { get; set; }
 
         public string Notes { get; set; }

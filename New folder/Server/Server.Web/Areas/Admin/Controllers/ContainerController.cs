@@ -51,41 +51,37 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(ContainerModel dto, int fclExpId)
+        public async Task<ActionResult> Create(ContainerModel dto, int fclId)
         {
-            var fclExp = _fclExpService.GetSingleAsync(fclExpId);
+            var fclExp = await _fclExpService.GetSingleAsync(fclId);
             if (fclExp.Id <= 0)
                 return Json(new DataSourceResult { Errors = "Fcl Export không tồn tại" });
 
-            if (!ModelState.IsValid)
-            {
-                return View(dto);
-            }
-            await _fclExpService.InsertContainer(fclExpId, dto);
+            await _fclExpService.InsertContainer(fclId, dto);
             return new NullJsonResult();
         }
 
         [System.Web.Mvc.HttpPost]
-        public async Task<ActionResult> Edit(ContainerModel model, int fclExpId)
+        public async Task<ActionResult> Edit(ContainerModel model, int fclId)
         {
-            var fclExp = _fclExpService.GetSingleAsync(fclExpId);
+            var fclExp = await _fclExpService.GetSingleAsync(fclId);
             if (fclExp.Id <= 0)
                 return Json(new DataSourceResult { Errors = "Fcl Export không tồn tại" });
           
             if (!ModelState.IsValid)
                 return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
-            await _fclExpService.UpdateContainer(fclExpId, model);
+            await _fclExpService.UpdateContainer(fclId, model);
 
             return new NullJsonResult();
         }
 
         [System.Web.Mvc.HttpPost]
-        public async Task<ActionResult> Delete(Guid id, int fclExpId)
+        public async Task<ActionResult> Delete(Guid id, int fclId)
         {
-            var fclExp = _fclExpService.GetSingleAsync(fclExpId);
+            var fclExp = await _fclExpService.GetSingleAsync(fclId);
             if (fclExp.Id <= 0)
                 return new NullJsonResult();
-            await _fclExpService.DeleteContainer(id, fclExpId);
+            await _fclExpService.DeleteContainer(id, fclId);
             return new NullJsonResult();
         }
         #endregion

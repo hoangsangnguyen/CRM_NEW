@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
 @using Falcon.Web.Mvc.HtmlExtensions
+@using Vino.Server.Web.Areas.Admin.Models.Container
 @using Vino.Shared.Constants.Common
 @model Vino.Server.Services.MainServices.CRM.FclExp.Models.FclExpModel
 @{
@@ -21,743 +22,723 @@
 }
 <div class="content">
     <div class="form-horizontal">
-        <div class="panel-group">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="row">
-                        @*JobId*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">JobId:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input readonly="readonly" type="text"
-                                           class="form-control" id="@Html.FieldIdFor(model => model.JobId)"
-                                           name="@Html.FieldIdFor(model => model.JobId)" value="@Model.JobId" />
-                                </div>
-                            </div>
-                        </div>
-                        @*MblType*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">MblType:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.MblTypeId)"
-                                           name="@Html.NameFor(model => model.MblTypeId)"
-                                           value="@Html.ValueFor(model => model.MblTypeId)" />
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.MblTypeId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn mbl type...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LookupApi/GetMblTypes",
-                                                            dataType: "json",
-                                                            data: filterMblType
-                                                        }
-                                                    }
-                                                }
-                                            });
-
-                                            function filterMblType() {
-                                                var data = {
-                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                                    Name : ""
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.MblTypeId)
-                                </div>
-                                <div class="col-md-1">
-                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.MblTypeId)', '@LookupTypes.MblType')">Add</a>
-                                </div>
-                            </div>
-                        </div>
-                        @*S.Lines*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">S.Lines:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.SlinesId)"
-                                           name="@Html.NameFor(model => model.SlinesId)"
-                                           value="@Html.ValueFor(model => model.SlinesId)" />
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.SlinesId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn s.lines...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/CarrierApi/GetAll",
-                                                            dataType: "json",
-                                                            data: filterAgents
-                                                        }
-                                                    }
-                                                }
-                                            });
-
-                                            function filterAgents() {
-                                                var data = {
-                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                                    Name : ""
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.SlinesId)
-                                </div>
-                                <div class="col-md-1">
-                                    <a onclick="openCarrierPopup('@Html.FieldIdFor(m => m.SlinesId)')">Add</a>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 10px">
-                        @*Created*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Created:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="datetime" id="@Html.FieldIdFor(model => model.Created)"
-                                           name="@Html.FieldIdFor(model => model.Created)" value="@Model.Created"
-                                           style="width: 100%" />
-                                    <script>
-                                    $(document).ready(function() {
-                                        $("#@Html.FieldIdFor(model => model.Created)").kendoDatePicker({
-                                            culture: "vi-VN",
-                                            format: "dd/MM/yyyy"
-                                        });
-                                        $("#@Html.FieldIdFor(model => model.Created)")
-                                            .prop("readonly", "readonly");
-                                    });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.Created)
-                                </div>
-                            </div>
-                        </div>
-
-                        @*Vessel*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Vessel:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.VesselId)"
-                                           name="@Html.NameFor(model => model.VesselId)"
-                                           value="@Html.ValueFor(model => model.VesselId)" />
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.VesselId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn vessel...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LookupApi/GetVessels",
-                                                            dataType: "json",
-                                                            data: filterVessels
-                                                        }
-                                                    }
-                                                }
-                                            });
-
-                                            function filterVessels() {
-                                                var data = {
-                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                                    Name : ""
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.VesselId)
-                                </div>
-                                <div class="col-md-1">
-                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.VesselId)', '@LookupTypes.VesselType')">Add</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        @*Agent*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Agent:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.AgentId)"
-                                           name="@Html.NameFor(model => model.AgentId)"
-                                           value="@Html.ValueFor(model => model.AgentId)" />
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.AgentId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn agent...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/CarrierApi/GetAll",
-                                                            dataType: "json",
-                                                            data: filterAgents
-                                                        }
-                                                    }
-                                                }
-                                            });
-
-                                            function filterAgents() {
-                                                var data = {
-                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                                    Name : ""
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.AgentId)
-                                </div>
-                                <div class="col-md-1">
-                                    <a onclick="openCarrierPopup('@Html.FieldIdFor(m => m.AgentId)')">Add</a>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 10px">
-                        @*Etd*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Etd:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="datetime" id="@Html.FieldIdFor(model => model.Etd)"
-                                           name="@Html.FieldIdFor(model => model.Etd)" value="@Model.Etd"
-                                           style="width: 100%" />
-                                    <script>
-                                            $(document).ready(function() {
-                                                $("#@Html.FieldIdFor(model => model.Etd)").kendoDatePicker({
-                                                    culture: "vi-VN",
-                                                    format: "dd/MM/yyyy"
-                                                });
-                                                $("#@Html.FieldIdFor(model => model.Etd)")
-                                                    .prop("readonly", "readonly");
-                                            });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.Etd)
-                                </div>
-                            </div>
-                        </div>
-
-                        @*Shipments*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Shipments:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.ShipmentId)"
-                                           name="@Html.NameFor(model => model.ShipmentId)"
-                                           value="@Html.ValueFor(model => model.ShipmentId)" />
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.ShipmentId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn shipment...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/lookupApi/GetShipments",
-                                                            dataType: "json",
-                                                            data: filterShipment
-                                                        }
-                                                    }
-                                                }
-                                            });
-
-                                            function filterShipment() {
-                                                var data = {
-                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                                    Name : ""
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.ShipmentId)
-                                </div>
-
-                                <div class="col-md-1">
-                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.ShipmentId)', '@LookupTypes.ShipmentType')">Add</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        @*Commodity*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Commodity:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.CommodityId)"
-                                           name="@Html.NameFor(model => model.CommodityId)"
-                                           value="@Html.ValueFor(model => model.CommodityId)" />
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.CommodityId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn commodity...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LookupApi/GetCommodities",
-                                                            dataType: "json",
-                                                            data: filterCommodity
-                                                        }
-                                                    }
-                                                }
-                                            });
-
-                                            function filterCommodity() {
-                                                var data = {
-                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                                    Name : ""
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.CommodityId)
-                                </div>
-                                <div class="col-md-1">
-                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.CommodityId)', '@LookupTypes.CommoditiesType')">Add</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row" style="margin-top: 10px">
-                        @*Bkg No*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Bkg No :</label>
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.FalconEditorFor(m => m.BkgNumber)
-                                    @Html.ValidationMessageFor(model => model.BkgNumber)
-                                </div>
-                            </div>
-                        </div>
-
-                        @*P.O.L*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">P.O.L:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.PolId)"
-                                           name="@Html.NameFor(model => model.PolId)"
-                                           value="@Html.ValueFor(model => model.PolId)" />
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.PolId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn pol port...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/PortApi/GetAll",
-                                                            dataType: "json",
-                                                            data: filterPorts
-                                                        }
-                                                    }
-                                                }
-                                            });
-
-                                            function filterPorts() {
-                                                var data = {
-                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                                    Name : ""
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.PolId)
-                                </div>
-                                <div class="col-md-1">
-                                    <a onclick="openPortPopup('@Html.FieldIdFor(m => m.PolId)')">Add</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        @*P.O.D*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">P.O.D:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.PodId)"
-                                           name="@Html.NameFor(model => model.PodId)"
-                                           value="@Html.ValueFor(model => model.PodId)" />
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.PodId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn pod port...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/PortApi/GetAll",
-                                                            dataType: "json",
-                                                            data: filterPorts
-                                                        }
-                                                    }
-                                                }
-                                            });
-
-                                            function filterPorts() {
-                                                var data = {
-                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                                    Name : ""
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.PodId)
-                                </div>
-                                <div class="col-md-1">
-                                    <a onclick="openPortPopup('@Html.FieldIdFor(m => m.PolId)')">Add</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 10px">
-                        @*M-B/L*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">M-B/L :</label>
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.FalconEditorFor(m => m.Mbl)
-                                    @Html.ValidationMessageFor(model => model.Mbl)
-                                </div>
-                            </div>
-                        </div>
-
-                        @*Freight*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Freight:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.FreightId)"
-                                           name="@Html.NameFor(model => model.FreightId)"
-                                           value="@Html.ValueFor(model => model.FreightId)" />
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.FreightId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn freight...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LookupApi/GetFreights",
-                                                            dataType: "json",
-                                                            data: filterFreights
-                                                        }
-                                                    }
-                                                }
-                                            });
-
-                                            function filterFreights() {
-                                                var data = {
-                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                                    Name : ""
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.FreightId)
-                                </div>
-                                <div class="col-md-1">
-                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.FreightId)', '@LookupTypes.FreightType')">Add</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        @*Service*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Service :</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.Service)
-                                    @Html.ValidationMessageFor(model => model.Service)
-                                </div>
-                                <div class="col-md-1"></div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row" style="margin-top: 10px">
-
-                        @*Eta*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Eta:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="datetime" id="@Html.FieldIdFor(model => model.Eta)"
-                                           name="@Html.FieldIdFor(model => model.Eta)" value="@Model.Eta"
-                                           style="width: 100%" />
-                                    <script>
-                                    $(document).ready(function() {
-                                        $("#@Html.FieldIdFor(model => model.Eta)").kendoDatePicker({
-                                            culture: "vi-VN",
-                                            format: "dd/MM/yyyy"
-                                        });
-                                        $("#@Html.FieldIdFor(model => model.Eta)")
-                                            .prop("readonly", "readonly");
-                                    });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.Eta)
-                                </div>
-                            </div>
-                        </div>
-                        @*Container*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Container:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @*<input readonly="readonly" type="text"
-                                           class="form-control" id="@Html.FieldIdFor(model => model.Container)"
-                                           name="@Html.FieldIdFor(model => model.ContainerId)" value="1" />*@
-                                    @Html.FalconEditorFor(m => m.Container)
-                                    @Html.ValidationMessageFor(m => m.Container)
-                                </div>
-                                <div class="col-md-1">
-                                    <a onclick="openContainerPopup('@Html.FieldIdFor(m => m.Container)')">Add</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        @*GW*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">GW :</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.Gw)
-                                    @Html.ValidationMessageFor(model => model.Gw)
-                                </div>
-                                <div class="col-md-1"></div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="row" style="margin-top: 10px">
-                        @*CMB*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">CBM :</label>
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.FalconEditorFor(m => m.Cbm)
-                                    @Html.ValidationMessageFor(model => model.Cbm)
-                                </div>
-                            </div>
-                        </div>
-
-                        @*PO No*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">PO No :</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.PoNumber)
-                                    @Html.ValidationMessageFor(model => model.PoNumber)
-                                </div>
-                                <div class="col-md-1"></div>
-                            </div>
-                        </div>
-
-                        @*OPIC*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">O.P IC:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.OpIcId)"
-                                           name="@Html.NameFor(model => model.OpIcId)"
-                                           value="@Html.ValueFor(model => model.OpIcId)" />
-                                    <script>
-                                    $(document).ready(function() {
-                                        $("#@Html.FieldIdFor(model => model.OpIcId)").kendoComboBox({
-                                            filter: "contains",
-                                            dataTextField: "Name",
-                                            dataValueField: "Value",
-                                            placeholder: "Chọn opic...",
-                                            minLength: 1,
-                                            dataSource: {
-                                                type: "json",
-                                                serverFiltering: true,
-                                                transport: {
-                                                    read: {
-                                                        url: "/api/CrmContactApi/GetAll",
-                                                        dataType: "json",
-                                                        data: filterContact
-                                                    }
-                                                }
-                                            }
-                                        });
-
-                                        function filterContact() {
-                                            var data = {
-                                                @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                                Name : ""
-                                            };
-                                            addAntiForgeryToken(data);
-                                            return data;
-                                        }
-                                    });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.OpIcId)
-                                </div>
-                                <div class="col-md-1">
-                                    <a onclick="openContactPopup('@Html.FieldIdFor(m => m.OpIcId)')">Add</a>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div class="row" style="margin-top: 10px">
-
-                        @*Finish*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Finish:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.CheckBoxFor(m => m.IsFinish)
-                                </div>
-                                <div class="col-md-1"></div>
-                            </div>
-                        </div>
-
-                        @*Notes*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Notes:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconTextAreaFor(m => m.Notes)
-                                </div>
-                                <div class="col-md-1"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="fclExp-edit" class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                @Html.RenderBootstrapTabHeader("tab-info", new LocalizedString("Thông tin"), true)
+                @Html.RenderBootstrapTabHeader("tab-quantity", new LocalizedString("Quantity"))
+            </ul>
+            <div class="tab-content">
+                @Html.RenderBootstrapTabContent("tab-info", @TabInfo(), true)
+                @Html.RenderBootstrapTabContent("tab-quantity", TabQuantity())
             </div>
+
+            @helper TabInfo()
+                {
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    @*JobId*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">JobId:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input readonly="readonly" type="text"
+                                                       class="form-control" id="@Html.FieldIdFor(model => model.JobId)"
+                                                       name="@Html.FieldIdFor(model => model.JobId)" value="@Model.JobId" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*MblType*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">MblType:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input id="@Html.FieldIdFor(model => model.MblTypeId)"
+                                                       name="@Html.NameFor(model => model.MblTypeId)"
+                                                       value="@Html.ValueFor(model => model.MblTypeId)" />
+                                                <script>
+                        $(document).ready(function() {
+                            $("#@Html.FieldIdFor(model => model.MblTypeId)").kendoComboBox({
+                                filter: "contains",
+                                dataTextField: "Name",
+                                dataValueField: "Value",
+                                placeholder: "Chọn mbl type...",
+                                minLength: 1,
+                                dataSource: {
+                                    type: "json",
+                                    serverFiltering: true,
+                                    transport: {
+                                        read: {
+                                            url: "/api/LookupApi/GetMblTypes",
+                                            dataType: "json",
+                                            data: filterMblType
+                                        }
+                                    }
+                                }
+                            });
+
+                            function filterMblType() {
+                                var data = {
+                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                    Name: ""
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+                        });
+                                                </script>
+                                                @Html.ValidationMessageFor(model => model.MblTypeId)
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.MblTypeId)', '@LookupTypes.MblType')">Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*S.Lines*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">S.Lines:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input id="@Html.FieldIdFor(model => model.SlinesId)"
+                                                       name="@Html.NameFor(model => model.SlinesId)"
+                                                       value="@Html.ValueFor(model => model.SlinesId)" />
+                                                <script>
+                        $(document).ready(function() {
+                            $("#@Html.FieldIdFor(model => model.SlinesId)").kendoComboBox({
+                                filter: "contains",
+                                dataTextField: "Name",
+                                dataValueField: "Value",
+                                placeholder: "Chọn s.lines...",
+                                minLength: 1,
+                                dataSource: {
+                                    type: "json",
+                                    serverFiltering: true,
+                                    transport: {
+                                        read: {
+                                            url: "/api/CarrierApi/GetAll",
+                                            dataType: "json",
+                                            data: filterAgents
+                                        }
+                                    }
+                                }
+                            });
+
+                            function filterAgents() {
+                                var data = {
+                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                    Name: ""
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+                        });
+                                                </script>
+                                                @Html.ValidationMessageFor(model => model.SlinesId)
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a onclick="openCarrierPopup('@Html.FieldIdFor(m => m.SlinesId)')">Add</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 10px">
+                                    @*Created*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Created:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="datetime" id="@Html.FieldIdFor(model => model.Created)"
+                                                       name="@Html.FieldIdFor(model => model.Created)" value="@Model.Created"
+                                                       style="width: 100%" />
+                                                <script>
+                        $(document).ready(function() {
+                            $("#@Html.FieldIdFor(model => model.Created)").kendoDatePicker({
+                                culture: "vi-VN",
+                                format: "dd/MM/yyyy"
+                            });
+                            $("#@Html.FieldIdFor(model => model.Created)")
+                                .prop("readonly", "readonly");
+                        });
+                                                </script>
+                                                @Html.ValidationMessageFor(model => model.Created)
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*Vessel*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Vessel:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input id="@Html.FieldIdFor(model => model.VesselId)"
+                                                       name="@Html.NameFor(model => model.VesselId)"
+                                                       value="@Html.ValueFor(model => model.VesselId)" />
+                                                <script>
+                        $(document).ready(function() {
+                            $("#@Html.FieldIdFor(model => model.VesselId)").kendoComboBox({
+                                filter: "contains",
+                                dataTextField: "Name",
+                                dataValueField: "Value",
+                                placeholder: "Chọn vessel...",
+                                minLength: 1,
+                                dataSource: {
+                                    type: "json",
+                                    serverFiltering: true,
+                                    transport: {
+                                        read: {
+                                            url: "/api/LookupApi/GetVessels",
+                                            dataType: "json",
+                                            data: filterVessels
+                                        }
+                                    }
+                                }
+                            });
+
+                            function filterVessels() {
+                                var data = {
+                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                    Name: ""
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+                        });
+                                                </script>
+                                                @Html.ValidationMessageFor(model => model.VesselId)
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.VesselId)', '@LookupTypes.VesselType')">Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*Agent*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Agent:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input id="@Html.FieldIdFor(model => model.AgentId)"
+                                                       name="@Html.NameFor(model => model.AgentId)"
+                                                       value="@Html.ValueFor(model => model.AgentId)" />
+                                                <script>
+                        $(document).ready(function() {
+                            $("#@Html.FieldIdFor(model => model.AgentId)").kendoComboBox({
+                                filter: "contains",
+                                dataTextField: "Name",
+                                dataValueField: "Value",
+                                placeholder: "Chọn agent...",
+                                minLength: 1,
+                                dataSource: {
+                                    type: "json",
+                                    serverFiltering: true,
+                                    transport: {
+                                        read: {
+                                            url: "/api/CarrierApi/GetAll",
+                                            dataType: "json",
+                                            data: filterAgents
+                                        }
+                                    }
+                                }
+                            });
+
+                            function filterAgents() {
+                                var data = {
+                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                    Name: ""
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+                        });
+                                                </script>
+                                                @Html.ValidationMessageFor(model => model.AgentId)
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a onclick="openCarrierPopup('@Html.FieldIdFor(m => m.AgentId)')">Add</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 10px">
+                                    @*Etd*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Etd:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="datetime" id="@Html.FieldIdFor(model => model.Etd)"
+                                                       name="@Html.FieldIdFor(model => model.Etd)" value="@Model.Etd"
+                                                       style="width: 100%" />
+                                                <script>
+                        $(document).ready(function() {
+                            $("#@Html.FieldIdFor(model => model.Etd)").kendoDatePicker({
+                                culture: "vi-VN",
+                                format: "dd/MM/yyyy"
+                            });
+                            $("#@Html.FieldIdFor(model => model.Etd)")
+                                .prop("readonly", "readonly");
+                        });
+                                                </script>
+                                                @Html.ValidationMessageFor(model => model.Etd)
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*Shipments*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Shipments:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input id="@Html.FieldIdFor(model => model.ShipmentId)"
+                                                       name="@Html.NameFor(model => model.ShipmentId)"
+                                                       value="@Html.ValueFor(model => model.ShipmentId)" />
+                                                <script>
+                        $(document).ready(function() {
+                            $("#@Html.FieldIdFor(model => model.ShipmentId)").kendoComboBox({
+                                filter: "contains",
+                                dataTextField: "Name",
+                                dataValueField: "Value",
+                                placeholder: "Chọn shipment...",
+                                minLength: 1,
+                                dataSource: {
+                                    type: "json",
+                                    serverFiltering: true,
+                                    transport: {
+                                        read: {
+                                            url: "/api/lookupApi/GetShipments",
+                                            dataType: "json",
+                                            data: filterShipment
+                                        }
+                                    }
+                                }
+                            });
+
+                            function filterShipment() {
+                                var data = {
+                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                    Name: ""
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+                        });
+                                                </script>
+                                                @Html.ValidationMessageFor(model => model.ShipmentId)
+                                            </div>
+
+                                            <div class="col-md-1">
+                                                <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.ShipmentId)', '@LookupTypes.ShipmentType')">Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*Commodity*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Commodity:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input id="@Html.FieldIdFor(model => model.CommodityId)"
+                                                       name="@Html.NameFor(model => model.CommodityId)"
+                                                       value="@Html.ValueFor(model => model.CommodityId)" />
+                                                <script>
+                        $(document).ready(function() {
+                            $("#@Html.FieldIdFor(model => model.CommodityId)").kendoComboBox({
+                                filter: "contains",
+                                dataTextField: "Name",
+                                dataValueField: "Value",
+                                placeholder: "Chọn commodity...",
+                                minLength: 1,
+                                dataSource: {
+                                    type: "json",
+                                    serverFiltering: true,
+                                    transport: {
+                                        read: {
+                                            url: "/api/LookupApi/GetCommodities",
+                                            dataType: "json",
+                                            data: filterCommodity
+                                        }
+                                    }
+                                }
+                            });
+
+                            function filterCommodity() {
+                                var data = {
+                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                    Name: ""
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+                        });
+                                                </script>
+                                                @Html.ValidationMessageFor(model => model.CommodityId)
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.CommodityId)', '@LookupTypes.CommoditiesType')">Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row" style="margin-top: 10px">
+                                    @*Bkg No*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Bkg No :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                @Html.FalconEditorFor(m => m.BkgNumber)
+                                                @Html.ValidationMessageFor(model => model.BkgNumber)
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*P.O.L*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">P.O.L:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input id="@Html.FieldIdFor(model => model.PolId)"
+                                                       name="@Html.NameFor(model => model.PolId)"
+                                                       value="@Html.ValueFor(model => model.PolId)" />
+                                                <script>
+                        $(document).ready(function() {
+                            $("#@Html.FieldIdFor(model => model.PolId)").kendoComboBox({
+                                filter: "contains",
+                                dataTextField: "Name",
+                                dataValueField: "Value",
+                                placeholder: "Chọn pol port...",
+                                minLength: 1,
+                                dataSource: {
+                                    type: "json",
+                                    serverFiltering: true,
+                                    transport: {
+                                        read: {
+                                            url: "/api/PortApi/GetAll",
+                                            dataType: "json",
+                                            data: filterPorts
+                                        }
+                                    }
+                                }
+                            });
+
+                            function filterPorts() {
+                                var data = {
+                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                    Name: ""
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+                        });
+                                                </script>
+                                                @Html.ValidationMessageFor(model => model.PolId)
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a onclick="openPortPopup('@Html.FieldIdFor(m => m.PolId)')">Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*P.O.D*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">P.O.D:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input id="@Html.FieldIdFor(model => model.PodId)"
+                                                       name="@Html.NameFor(model => model.PodId)"
+                                                       value="@Html.ValueFor(model => model.PodId)" />
+                                                <script>
+                        $(document).ready(function() {
+                            $("#@Html.FieldIdFor(model => model.PodId)").kendoComboBox({
+                                filter: "contains",
+                                dataTextField: "Name",
+                                dataValueField: "Value",
+                                placeholder: "Chọn pod port...",
+                                minLength: 1,
+                                dataSource: {
+                                    type: "json",
+                                    serverFiltering: true,
+                                    transport: {
+                                        read: {
+                                            url: "/api/PortApi/GetAll",
+                                            dataType: "json",
+                                            data: filterPorts
+                                        }
+                                    }
+                                }
+                            });
+
+                            function filterPorts() {
+                                var data = {
+                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                    Name: ""
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+                        });
+                                                </script>
+                                                @Html.ValidationMessageFor(model => model.PodId)
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a onclick="openPortPopup('@Html.FieldIdFor(m => m.PolId)')">Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 10px">
+                                    @*M-B/L*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">M-B/L :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                @Html.FalconEditorFor(m => m.Mbl)
+                                                @Html.ValidationMessageFor(model => model.Mbl)
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*Freight*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Freight:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input id="@Html.FieldIdFor(model => model.FreightId)"
+                                                       name="@Html.NameFor(model => model.FreightId)"
+                                                       value="@Html.ValueFor(model => model.FreightId)" />
+                                                <script>
+                        $(document).ready(function() {
+                            $("#@Html.FieldIdFor(model => model.FreightId)").kendoComboBox({
+                                filter: "contains",
+                                dataTextField: "Name",
+                                dataValueField: "Value",
+                                placeholder: "Chọn freight...",
+                                minLength: 1,
+                                dataSource: {
+                                    type: "json",
+                                    serverFiltering: true,
+                                    transport: {
+                                        read: {
+                                            url: "/api/LookupApi/GetFreights",
+                                            dataType: "json",
+                                            data: filterFreights
+                                        }
+                                    }
+                                }
+                            });
+
+                            function filterFreights() {
+                                var data = {
+                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                    Name: ""
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+                        });
+                                                </script>
+                                                @Html.ValidationMessageFor(model => model.FreightId)
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.FreightId)', '@LookupTypes.FreightType')">Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*Service*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Service :</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                @Html.FalconEditorFor(m => m.Service)
+                                                @Html.ValidationMessageFor(model => model.Service)
+                                            </div>
+                                            <div class="col-md-1"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row" style="margin-top: 10px">
+
+                                    @*Eta*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Eta:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="datetime" id="@Html.FieldIdFor(model => model.Eta)"
+                                                       name="@Html.FieldIdFor(model => model.Eta)" value="@Model.Eta"
+                                                       style="width: 100%" />
+                                                <script>
+                        $(document).ready(function() {
+                            $("#@Html.FieldIdFor(model => model.Eta)").kendoDatePicker({
+                                culture: "vi-VN",
+                                format: "dd/MM/yyyy"
+                            });
+                            $("#@Html.FieldIdFor(model => model.Eta)")
+                                .prop("readonly", "readonly");
+                        });
+                                                </script>
+                                                @Html.ValidationMessageFor(model => model.Eta)
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*PO No*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">PO No :</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                @Html.FalconEditorFor(m => m.PoNumber)
+                                                @Html.ValidationMessageFor(model => model.PoNumber)
+                                            </div>
+                                            <div class="col-md-1"></div>
+                                        </div>
+                                    </div>
+
+                                    @*OPIC*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">O.P IC:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input id="@Html.FieldIdFor(model => model.OpIcId)"
+                                                       name="@Html.NameFor(model => model.OpIcId)"
+                                                       value="@Html.ValueFor(model => model.OpIcId)" />
+                                                <script>
+                        $(document).ready(function() {
+                            $("#@Html.FieldIdFor(model => model.OpIcId)").kendoComboBox({
+                                filter: "contains",
+                                dataTextField: "Name",
+                                dataValueField: "Value",
+                                placeholder: "Chọn opic...",
+                                minLength: 1,
+                                dataSource: {
+                                    type: "json",
+                                    serverFiltering: true,
+                                    transport: {
+                                        read: {
+                                            url: "/api/CrmContactApi/GetAll",
+                                            dataType: "json",
+                                            data: filterContact
+                                        }
+                                    }
+                                }
+                            });
+
+                            function filterContact() {
+                                var data = {
+                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                    Name: ""
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+                        });
+                                                </script>
+                                                @Html.ValidationMessageFor(model => model.OpIcId)
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a onclick="openContactPopup('@Html.FieldIdFor(m => m.OpIcId)')">Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
+                                </div>
+                                <div class="row" style="margin-top: 10px">
+
+                                    @*Finish*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Finish:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                @Html.CheckBoxFor(m => m.IsFinish)
+                                            </div>
+                                            <div class="col-md-1"></div>
+                                        </div>
+                                    </div>
+
+                                    @*Notes*@
+                                    <div class="col-md-4">
+                                        <div class="form-group form-custom">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Notes:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                @Html.FalconTextAreaFor(m => m.Notes)
+                                            </div>
+                                            <div class="col-md-1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+        
+        @helper TabQuantity()
+        {
+            if (Model.Id > 0)
+             {
+                 @Html.Partial("~/Areas/Admin/Views/Container/ContainerAddPopup.cshtml", new ContainerListModel{FclId = Model.Id})
+            }
+             else
+             {
+                 <div class="panel panel-default">
+                     <div class="panel-body">
+                         Vui lòng lưu thông tin cơ bản trước khi thêm quantity
+                     </div>
+                 </div>
+             }
+        }
         </div>
 
         <input type="submit" id="btnRefreshContactItems" style="display: none" />

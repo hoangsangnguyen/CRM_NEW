@@ -76,15 +76,15 @@
                                                 model: {
                                                     id: "Id",
                                                     fields: {
-                                                        Type: { editable: true, nullable: false },
+                                                        Type: { editable: true, nullable: false, validation: { required: true } },
                                                         ContainerNo: { validation: { required: true } },
                                                         SealNo: { validation: { required: true } },
-                                                        Quantity: { validation: { required: true } },
+                                                        Quantity: { type: "number", validation: { required: true } },
                                                         UnitId: { validation: { required: true } },
                                                         UnitName: { validation: { required: true } },
-                                                        Nw: { validation: { required: false } },
-                                                        Gw: { validation: { required: false } },
-                                                        Cbm: { validation: { required: false } }
+                                                        Nw: { type: "number", validation: { required: false } },
+                                                        Gw: { type: "number",validation: { required: false } },
+                                                        Cbm: { type: "number", validation: { required: false } }
                                                     }
                                                 }
                                             },
@@ -210,12 +210,12 @@
                         });
 
                                 function unitDropDownEditor(container, options) {
-                                    $('<input required name="' + options.field + '"/>')
+                                    $('<input data-text-field="Name" data-value-field="Value" data-bind="value:UnitId" required name="' + options.field + '"/>')
                                         .appendTo(container)
                                         .kendoDropDownList({
-                                            autoBind: false,
                                             dataTextField: "Name",
                                             dataValueField: "Value",
+                                            optionLabel: "Chon Unit...",
                                             dataSource: {
                                                 type: "json",
                                                 transport: {

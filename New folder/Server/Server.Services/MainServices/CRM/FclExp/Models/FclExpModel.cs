@@ -69,8 +69,8 @@ namespace Vino.Server.Services.MainServices.CRM.FclExp.Models
         [Required(ErrorMessage = "Vui lòng chọn agent hoặc tạo mới")]
         public int? AgentId { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn container")]
         public string Container { get; set; }
+        public string ContainerName { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn commodity")]
         public int? CommodityId { get; set; }
@@ -82,6 +82,8 @@ namespace Vino.Server.Services.MainServices.CRM.FclExp.Models
 
         [Required(ErrorMessage = "Vui lòng nhập service")]
         public string Service { get; set; }
+
+        public double Qty { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập GW")]
         public double Gw { get; set; }

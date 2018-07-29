@@ -3,7 +3,6 @@
 @{
     var defaultGridPageSize = 20;
     var gridPageSizes = "10,20,50,100,500";
-    Layout = "~/Areas/Admin/Views/Shared/_PopupLayout.cshtml";
     ViewBag.Title = "Thêm container";
     <style>
         .k-combobox .k-input {
@@ -11,7 +10,7 @@
         }
     </style>
 }
-@if (ViewBag.RefreshPage == true)
+@*@if (ViewBag.RefreshPage == true)
 {
     <script type="text/javascript">
         $(document).ready(function() {
@@ -24,7 +23,7 @@
             window.close();
         })
     </script>
-}
+}*@
 @Html.AntiForgeryToken()
 <div class="content-header clearfix">
     <h1 class="pull-left">
@@ -41,30 +40,62 @@
                     <script>
                                 $(document).ready(function() {
                                     $("#main-grid").kendoGrid({
-                                        dataSource: {
+                                        dataSource:
+                                        {
                                             type: "json",
-                                            autoSync: true,
-                                            transport: {
+                                            transport:
+                                            {
                                                 read: {
-                                                    url: "@Html.Raw(Url.Action("List", "Container"))",
+                                                    url: "@Html.Raw(Url.Action("List", "Container", new { FclId = Model.FclId}))",
+                                                    type: "POST",
+                                                    dataType: "json"
+                                                },
+                                                create: {
+                                                    url: "@Html.Raw(Url.Action("Create", "Container"))",
+                                                    type: "POST",
+                                                    dataType: "json",
+                                                    data: additionalData
+                                                },
+                                                update: {
+                                                    url: "@Html.Raw(Url.Action("Edit", "Container"))",
+                                                    type: "POST",
+                                                    dataType: "json",
+                                                    data: additionalData
+                                                },
+                                                destroy: {
+                                                    url: "@Html.Raw(Url.Action("Delete", "Container"))",
                                                     type: "POST",
                                                     dataType: "json",
                                                     data: additionalData
                                                 }
                                             },
                                             schema: {
+                                                data: "Data",
+                                                total: "Total",
+                                                errors: "Errors",
                                                 model: {
                                                     id: "Id",
                                                     fields: {
-                                                        Type: { editable: true, nullable: false },
+                                                        Type: { editable: true, nullable: false, validation: { required: true } },
                                                         ContainerNo: { validation: { required: true } },
                                                         SealNo: { validation: { required: true } },
-                                                        Quantity: { validation: { required: true } },
+                                                        Quantity: { type: "number", validation: { required: true } },
                                                         UnitId: { validation: { required: true } },
-                                                        Nw: { validation: { required: false } },
-                                                        Gw: { validation: { required: false } },
-                                                        Cbm: { validation: { required: false } }
+                                                        UnitName: { validation: { required: false } },
+                                                        Nw: { type: "number", validation: { required: false } },
+                                                        Gw: { type: "number",validation: { required: false } },
+                                                        Cbm: { type: "number", validation: { required: false } }
                                                     }
+                                                }
+                                            },
+                                            aggregate: [{ field: "Gw", aggregate: "sum"},
+                                                { field: "Nw", aggregate: "sum" },
+                                                { field: "Cbm", aggregate: "sum" }
+                                            ],
+
+                                            requestEnd: function(e) {
+                                                if (e.type === "create" || e.type === "update" || e.type ==="destroy") {
+                                                    this.read();
                                                 }
                                             },
                                             error: function(e) {
@@ -77,6 +108,7 @@
                                             serverFiltering: true,
                                             serverSorting: true
                                         },
+
                                         pageable: {
                                             refresh: true,
                                             pageSizes: [@(gridPageSizes)],
@@ -86,65 +118,118 @@
                                                 display: "{0} - {1} của {2} container",
                                             }
                                         },
-                                        toolbar: ["create"],
+                                        toolbar: [{ name: "create", text: "Thêm container" }],
                                         editable: {
-                                            createAt: "bottom"
-                                            //confirmation: "Delete",
-                                            //mode: "inline"
+                                            confirmation: false,
+                                            mode: "inline"
+                                        },
+                                        dataBound: function() {
+                                            $(".k-grid-Delete span").addClass("k-icon k-delete");
+                                        },
+                                        cancel: function() {
+                                            setTimeout(function(){
+                                                $(".k-grid-Delete span").addClass("k-icon k-delete");
+                                            });
                                         },
                                         scrollable: false,
                                         columns: [
                                             {
                                                 field: "Type",
                                                 title: "Type",
-                                                headerAttributes: { style: "text-align:left" },
+                                                headerAttributes: { style: "text-align:center" },
                                             }, {
                                                 field: "ContainerNo",
                                                 title: "ContainerNo",
-                                                headerAttributes: { style: "text-align:left" },
+                                                headerAttributes: { style: "text-align:center" },
                                             }, {
                                                 field: "SealNo",
                                                 title: "SealNo",
-                                                headerAttributes: { style: "text-align:left" },
+                                                headerAttributes: { style: "text-align:center" },
                                                 attributes: { style: "text-align:left" }
                                             }, {
                                                 field: "Quantity",
                                                 title: "Quantity",
-                                                headerAttributes: { style: "text-align:left" },
+                                                attributes: { style: "text-align:right" },
+                                                headerAttributes: { style: "text-align:center" },
                                             }, {
                                                 field: "UnitId",
                                                 title: "Unit",
-                                                headerAttributes: { style: "text-align:left" },
+                                                headerAttributes: { style: "text-align:center" },
                                                 editor: unitDropDownEditor,
-                                                template: "#=UnitName#"
+                                                template: "#=UnitName?UnitName:''#"
 
                                             }, {
                                                 field: "Nw",
                                                 title: "N.W",
-                                                headerAttributes: { style: "text-align:left" }
+                                                headerAttributes: { style: "text-align:center" },
+                                                attributes: { style: "text-align:right" },
+                                                footerAttributes: { style: "text-align:right" },
+                                                footerTemplate: "Tổng N.W: #= kendo.toString(sum)#"
                                             }, {
                                                 field: "Gw",
                                                 title: "G.W",
-                                                headerAttributes: { style: "text-align:left" },
+                                                headerAttributes: { style: "text-align:center" },
+                                                attributes: { style: "text-align:right" },
+                                                footerAttributes: { style: "text-align:right" },
+                                                footerTemplate: "Tổng G.W: #= kendo.toString(sum)#"
                                             }, {
                                                 field: "Cbm",
                                                 title: "CBM",
-                                                headerAttributes: { style: "text-align:left" }
+                                                headerAttributes: { style: "text-align:center" },
+                                                attributes: { style: "text-align:right" },
+                                                footerAttributes: { style: "text-align:right" },
+                                                footerTemplate: "Tổng CBM: #= kendo.toString(sum)#"
                                             },
                                             {
-                                                command: "destroy", title: " ", width: "150px"
+                                                command: [
+                                                    {
+                                                        name: "edit",
+                                                        text: {
+                                                            "cancel": "Hủy",
+                                                            "update": "Lưu",
+                                                            "edit": "Sửa"
+                                                        }
+                                                    }, {
+                                                        name: "Delete",
+                                                        text: "Xóa"
+                                                    }
+                                                ],
                                             }
+                                            //{ field: "name" },
+                                            //{ field: "age" }
                                         ]
                                     });
+
+                                    $("#main-grid").on("click", ".k-grid-Delete", function(e) {
+                                        e.preventDefault();
+                                        var command = $(this);
+                                        var cell = command.closest("td");
+                                        command.remove();
+                                        cell.append('<a class="k-button k-button-icontext k-grid-myConfirm" href="#"><span class="k-icon k-update"></span>Xác nhận</a>');
+                                        cell.append('<a class="k-button k-button-icontext k-grid-myCancel" href="#"><span class="k-icon k-cancel"></span>Hủy</a>');
+                                    });
+                                    $("#main-grid").on("click", ".k-grid-myConfirm", function(e){
+                                        e.preventDefault();
+                                        var grid = $("#main-grid").data("kendoGrid");
+                                        grid.removeRow($(this).closest("tr"));
+                                    });
+
+                                    $("#main-grid").on("click",
+                                        ".k-grid-myCancel",
+                                        function(e) {
+                                            e.preventDefault();
+                                            var grid = $("#main-grid").data("kendoGrid");
+                                            grid.refresh();
+                                        });
                         });
 
                                 function unitDropDownEditor(container, options) {
-                                    $('<input required name="' + options.field + '"/>')
+                                    $('<input data-text-field="Name" data-value-field="Value" data-bind="value:UnitId" required name="' + options.field + '"/>')
                                         .appendTo(container)
                                         .kendoDropDownList({
-                                            autoBind: false,
                                             dataTextField: "Name",
                                             dataValueField: "Value",
+                                            optionLabel: "Chon Unit...",
                                             dataSource: {
                                                 type: "json",
                                                 transport: {
@@ -160,24 +245,24 @@
                     </script>
 
                     <script type="text/javascript">
-                                $(document).ready(function() {
-                                    //search button
-                                    $('#button-search').click(function() {
-                                        //search
-                                        var grid = $('#main-grid').data('kendoGrid');
-                                        grid.dataSource.page(1); //new search. Set page size to 1
-                                        //grid.dataSource.read(); we already loaded the grid above using "page" function
-                                        return false;
-                                    });
-                                });
+                        $(document).ready(function () {
+                            //search button
+                            $('#button-search').click(function () {
+                                //search
+                                var grid = $('#main-grid').data('kendoGrid');
+                                grid.dataSource.page(1); //new search. Set page size to 1
+                                //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                return false;
+                            });
+                        });
 
-                                function additionalData() {
-                                    var data = {
-                                        FclId: '@Model.FclId'
-                                    };
-                                    addAntiForgeryToken(data);
-                                    return data;
-                                }
+                        function additionalData() {
+                            var data = {
+                                FclId: '@Model.FclId'
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
                     </script>
                 </div>
             </div>

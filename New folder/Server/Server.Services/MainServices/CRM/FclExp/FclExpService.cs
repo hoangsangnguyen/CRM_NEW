@@ -60,6 +60,7 @@ namespace Vino.Server.Services.MainServices.CRM.FclExp
 
             var models = details.MapTo<FclExpModel>();
 
+
             var fclExpIds = models.Select(x => x.Id).ToList();
 
             var hblItems = await _context.HblFclExps.Where(x =>
@@ -69,6 +70,15 @@ namespace Vino.Server.Services.MainServices.CRM.FclExp
 
             foreach (var fclExpModel in models)
             {
+
+                if (!fclExpModel.Container.IsNullOrEmpty())
+                {
+                    var containerName = new List<string>();
+                    var listContainer = JsonConvert.DeserializeObject<List<ContainerModel>>(fclExpModel.Container);
+                    listContainer.ForEach(d => containerName.Add(d.Type));
+                    fclExpModel.ContainerName = String.Join(" & ", containerName.ToArray());
+                }
+
                 var qty = 0;
                 var grossWeight = 0.0;
                 var cbm = 0.0;
@@ -85,7 +95,7 @@ namespace Vino.Server.Services.MainServices.CRM.FclExp
                     }
                 }
 
-                //lclExpModel.Packages = lclExpModel.Packages > qty ? lclExpModel.Packages : qty;
+                fclExpModel.Qty = fclExpModel.Qty > qty ? fclExpModel.Qty : qty;
                 fclExpModel.Gw = fclExpModel.Gw > grossWeight ? fclExpModel.Gw : grossWeight;
                 fclExpModel.Cbm = fclExpModel.Cbm > cbm ? fclExpModel.Cbm : cbm;
 
@@ -108,6 +118,9 @@ namespace Vino.Server.Services.MainServices.CRM.FclExp
             var containers = query.Skip(page * pageSize).Take(pageSize).ToList();
 
             var res = containers.MapTo<ContainerModel>();
+            var unitLookups = _lookupService.GetLookupByLookupType(LookupTypes.UnitType);
+            res.ForEach(d => d.UnitName = unitLookups.FirstOrDefault(x => x.Id == d.UnitId)?.Title);
+
             return new PageList<ContainerModel>(res, 0, int.MaxValue, query.Count());
         }
 
@@ -115,14 +128,18 @@ namespace Vino.Server.Services.MainServices.CRM.FclExp
         {
             if (model == null)
                 throw new ArgumentNullException(nameof(model));
-            var fclExp = await GetSingleAsync(fclExpId);
+            var fclExp = await _context.FclExps.FirstOrDefaultAsync(x => x.Id == fclExpId && !x.Deleted);
             if (fclExp == null) return new CrudResult();
             var container = model.MapTo<ContainerModel>();
             container.Id = Guid.NewGuid();
             var listContainer = new List<ContainerModel>();
             if (!fclExp.Container.IsNullOrEmpty())
                 listContainer = JsonConvert.DeserializeObject<List<ContainerModel>>(fclExp.Container);
-            listContainer.Add(container);
+            listContainer.Insert(0, container);
+
+            fclExp.Qty = listContainer.Sum(item => item.Quantity);
+            fclExp.Gw = listContainer.Sum(item => item.Gw);
+            fclExp.Cbm = listContainer.Sum(item => item.Cbm);
 
             fclExp.Container = JsonConvert.SerializeObject(listContainer);
             await _context.SaveChangesAsync();
@@ -137,16 +154,20 @@ namespace Vino.Server.Services.MainServices.CRM.FclExp
         {
             if (model == null)
                 throw new ArgumentNullException(nameof(model));
-            var fclExp = await GetSingleAsync(fclExpId);
+            var fclExp = _context.FclExps.FirstOrDefault(x => x.Id == fclExpId && !x.Deleted);
             if (fclExp == null) return;
-            var listContainer = new List<ContainerModel>();
+            var listContainer = new List<Data.CRM.Container>();
             if (!fclExp.Container.IsNullOrEmpty())
-                listContainer = JsonConvert.DeserializeObject<List<ContainerModel>>(fclExp.Container);
+                listContainer = JsonConvert.DeserializeObject<List<Data.CRM.Container>>(fclExp.Container);
             var containerUpdate = listContainer.FirstOrDefault(f => f.Id == model.Id);
             if (containerUpdate != null)
             {
                 model.MapTo(containerUpdate);
             }
+
+            fclExp.Qty = listContainer.Sum(item => item.Quantity);
+            fclExp.Gw = listContainer.Sum(item => item.Gw);
+            fclExp.Cbm = listContainer.Sum(item => item.Cbm);
 
             fclExp.Container= JsonConvert.SerializeObject(listContainer);
             await _context.SaveChangesAsync();
@@ -155,12 +176,17 @@ namespace Vino.Server.Services.MainServices.CRM.FclExp
         {
             if (guid == Guid.Empty)
                 return;
-            var fclExp = await GetSingleAsync(fclExpId);
+            var fclExp = await _context.FclExps.FirstOrDefaultAsync(x => x.Id == fclExpId && !x.Deleted);
             if (fclExp == null) return;
             if (fclExp.Container.IsNullOrEmpty()) return;
 
-            var listContainer = JsonConvert.DeserializeObject<List<ContainerModel>>(fclExp.Container);
+            var listContainer = JsonConvert.DeserializeObject<List<Data.CRM.Container>>(fclExp.Container);
             listContainer.RemoveAll(r => r.Id == guid);
+
+            fclExp.Qty = listContainer.Sum(item => item.Quantity);
+            fclExp.Gw = listContainer.Sum(item => item.Gw);
+            fclExp.Cbm = listContainer.Sum(item => item.Cbm);
+
             fclExp.Container= JsonConvert.SerializeObject(listContainer);
             await _context.SaveChangesAsync();
         }
