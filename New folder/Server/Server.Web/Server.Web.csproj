@@ -3443,6 +3443,7 @@
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoxyFilemanController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -3698,6 +3699,7 @@
     <Folder Include="Views\CustomerApi\" />
     <Folder Include="Views\ProductApi\" />
     <Folder Include="Views\ProductionApi\" />
+    <Folder Include="Views\Reports\" />
     <Folder Include="Views\SupplierApi\" />
     <Folder Include="Views\Topic\" />
     <Folder Include="Views\WarehouseApi\" />

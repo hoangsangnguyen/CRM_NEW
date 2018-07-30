@@ -280,6 +280,7 @@
     <Compile Include="MainServices\Message\Models\MessageModel.cs" />
     <Compile Include="MainServices\Message\Models\MessageTemplateModel.cs" />
     <Compile Include="MainServices\Message\SearchMessageRequest.cs" />
+    <Compile Include="MainServices\Report\ReportService.cs" />
     <Compile Include="MainServices\System\Email\EmailService.cs" />
     <Compile Include="MainServices\System\Email\Models\EmailModel.cs" />
     <Compile Include="MainServices\System\Email\Models\QueueEmailModel.cs" />

@@ -8,6 +8,8 @@ using Falcon.Web.Core.Infrastructure;
 using Newtonsoft.Json;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.Common.Models;
+using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
+using Vino.Server.Services.MainServices.Report;
 using Vino.Server.Services.MainServices.Users;
 using Vino.Shared.Constants.Common;
 using Vino.Shared.Constants.Producing;
@@ -19,9 +21,18 @@ namespace Vino.Server.Web.Reports
 	{
 		
 		private LookupService lookupService;
+	    private readonly ReportService _reportService;
+
 		public DataAccessLayer()
 		{
+		    _reportService = EngineContext.Current.Resolve<ReportService>();
 			lookupService = EngineContext.Current.Resolve<LookupService>();
 		}
+
+	    public HblLclExpModel GetHblLclExpModel(int hblLclExpId)
+	    {
+	        return _reportService.GetHblLclExpReport(hblLclExpId);
+	    }
+
 	}
 }
