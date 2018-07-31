@@ -1,31 +1,31 @@
 ﻿@model Vino.Server.Services.MainServices.CRM.HblLclExp.Models.HblLclExpModel
 
-@using (Html.BeginForm("Export", "HblLclExp", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="content-header clearfix">
-        <h1 class="pull-left"></h1>
-        <div class="pull-right">
-            <a class="btn bg-blue" href="@Html.Raw(Url.Action("Edit", new {id = Model.Id}))"><i class="fa fa-chevron-left" aria-hidden="true"></i> Quay Lại</a>
+    @using (Html.BeginForm("Export", "HblLclExp", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="content-header clearfix">
+            <h1 class="pull-left"></h1>
+            <div class="pull-right">
+                <a class="btn bg-blue" href="@Html.Raw(Url.Action("Edit", new {id = Model.Id}))"><i class="fa fa-chevron-left" aria-hidden="true"></i> Quay Lại</a>
 
-            <button type="submit" class="btn bg-green" id="btnSubmitExport">
-                <i class="fa fa-print"></i>
-                In phiếu
-            </button>
+                <a href="@Html.Raw(Url.Action("HblLclExpReport", "CallReport", new {hblLclExpId = Model.Id}))" class="btn bg-green" id="btnSubmitExport">
+                    <i class="fa fa-print"></i>
+                    In phiếu
+                </a>
 
+            </div>
         </div>
-    </div>
 
-    <input type="hidden" name="GridHtml" />
-    <div id="grid">
-        @Html.Partial("_form", Model)
-    </div>
-}
+        <input type="hidden" name="gridHtml" />
+        <div id="grid">
+            @Html.Partial("_form", Model)
+        </div>
+    }
 
-<script type="text/javascript">
-    $(function () {
-        $("#btnSubmitExport").click(function () {
-
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSubmitExport").click(function () {
+                $("input[name='gridHtml']").val($("#grid").html());
+            });
         });
-    });
-</script>
+    </script>
