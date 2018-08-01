@@ -850,19 +850,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/01/2018 16:20:19</publishTime>
     </File>
     <File Include="bin/Vino.Server.Services.dll">
-      <publishTime>08/01/2018 16:20:25</publishTime>
+      <publishTime>08/02/2018 00:50:30</publishTime>
     </File>
     <File Include="bin/Vino.Server.Services.dll.config">
       <publishTime>05/21/2018 08:22:40</publishTime>
     </File>
     <File Include="bin/Vino.Server.Services.pdb">
-      <publishTime>08/01/2018 16:20:25</publishTime>
+      <publishTime>08/02/2018 00:50:30</publishTime>
     </File>
     <File Include="bin/Vino.Server.Web.dll">
-      <publishTime>08/01/2018 16:20:40</publishTime>
+      <publishTime>08/02/2018 00:50:41</publishTime>
     </File>
     <File Include="bin/Vino.Server.Web.pdb">
-      <publishTime>08/01/2018 16:20:40</publishTime>
+      <publishTime>08/02/2018 00:50:41</publishTime>
     </File>
     <File Include="bin/Vino.Shared.dll">
       <publishTime>07/31/2018 23:38:15</publishTime>
@@ -5485,7 +5485,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/21/2018 08:22:24</publishTime>
     </File>
     <File Include="Views/User/Login.cshtml">
-      <publishTime>06/03/2018 23:48:28</publishTime>
+      <publishTime>08/01/2018 23:49:32</publishTime>
     </File>
     <File Include="Views/User/Register.cshtml">
       <publishTime>05/21/2018 08:22:24</publishTime>

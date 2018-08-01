@@ -26,6 +26,7 @@ namespace Vino.Server.Services.MainServices.Report
         {
             var hblLclExp = _context.HblLclExps.FirstOrDefault(x => x.Id == hblLclExpId && !x.Deleted);
             var model = hblLclExp.MapTo<HblLclExpModel>();
+            model.HblTypeName = _lookupService.GetLookupById(model.HblType ?? 0)?.Title;
             model.UnitName = _lookupService.GetLookupById(model.UnitId ?? 0)?.Title;
             model.TypeOfMoveName = _lookupService.GetLookupById(model.TypeOfMoveId ?? 0)?.Title;
             model.FreightPayableName = _lookupService.GetLookupById(model.FreightPayableId ?? 0)?.Title;
