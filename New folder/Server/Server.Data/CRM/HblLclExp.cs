@@ -118,6 +118,9 @@ namespace Vino.Server.Data.CRM
         [Required(ErrorMessage = "Vui lòng chọn ngày Issue")]
         public DateTimeOffset IssueDate { get; set; }
 
+        public string ShippingMarks { get; set; }
+
+
         public string UpdateName { get; set; }
 
         public DateTimeOffset? UpdateAt { get; set; }

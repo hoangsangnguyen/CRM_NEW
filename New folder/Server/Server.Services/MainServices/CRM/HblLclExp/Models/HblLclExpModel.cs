@@ -197,6 +197,7 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
         [Required(ErrorMessage = "Vui lòng chọn ngày Issue")]
         public string IssueDate { get; set; }
 
+        public string ShippingMarks { get; set; }
         /**
          * Creator
          */

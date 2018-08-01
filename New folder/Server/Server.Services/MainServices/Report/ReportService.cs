@@ -31,6 +31,8 @@ namespace Vino.Server.Services.MainServices.Report
             model.FreightPayableName = _lookupService.GetLookupById(model.FreightPayableId ?? 0)?.Title;
             model.LocalVesselName = _lookupService.GetLookupById(model.LocalVessel ?? 0)?.Title;
             model.PlaceOfIssueName = _lookupService.GetLookupById(model.PlaceOfIssueId ?? 0)?.Title;
+            if (model.NotifyPartyId == model.ConsigneeId)
+                model.NotifyPartyInfo = "SAME AS CONSIGNEE";
 
             model.ContainerInfo = model.NumberOfPackage + " " + model.UnitName + " " + model.QtyOfContainer;
 
