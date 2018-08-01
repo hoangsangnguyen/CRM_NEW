@@ -98,6 +98,7 @@ namespace Vino.Server.Services.MainServices.CRM.HblLclExp.Models
         public string TranshipmentPortName { get; set; }
 
         public string Container { get; set; }
+        public string ContainerInfo { get; set; }
 
         public int NumberOfPackage { get; set; }
 

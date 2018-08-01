@@ -8,6 +8,7 @@ using Falcon.Web.Core.Infrastructure;
 using Newtonsoft.Json;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.Common.Models;
+using Vino.Server.Services.MainServices.CRM.HblFclExp.Models;
 using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
 using Vino.Server.Services.MainServices.Report;
 using Vino.Server.Services.MainServices.Users;
@@ -34,5 +35,9 @@ namespace Vino.Server.Web.Reports
 	        return _reportService.GetHblLclExpReport(hblLclExpId);
 	    }
 
-	}
+	    public HblFclExpModel GetHblFclExpModel(int hblFclExpId)
+	    {
+	        return _reportService.GetHblFclExpReport(hblFclExpId);
+	    }
+    }
 }

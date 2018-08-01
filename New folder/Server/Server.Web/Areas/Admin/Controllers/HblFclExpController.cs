@@ -209,7 +209,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             await _service.EditAsync(dto.Id, dto);
 
             if (dto.Preview)
-                return RedirectToAction("Preview", new { id = dto.Id });
+                return RedirectToAction("HblFclExpReport", "CallReport", new { hblFclExpId = dto.Id });
+
 
             SuccessNotification("Chỉnh sửa thành công!");
             return RedirectToAction("Edit", new { id = dto.Id });

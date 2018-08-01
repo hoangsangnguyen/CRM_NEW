@@ -2684,6 +2684,7 @@
     <Content Include="Areas\Admin\Views\Container\ContainerAddPopup.cshtml" />
     <Content Include="Areas\Admin\Views\Container\_AddPopup.cshtml" />
     <Content Include="Areas\Admin\Views\CallReport\HblLclExpReport.cshtml" />
+    <Content Include="Areas\Admin\Views\CallReport\HblFclExpReport.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
@@ -3499,6 +3500,12 @@
     <Compile Include="Reports\FieldProfileReport.Designer.cs">
       <DependentUpon>FieldProfileReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\HblFclExpReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\HblFclExpReport.Designer.cs">
+      <DependentUpon>HblFclExpReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\HblLclExpReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -3724,6 +3731,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\FieldProfileReport.resx">
       <DependentUpon>FieldProfileReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\HblFclExpReport.resx">
+      <DependentUpon>HblFclExpReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\HblLclExpReport.resx">
       <DependentUpon>HblLclExpReport.cs</DependentUpon>
