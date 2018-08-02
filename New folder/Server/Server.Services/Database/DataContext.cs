@@ -297,6 +297,51 @@ namespace Vino.Server.Services.Database
                 .WillCascadeOnDelete(false);
 
             #endregion
+
+            #region FclExp Si
+
+            // Customer
+            modelBuilder.Entity<LclExpSi>().HasRequired(aa => aa.Shipper)
+                .WithMany(m => m.LclExpSiShippers)
+                .HasForeignKey(m => m.ShipperId)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<LclExpSi>().HasRequired(aa => aa.RealShipper)
+                .WithMany(m => m.LclExpSiRealShippers)
+                .HasForeignKey(m => m.RealShipperId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<LclExpSi>().HasRequired(aa => aa.Consignee)
+                .WithMany(m => m.LclExpSiConsignees)
+                .HasForeignKey(m => m.ConsigneeId)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<LclExpSi>().HasRequired(aa => aa.RealConsignee)
+                .WithMany(m => m.LclExpSiRealConsignees)
+                .HasForeignKey(m => m.RealConsigneeId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<LclExpSi>().HasRequired(aa => aa.NotifyParty)
+                .WithMany(m => m.LclExpSiNotifyParties)
+                .HasForeignKey(m => m.NotifyPartyId)
+                .WillCascadeOnDelete(false);
+
+            // port
+            modelBuilder.Entity<LclExpSi>().HasRequired(aa => aa.PortOfLoading)
+                .WithMany(m => m.LclExpSiPortOfLoading)
+                .HasForeignKey(m => m.PortofLoadingId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<LclExpSi>().HasRequired(aa => aa.PortOfDischarge)
+                .WithMany(m => m.LclExpSiPortOfDischarge)
+                .HasForeignKey(m => m.PortofLoadingId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<LclExpSi>().HasRequired(aa => aa.PlaceOfDelivery)
+                .WithMany(m => m.LclExpSiPlaceOfDelivery)
+                .HasForeignKey(m => m.PlaceOfDeliveryId)
+                .WillCascadeOnDelete(false);
+
+            #endregion
+
             #endregion
 
         }
@@ -330,6 +375,7 @@ namespace Vino.Server.Services.Database
 
         public DbSet<Topic> Topics{ get; set; }
         public DbSet<Container> Containers { get; set; }
+        public DbSet<LclExpSi> LclExpSis { get; set; }
 
 
         #endregion

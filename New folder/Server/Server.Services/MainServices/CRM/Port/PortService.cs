@@ -18,7 +18,7 @@ namespace Vino.Server.Services.MainServices.CRM.Port
 {
     public class PortService : GenericRepository<Data.CRM.Port, PortModel, PortModel>, IPortService
     {
-        private DataContext _context;
+        private readonly DataContext _context;
 
         public PortService(DataContext context) : base(context)
         {

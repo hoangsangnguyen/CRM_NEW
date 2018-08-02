@@ -26,6 +26,7 @@ using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
 using Vino.Server.Services.MainServices.CRM.LclExp.Models;
 using Vino.Server.Services.MainServices.CRM.LclImp.Models;
 using Vino.Server.Services.MainServices.CRM.Port.Model;
+using Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp;
 using Vino.Server.Services.MainServices.CRM.Topic.Model;
 using Vino.Server.Services.MainServices.Media.Models;
 using Vino.Server.Services.MainServices.Message.Models;
@@ -506,6 +507,50 @@ namespace Vino.Server.Services.Infrastructure
 
             // container
             CreateMap<Container, ContainerModel>().ReverseMap();
+
+            // Lcl Exp Si
+            CreateMap<LclExpSi, LclExpSiModel>()
+                .ForMember(d => d.ShipperName, opt => opt.MapFrom(
+                    x => x.Shipper.Name))
+                .ForMember(d => d.RealShipperName, opt => opt.MapFrom(
+                    x => x.RealShipper.Name))
+                .ForMember(d => d.ConsigneeName, opt => opt.MapFrom(
+                    x => x.Consignee.Name))
+                .ForMember(d => d.RealConsigneeName, opt => opt.MapFrom(
+                    x => x.RealConsignee.Name))
+                .ForMember(d => d.NotifyPartyName, opt => opt.MapFrom(
+                    x => x.NotifyParty.Name))
+                .ForMember(d => d.PortOfLoadingName, opt => opt.MapFrom(
+                    x => x.PortOfLoading.PortName))
+                .ForMember(d => d.PortOfDischargeName, opt => opt.MapFrom(
+                    x => x.PortOfDischarge.PortName))
+                .ForMember(d => d.PlaceOfDeliveryName, opt => opt.MapFrom(
+                    x => x.PlaceOfDelivery.PortName))
+                .ForMember(d => d.CreatorName, opt => opt.MapFrom(
+                    x => x.Creator.UserName))
+                .ForMember(d => d.Etd,
+                    opt => opt.MapFrom(x => x.Etd.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)))
+                .ForMember(d => d.Date, opt => opt.MapFrom(x =>
+                    x.Date.HasValue ? x.Date.Value.ToString("dd/MM/yyyy HH:mm:ss") : ""))
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x => x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)))
+                .ForMember(d => d.UpdateAt, opt => opt.MapFrom(x =>
+                    x.UpdateAt.HasValue ? x.UpdateAt.Value.ToString("dd/MM/yyyy HH:mm:ss") : ""));
+
+            CreateMap<LclExpSiModel, LclExpSi>()
+                .ForMember(d => d.Etd,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.Etd) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.Etd, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.Date,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.Date) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.Date, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.CreatedAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.CreatedAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.CreatedAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))))
+                .ForMember(d => d.UpdateAt,
+                    opt => opt.MapFrom(x =>
+                        string.IsNullOrEmpty(x.UpdateAt) ? (DateTimeOffset?)null : DateTimeOffset.ParseExact(x.UpdateAt, "dd/MM/yyyy HH:mm:ss", new CultureInfo("vi-VN"))));
+
         }
     }
 }

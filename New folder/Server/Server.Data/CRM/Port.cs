@@ -95,5 +95,12 @@ namespace Vino.Server.Data.CRM
 
 
         #endregion
+
+        #region Map to LclExp SI
+        public ICollection<LclExpSi> LclExpSiPortOfLoading { get; set; }
+        public ICollection<LclExpSi> LclExpSiPortOfDischarge { get; set; }
+        public ICollection<LclExpSi> LclExpSiPlaceOfDelivery { get; set; }
+
+        #endregion
     }
 }

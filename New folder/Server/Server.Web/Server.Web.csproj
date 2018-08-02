@@ -2685,6 +2685,10 @@
     <Content Include="Areas\Admin\Views\Container\_AddPopup.cshtml" />
     <Content Include="Areas\Admin\Views\CallReport\HblLclExpReport.cshtml" />
     <Content Include="Areas\Admin\Views\CallReport\HblFclExpReport.cshtml" />
+    <Content Include="Areas\Admin\Views\SiLclExp\List.cshtml" />
+    <Content Include="Areas\Admin\Views\SiLclExp\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SiLclExp\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SiLclExp\_AddEdit.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
@@ -3403,6 +3407,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\JbimagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\LclExpsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SiLclExpController.cs" />
     <Compile Include="Areas\Admin\Controllers\LclImpsController.cs" />
     <Compile Include="Areas\Admin\Controllers\MessageTemplateController.cs" />
     <Compile Include="Areas\Admin\Controllers\PortController.cs" />
@@ -3436,6 +3441,7 @@
     <Compile Include="Areas\Admin\Models\Message\SendEmailTestModel.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Models\Ports\PortsListModel.cs" />
+    <Compile Include="Areas\Admin\Models\SiLclExp\SiLclExpListModel.cs" />
     <Compile Include="Areas\Admin\Models\Topic\TopicListModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
@@ -3707,6 +3713,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\LclExpSi\" />
     <Folder Include="Content\Roxy_Fileman\tmp\" />
     <Folder Include="Views\CustomerApi\" />
     <Folder Include="Views\ProductApi\" />
