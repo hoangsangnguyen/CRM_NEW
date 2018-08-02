@@ -79,7 +79,7 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
 
         public double Cbm { get; set; }
 
-        public string Remark { get; set; }
+        public int? Remark { get; set; }
 
         public int? PaymentId { get; set; }
 

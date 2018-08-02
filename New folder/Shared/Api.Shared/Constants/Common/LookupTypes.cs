@@ -87,6 +87,7 @@
         PlaceType = 62,
         TopicType = 63,
         Container = 64,
+        Remark = 65,
 
     }
 }

@@ -842,23 +842,16 @@ namespace Vino.Server.Services.Installation
             });
             #endregion
 
-            #region Container
-            //db.Lookups.Add(new Lookup()
-            //{
-            //    Code = "cat-lai-kho-1",
-            //    Title = "Part of container",
-            //    Type = LookupTypes.Container
-            //});
-
-            //db.Lookups.Add(new Lookup()
-            //{
-            //    Code = "hai-phong-viet-nam",
-            //    Title = "HAI PHONG , VIETNAM",
-            //    Type = LookupTypes.Container
-            //});
-
-
+            #region Remark
+            db.Lookups.Add(new Lookup()
+            {
+                Code = "Remarks",
+                Title = "Remarks",
+                Type = LookupTypes.Remark
+            });
             #endregion
+
+
             await db.SaveChangesAsync();
         }
 

@@ -412,6 +412,23 @@ namespace Vino.Server.Web.Api
 
         #endregion
 
+        #region Remark
+        public List<NameValueModel> GetRemarks(string name = "", bool withAll = false)
+        {
+            var remark = _lookupService.GetLookupByLookupType(LookupTypes.Remark).Select(d => new NameValueModel()
+            {
+                Name = d.Title,
+                Value = d.Id.ToString()
+            }).Where(p => p.Name.ToLower().Contains(name.IsNullOrEmpty() ? "" : name.ToLower())).ToList();
+            if (withAll)
+                remark.Insert(0, new NameValueModel() { Name = "Tất cả", Value = "0" });
+
+            return remark;
+        }
+
+
+        #endregion
+
         #region Freight
         public List<NameValueModel> GetFreights(string name = "", bool withAll = false)
         {
