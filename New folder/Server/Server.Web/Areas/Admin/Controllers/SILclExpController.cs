@@ -68,6 +68,12 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         public ActionResult List(int? id)
         {
+            if (id == null)
+                return RedirectToAction("List", "LclExps");
+            var siLclExp = _lclExpService.GetSingleAsync(id.Value);
+            if (siLclExp.Id <= 0)
+                return RedirectToAction("List", "LclExps");
+
             return View(new SiLclExpListModel()
             {
                 LclExpId = id
@@ -104,6 +110,12 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         public ActionResult Create(int? id)
         {
+            if (id == null)
+                return RedirectToAction("List", "LclExps");
+            var siLclExp = _lclExpService.GetSingleAsync(id.Value);
+            if (siLclExp.Id <= 0)
+                return RedirectToAction("List", "LclExps");
+
             var model = new LclExpSiModel()
             {
                 Etd  = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
@@ -156,6 +168,12 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
         public async Task<ActionResult> Edit(int id = 0)
         {
+            if (id == 0)
+                return RedirectToAction("List", "LclExps");
+            var siLclExp = _lclExpService.GetSingleAsync(id);
+            if (siLclExp.Id <= 0)
+                return RedirectToAction("List", "LclExps");
+
             var model = await _service.GetSingleAsync(id);
 
             if (model == null)

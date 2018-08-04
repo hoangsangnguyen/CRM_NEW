@@ -23,14 +23,45 @@
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Code: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Name:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">English Name: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                     <div class="row">
                         @*Code*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Code :</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input readonly="readonly" type="text"
                                            class="form-control" id="@Html.FieldIdFor(model => model.Code)"
                                            name="@Html.FieldIdFor(model => model.Code)" value="@Model.Code" />
@@ -41,10 +72,7 @@
                         @*Name*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Name:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.Name)
                                     @Html.ValidationMessageFor(m => m.Name)
                                 </div>
@@ -54,10 +82,7 @@
                         @*English Name*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">English Name:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.FullEnglishName)
                                     @Html.ValidationMessageFor(m => m.FullEnglishName)
                                 </div>
@@ -66,14 +91,44 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Country: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Cell:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Contact: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
                         @*Country*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Country:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.CountryId)"
                                            name="@Html.NameFor(model => model.CountryId)"
                                            value="@Html.ValueFor(model => model.CountryId)" />
@@ -102,7 +157,7 @@
                                                 var data = {
                                                     @*Name: $("#@Html.FieldIdFor(model => model.PlaceOfIssueId)")
                                                         .data("kendoComboBox").input.val()*@
-                                                    Name : ""
+                                                    Name: ""
                                                 };
                                                 addAntiForgeryToken(data);
                                                 return data;
@@ -119,10 +174,7 @@
                         @*Cell*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Cell :</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.Cell)
                                     @Html.ValidationMessageFor(m => m.Cell)
                                 </div>
@@ -132,10 +184,7 @@
                         @*Contact*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Contact:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.Contact)
                                     @Html.ValidationMessageFor(m => m.Contact)
                                 </div>

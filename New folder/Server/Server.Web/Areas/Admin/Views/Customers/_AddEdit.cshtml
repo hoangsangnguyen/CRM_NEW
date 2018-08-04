@@ -25,13 +25,42 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Customer Id:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Name:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">English Name:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
                         @*CustomerId*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Customer Id:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input readonly="readonly" type="text"
                                            class="form-control" id="@Html.FieldIdFor(model => model.CustomerId)"
                                            name="@Html.FieldIdFor(model => model.CustomerId)" value="@Model.CustomerId" />
@@ -42,10 +71,7 @@
                         @*Name*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Name:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.Name)
                                     @Html.ValidationMessageFor(model => model.Name)
                                 </div>
@@ -55,10 +81,7 @@
                         @*English Name*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">English Name:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.FullEngishName)
                                     @Html.ValidationMessageFor(model => model.FullEngishName)
                                 </div>
@@ -66,14 +89,44 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">VietNamese Name:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Address:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Contact:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
                         @*VietNamese Name*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">VietNamese Name:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.FullVietNamName)
                                     @Html.ValidationMessageFor(model => model.FullVietNamName)
                                 </div>
@@ -84,10 +137,7 @@
                         @*Address*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Address :</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.Address)
                                     @Html.ValidationMessageFor(model => model.Address)
                                 </div>
@@ -98,44 +148,41 @@
                         @*Contact*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Contact:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.ContactId)"
                                            name="@Html.NameFor(model => model.ContactId)"
                                            value="@Html.ValueFor(model => model.ContactId)" />
                                     <script>
-                    $(document).ready(function() {
-                        $("#@Html.FieldIdFor(model => model.ContactId)").kendoComboBox({
-                            filter: "contains",
-                            dataTextField: "Name",
-                            dataValueField: "Value",
-                            placeholder: "Chọn contact...",
-                            minLength: 1,
-                            dataSource: {
-                                type: "json",
-                                serverFiltering: true,
-                                transport: {
-                                    read: {
-                                        url: "/api/CrmContactApi/GetAll",
-                                        dataType: "json",
-                                        data: filterContact
-                                    }
-                                }
-                            }
-                        });
+                                $(document).ready(function() {
+                                    $("#@Html.FieldIdFor(model => model.ContactId)").kendoComboBox({
+                                        filter: "contains",
+                                        dataTextField: "Name",
+                                        dataValueField: "Value",
+                                        placeholder: "Chọn contact...",
+                                        minLength: 1,
+                                        dataSource: {
+                                            type: "json",
+                                            serverFiltering: true,
+                                            transport: {
+                                                read: {
+                                                    url: "/api/CrmContactApi/GetAll",
+                                                    dataType: "json",
+                                                    data: filterContact
+                                                }
+                                            }
+                                        }
+                                    });
 
-                        function filterContact() {
-                            var data = {
-                                @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                    function filterContact() {
+                                        var data = {
+                                            @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
                                                         .data("kendoComboBox").input.val()*@
-                                Name : ""
-                            };
-                            addAntiForgeryToken(data);
-                            return data;
-                        }
-                    });
+                                            Name: ""
+                                        };
+                                        addAntiForgeryToken(data);
+                                        return data;
+                                    }
+                                });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.ContactId)
                                 </div>
@@ -145,14 +192,45 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Work phone:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Fax No:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Location:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
                         @*Workphone*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Work phone :</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.WorkPhone)
                                     @Html.ValidationMessageFor(model => model.WorkPhone)
                                 </div>
@@ -163,10 +241,7 @@
                         @*Fax No*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Fax No :</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.FaxNo)
                                     @Html.ValidationMessageFor(model => model.FaxNo)
                                 </div>
@@ -177,44 +252,41 @@
                         @*Location*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Location:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.LocationId)"
                                            name="@Html.NameFor(model => model.LocationId)"
                                            value="@Html.ValueFor(model => model.LocationId)" />
                                     <script>
-                    $(document).ready(function() {
-                        $("#@Html.FieldIdFor(model => model.LocationId)").kendoComboBox({
-                            filter: "contains",
-                            dataTextField: "Name",
-                            dataValueField: "Value",
-                            placeholder: "Chọn location...",
-                            minLength: 1,
-                            dataSource: {
-                                type: "json",
-                                serverFiltering: true,
-                                transport: {
-                                    read: {
-                                        url: "/api/LookupApi/GetLocations",
-                                        dataType: "json",
-                                        data: filterLocation
-                                    }
-                                }
-                            }
-                        });
+                                $(document).ready(function() {
+                                    $("#@Html.FieldIdFor(model => model.LocationId)").kendoComboBox({
+                                        filter: "contains",
+                                        dataTextField: "Name",
+                                        dataValueField: "Value",
+                                        placeholder: "Chọn location...",
+                                        minLength: 1,
+                                        dataSource: {
+                                            type: "json",
+                                            serverFiltering: true,
+                                            transport: {
+                                                read: {
+                                                    url: "/api/LookupApi/GetLocations",
+                                                    dataType: "json",
+                                                    data: filterLocation
+                                                }
+                                            }
+                                        }
+                                    });
 
-                        function filterLocation() {
-                            var data = {
-                                @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                    function filterLocation() {
+                                        var data = {
+                                            @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
                                                         .data("kendoComboBox").input.val()*@
-                                Name : ""
-                            };
-                            addAntiForgeryToken(data);
-                            return data;
-                        }
-                    });
+                                            Name: ""
+                                        };
+                                        addAntiForgeryToken(data);
+                                        return data;
+                                    }
+                                });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.LocationId)
                                 </div>
@@ -226,93 +298,141 @@
                         </div>
 
                     </div>
+
                     <div class="row" style="margin-top: 10px">
-                        @*Home phone*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Home phone :</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.HomePhone)
-                                    @Html.ValidationMessageFor(model => model.HomePhone)
-                                </div>
-                                <div class="col-md-1"></div>
-                            </div>
-                        </div>
-
-                        @*Tax code*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Tax code:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    @Html.FalconEditorFor(m => m.Taxcode)
-                                    @Html.ValidationMessageFor(model => model.Taxcode)
-                                </div>
-                                <div class="col-md-1"></div>
-                            </div>
-                        </div>
-
-                        @*Category*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Category:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <input id="@Html.FieldIdFor(model => model.CategoryId)"
-                                           name="@Html.NameFor(model => model.CategoryId)"
-                                           value="@Html.ValueFor(model => model.CategoryId)" />
-                                    <script>
-                    $(document).ready(function() {
-                        $("#@Html.FieldIdFor(model => model.CategoryId)").kendoComboBox({
-                            filter: "contains",
-                            dataTextField: "Name",
-                            dataValueField: "Value",
-                            placeholder: "Chọn category...",
-                            minLength: 1,
-                            dataSource: {
-                                type: "json",
-                                serverFiltering: true,
-                                transport: {
-                                    read: {
-                                        url: "/api/LookupApi/GetCategories",
-                                        dataType: "json",
-                                        data: filterCategory
-                                    }
-                                }
-                            }
-                        });
-
-                        function filterCategory() {
-                            var data = {
-                                @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                Name : ""
-                            };
-                            addAntiForgeryToken(data);
-                            return data;
-                        }
-                    });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.CategoryId)
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Home phone:</label>
                                 </div>
                                 <div class="col-md-1">
-                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.CategoryId)', '@LookupTypes.CategoryType')">Add</a>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Tax Code:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Category:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                <div class="row">
+                    @*Home phone*@
+                    <div class="col-md-4">
+                        <div class="form-group form-custom">
+                            <div class="col-md-11">
+                                @Html.FalconEditorFor(m => m.HomePhone)
+                                @Html.ValidationMessageFor(model => model.HomePhone)
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </div>
+
+                    @*Tax code*@
+                    <div class="col-md-4">
+                        <div class="form-group form-custom">
+                            <div class="col-md-11">
+                                @Html.FalconEditorFor(m => m.Taxcode)
+                                @Html.ValidationMessageFor(model => model.Taxcode)
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </div>
+
+                    @*Category*@
+                    <div class="col-md-4">
+                        <div class="form-group form-custom">
+                            <div class="col-md-11">
+                                <input id="@Html.FieldIdFor(model => model.CategoryId)"
+                                       name="@Html.NameFor(model => model.CategoryId)"
+                                       value="@Html.ValueFor(model => model.CategoryId)" />
+                                <script>
+                                    $(document).ready(function() {
+                                        $("#@Html.FieldIdFor(model => model.CategoryId)").kendoComboBox({
+                                            filter: "contains",
+                                            dataTextField: "Name",
+                                            dataValueField: "Value",
+                                            placeholder: "Chọn category...",
+                                            minLength: 1,
+                                            dataSource: {
+                                                type: "json",
+                                                serverFiltering: true,
+                                                transport: {
+                                                    read: {
+                                                        url: "/api/LookupApi/GetCategories",
+                                                        dataType: "json",
+                                                        data: filterCategory
+                                                    }
+                                                }
+                                            }
+                                        });
+
+                                        function filterCategory() {
+                                            var data = {
+                                                @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                                Name: ""
+                                            };
+                                            addAntiForgeryToken(data);
+                                            return data;
+                                        }
+                                    });
+                                </script>
+                                @Html.ValidationMessageFor(model => model.CategoryId)
+                            </div>
+                            <div class="col-md-1">
+                                <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.CategoryId)', '@LookupTypes.CategoryType')">Add</a>
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="margin-top: 10px">
+                </div>
+                
+                <div class="row" style="margin-top: 10px">
+                    <div class="col-md-4">
+                        <div class="form-group form-custom">
+                            <div class="col-md-11" style="text-align: left">
+                                <label class="control-label">Website: </label>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-custom">
+                            <div class="col-md-11" style="text-align: left">
+                                <label class="control-label">Email:</label>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      
+                    </div>
+
+                </div>
+                <div class="row">
                         @*Website*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Website :</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.Website)
                                     @Html.ValidationMessageFor(model => model.Website)
                                 </div>
@@ -322,10 +442,7 @@
                         @*Email*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Email :</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.Email)
                                     @Html.ValidationMessageFor(model => model.Email)
                                 </div>
