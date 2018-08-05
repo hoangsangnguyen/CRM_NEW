@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Falcon.Web.Core.Helpers;
 using Falcon.Web.Mvc.PageList;
+using Vino.Server.Data.CRM;
 using Vino.Server.Services.Database;
 using Vino.Server.Services.MainServices.BaseService;
 using Vino.Server.Services.MainServices.Common;
@@ -77,6 +78,18 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
             var siLclExp = await _context.LclExpSis.FirstOrDefaultAsync(x => x.LclExpId == lclExpId && !x.Deleted);
             var result = siLclExp.MapTo<LclExpSiModel>();
             return result;
+        }
+
+        public async Task<LclExpSiModel> GetSingleAsyncForReport(int id)
+        {
+            var siLclExp = await _context.LclExpSis.FirstOrDefaultAsync(x => x.Id == id && !x.Deleted);
+            if (siLclExp == null)
+                return new LclExpSiModel();
+            var siLclExpModel = siLclExp.MapTo<LclExpSiModel>();
+
+            var hblList = _context.HblLclExps.Where(x => x.LclExpId == siLclExpModel.LclExpId && !x.Deleted).ToList();
+            hblList.ForEach(d => siLclExpModel.Details.Add(d.MapTo<HblLclExpModel>()));
+            return siLclExpModel;
         }
     }
 }

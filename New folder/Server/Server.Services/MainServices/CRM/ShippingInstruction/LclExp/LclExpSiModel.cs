@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 using Falcon.Web.Core.Auth;
 using Vino.Server.Data.CRM;
 using Vino.Server.Services.MainServices.BaseService;
+using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
 
 namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
 {
     public class LclExpSiModel : BaseDto
     {
+        public LclExpSiModel()
+        {
+            Details = new List<HblLclExpModel>();
+        }
         [Required(ErrorMessage = "Vui lòng chọn MBL")]
         public int? LclExpId { get; set; }
 
@@ -84,8 +89,10 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
         public double Cbm { get; set; }
 
         public int? Remark { get; set; }
+        public string RemarkName { get; set; }
 
         public int? PaymentId { get; set; }
+        public string PaymentName { get; set; }
 
         public string UpdateName { get; set; }
 
@@ -97,6 +104,8 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
         public string CreatorName { get; set; }
 
         public bool Preview { get; set; }
+
+        public List<HblLclExpModel> Details { get; set; }
 
     }
 }
