@@ -27,15 +27,44 @@
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-body">
+
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">B/L No: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Lcl Exp:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Booking/Ref No: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
 
                         @*Bl Number*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">B/L No:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input readonly="readonly" type="text"
                                            class="form-control" id="@Html.FieldIdFor(model => model.BlNumber)"
                                            name="@Html.FieldIdFor(model => model.BlNumber)" value="@Model.BlNumber" />
@@ -50,47 +79,43 @@
                         @*Lcl Exp*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Lcl Exp:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.LclExpId)"
                                            name="@Html.NameFor(model => model.LclExpId)"
                                            value="@(Model.LclExpId > 0 ? Html.ValueFor(model => model.LclExpId) : null)" />
                                     <script>
-                                            $(document).ready(function() {
-                                                $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
-                                                    filter: "contains",
-                                                    dataTextField: "Name",
-                                                    dataValueField: "Value",
-                                                    placeholder: "Chọn lcl exp...",
-                                                    minLength: 1,
-                                                    dataSource: {
-                                                        type: "json",
-                                                        serverFiltering: true,
-                                                        transport: {
-                                                            read: {
-                                                                url: "/api/LclExpApi/GetAll",
-                                                                dataType: "json",
-                                                                data: filterLclExp
-                                                            }
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.LclExpId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn lcl exp...",
+                                                minLength: 1,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/LclExpApi/GetAll",
+                                                            dataType: "json",
+                                                            data: filterLclExp
                                                         }
                                                     }
-                                                });
-
-                                                function filterLclExp() {
-                                                    var data = {
-                                                        @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                                                .data("kendoComboBox").input.val()*@
-                                                        Name: ""
-                                                    };
-                                                    addAntiForgeryToken(data);
-                                                    return data;
                                                 }
-
-
-
                                             });
+
+                                            function filterLclExp() {
+                                                var data = {
+                                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                                                .data("kendoComboBox").input.val()*@
+                                                    Name: ""
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+
+
+                                        });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.LclExpId)
 
@@ -103,10 +128,7 @@
                         @*Booking Number*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Booking/Ref No:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.BookingNumber)
                                     @Html.ValidationMessageFor(model => model.BookingNumber)
                                 </div>
@@ -115,16 +137,46 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Forward Agent: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">H-B/L Type:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Ex Ref: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
 
                         @*Forward Agent*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Forward Agent:</label>
-                                </div>
-                                <div class="col-md-7">
-                                    <textarea readonly="readonly" type="text" style="height:150px;"
+                                <div class="col-md-11">
+                                    <textarea readonly="readonly" type="text" style="height: 150px;"
                                               class="form-control" id="@Html.FieldIdFor(model => model.ForwardingAgent)"
                                               name="@Html.FieldIdFor(model => model.ForwardingAgent)" value="@Model.ForwardingAgent">@Model.ForwardingAgent</textarea>
                                     @Html.ValidationMessageFor(model => model.ForwardingAgent)
@@ -138,10 +190,7 @@
                         <div class="col-md-4">
                             @*HblType*@
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">H-B/L Type:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.HblType)"
                                            name="@Html.NameFor(model => model.HblType)"
                                            value="@Html.ValueFor(model => model.HblType)" />
@@ -187,12 +236,17 @@
                                 </div>
                             </div>
 
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Freight Amount: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+
                             @*FreightAmount*@
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">FreightAmount:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.FreightAmount)
                                     @Html.ValidationMessageFor(model => model.FreightAmount)
                                 </div>
@@ -204,23 +258,20 @@
                         @*ExRef*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Ex Ref:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input type="datetime" id="@Html.FieldIdFor(model => model.ExRef)"
                                            name="@Html.FieldIdFor(model => model.ExRef)"
                                            value="@Model.ExRef"
                                            style="width: 100%" />
                                     <script>
-                                            $(document).ready(function() {
-                                                $("#@Html.FieldIdFor(model => model.ExRef)").kendoDatePicker({
-                                                    culture: "vi-VN",
-                                                    format: "dd/MM/yyyy"
-                                                });
-                                                $("#@Html.FieldIdFor(model => model.ExRef)")
-                                                    .prop("readonly", "readonly");
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.ExRef)").kendoDatePicker({
+                                                culture: "vi-VN",
+                                                format: "dd/MM/yyyy"
                                             });
+                                            $("#@Html.FieldIdFor(model => model.ExRef)")
+                                                .prop("readonly", "readonly");
+                                        });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.ExRef)
                                 </div>
@@ -238,13 +289,43 @@
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-body">
+
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Shipper: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Consignee:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Notify party: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Shipper:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.ShipperId)"
                                            name="@Html.NameFor(model => model.ShipperId)"
                                            value="@Html.ValueFor(model => model.ShipperId)" />
@@ -320,10 +401,7 @@
 
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Consignee:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.ConsigneeId)"
                                            name="@Html.NameFor(model => model.ConsigneeId)"
                                            value="@Html.ValueFor(model => model.ConsigneeId)" />
@@ -398,10 +476,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Notify party:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.NotifyPartyId)"
                                            name="@Html.NameFor(model => model.NotifyPartyId)"
                                            value="@Html.ValueFor(model => model.NotifyPartyId)" />
@@ -549,14 +624,44 @@
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-body">
+
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Final Destination: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Place Of Delivery:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Shipping Marks: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         @*FinalDestination*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Final Destination:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.FinalDestinationId)"
                                            name="@Html.NameFor(model => model.FinalDestinationId)"
                                            value="@Html.ValueFor(model => model.FinalDestinationId)" />
@@ -602,10 +707,7 @@
                         @*Place Of Delivery*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Place Of Delivery:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.PlaceOfDeliveryId)"
                                            name="@Html.NameFor(model => model.PlaceOfDeliveryId)"
                                            value="@Html.ValueFor(model => model.PlaceOfDeliveryId)" />
@@ -652,10 +754,7 @@
                         @*Shipping marks*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Shipping Marks:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.ShippingMarks)
                                 </div>
                                 <div class="col-md-1">
@@ -663,15 +762,45 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
 
-                        @*FinalDestination*@
+                    <div class="row" style="margin-top: 10px">
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Country Of Origin:</label>
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Country Of Origin: </label>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Type Of Move:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Closing date: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        @*Country Of Origin*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.CountryOfOriginId)"
                                            name="@Html.NameFor(model => model.CountryOfOriginId)"
                                            value="@Html.ValueFor(model => model.CountryOfOriginId)" />
@@ -717,10 +846,7 @@
                         @*Type Of Move*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Type Of Move:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.TypeOfMoveId)"
                                            name="@Html.NameFor(model => model.TypeOfMoveId)"
                                            value="@Html.ValueFor(model => model.TypeOfMoveId)" />
@@ -767,10 +893,7 @@
                         @*Closing Date*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Closing date:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input type="datetime" id="@Html.FieldIdFor(model => model.ClosingDate)"
                                            name="@Html.FieldIdFor(model => model.ClosingDate)" value="@Model.ClosingDate"
                                            style="width: 100%" />
@@ -791,15 +914,44 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Freight Payable: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Number of origin:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Sailing Date: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
 
                         @*FreightPayableAt*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Freight Payable:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.FreightPayableId)"
                                            name="@Html.NameFor(model => model.FreightPayableId)"
                                            value="@Html.ValueFor(model => model.FreightPayableId)" />
@@ -846,10 +998,7 @@
                         @*Number of origin*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Number of origin:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.NumberOfOriginal)
                                     @Html.ValidationMessageFor(model => model.NumberOfOriginal)
                                 </div>
@@ -860,10 +1009,7 @@
                         @*SellingDate*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Sailing Date:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input type="datetime" id="@Html.FieldIdFor(model => model.SailingDate)"
                                            name="@Html.FieldIdFor(model => model.SailingDate)" value="@Model.SailingDate"
                                            style="width: 100%" />
@@ -894,15 +1040,45 @@
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-body">
+
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Local Vessel: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Ocean Vessel:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Port Of Discharge: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
 
                         @*Local Vessel*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Local Vessel:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.LocalVessel)"
                                            name="@Html.NameFor(model => model.LocalVessel)"
                                            value="@Html.ValueFor(model => model.LocalVessel)" />
@@ -948,10 +1124,7 @@
                         @*Ocean Vessel*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Ocean Vessel:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.OceanVessel)"
                                            name="@Html.NameFor(model => model.OceanVessel)"
                                            value="@Html.ValueFor(model => model.OceanVessel)" />
@@ -997,10 +1170,7 @@
                         @*Port of dis*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">PortOfDischarge:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.PortOfDischargeId)"
                                            name="@Html.NameFor(model => model.PortOfDischargeId)"
                                            value="@Html.ValueFor(model => model.PortOfDischargeId)" />
@@ -1044,15 +1214,44 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Place Of Receipt: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Port Of Loaing:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Transhipment Port: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
 
                         @*PlaceOfReceipt*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Place Of Receipt:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.PlaceOfReceiptId)"
                                            name="@Html.NameFor(model => model.PlaceOfReceiptId)"
                                            value="@Html.ValueFor(model => model.PlaceOfReceiptId)" />
@@ -1098,10 +1297,7 @@
                         @*Port Of Loaing*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Port Of Loaing:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.PortOfLoaingId)"
                                            name="@Html.NameFor(model => model.PortOfLoaingId)"
                                            value="@Html.ValueFor(model => model.PortOfLoaingId)" />
@@ -1147,10 +1343,7 @@
                         @*TranshipmentPort*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">TranshipmentPort:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.TranshipmentPortId)"
                                            name="@Html.NameFor(model => model.TranshipmentPortId)"
                                            value="@Html.ValueFor(model => model.TranshipmentPortId)" />
@@ -1200,14 +1393,44 @@
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-body">
+
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">ContainerNo/Seal: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Delivery Of Goods:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Qty of container: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         @*Container*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">ContainerNo/Seal:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconTextAreaFor(m => m.Container)
                                     @Html.ValidationMessageFor(model => model.Container)
                                 </div>
@@ -1219,44 +1442,41 @@
                         <div class="col-md-4">
                             @*Delivery Of Goods*@
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Delivery Of Goods:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.DeliveryOfGoodsId)"
                                            name="@Html.NameFor(model => model.DeliveryOfGoodsId)"
                                            value="@Html.ValueFor(model => model.DeliveryOfGoodsId)" />
                                     <script>
-                    $(document).ready(function() {
-                        $("#@Html.FieldIdFor(model => model.DeliveryOfGoodsId)").kendoComboBox({
-                            filter: "contains",
-                            dataTextField: "Name",
-                            dataValueField: "Value",
-                            placeholder: "Chọn delivery of goods...",
-                            minLength: 1,
-                            dataSource: {
-                                type: "json",
-                                serverFiltering: true,
-                                transport: {
-                                    read: {
-                                        url: "/api/CustomerApi/GetAllCustomers",
-                                        dataType: "json",
-                                        data: filterDeliveryOfGoods
-                                    }
-                                }
-                            }
-                        });
+                                        $(document).ready(function() {
+                                            $("#@Html.FieldIdFor(model => model.DeliveryOfGoodsId)").kendoComboBox({
+                                                filter: "contains",
+                                                dataTextField: "Name",
+                                                dataValueField: "Value",
+                                                placeholder: "Chọn delivery of goods...",
+                                                minLength: 1,
+                                                dataSource: {
+                                                    type: "json",
+                                                    serverFiltering: true,
+                                                    transport: {
+                                                        read: {
+                                                            url: "/api/CustomerApi/GetAllCustomers",
+                                                            dataType: "json",
+                                                            data: filterDeliveryOfGoods
+                                                        }
+                                                    }
+                                                }
+                                            });
 
-                        function filterDeliveryOfGoods() {
-                            var data = {
-                                @*Name: $("#@Html.FieldIdFor(model => model.DeliveryOfGoodsId)")
+                                            function filterDeliveryOfGoods() {
+                                                var data = {
+                                                    @*Name: $("#@Html.FieldIdFor(model => model.DeliveryOfGoodsId)")
                                                         .data("kendoComboBox").input.val()*@
-                                Name: ""
-                            };
-                            addAntiForgeryToken(data);
-                            return data;
-                        }
-                    });
+                                                    Name: ""
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        });
                                     </script>
                                     @Html.ValidationMessageFor(model => model.DeliveryOfGoodsId)
                                 </div>
@@ -1264,12 +1484,18 @@
                                     <a onclick="openCustomerPopup('@Html.FieldIdFor(m => m.DeliveryOfGoodsId)')">Add</a>
                                 </div>
                             </div>
+                            
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Number of package: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+
                             @*NumberOfPackage*@
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">NumberOfPackage:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.NumberOfPackage)
                                     @Html.ValidationMessageFor(model => model.NumberOfPackage)
                                 </div>
@@ -1281,10 +1507,7 @@
                         <div class="col-md-4">
                             @*QtyOfContainer*@
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">QtyOfContainer:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input readonly="readonly" type="text"
                                            class="form-control" id="@Html.FieldIdFor(model => model.QtyOfContainer)"
                                            name="@Html.FieldIdFor(model => model.QtyOfContainer)" value="@Model.QtyOfContainer" />
@@ -1292,12 +1515,17 @@
                                 <div class="col-md-1">
                                 </div>
                             </div>
+                            
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Po Number: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
                             @*PoNumber*@
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">PoNumber:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.PoNumber)
                                     @Html.ValidationMessageFor(model => model.PoNumber)
                                 </div>
@@ -1306,15 +1534,43 @@
                             </div>
                         </div>
                     </div>
+                    
+                <div class="row" style="margin-top: 10px">
+                    <div class="col-md-4">
+                        <div class="form-group form-custom">
+                            <div class="col-md-11" style="text-align: left">
+                                <label class="control-label">Description Of Goods: </label>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group form-custom">
+                            <div class="col-md-11" style="text-align: left">
+                                <label class="control-label">Gross Weight:</label>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-custom">
+                            <div class="col-md-11" style="text-align: left">
+                                <label class="control-label">OnBoard Status: </label>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                         @*DescriptionOfGoods*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">DescriptionOfGoods:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconTextAreaFor(m => m.DescriptionOfGoods)
                                     @Html.ValidationMessageFor(model => model.DescriptionOfGoods)
                                 </div>
@@ -1327,12 +1583,17 @@
                         <div class="col-md-4">
                             @*GrossWeight*@
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">GrossWeight:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.GrossWeight)
                                     @Html.ValidationMessageFor(model => model.GrossWeight)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Unit: </label>
                                 </div>
                                 <div class="col-md-1">
                                 </div>
@@ -1340,10 +1601,7 @@
 
                             @*Unit*@
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Unit:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.UnitId)"
                                            name="@Html.NameFor(model => model.UnitId)"
                                            value="@Html.ValueFor(model => model.UnitId)" />
@@ -1385,12 +1643,16 @@
                                 </div>
                             </div>
 
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Measurement: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
                             @*Measurement*@
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Measurement:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.Measurement)
                                     @Html.ValidationMessageFor(model => model.Measurement)
                                 </div>
@@ -1401,10 +1663,7 @@
                         @*OnBoardStatus*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">OnBoardStatus:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconTextAreaFor(m => m.OnBoardStatus)
                                     @Html.ValidationMessageFor(model => model.OnBoardStatus)
                                 </div>
@@ -1413,15 +1672,43 @@
                             </div>
                         </div>
                     </div>
+                    
+                <div class="row" style="margin-top: 10px">
+                    <div class="col-md-4">
+                        <div class="form-group form-custom">
+                            <div class="col-md-11" style="text-align: left">
+                                <label class="control-label">Commodity: </label>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group form-custom">
+                            <div class="col-md-11" style="text-align: left">
+                                <label class="control-label">Place Of Issue:</label>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-custom">
+                            <div class="col-md-11" style="text-align: left">
+                                <label class="control-label">Issue Date: </label>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                         @*Commodity*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Commodity:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.CommodityId)"
                                            name="@Html.NameFor(model => model.CommodityId)"
                                            value="@Html.ValueFor(model => model.CommodityId)" />
@@ -1469,10 +1756,7 @@
                         @*PlaceOfIssue*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">PlaceOfIssue:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.PlaceOfIssueId)"
                                            name="@Html.NameFor(model => model.PlaceOfIssueId)"
                                            value="@Html.ValueFor(model => model.PlaceOfIssueId)" />
@@ -1519,10 +1803,7 @@
                         @*Date of issue*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">IssueDate:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input type="datetime" id="@Html.FieldIdFor(model => model.IssueDate)"
                                            name="@Html.FieldIdFor(model => model.IssueDate)"
                                            value="@Model.IssueDate"

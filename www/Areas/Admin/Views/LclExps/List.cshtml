@@ -147,6 +147,7 @@
                 <div class="panel-body">
                     <div id="main-grid"></div>
 
+
                     <script>
                         $(document).ready(function() {
                             $("#main-grid").kendoGrid({
@@ -239,10 +240,25 @@
                                         attributes: { style: "text-align:center" },
                                         template: '<a class="btn btn-default" href="Edit/#=Id#"><i class="fa fa-pencil"></i>Chi tiết</a>'
                                             //+ '<a class="btn btn-default" href="/admin/HblLclExp/HblList/#=Id#"><i class="fa fa-pencil"></i>HBL</a>'
+                                    },
+                                    {
+                                        field: "Id",
+                                        title: " ",
+                                        width: 100,
+                                        disabled: true,
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" },
+                                        template: kendo.template($("#statusname-template").html()),
                                     }
                                 ]
                             });
                         });
+                    </script>
+                    <script id="statusname-template" type="text/x-kendo-template">
+                        #if(IsVailableSi){#
+                        <a class="btn btn-default" href="/Admin/SiLclExp/Create/#=Id#"><i class="fa fa-pencil"></i> CHI TIẾT SI</a>#}
+                        else {#
+                        <span style="color:rgb(11, 125, 218)">Chưa có SI </span>#}#
                     </script>
 
                     <script type="text/javascript">
@@ -280,6 +296,7 @@
                             });
 
                         var record = 0;
+
 
                         function detailInit(e) {
                             record = 0;

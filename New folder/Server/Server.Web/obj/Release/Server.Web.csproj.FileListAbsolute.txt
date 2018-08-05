@@ -101,3 +101,4 @@ D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\bin\itextshar
 D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\obj\Release\Vino.Server.Web.Properties.Resources.resources
 D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\obj\Release\Vino.Server.Web.Reports.HblLclExpReport.resources
 D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\obj\Release\Vino.Server.Web.Reports.HblFclExpReport.resources
+D:\Workspace\Work\DoAnThucTap\CRM_NEW\New folder\Server\Server.Web\obj\Release\Vino.Server.Web.Reports.SiLclExpReport.resources

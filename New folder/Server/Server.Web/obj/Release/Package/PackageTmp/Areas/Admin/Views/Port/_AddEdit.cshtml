@@ -23,14 +23,44 @@
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Port Code: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Port Name:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Nationality: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                     <div class="row">
                         @*Port Code*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Port Code:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.PortCode)
                                     @Html.ValidationMessageFor(m => m.PortCode)
                                 </div>
@@ -40,10 +70,7 @@
                         @*Port Name*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Port Name:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.PortName)
                                     @Html.ValidationMessageFor(m => m.PortName)
                                 </div>
@@ -53,10 +80,7 @@
                         @*Nationality*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Nationality:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.NationalityId)"
                                            name="@Html.NameFor(model => model.NationalityId)"
                                            value="@Html.ValueFor(model => model.NationalityId)" />
@@ -85,7 +109,7 @@
                                                 var data = {
                                                     @*Name: $("#@Html.FieldIdFor(model => model.PlaceOfIssueId)")
                                                         .data("kendoComboBox").input.val()*@
-                                                    Name : ""
+                                                    Name: ""
                                                 };
                                                 addAntiForgeryToken(data);
                                                 return data;
@@ -100,14 +124,45 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="row" style="margin-top: 10px">
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Zone: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Local Zone:</label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Mode: </label>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
                         @*Zone*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Zone:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.ZoneId)"
                                            name="@Html.NameFor(model => model.ZoneId)"
                                            value="@Html.ValueFor(model => model.ZoneId)" />
@@ -136,7 +191,7 @@
                                                 var data = {
                                                     @*Name: $("#@Html.FieldIdFor(model => model.PlaceOfIssueId)")
                                                         .data("kendoComboBox").input.val()*@
-                                                    Name : ""
+                                                    Name: ""
                                                 };
                                                 addAntiForgeryToken(data);
                                                 return data;
@@ -155,10 +210,7 @@
                         @*Local Zone*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Local Zone:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     @Html.FalconEditorFor(m => m.LocalZone)
                                     @Html.ValidationMessageFor(m => m.LocalZone)
                                 </div>
@@ -169,10 +221,7 @@
                         @*Model*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-4">
-                                    <label class="control-label">Model:</label>
-                                </div>
-                                <div class="col-md-7">
+                                <div class="col-md-11">
                                     <input id="@Html.FieldIdFor(model => model.ModeId)"
                                            name="@Html.NameFor(model => model.ModeId)"
                                            value="@Html.ValueFor(model => model.ModeId)" />
@@ -201,7 +250,7 @@
                                                 var data = {
                                                     @*Name: $("#@Html.FieldIdFor(model => model.PlaceOfIssueId)")
                                                         .data("kendoComboBox").input.val()*@
-                                                    Name : ""
+                                                    Name: ""
                                                 };
                                                 addAntiForgeryToken(data);
                                                 return data;

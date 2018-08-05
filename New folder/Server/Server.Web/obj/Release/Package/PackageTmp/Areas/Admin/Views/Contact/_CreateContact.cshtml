@@ -114,7 +114,6 @@
                                     @Html.ValidationMessageFor(model => model.PositionId)
                                 </div>
                                 <div class="col-md-1">
-                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.PositionId)', '@LookupTypes.PositionType')">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -245,7 +244,6 @@
                                     @Html.ValidationMessageFor(model => model.DepartmentId)
                                 </div>
                                 <div class="col-md-1">
-                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.DepartmentId)', '@LookupTypes.DepartmentType')">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -258,29 +256,12 @@
         <button type="button" id="btn-close" class="btn btn-default" data-dismiss="modal">Đóng</button>
         <button type="submit" class="btn btn-primary">Lưu</button>
     </div>
-    <input type="submit" id="btnRefreshLookupItems" style="display: none" />
 </div>
 
 <script>
-    function openLookupPopup(viewId, type) {
-
-        var url = '/Admin/Lookup/LookupAddPopup?viewId=' +
-            viewId + "&type=" + type +
-            '&btnId=btnRefreshLookupItems&formId=popup-contact-edit-form';
-        OpenWindow(url, 800, 800, true);
-    }
-
     $(document).ready(function () {
         $('#btn-close').click(function () {
             window.close();
         });
-        $('#btnRefreshLookupItems')[0].addEventListener("lookup",
-            function (event) {
-                //refresh combobox
-                $("#" + event.detail.viewId).data("kendoComboBox").dataSource.read();
-                $("#" + event.detail.viewId).data("kendoComboBox").value(event.detail.valueId);
-
-                return false;
-            });
     });
 </script>

@@ -23,7 +23,7 @@
         })
     </script>
 }
-@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", id = "popup-contact-edit-form" }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="content-header clearfix">
