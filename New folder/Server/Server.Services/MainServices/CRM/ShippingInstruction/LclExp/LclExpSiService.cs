@@ -74,7 +74,7 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
 
         public async Task<LclExpSiModel> GetSingleAsyncByLclExpId(int lclExpId)
         {
-            var siLclExp = await _context.LclExpSis.FirstOrDefaultAsync(x => x.LclExpId == lclExpId);
+            var siLclExp = await _context.LclExpSis.FirstOrDefaultAsync(x => x.LclExpId == lclExpId && !x.Deleted);
             var result = siLclExp.MapTo<LclExpSiModel>();
             return result;
         }

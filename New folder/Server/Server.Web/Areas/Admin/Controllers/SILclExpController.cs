@@ -117,8 +117,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 return RedirectToAction("List", "LclExps");
 
             var siLclExp = await _service.GetSingleAsyncByLclExpId(id.Value);
-            if (siLclExp.Id > 0)
-                return RedirectToAction("Edit", siLclExp.Id);
+            if (siLclExp != null)
+                return RedirectToAction("Edit", new {id = siLclExp.Id});
 
             var model = new LclExpSiModel()
             {
@@ -208,44 +208,12 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
             await _service.EditAsync(dto.Id, dto);
 
+            // print report
             if (dto.Preview)
                 return RedirectToAction("SiLclExpReport", "CallReport", new { siLclExpId = dto.Id });
 
             SuccessNotification("Chỉnh sửa thành công!");
             return RedirectToAction("Edit", new { id = dto.Id });
-        }
-
-        public async Task<ActionResult> Preview(int id)
-        {
-            var entity = await _service.GetSingleAsync(id);
-            if (entity == null)
-            {
-                ErrorNotification("Không tìm thấy phiếu");
-                return RedirectToAction("Edit", id);
-            }
-
-            var model = entity.MapTo<HblLclExpModel>();
-            if (model.NotifyPartyId == model.ConsigneeId)
-                model.NotifyPartyName = "SAME AS CONSIGNEE";
-
-            var vesselLookups = _lookupService.GetLookupByLookupType(LookupTypes.VesselType);
-            model.OceanVesselName = vesselLookups.FirstOrDefault(x => x.Id == model.OceanVessel)?.Title;
-            model.LocalVesselName = vesselLookups.FirstOrDefault(x => x.Id == model.LocalVessel)?.Title;
-
-            return View(model);
-        }
-
-        private async Task<HblLclExpModel> GetModel(int id)
-        {
-            var entity = await _service.GetSingleAsync(id);
-            var model = entity.MapTo<HblLclExpModel>();
-            if (model.NotifyPartyId == model.ConsigneeId)
-                model.NotifyPartyName = "SAME AS CONSIGNEE";
-
-            var vesselLookups = _lookupService.GetLookupByLookupType(LookupTypes.VesselType);
-            model.OceanVesselName = vesselLookups.FirstOrDefault(x => x.Id == model.OceanVessel)?.Title;
-            model.LocalVesselName = vesselLookups.FirstOrDefault(x => x.Id == model.LocalVessel)?.Title;
-            return model;
         }
 
         [HttpPost]
