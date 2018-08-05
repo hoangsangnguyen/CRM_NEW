@@ -15,6 +15,7 @@
 @Html.HiddenFor(model => model.Id)
 @Html.HiddenFor(model => model.CreatorId)
 @Html.HiddenFor(model => model.CreatedAt)
+@Html.HiddenFor(model => model.ReferenceNo)
 
 @{
     Layout = null;
@@ -148,16 +149,6 @@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
                                 <div class="col-md-11" style="text-align: left">
-                                    <label class="control-label">Shipping Lines:</label>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-11" style="text-align: left">
                                     <label class="control-label">Shipper Name & Address:</label>
                                 </div>
                                 <div class="col-md-1">
@@ -174,23 +165,19 @@
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="row">
-                        @*SHIpping line*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-11">
-                                    @Html.FalconEditorFor(m => m.ShippingLines)
-                                    @*<textarea type="text" style="height:150px;"
-                                        class="form-control" id="@Html.FieldIdFor(model => model.ShippingLines)"
-                                        name="@Html.FieldIdFor(model => model.ShippingLines)" value="@Model.ShippingLines">@Model.ShippingLines</textarea>*@
-                                    @Html.ValidationMessageFor(model => model.ShippingLines)
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Shipping Lines:</label>
                                 </div>
                                 <div class="col-md-1">
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row">
+
                         @*Lcl Exp*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -285,6 +272,7 @@
                                 minLength: 1,
                                 change: onChange,
                                 dataBound: onDataBound,
+                                cascadeFrom: "@Html.FieldIdFor(x => x.ShipperId)",
                                 dataSource: {
                                     type: "json",
                                     serverFiltering: true,
@@ -345,12 +333,25 @@
                             </div>
                         </div>
 
+                        @*SHIpping line*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11">
+                                    @Html.FalconEditorFor(m => m.ShippingLines)
+                                    @*<textarea type="text" style="height:150px;"
+                                        class="form-control" id="@Html.FieldIdFor(model => model.ShippingLines)"
+                                        name="@Html.FieldIdFor(model => model.ShippingLines)" value="@Model.ShippingLines">@Model.ShippingLines</textarea>*@
+                                    @Html.ValidationMessageFor(model => model.ShippingLines)
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="row">
-                        @*none*@
-                        <div class="col-md-4" style="display: none">
-                        </div>
+
 
                         @*shipper*@
                         <div class="col-md-4" id="shipper-content" style="display: none">
@@ -379,18 +380,13 @@
                                 </div>
                             </div>
                         </div>
+
+                        @*none*@
+                        <div class="col-md-4" style="display: none">
+                        </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-11" style="text-align: left">
-                                    <label class="control-label">Notify party:</label>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -411,85 +407,19 @@
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="row">
-                        @*Attn*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
-                                <div class="col-md-11">
-                                    <input id="@Html.FieldIdFor(model => model.NotifyPartyId)"
-                                           name="@Html.NameFor(model => model.NotifyPartyId)"
-                                           value="@Html.ValueFor(model => model.NotifyPartyId)" />
-                                    <script>
-                        $(document).ready(function() {
-                            var ddl = $("#@Html.FieldIdFor(model => model.NotifyPartyId)").kendoComboBox({
-                                filter: "contains",
-                                dataTextField: "Optional",
-                                dataValueField: "Value",
-                                placeholder: "Chọn notify party...",
-                                minLength: 1,
-                                change: onChange,
-                                dataBound: onDataBound,
-                                dataSource: {
-                                    type: "json",
-                                    serverFiltering: true,
-                                    transport: {
-                                        read: {
-                                            url: "/api/CustomerApi/GetAllCustomers",
-                                            dataType: "json",
-                                            data: filterConsignee
-                                        }
-                                    }
-                                }
-                            });
-
-
-                            function filterConsignee() {
-                                var data = {
-                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
-                                                        .data("kendoComboBox").input.val()*@
-                                    Name: ""
-                                };
-                                addAntiForgeryToken(data);
-                                return data;
-                            }
-
-                            function onChange() {
-                                var combobox = $("#@Html.FieldIdFor(m => m.NotifyPartyId)")
-                                    .data("kendoComboBox");
-                                console.log(combobox.select());
-                                if (combobox.select() < 0) {
-                                    $('#notify-party-content').hide();
-                                } else {
-                                    GetCustomerInfo("@Html.FieldIdFor(m => m.NotifyPartyId)",
-                                        "@Html.FieldIdFor(m => m.NotifyPartyName)");
-                                        $('#notify-party-content').show();
-                                }
-                            }
-
-                            function onDataBound(e) {
-                                var combobox = $("#@Html.FieldIdFor(m => m.NotifyPartyId)")
-                                    .data("kendoComboBox");
-                                console.log(combobox.select());
-                                if (combobox.select() < 0) {
-                                    $('#notify-party-content').hide();
-                                } else {
-                                    GetCustomerInfo("@Html.FieldIdFor(m => m.NotifyPartyId)",
-                                        "@Html.FieldIdFor(m => m.NotifyPartyName)");
-                                    $('#consignee-content').show();
-                                }
-                            };
-
-                        });
-                                    </script>
-                                    @Html.ValidationMessageFor(m => m.NotifyPartyId)
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label">Notify party:</label>
                                 </div>
                                 <div class="col-md-1">
-                                    <a onclick="openCustomerPopup('@Html.FieldIdFor(m => m.NotifyPartyId)')">Add</a>
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="row">
+
                         @*Consignee*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -594,7 +524,8 @@
                                             data: filterConsignee
                                         }
                                     }
-                                }
+                                },
+                                cascadeFrom: "@Html.FieldIdFor(m => m.ConsigneeId)",
                             });
 
 
@@ -644,6 +575,83 @@
                             </div>
                         </div>
 
+                        @*NotifyPartyId*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11">
+                                    <input id="@Html.FieldIdFor(model => model.NotifyPartyId)"
+                                           name="@Html.NameFor(model => model.NotifyPartyId)"
+                                           value="@Html.ValueFor(model => model.NotifyPartyId)" />
+                                    <script>
+                        $(document).ready(function() {
+                            var ddl = $("#@Html.FieldIdFor(model => model.NotifyPartyId)").kendoComboBox({
+                                filter: "contains",
+                                dataTextField: "Optional",
+                                dataValueField: "Value",
+                                placeholder: "Chọn notify party...",
+                                minLength: 1,
+                                change: onChange,
+                                dataBound: onDataBound,
+                                dataSource: {
+                                    type: "json",
+                                    serverFiltering: true,
+                                    transport: {
+                                        read: {
+                                            url: "/api/CustomerApi/GetAllCustomers",
+                                            dataType: "json",
+                                            data: filterConsignee
+                                        }
+                                    }
+                                 },
+                                cascadeFrom: "@Html.FieldIdFor(m => m.RealConsigneeId)",
+                            });
+
+
+                            function filterConsignee() {
+                                var data = {
+                                    @*Name: $("#@Html.FieldIdFor(model => model.ShipperId)")
+                                                        .data("kendoComboBox").input.val()*@
+                                    Name: ""
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+
+                            function onChange() {
+                                var combobox = $("#@Html.FieldIdFor(m => m.NotifyPartyId)")
+                                    .data("kendoComboBox");
+                                console.log(combobox.select());
+                                if (combobox.select() < 0) {
+                                    $('#notify-party-content').hide();
+                                } else {
+                                    GetCustomerInfo("@Html.FieldIdFor(m => m.NotifyPartyId)",
+                                        "@Html.FieldIdFor(m => m.NotifyPartyName)");
+                                        $('#notify-party-content').show();
+                                }
+                            }
+
+                            function onDataBound(e) {
+                                var combobox = $("#@Html.FieldIdFor(m => m.NotifyPartyId)")
+                                    .data("kendoComboBox");
+                                console.log(combobox.select());
+                                if (combobox.select() < 0) {
+                                    $('#notify-party-content').hide();
+                                } else {
+                                    GetCustomerInfo("@Html.FieldIdFor(m => m.NotifyPartyId)",
+                                        "@Html.FieldIdFor(m => m.NotifyPartyName)");
+                                    $('#consignee-content').show();
+                                }
+                            };
+
+                        });
+                                    </script>
+                                    @Html.ValidationMessageFor(m => m.NotifyPartyId)
+                                </div>
+                                <div class="col-md-1">
+                                    <a onclick="openCustomerPopup('@Html.FieldIdFor(m => m.NotifyPartyId)')">Add</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -1208,9 +1216,9 @@
                                     <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.Remark)', '@LookupTypes.Remark')">Add</a>
                                 </div>
                             </div>
-                                <div class="col-md-1">
-                                </div>
+                            <div class="col-md-1">
                             </div>
+                        </div>
                         @*Payments*@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
@@ -1256,20 +1264,20 @@
                                     <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.PaymentId)', '@LookupTypes.PaymentType')">Add</a>
                                 </div>
                             </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div>
+
+                        @*Cbm*@
+                        <div class="col-md-4">
+                            <div class="form-group form-custom">
+                                <div class="col-md-11" style="text-align: left">
+                                    <label class="control-label"></label>
+                                </div>
                                 <div class="col-md-1">
                                 </div>
                             </div>
-
-                        @*Cbm*@
-                <div class="col-md-4">
-                    <div class="form-group form-custom">
-                        <div class="col-md-11" style="text-align: left">
-                            <label class="control-label"></label>
                         </div>
-                        <div class="col-md-1">
-                        </div>
-                    </div>
-                </div>
 
                     </div>
                 </div>

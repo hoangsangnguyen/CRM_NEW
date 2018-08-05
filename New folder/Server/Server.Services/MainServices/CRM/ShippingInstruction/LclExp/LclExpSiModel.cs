@@ -25,29 +25,30 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
         public string Attn { get; set; }
         public string ShippingLines { get; set; }
 
-
-        [Required(ErrorMessage = "Vui lòng chọn ngày")]
-        public string Date { get; set; }
-
         [Required(ErrorMessage = "Vui lòng chọn shipper")]
         public int? ShipperId { get; set; }
         public string ShipperName { get; set; }
+        public string ShipperInfo { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn real shipper")]
         public int? RealShipperId { get; set; }
         public string RealShipperName { get; set; }
+        public string RealShipperInfo { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn consignee")]
         public int? ConsigneeId { get; set; }
         public string ConsigneeName { get; set; }
+        public string ConsigneeInfo { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn real consignee")]
         public int? RealConsigneeId { get; set; }
         public string RealConsigneeName { get; set; }
+        public string RealConsigneeInfo { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn notify party")]
         public int? NotifyPartyId { get; set; }
         public string NotifyPartyName { get; set; }
+        public string NotifyPartyInfo { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn port of loading")]
         public int? PortofLoadingId { get; set; }
@@ -63,6 +64,9 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
 
         [Required(ErrorMessage = "Vui lòng chọn tên tàu")]
         public int? VesselId { get; set; }
+
+        public string VesselName { get; set; }
+
 
         [Required(ErrorMessage = "Vui lòng nhập ngày Etd")]
         public string Etd { get; set; }
@@ -92,6 +96,7 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
         public int? CreatorId { get; set; }
         public string CreatorName { get; set; }
 
+        public bool Preview { get; set; }
 
     }
 }

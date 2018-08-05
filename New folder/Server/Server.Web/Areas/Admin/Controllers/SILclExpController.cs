@@ -108,19 +108,20 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             return Json(gridModel);
         }
 
-        public ActionResult Create(int? id)
+        public async Task<ActionResult> Create(int? id)
         {
             if (id == null)
                 return RedirectToAction("List", "LclExps");
-            var siLclExp = _lclExpService.GetSingleAsync(id.Value);
-            if (siLclExp.Id <= 0)
+            var lclExp = await _lclExpService.GetSingleAsync(id.Value);
+            if (lclExp.Id <= 0)
                 return RedirectToAction("List", "LclExps");
 
             var model = new LclExpSiModel()
             {
                 Etd  = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
-                LclExpId = id ?? 0,
-                QtyOfContainer = "PART OF CONTAINER"
+                LclExpId = id,
+                QtyOfContainer = "PART OF CONTAINER",
+                ReferenceNo = lclExp.JobId
             };
 
             return View(model);
@@ -170,7 +171,7 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         {
             if (id == 0)
                 return RedirectToAction("List", "LclExps");
-            var siLclExp = _lclExpService.GetSingleAsync(id);
+            var siLclExp = await _service.GetSingleAsync(id);
             if (siLclExp.Id <= 0)
                 return RedirectToAction("List", "LclExps");
 
@@ -203,8 +204,8 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
 
             await _service.EditAsync(dto.Id, dto);
 
-            //if (dto.Preview)
-            //    return RedirectToAction("HblLclExpReport", "CallReport", new { hblLclExpId = dto.Id });
+            if (dto.Preview)
+                return RedirectToAction("SiLclExpReport", "CallReport", new { siLclExpId = dto.Id });
 
             SuccessNotification("Chỉnh sửa thành công!");
             return RedirectToAction("Edit", new { id = dto.Id });

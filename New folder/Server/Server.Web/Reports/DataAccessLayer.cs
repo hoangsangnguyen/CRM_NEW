@@ -10,6 +10,7 @@ using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.Common.Models;
 using Vino.Server.Services.MainServices.CRM.HblFclExp.Models;
 using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
+using Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp;
 using Vino.Server.Services.MainServices.Report;
 using Vino.Server.Services.MainServices.Users;
 using Vino.Shared.Constants.Common;
@@ -38,6 +39,11 @@ namespace Vino.Server.Web.Reports
 	    public HblFclExpModel GetHblFclExpModel(int hblFclExpId)
 	    {
 	        return _reportService.GetHblFclExpReport(hblFclExpId);
+	    }
+
+	    public LclExpSiModel GetSiLclExpModel(int siLclExpId)
+	    {
+	        return _reportService.GetSiLclExpReport(siLclExpId);
 	    }
     }
 }

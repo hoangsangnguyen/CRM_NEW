@@ -26,9 +26,6 @@ namespace Vino.Server.Data.CRM
 
         public string ShippingLines { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn ngày")]
-        public DateTimeOffset? Date { get; set; }
-
         [Required(ErrorMessage = "Vui lòng chọn shipper")]
         public int? ShipperId { get; set; }
         public virtual CrmCustomer Shipper { get; set; }

@@ -8,6 +8,7 @@ using Vino.Server.Services.Database;
 using Vino.Server.Services.MainServices.Common;
 using Vino.Server.Services.MainServices.CRM.HblFclExp.Models;
 using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
+using Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp;
 
 namespace Vino.Server.Services.MainServices.Report
 {
@@ -44,6 +45,14 @@ namespace Vino.Server.Services.MainServices.Report
         {
             var hblFclExp = _context.HblFclExps.FirstOrDefault(x => x.Id == hblFclExpId && !x.Deleted);
             var model = hblFclExp.MapTo<HblFclExpModel>();
+            return model;
+        }
+
+        public LclExpSiModel GetSiLclExpReport(int siLclExpId)
+        {
+            var hblFclExp = _context.LclExpSis.FirstOrDefault(x => x.Id == siLclExpId && !x.Deleted);
+            var model = hblFclExp.MapTo<LclExpSiModel>();
+            model.VesselName = _lookupService.GetLookupById(model.VesselId??0)?.Title;
             return model;
         }
     }

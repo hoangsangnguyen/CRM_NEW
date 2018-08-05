@@ -2689,6 +2689,7 @@
     <Content Include="Areas\Admin\Views\SiLclExp\Create.cshtml" />
     <Content Include="Areas\Admin\Views\SiLclExp\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\SiLclExp\_AddEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\CallReport\SiLclExpReport.cshtml" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Sumi.pubxml" />
@@ -3530,6 +3531,12 @@
     <Compile Include="Reports\SauBenhReport.Designer.cs">
       <DependentUpon>SauBenhReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\SiLclExpReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SiLclExpReport.Designer.cs">
+      <DependentUpon>SiLclExpReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\ThuHoachReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -3750,6 +3757,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\SauBenhReport.resx">
       <DependentUpon>SauBenhReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SiLclExpReport.resx">
+      <DependentUpon>SiLclExpReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ThuHoachReport.resx">
       <DependentUpon>ThuHoachReport.cs</DependentUpon>
