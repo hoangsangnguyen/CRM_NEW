@@ -71,5 +71,12 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
 
             return new PageList<LclExpSiModel>(models, request.Page, request.PageSize, query.Count());
         }
+
+        public async Task<LclExpSiModel> GetSingleAsyncByLclExpId(int lclExpId)
+        {
+            var siLclExp = await _context.LclExpSis.FirstOrDefaultAsync(x => x.LclExpId == lclExpId);
+            var result = siLclExp.MapTo<LclExpSiModel>();
+            return result;
+        }
     }
 }

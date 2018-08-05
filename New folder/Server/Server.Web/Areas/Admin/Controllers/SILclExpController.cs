@@ -116,6 +116,10 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             if (lclExp.Id <= 0)
                 return RedirectToAction("List", "LclExps");
 
+            var siLclExp = await _service.GetSingleAsyncByLclExpId(id.Value);
+            if (siLclExp.Id > 0)
+                return RedirectToAction("Edit", siLclExp.Id);
+
             var model = new LclExpSiModel()
             {
                 Etd  = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),

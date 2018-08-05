@@ -82,7 +82,7 @@ namespace Vino.Server.Services.MainServices.CRM.LclExp
                 lclExpModel.Packages = lclExpModel.Packages > qty ? lclExpModel.Packages : qty;
                 lclExpModel.Gw = lclExpModel.Gw > grossWeight ? lclExpModel.Gw : grossWeight;
                 lclExpModel.Cbm = lclExpModel.Cbm > cbm ? lclExpModel.Cbm : cbm;
-
+                lclExpModel.IsVailableSi = lclExpModel.Items.Count > 0;
             }
 
             return new PageList<LclExpModel>(models, request.Page, request.PageSize, query.Count());

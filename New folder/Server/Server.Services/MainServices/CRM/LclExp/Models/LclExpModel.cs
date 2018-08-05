@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Vino.Server.Services.Helper;
 using Vino.Server.Services.MainServices.BaseService;
 using Vino.Server.Services.MainServices.CRM.Carrier.Model;
 using Vino.Server.Services.MainServices.CRM.HblLclExp.Models;
@@ -108,5 +109,7 @@ namespace Vino.Server.Services.MainServices.CRM.LclExp.Models
         public string UpdateAt { get; set; }
 
         public List<HblLclExpModel> Items { get; set; }
+
+        public bool IsVailableSi { get; set; } = true;
     }
 }
