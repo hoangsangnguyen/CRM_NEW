@@ -865,19 +865,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/05/2018 20:42:35</publishTime>
     </File>
     <File Include="bin/Vino.Server.Services.dll">
-      <publishTime>08/05/2018 20:42:38</publishTime>
+      <publishTime>08/06/2018 09:04:25</publishTime>
     </File>
     <File Include="bin/Vino.Server.Services.dll.config">
       <publishTime>05/21/2018 08:22:40</publishTime>
     </File>
     <File Include="bin/Vino.Server.Services.pdb">
-      <publishTime>08/05/2018 20:42:38</publishTime>
+      <publishTime>08/06/2018 09:04:25</publishTime>
     </File>
     <File Include="bin/Vino.Server.Web.dll">
-      <publishTime>08/05/2018 20:42:46</publishTime>
+      <publishTime>08/06/2018 09:04:35</publishTime>
     </File>
     <File Include="bin/Vino.Server.Web.pdb">
-      <publishTime>08/05/2018 20:42:46</publishTime>
+      <publishTime>08/06/2018 09:04:35</publishTime>
     </File>
     <File Include="bin/Vino.Shared.dll">
       <publishTime>08/05/2018 20:42:35</publishTime>
