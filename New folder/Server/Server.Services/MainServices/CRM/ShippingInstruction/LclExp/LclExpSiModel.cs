@@ -30,29 +30,17 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
         public string Attn { get; set; }
         public string ShippingLines { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn shipper")]
-        public int? ShipperId { get; set; }
-        public string ShipperName { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập shipper")]
         public string ShipperInfo { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn real shipper")]
-        public int? RealShipperId { get; set; }
-        public string RealShipperName { get; set; }
         public string RealShipperInfo { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn consignee")]
-        public int? ConsigneeId { get; set; }
-        public string ConsigneeName { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập consignee")]
         public string ConsigneeInfo { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn real consignee")]
-        public int? RealConsigneeId { get; set; }
-        public string RealConsigneeName { get; set; }
         public string RealConsigneeInfo { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn notify party")]
-        public int? NotifyPartyId { get; set; }
-        public string NotifyPartyName { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập notify party")]
         public string NotifyPartyInfo { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn port of loading")]

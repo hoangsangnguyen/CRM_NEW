@@ -155,8 +155,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             dto.CreatorId = user.Id;
 
             // same as consignee
-            if (dto.NotifyPartyId == 0)
-                dto.NotifyPartyId = dto.ConsigneeId;
 
             var id = await _service.CreateAsync(dto);
             if (id == 0)
@@ -199,8 +197,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             }
 
             // same as consignee
-            if (dto.NotifyPartyId == 0)
-                dto.NotifyPartyId = dto.ConsigneeId;
 
             var user = await _userService.GetById(_webContext.UserId);
             dto.UpdateName = user?.UserName ?? "";

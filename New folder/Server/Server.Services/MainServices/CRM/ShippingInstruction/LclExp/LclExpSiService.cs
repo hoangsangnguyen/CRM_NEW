@@ -50,16 +50,6 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
                 query = query.Where(w => w.ReferenceNo.ToLower().Contains(request.ReferenceNo.ToLower()));
             }
 
-            if (request.ShipperId.HasValue && request.ShipperId.Value > 0)
-            {
-                query = query.Where(w => w.ShipperId == request.ShipperId);
-            }
-
-            if (request.ConsigneeId.HasValue && request.ConsigneeId.Value > 0)
-            {
-                query = query.Where(w => w.ConsigneeId == request.ConsigneeId);
-            }
-
             if (request.LclExpId.HasValue && request.LclExpId.Value > 0)
             {
                 query = query.Where(w => w.LclExpId == request.LclExpId);

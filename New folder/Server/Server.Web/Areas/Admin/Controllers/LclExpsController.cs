@@ -91,7 +91,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
                 Etd = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
             };
 
-
             var now = DateTimeOffset.Now;
             // init code
             var orderGenCode = _genCodeService.GetOrderGenCode(BookPrefixes.LclExp, now.LocalDateTime.Date);

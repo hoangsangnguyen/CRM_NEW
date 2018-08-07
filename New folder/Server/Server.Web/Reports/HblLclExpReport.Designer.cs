@@ -566,7 +566,7 @@
             this.textBox24.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
             this.textBox24.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Point(4D);
             this.textBox24.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Top;
-            this.textBox24.Value = "= Fields.PortOfLoaingName";
+            this.textBox24.Value = "= Fields.PortOfDischargeName";
             // 
             // textBox25
             // 
