@@ -71,8 +71,6 @@ namespace Vino.Server.Data.CRM
 
         public int? Remark { get; set; }
 
-        public int? PaymentId { get; set; }
-
         public string UpdateName { get; set; }
 
         public DateTimeOffset? UpdateAt { get; set; }

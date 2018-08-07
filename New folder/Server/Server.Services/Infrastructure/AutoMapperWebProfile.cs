@@ -244,6 +244,9 @@ namespace Vino.Server.Services.Infrastructure
                     x => x.CoLoader.FullEnglishName))
                 .ForMember(d => d.AgentName, opt => opt.MapFrom(
                     x => x.Agent.FullEnglishName))
+                .ForMember(d => d.AgentInfo, opt => opt.MapFrom(
+                    x => $"{x.Agent.Name}" +
+                         $"{Environment.NewLine}Cell: {x.Agent.Cell}"))
                 .ForMember(d => d.CreatedAt, opt => opt.MapFrom(x =>
                     x.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")))
                 .ForMember(d => d.UpdateAt, opt => opt.MapFrom(x =>
@@ -383,20 +386,20 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.ShipperInfo, opt => opt.MapFrom(
                     x => $"{x.Shipper.Name}{Environment.NewLine}{x.Shipper.Address}" +
                          $"{Environment.NewLine}Tel: " +
-                         (string.IsNullOrEmpty(x.Shipper.WorkPhone) ? x.Shipper.WorkPhone : "\t\t\t") + 
+                         (!string.IsNullOrEmpty(x.Shipper.WorkPhone) ? x.Shipper.WorkPhone : "\t\t\t") + 
                          $"\t\tFax: {x.Shipper.FaxNo}"))
                 .ForMember(d => d.ConsigneeName, opt => opt.MapFrom(
                     x => x.NotifyParty.Name))
                 .ForMember(d => d.ConsigneeInfo, opt => opt.MapFrom(
                     x => $"{x.Consignee.Name}{Environment.NewLine}{x.Consignee.Address}" +
                          $"{Environment.NewLine}Tel: " +
-                         (string.IsNullOrEmpty(x.Consignee.WorkPhone) ? x.Consignee.WorkPhone : "\t\t\t") +
+                         (!string.IsNullOrEmpty(x.Consignee.WorkPhone) ? x.Consignee.WorkPhone : "\t\t\t") +
                          $"\t\tFax: {x.Consignee.FaxNo}"))
 
                 .ForMember(d => d.NotifyPartyInfo, opt => opt.MapFrom(
                     x => $"{x.NotifyParty.Name}{Environment.NewLine}{x.NotifyParty.Address}" +
                          $"{Environment.NewLine}Tel: " +
-                         (string.IsNullOrEmpty(x.NotifyParty.WorkPhone) ? x.NotifyParty.WorkPhone : "\t\t\t") +
+                         (!string.IsNullOrEmpty(x.NotifyParty.WorkPhone) ? x.NotifyParty.WorkPhone : "\t\t\t") +
                          $"\t\tFax: {x.NotifyParty.FaxNo}"))
 
                 .ForMember(d => d.NotifyPartyName, opt => opt.MapFrom(
@@ -416,7 +419,7 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.DeliveryOfGoodsName, opt => opt.MapFrom(
                     x => $"{x.DeliveryOfGoods.Name}{Environment.NewLine}{x.DeliveryOfGoods.Address}" +
                          $"{Environment.NewLine}Tel: " +
-                         (string.IsNullOrEmpty(x.DeliveryOfGoods.WorkPhone) ? x.DeliveryOfGoods.WorkPhone : "\t\t\t") +
+                         (!string.IsNullOrEmpty(x.DeliveryOfGoods.WorkPhone) ? x.DeliveryOfGoods.WorkPhone : "\t\t\t") +
                          $"\t\tFax: {x.DeliveryOfGoods.FaxNo}"))
                 .ForMember(d => d.ClosingDate,
                     opt => opt.MapFrom(x => x.ClosingDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
@@ -460,19 +463,19 @@ namespace Vino.Server.Services.Infrastructure
                 .ForMember(d => d.ShipperInfo, opt => opt.MapFrom(
                     x => $"{x.Shipper.Name}{Environment.NewLine}{x.Shipper.Address}" +
                          $"{Environment.NewLine}Tel: " +
-                         (string.IsNullOrEmpty(x.Shipper.WorkPhone) ? x.Shipper.WorkPhone : "\t\t\t") +
+                         (!string.IsNullOrEmpty(x.Shipper.WorkPhone) ? x.Shipper.WorkPhone : "\t\t\t") +
                          $"\t\tFax: {x.Shipper.FaxNo}"))
                 .ForMember(d => d.ConsigneeName, opt => opt.MapFrom(
                     x => x.NotifyParty.Name))
                 .ForMember(d => d.ConsigneeInfo, opt => opt.MapFrom(
                     x => $"{x.Consignee.Name}{Environment.NewLine}{x.Consignee.Address}" +
                          $"{Environment.NewLine}Tel: " +
-                         (string.IsNullOrEmpty(x.Consignee.WorkPhone) ? x.Consignee.WorkPhone : "\t\t\t") +
+                         (!string.IsNullOrEmpty(x.Consignee.WorkPhone) ? x.Consignee.WorkPhone : "\t\t\t") +
                          $"\t\tFax: {x.Consignee.FaxNo}"))
                 .ForMember(d => d.NotifyPartyInfo, opt => opt.MapFrom(
                     x => $"{x.NotifyParty.Name}{Environment.NewLine}{x.NotifyParty.Address}" +
                          $"{Environment.NewLine}Tel: " +
-                         (string.IsNullOrEmpty(x.NotifyParty.WorkPhone) ? x.NotifyParty.WorkPhone : "\t\t\t") +
+                         (!string.IsNullOrEmpty(x.NotifyParty.WorkPhone) ? x.NotifyParty.WorkPhone : "\t\t\t") +
                          $"\t\tFax: {x.NotifyParty.FaxNo}"))
                 .ForMember(d => d.NotifyPartyName, opt => opt.MapFrom(
                     x => x.NotifyParty.Name))

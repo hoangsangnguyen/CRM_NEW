@@ -36,7 +36,6 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
         private readonly WebContext _webContext;
         private readonly LookupService _lookupService;
 
-
         public SiLclExpController(LclExpSiService service,
             CrmCustomerService customerService,
             TopicService topicService,
@@ -120,12 +119,18 @@ namespace Vino.Server.Web.Areas.Admin.Controllers
             if (siLclExp != null)
                 return RedirectToAction("Edit", new {id = siLclExp.Id});
 
+            var company = await _topicService.GetTopicByTopicType(TopicType.Company);
+            
             var model = new LclExpSiModel()
             {
                 Etd  = DateTimeOffset.Now.Date.ToString("dd/MM/yyyy"),
+                BookingNumber = lclExp?.BkgNumber,
                 LclExpId = id,
                 QtyOfContainer = "PART OF CONTAINER",
-                ReferenceNo = lclExp.JobId
+                ReferenceNo = lclExp.JobId,
+                ShipperInfo = company != null ? company?.Name + "\n" + company?.Address + "\nTel: "
+                              + company?.Phone : "",
+                ColoaderName = lclExp.CoLoaderName
             };
 
             return View(model);

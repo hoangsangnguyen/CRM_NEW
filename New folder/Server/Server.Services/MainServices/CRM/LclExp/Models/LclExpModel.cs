@@ -76,10 +76,11 @@ namespace Vino.Server.Services.MainServices.CRM.LclExp.Models
         [Required(ErrorMessage = "Vui lòng chọn coloader")]
         public int? CoLoaderId { get; set; }
 
-        public string AgentName { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn agent")]
         public int? AgentId { get; set; }
+        public string AgentName { get; set; }
+        public string AgentInfo { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn commodity")]
         public int? CommodityId { get; set; }

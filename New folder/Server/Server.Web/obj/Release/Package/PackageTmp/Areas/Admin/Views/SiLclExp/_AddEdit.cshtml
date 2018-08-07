@@ -181,7 +181,8 @@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
                                 <div class="col-md-11" style="text-align: left">
-                                   @Html.FalconTextAreaFor(model => model.ShipperInfo)
+                                   @* @Html.EditorFor(model => model.ShipperInfo, "RichEditor")*@
+                                    @Html.FalconTextAreaFor(model => model.ShipperInfo)
                                 </div>
                                 <div class="col-md-1">
                                 </div>
@@ -738,16 +739,6 @@
                         <div class="col-md-4">
                             <div class="form-group form-custom">
                                 <div class="col-md-11" style="text-align: left">
-                                    <label class="control-label">Payment:</label>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-11" style="text-align: left">
                                     <label class="control-label"></label>
                                 </div>
                                 <div class="col-md-1">
@@ -800,54 +791,6 @@
                                 </div>
                                 <div class="col-md-1">
                                     <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.Remark)', '@LookupTypes.Remark')">Add</a>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                            </div>
-                        </div>
-                        @*Payments*@
-                        <div class="col-md-4">
-                            <div class="form-group form-custom">
-                                <div class="col-md-11">
-                                    <input id="@Html.FieldIdFor(model => model.PaymentId)"
-                                           name="@Html.NameFor(model => model.PaymentId)"
-                                           value="@Html.ValueFor(model => model.PaymentId)" />
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#@Html.FieldIdFor(model => model.PaymentId)").kendoComboBox({
-                                                filter: "contains",
-                                                dataTextField: "Name",
-                                                dataValueField: "Value",
-                                                placeholder: "Chọn payments...",
-                                                minLength: 1,
-                                                dataSource: {
-                                                    type: "json",
-                                                    serverFiltering: true,
-                                                    transport: {
-                                                        read: {
-                                                            url: "/api/LookupApi/GetPayments",
-                                                            dataType: "json",
-                                                            data: filterPayments
-                                                        }
-                                                    }
-                                                }
-                                            });
-
-                                            function filterPayments() {
-                                                var data = {
-                                                    @*Name: $("#@Html.FieldIdFor(model => model.CommodityId)")
-                                                                            .data("kendoComboBox").input.val()*@
-                                                    Name: ""
-                                                };
-                                                addAntiForgeryToken(data);
-                                                return data;
-                                            }
-                                        });
-                                    </script>
-                                    @Html.ValidationMessageFor(model => model.PaymentId)
-                                </div>
-                                <div class="col-md-1">
-                                    <a onclick="openLookupPopup('@Html.FieldIdFor(m => m.PaymentId)', '@LookupTypes.PaymentType')">Add</a>
                                 </div>
                             </div>
                             <div class="col-md-1">

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Falcon.Web.Core.Auth;
 using Vino.Server.Data.CRM;
 using Vino.Server.Services.MainServices.BaseService;
@@ -28,18 +29,20 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
 
         [Required(ErrorMessage = "Vui lòng chọn hãng tàu")]
         public string Attn { get; set; }
+        [AllowHtml]
         public string ShippingLines { get; set; }
 
+        [AllowHtml]
         [Required(ErrorMessage = "Vui lòng nhập shipper")]
         public string ShipperInfo { get; set; }
-
+        [AllowHtml]
         public string RealShipperInfo { get; set; }
-
+        [AllowHtml]
         [Required(ErrorMessage = "Vui lòng nhập consignee")]
         public string ConsigneeInfo { get; set; }
-
+        [AllowHtml]
         public string RealConsigneeInfo { get; set; }
-
+        [AllowHtml]
         [Required(ErrorMessage = "Vui lòng nhập notify party")]
         public string NotifyPartyInfo { get; set; }
 
@@ -79,8 +82,7 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
         public int? Remark { get; set; }
         public string RemarkName { get; set; }
 
-        public int? PaymentId { get; set; }
-        public string PaymentName { get; set; }
+        public string FreightType { get; set; }
 
         public string UpdateName { get; set; }
 
@@ -92,6 +94,8 @@ namespace Vino.Server.Services.MainServices.CRM.ShippingInstruction.LclExp
         public string CreatorName { get; set; }
 
         public bool Preview { get; set; }
+
+        public string ColoaderName { get; set; }
 
         public List<HblLclExpModel> Details { get; set; }
 

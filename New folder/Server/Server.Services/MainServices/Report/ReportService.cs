@@ -68,7 +68,13 @@ namespace Vino.Server.Services.MainServices.Report
             }
             siLclExpModel.VesselName = _lookupService.GetLookupById(siLclExpModel.VesselId??0)?.Title;
             siLclExpModel.RemarkName = _lookupService.GetLookupById(siLclExpModel.Remark??0)?.Title;
-            siLclExpModel.PaymentName = _lookupService.GetLookupById(siLclExpModel.PaymentId ?? 0)?.Title;
+
+            var lclExp = _context.LclExps.FirstOrDefault(x => x.Id == siLclExpModel.LclExpId &&
+                                                              !x.Deleted);
+            siLclExpModel.ColoaderName = lclExp?.CoLoader.FullEnglishName;
+
+            var freight = _lookupService.GetLookupById(lclExp?.FreightId ?? 0);
+            siLclExpModel.FreightType = freight != null ? "FREIGHT " + freight.Title.ToUpper() : "";
 
             return siLclExpModel;
         }

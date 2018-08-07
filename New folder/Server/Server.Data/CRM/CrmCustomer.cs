@@ -113,15 +113,5 @@ namespace Vino.Server.Data.CRM
 
         #endregion
 
-        #region Map to Lcl Exp
-
-        public ICollection<LclExpSi> LclExpSiShippers { get; set; }
-        public ICollection<LclExpSi> LclExpSiRealShippers { get; set; }
-
-        public ICollection<LclExpSi> LclExpSiConsignees { get; set; }
-        public ICollection<LclExpSi> LclExpSiRealConsignees { get; set; }
-        public ICollection<LclExpSi> LclExpSiNotifyParties { get; set; }
-
-        #endregion
     }
 }
