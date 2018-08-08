@@ -66,7 +66,7 @@ Global
 		{07BD6F2E-3088-4E4B-AEB1-B1FDFD72179C} = {BD7EC0CF-9646-4B8D-9E23-3E17C10DDA88}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {2CB3DAC4-47A9-481C-A5B6-0296BEFAF516}
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {2CB3DAC4-47A9-481C-A5B6-0296BEFAF516}
 	EndGlobalSection
 EndGlobal

@@ -874,10 +874,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/07/2018 16:59:52</publishTime>
     </File>
     <File Include="bin/Vino.Server.Web.dll">
-      <publishTime>08/07/2018 17:00:00</publishTime>
+      <publishTime>08/08/2018 07:36:18</publishTime>
     </File>
     <File Include="bin/Vino.Server.Web.pdb">
-      <publishTime>08/07/2018 17:00:00</publishTime>
+      <publishTime>08/08/2018 07:36:18</publishTime>
     </File>
     <File Include="bin/Vino.Shared.dll">
       <publishTime>08/07/2018 15:21:53</publishTime>
