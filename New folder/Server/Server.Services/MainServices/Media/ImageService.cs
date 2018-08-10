@@ -40,6 +40,7 @@ namespace Vino.Server.Services.MainServices.Media
             return image.MapTo<ImageModel>();
         }
 
+
         public async Task<ImageResponse> InsertImage(byte[] pictureBinary, string filename)
         {
             if (!Directory.Exists(LocalMapPath(SubPath)))

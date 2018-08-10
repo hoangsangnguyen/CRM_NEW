@@ -102,5 +102,13 @@ namespace Vino.Server.Data.CRM
 
         public int? CreatorId { get; set; }
         public virtual User Creator{ get; set; }
+
+        private ICollection<HblLclExp> _hblLclExps;
+
+        public virtual ICollection<HblLclExp> HblLclExps
+        {
+            get => _hblLclExps ?? (_hblLclExps = new List<HblLclExp>());
+            set => _hblLclExps = value;
+        }
     }
 }
